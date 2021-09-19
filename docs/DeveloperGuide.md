@@ -268,60 +268,87 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `H`, Medium (nice to have) - `M`, Low (unlikely to have) - `L`
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `H`  | new user                                   | see the help menu                  | refer to instructions when I forget how to use the App
+| `M`  | new user exploring the app                 | see my inventory populated with some sample ingredients and recipes        | test out the features              |
+| `M`  | new user ready to start using the app      | purge all current data             | get rid of sample/experimental data I used for exploring the app           |
+| `H`  | user                                       | add ingredients to my inventory    | keep track of the quantity and expiry date                                 | 
+| `H`  | user                                       | add recipes                        | keep track of quantity of ingredients needed for a recipe                  |
+| `H`  | user                                       | delete an ingredient               | stop keeping track of the ingredient                                       | 
+| `H`  | user                                       | delete a recipe                    | stop keeping track of the recipe                                           |
+| `H`  | user                                       | find an ingredient by name         | locate details of ingredients without having to go through the entire list |
+| `H`  | user                                       | find a recipe by name              | locate details of recipes without having to go through the entire list     |
+| `H`  | user                                       | list all ingredients               | easily see all ingredients                                                 |
+| `H`  | user                                       | list all recipes                   | easily see all recipes                                                     |
+| `H`  | user                                       | sort ingredients by expiry date    | locate ingredients that are expired or expiring soon                       |
+| `H`  | user                                       | automatically update the inventory list after executing a recipe | update the ingredients I have used           |
+| `H`  | user                                       | view ingredient tags               | view details about the ingredient (ie. its expiry status)                  |
+| `H`  | user                                       | update ingredients                 | update the quantity of ingredients as needed                               |
+| `H`  | user                                       | update recipes                     | update the recipe as needed                                                |
+| `M`  | user                                       | import my saved database           | start using it again quickly                                               |
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Fridgy` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Delete ingredient**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  `User` requests to delete a specific ingredient by specifying its name, quantity and expiry date.
+2.  `Fridgy` deletes the ingredient.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The name, quantity or expiry date is invalid.
+    * `Fridgy` throws an error message.
+
+    Use case ends.
+
+**Use case: UC02 - Add Recipe**
+
+**MSS**
+
+1.  `User` requests to add a specific recipe by specifying its name, ingredients and quantity, and an optional description.
+2.  `Fridgy` requests the user to add recipe steps.
+3.  `User` inputs recipe steps by entering after each step.
+4.  `User` indicates end of steps by entering `/end`
+5.  `Fridgy` creates the recipe.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The ingredient name is invalid.
+    * `Fridgy` throws an error message.
+* 1b. The quantity of ingredients is invalid.
+    * `Fridgy` throws an error message and informs the user of quantity of missing ingredients.
 
   Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 ingredients / recipes without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should be able to function without internet access.
+5. Should be able to perform all actions from the command line.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -340,7 +367,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample ingredients and recipes. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -351,19 +378,19 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a recipe
 
-1. Deleting a person while all persons are being shown
+1. Deleting a recipe while all recipes are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all recipes using the `list` command. Multiple recipes in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete recipe -n pasta`<br>
+      Expected: Recipe named `pasta` is deleted from the list. Details of the deleted recipe shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete recipe -n not_a_recipe`<br>
+      Expected: No recipe is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is any flag other than `-n`)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
@@ -372,6 +399,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1a. If file is missing, creates a new file that replaces the existing one.
 
 1. _{ more test cases …​ }_
