@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Rebecca Chin
 
-<img src="images/rebecca.png" width="200px">
+<img src="images/rebeccacxy.png" width="200px">
 
 [[github](http://github.com/rebeccacxy)]
 [[portfolio](team/rebecca.md)]
