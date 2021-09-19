@@ -399,6 +399,8 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1a. If file is missing, creates a new file that replaces the existing one.
+   1a. To simulate missing file, create an empty directory and run the program. Program should create a new file in the directory.
+   
+   1b. To simulate a corrupted file, replace content in file with wrong or unexpected content. Program should throw an error.
 
 1. _{ more test cases …​ }_
