@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/rebeccacxy.png" width="200px">
 
 [[github](http://github.com/rebeccacxy)]
-[[portfolio](team/rebecca.md)]
+[[portfolio](team/rebeccacxy.md)]
 
 * Role: Developer
 * Responsibilities: Testing + UI
