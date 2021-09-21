@@ -301,14 +301,14 @@ Priorities: High (must have) - `H`, Medium (nice to have) - `M`, Low (unlikely t
 
 **MSS**
 
-1.  `User` requests to delete a specific ingredient by specifying its name, quantity and expiry date.
-2.  `Fridgy` deletes the ingredient.
+1.  `User` requests to delete a specific ingredient by specifying its name and expiry date.
+2.  `Fridgy` removes the full quantity of the ingredient.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The name, quantity or expiry date is invalid.
+* 1a. The name or expiry date is invalid.
     * `Fridgy` throws an error message.
 
     Use case ends.
