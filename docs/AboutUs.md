@@ -39,15 +39,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Code quality, Integration
 
-### Patrick Tan
+### Jean Doe
 
-<img src="images/pattan9955.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/pattan9955)]
-[[portfolio](team/pattan9955.md)]
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Documentation + Testing
+* Responsibilities: Dev Ops + Threading
 
 ### James Doe
 
