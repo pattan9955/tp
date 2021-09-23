@@ -301,7 +301,7 @@ Priorities: High (must have) - `H`, Medium (nice to have) - `M`, Low (unlikely t
 
 **MSS**
 
-1.  `User` requests to delete a specific ingredient by specifying its name and expiry date.
+1.  `User` requests to delete a specific ingredient by specifying its index.
 2.  `Fridgy` removes the full quantity of the ingredient.
 
     Use case ends.
