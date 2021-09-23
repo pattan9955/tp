@@ -9,34 +9,35 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Li Bailin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rootkie.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/rootkie)]
+[[portfolio](team/rootkie.md)]
 
-* Role: Project Advisor
+* Role: DevOps / Team Lead
+* Responsibilities: Project Architecture + Code quality
 
 ### Rebecca Chin
 
 <img src="images/rebeccacxy.png" width="200px">
 
 [[github](http://github.com/rebeccacxy)]
-[[portfolio](team/rebecca.md)]
+[[portfolio](team/rebeccacxy.md)]
 
 * Role: Developer
 * Responsibilities: Testing + UI
 
-### Johnny Doe
+### Nay Lin Han
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/naylin-h99.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/NayLin-H99)]
+[[portfolio](team/naylin-h99.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Code quality, Integration
 
 ### Jean Doe
 

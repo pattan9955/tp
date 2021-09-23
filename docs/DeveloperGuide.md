@@ -308,7 +308,7 @@ Priorities: High (must have) - `H`, Medium (nice to have) - `M`, Low (unlikely t
 
 **Extensions**
 
-* 1a. The name or expiry date is invalid.
+* 1a. The index is invalid.
     * `Fridgy` throws an error message.
 
     Use case ends.
@@ -317,11 +317,8 @@ Priorities: High (must have) - `H`, Medium (nice to have) - `M`, Low (unlikely t
 
 **MSS**
 
-1.  `User` requests to add a specific recipe by specifying its name, ingredients and quantity, and an optional description.
-2.  `Fridgy` requests the user to add recipe steps.
-3.  `User` inputs recipe steps by entering after each step.
-4.  `User` indicates end of steps by entering `/end`
-5.  `Fridgy` creates the recipe.
+1.  `User` requests to add a specific recipe by specifying its name, ingredients and quantity, steps, and an optional description.
+2.  `Fridgy` creates the recipe.
 
     Use case ends.
 
