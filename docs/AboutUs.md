@@ -41,13 +41,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Alissa
 
-<img src="images/alissa.png" width="200px">
+<img src="images/alissayarmantho.png" width="200px">
 
 [[github](http://github.com/alissayarmantho)]
-[[portfolio](team/alissa.md)]
+[[portfolio](team/alissayarmantho.md)]
 
 * Role: Developer
-* Responsibilities: Code quality + Integration
+* Responsibilities: Scheduling and tracking + Git expert
 
 ### James Doe
 
