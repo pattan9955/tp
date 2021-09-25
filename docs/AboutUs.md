@@ -37,17 +37,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/naylin-h99.md)]
 
 * Role: Developer
-* Responsibilities: Code quality, Integration
+* Responsibilities: Code quality + Integration
 
-### Jean Doe
+### Alissa
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/alissayarmantho.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/alissayarmantho)]
+[[portfolio](team/alissayarmantho.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Scheduling and tracking + Git expert
 
 ### James Doe
 
