@@ -3,9 +3,9 @@ package fridgy.logic.parser;
 import java.util.Arrays;
 
 import fridgy.commons.core.Messages;
+import fridgy.logic.commands.FindCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;
-import fridgy.logic.commands.FindCommand;
 
 /**
  * Parses input arguments and creates a new FindCommand object

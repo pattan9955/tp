@@ -1,11 +1,11 @@
 package fridgy.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static fridgy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static fridgy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static fridgy.logic.parser.CliSyntax.PREFIX_NAME;
 import static fridgy.logic.parser.CliSyntax.PREFIX_PHONE;
 import static fridgy.logic.parser.CliSyntax.PREFIX_TAG;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -14,10 +14,10 @@ import java.util.Set;
 
 import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
-import fridgy.model.tag.Tag;
 import fridgy.logic.commands.EditCommand;
 import fridgy.logic.commands.EditCommand.EditIngredientDescriptor;
 import fridgy.logic.parser.exceptions.ParseException;
+import fridgy.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object

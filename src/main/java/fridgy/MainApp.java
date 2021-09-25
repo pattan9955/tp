@@ -28,7 +28,6 @@ import fridgy.storage.StorageManager;
 import fridgy.storage.UserPrefsStorage;
 import fridgy.ui.Ui;
 import fridgy.ui.UiManager;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 

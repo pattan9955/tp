@@ -4,8 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fridgy.commons.core.Messages;
-import fridgy.logic.commands.ListCommand;
-import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.logic.commands.AddCommand;
 import fridgy.logic.commands.ClearCommand;
 import fridgy.logic.commands.Command;
@@ -14,6 +12,8 @@ import fridgy.logic.commands.EditCommand;
 import fridgy.logic.commands.ExitCommand;
 import fridgy.logic.commands.FindCommand;
 import fridgy.logic.commands.HelpCommand;
+import fridgy.logic.commands.ListCommand;
+import fridgy.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.

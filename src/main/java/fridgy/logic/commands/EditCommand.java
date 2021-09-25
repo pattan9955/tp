@@ -14,12 +14,12 @@ import fridgy.commons.util.CollectionUtil;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.CliSyntax;
 import fridgy.model.Model;
-import fridgy.model.tag.Tag;
 import fridgy.model.ingredient.Address;
 import fridgy.model.ingredient.Email;
-import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Phone;
+import fridgy.model.tag.Tag;
 
 
 /**

@@ -6,14 +6,11 @@ import fridgy.MainApp;
 import fridgy.commons.core.LogsCenter;
 import fridgy.commons.util.StringUtil;
 import fridgy.logic.Logic;
-
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import fridgy.MainApp;
-import fridgy.logic.Logic;
 
 /**
  * The manager of the UI component.

@@ -1,11 +1,11 @@
 package fridgy.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static fridgy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static fridgy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static fridgy.logic.parser.CliSyntax.PREFIX_NAME;
 import static fridgy.logic.parser.CliSyntax.PREFIX_PHONE;
 import static fridgy.logic.parser.CliSyntax.PREFIX_TAG;
+import static java.util.Objects.requireNonNull;
 
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.Model;

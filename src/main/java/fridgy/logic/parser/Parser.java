@@ -1,7 +1,7 @@
 package fridgy.logic.parser;
 
-import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.logic.commands.Command;
+import fridgy.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a Parser that is able to parse user input into a {@code Command} of type {@code T}.

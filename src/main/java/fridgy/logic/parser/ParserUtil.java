@@ -8,12 +8,12 @@ import java.util.Set;
 
 import fridgy.commons.core.index.Index;
 import fridgy.commons.util.StringUtil;
+import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.ingredient.Address;
 import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Phone;
 import fridgy.model.tag.Tag;
-import fridgy.logic.parser.exceptions.ParseException;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
