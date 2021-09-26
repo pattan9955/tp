@@ -1,9 +1,8 @@
 package fridgy.model.ingredient;
 
-import fridgy.commons.util.AppUtil;
-
 import static java.util.Objects.requireNonNull;
-import static fridgy.commons.util.AppUtil.checkArgument;
+
+import fridgy.commons.util.AppUtil;
 
 /**
  * Represents a Ingredient's email in the address book.

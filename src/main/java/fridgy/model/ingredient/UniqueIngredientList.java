@@ -1,22 +1,23 @@
 package fridgy.model.ingredient;
 
 import static java.util.Objects.requireNonNull;
-import static fridgy.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
 import fridgy.commons.util.CollectionUtil;
+import fridgy.model.ingredient.exceptions.DuplicateIngredientException;
 import fridgy.model.ingredient.exceptions.IngredientNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import fridgy.model.ingredient.exceptions.DuplicateIngredientException;
 
 /**
  * A list of ingredients that enforces uniqueness between its elements and does not allow nulls.
- * A ingredient is considered unique by comparing using {@code Ingredient#isSameIngredient(Ingredient)}. As such, adding and updating of
- * ingredients uses Ingredient#isSameIngredient(Ingredient) for equality so as to ensure that the ingredient being added or updated is
- * unique in terms of identity in the UniqueIngredientList. However, the removal of a ingredient uses Ingredient#equals(Object) so
+ * A ingredient is considered unique by comparing using {@code Ingredient#isSameIngredient(Ingredient)}.
+ * As such, adding and updating of ingredients uses Ingredient#isSameIngredient(Ingredient)
+ * for equality so as to ensure that the ingredient being added or updated is
+ * unique in terms of identity in the UniqueIngredientList.
+ * However, the removal of a ingredient uses Ingredient#equals(Object) so
  * as to ensure that the ingredient with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -52,7 +53,8 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
     /**
      * Replaces the ingredient {@code target} in the list with {@code editedIngredient}.
      * {@code target} must exist in the list.
-     * The ingredient identity of {@code editedIngredient} must not be the same as another existing ingredient in the list.
+     * The ingredient identity of {@code editedIngredient} must not be the same
+     * as another existing ingredient in the list.
      */
     public void setIngredient(Ingredient target, Ingredient editedIngredient) {
         CollectionUtil.requireAllNonNull(target, editedIngredient);

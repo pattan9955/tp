@@ -1,9 +1,8 @@
 package fridgy.model.tag;
 
-import fridgy.commons.util.AppUtil;
-
 import static java.util.Objects.requireNonNull;
-import static fridgy.commons.util.AppUtil.checkArgument;
+
+import fridgy.commons.util.AppUtil;
 
 /**
  * Represents a Tag in the address book.

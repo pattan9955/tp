@@ -12,8 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import fridgy.commons.exceptions.IllegalValueException;
 import fridgy.model.ingredient.Address;
 import fridgy.model.ingredient.Email;
-import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Phone;
 import fridgy.model.tag.Tag;
 

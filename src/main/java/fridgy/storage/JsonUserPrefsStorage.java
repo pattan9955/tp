@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import fridgy.commons.util.JsonUtil;
 import fridgy.commons.exceptions.DataConversionException;
+import fridgy.commons.util.JsonUtil;
 import fridgy.model.ReadOnlyUserPrefs;
 import fridgy.model.UserPrefs;
 

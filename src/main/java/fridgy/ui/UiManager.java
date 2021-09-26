@@ -2,8 +2,13 @@ package fridgy.ui;
 
 import java.util.logging.Logger;
 
+import fridgy.MainApp;
 import fridgy.commons.core.LogsCenter;
 import fridgy.commons.util.StringUtil;
+<<<<<<< HEAD
+=======
+import fridgy.logic.Logic;
+>>>>>>> 366dfd3... Fix checkstyle for non-test classes
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;

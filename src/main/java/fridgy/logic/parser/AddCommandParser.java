@@ -10,13 +10,17 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import fridgy.commons.core.Messages;
+<<<<<<< HEAD
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.tag.Tag;
+=======
+>>>>>>> 366dfd3... Fix checkstyle for non-test classes
 import fridgy.logic.commands.AddCommand;
+import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.ingredient.Address;
 import fridgy.model.ingredient.Email;
-import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Phone;
 
 /**

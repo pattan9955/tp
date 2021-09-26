@@ -77,7 +77,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given ingredient {@code target} in the list with {@code editedIngredient}.
      * {@code target} must exist in the address book.
-     * The ingredient identity of {@code editedIngredient} must not be the same as another existing ingredient in the address book.
+     * The ingredient identity of {@code editedIngredient} must not be the same as
+     * another existing ingredient in the address book.
      */
     public void setIngredient(Ingredient target, Ingredient editedIngredient) {
         requireNonNull(editedIngredient);
