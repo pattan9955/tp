@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;
-import fridgy.testutil.AddressBookBuilder;
+import fridgy.testutil.InventoryBuilder;
 import fridgy.testutil.Assert;
 import fridgy.testutil.TypicalIngredients;
 import org.junit.jupiter.api.Assertions;
@@ -25,7 +25,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         Assertions.assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new Inventory(), new Inventory(modelManager.getInventory()));
     }
 
     @Test
@@ -36,14 +36,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setInventoryFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setInventoryFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -60,15 +60,15 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setInventoryFilePath_nullPath_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> modelManager.setInventoryFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setInventoryFilePath_validPath_setsInventoryFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setInventoryFilePath(path);
+        assertEquals(path, modelManager.getInventoryFilePath());
     }
 
     @Test
@@ -77,12 +77,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasIngredient_ingredientNotInAddressBook_returnsFalse() {
+    public void hasIngredient_ingredientNotInInventory_returnsFalse() {
         assertFalse(modelManager.hasIngredient(TypicalIngredients.ALICE));
     }
 
     @Test
-    public void hasIngredient_ingredientInAddressBook_returnsTrue() {
+    public void hasIngredient_ingredientInInventory_returnsTrue() {
         modelManager.addIngredient(TypicalIngredients.ALICE);
         assertTrue(modelManager.hasIngredient(TypicalIngredients.ALICE));
     }
@@ -94,8 +94,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withIngredient(TypicalIngredients.ALICE).withIngredient(TypicalIngredients.BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        Inventory addressBook = new InventoryBuilder().withIngredient(TypicalIngredients.ALICE).withIngredient(TypicalIngredients.BENSON).build();
+        Inventory differentInventory = new Inventory();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
@@ -113,7 +113,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentInventory, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = TypicalIngredients.ALICE.getName().fullName.split("\\s+");
@@ -125,7 +125,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setInventoryFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
 }

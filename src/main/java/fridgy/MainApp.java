@@ -13,15 +13,15 @@ import fridgy.commons.util.ConfigUtil;
 import fridgy.commons.util.StringUtil;
 import fridgy.logic.Logic;
 import fridgy.logic.LogicManager;
-import fridgy.model.AddressBook;
+import fridgy.model.Inventory;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
-import fridgy.model.ReadOnlyAddressBook;
+import fridgy.model.ReadOnlyInventory;
 import fridgy.model.ReadOnlyUserPrefs;
 import fridgy.model.UserPrefs;
 import fridgy.model.util.SampleDataUtil;
-import fridgy.storage.AddressBookStorage;
-import fridgy.storage.JsonAddressBookStorage;
+import fridgy.storage.InventoryStorage;
+import fridgy.storage.JsonInventoryStorage;
 import fridgy.storage.JsonUserPrefsStorage;
 import fridgy.storage.Storage;
 import fridgy.storage.StorageManager;
@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing Inventory ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -56,7 +56,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        InventoryStorage addressBookStorage = new JsonInventoryStorage(userPrefs.getInventoryFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         initLogging(config);
@@ -69,25 +69,25 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s Inventory and {@code userPrefs}. <br>
+     * The data from the sample Inventory will be used instead if {@code storage}'s Inventory is not found,
+     * or an empty Inventory will be used instead if errors occur when reading {@code storage}'s Inventory.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyInventory> addressBookOptional;
+        ReadOnlyInventory initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readInventory();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                logger.info("Data file not found. Will be starting with a sample Inventory");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleInventory);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty Inventory");
+            initialData = new Inventory();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty Inventory");
+            initialData = new Inventory();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -151,7 +151,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty Inventory");
             initializedPrefs = new UserPrefs();
         }
 
@@ -167,7 +167,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting Inventory " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

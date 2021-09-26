@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import fridgy.model.Model;
 
 /**
- * Lists all ingredients in the address book to the user.
+ * Lists all ingredients in the Inventory to the user.
  */
 public class ListCommand extends Command {
 

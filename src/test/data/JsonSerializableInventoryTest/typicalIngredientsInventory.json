@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Ingredient values as in TypicalIngredients#getTypicalAddressBook()",
+  "_comment": "Inventory save file which contains the same Ingredient values as in TypicalIngredients#getTypicalInventory()",
   "ingredients" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",

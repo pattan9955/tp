@@ -20,14 +20,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalIngredients.getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(TypicalIngredients.getTypicalInventory(), new UserPrefs());
     }
 
     @Test
     public void execute_newIngredient_success() {
         Ingredient validIngredient = new IngredientBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
         expectedModel.addIngredient(validIngredient);
 
         CommandTestUtil.assertCommandSuccess(new AddCommand(validIngredient), model,
@@ -36,7 +36,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateIngredient_throwsCommandException() {
-        Ingredient ingredientInList = model.getAddressBook().getIngredientList().get(0);
+        Ingredient ingredientInList = model.getInventory().getIngredientList().get(0);
         CommandTestUtil.assertCommandFailure(new AddCommand(ingredientInList), model, AddCommand.MESSAGE_DUPLICATE_INGREDIENT);
     }
 

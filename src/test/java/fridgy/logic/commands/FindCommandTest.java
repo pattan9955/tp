@@ -20,8 +20,8 @@ import org.junit.jupiter.api.Test;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(TypicalIngredients.getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(TypicalIngredients.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalIngredients.getTypicalInventory(), new UserPrefs());
+    private Model expectedModel = new ModelManager(TypicalIngredients.getTypicalInventory(), new UserPrefs());
 
     @Test
     public void equals() {

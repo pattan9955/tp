@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(TypicalIngredients.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalIngredients.getTypicalInventory(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -29,7 +29,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, IngredientToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
         expectedModel.deleteIngredient(IngredientToDelete);
 
         CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -52,7 +52,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, IngredientToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
         expectedModel.deleteIngredient(IngredientToDelete);
         showNoIngredient(expectedModel);
 
@@ -65,7 +65,7 @@ public class DeleteCommandTest {
 
         Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_INGREDIENT;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getIngredientList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getInventory().getIngredientList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 

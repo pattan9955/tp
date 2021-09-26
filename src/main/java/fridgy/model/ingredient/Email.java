@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import fridgy.commons.util.AppUtil;
 
 /**
- * Represents a Ingredient's email in the address book.
+ * Represents a Ingredient's email in the Inventory.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {

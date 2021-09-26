@@ -9,7 +9,7 @@ import fridgy.commons.util.CollectionUtil;
 import fridgy.model.tag.Tag;
 
 /**
- * Represents a Ingredient in the address book.
+ * Represents a Ingredient in the Inventory.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Ingredient {

@@ -12,13 +12,13 @@ import fridgy.model.Model;
 import fridgy.model.ingredient.Ingredient;
 
 /**
- * Adds a ingredient to the address book.
+ * Adds a ingredient to the Inventory.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a ingredient to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a ingredient to the Inventory. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -34,7 +34,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New ingredient added: %1$s";
-    public static final String MESSAGE_DUPLICATE_INGREDIENT = "This ingredient already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_INGREDIENT = "This ingredient already exists in the Inventory";
 
     private final Ingredient toAdd;
 

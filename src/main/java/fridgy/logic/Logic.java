@@ -7,7 +7,7 @@ import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.Model;
-import fridgy.model.ReadOnlyAddressBook;
+import fridgy.model.ReadOnlyInventory;
 import fridgy.model.ingredient.Ingredient;
 import javafx.collections.ObservableList;
 
@@ -25,19 +25,19 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the Inventory.
      *
-     * @see Model#getAddressBook()
+     * @see Model#getInventory()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyInventory getInventory();
 
     /** Returns an unmodifiable view of the filtered list of ingredients */
     ObservableList<Ingredient> getFilteredIngredientList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' Inventory file path.
      */
-    Path getAddressBookFilePath();
+    Path getInventoryFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import fridgy.model.AddressBook;
-import fridgy.model.ReadOnlyAddressBook;
+import fridgy.model.Inventory;
+import fridgy.model.ReadOnlyInventory;
 import fridgy.model.ingredient.Address;
 import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.Ingredient;
@@ -14,7 +14,7 @@ import fridgy.model.ingredient.Phone;
 import fridgy.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code Inventory} with sample data.
  */
 public class SampleDataUtil {
     public static Ingredient[] getSampleIngredients() {
@@ -40,8 +40,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyInventory getSampleInventory() {
+        Inventory sampleAb = new Inventory();
         for (Ingredient sampleIngredient : getSampleIngredients()) {
             sampleAb.addIngredient(sampleIngredient);
         }

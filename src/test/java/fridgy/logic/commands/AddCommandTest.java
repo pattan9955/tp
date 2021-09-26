@@ -13,9 +13,9 @@ import java.util.function.Predicate;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.logic.commands.exceptions.CommandException;
-import fridgy.model.AddressBook;
+import fridgy.model.Inventory;
 import fridgy.model.Model;
-import fridgy.model.ReadOnlyAddressBook;
+import fridgy.model.ReadOnlyInventory;
 import fridgy.model.ReadOnlyUserPrefs;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Ingredient;
@@ -101,12 +101,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getInventoryFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setInventoryFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -116,12 +116,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setInventory(ReadOnlyInventory newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyInventory getInventory() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -188,8 +188,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyInventory getInventory() {
+            return new Inventory();
         }
     }
 

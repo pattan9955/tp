@@ -28,9 +28,9 @@ import fridgy.testutil.EditIngredientDescriptorBuilder;
 import fridgy.testutil.IngredientBuilder;
 import fridgy.testutil.IngredientUtil;
 
-public class AddressBookParserTest {
+public class InventoryParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final InventoryParser parser = new InventoryParser();
 
     @Test
     public void parseCommand_add() throws Exception {

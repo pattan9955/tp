@@ -18,7 +18,7 @@ import fridgy.logic.parser.exceptions.ParseException;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class InventoryParser {
 
     /**
      * Used for initial separation of command word and args.

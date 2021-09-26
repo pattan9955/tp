@@ -22,9 +22,9 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class AddressBookTest {
+public class InventoryTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final Inventory addressBook = new Inventory();
 
     @Test
     public void constructor() {
@@ -37,8 +37,8 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = TypicalIngredients.getTypicalAddressBook();
+    public void resetData_withValidReadOnlyInventory_replacesData() {
+        Inventory newData = TypicalIngredients.getTypicalInventory();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -49,7 +49,7 @@ public class AddressBookTest {
         Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Ingredient> newIngredients = Arrays.asList(TypicalIngredients.ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newIngredients);
+        InventoryStub newData = new InventoryStub(newIngredients);
 
         Assert.assertThrows(DuplicateIngredientException.class, () -> addressBook.resetData(newData));
     }
@@ -60,18 +60,18 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasIngredient_ingredientNotInAddressBook_returnsFalse() {
+    public void hasIngredient_ingredientNotInInventory_returnsFalse() {
         assertFalse(addressBook.hasIngredient(TypicalIngredients.ALICE));
     }
 
     @Test
-    public void hasIngredient_ingredientInAddressBook_returnsTrue() {
+    public void hasIngredient_ingredientInInventory_returnsTrue() {
         addressBook.addIngredient(TypicalIngredients.ALICE);
         assertTrue(addressBook.hasIngredient(TypicalIngredients.ALICE));
     }
 
     @Test
-    public void hasIngredient_ingredientWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasIngredient_ingredientWithSameIdentityFieldsInInventory_returnsTrue() {
         addressBook.addIngredient(TypicalIngredients.ALICE);
         Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -84,12 +84,12 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose ingredients list can violate interface constraints.
+     * A stub ReadOnlyInventory whose ingredients list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class InventoryStub implements ReadOnlyInventory {
         private final ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Ingredient> ingredients) {
+        InventoryStub(Collection<Ingredient> ingredients) {
             this.ingredients.setAll(ingredients);
         }
 

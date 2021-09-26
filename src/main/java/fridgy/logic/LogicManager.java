@@ -9,10 +9,10 @@ import fridgy.commons.core.LogsCenter;
 import fridgy.logic.commands.Command;
 import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
-import fridgy.logic.parser.AddressBookParser;
+import fridgy.logic.parser.InventoryParser;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.Model;
-import fridgy.model.ReadOnlyAddressBook;
+import fridgy.model.ReadOnlyInventory;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.storage.Storage;
 import javafx.collections.ObservableList;
@@ -26,7 +26,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final InventoryParser addressBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -34,7 +34,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        addressBookParser = new InventoryParser();
     }
 
     @Override
@@ -46,7 +46,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveInventory(model.getInventory());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -55,8 +55,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyInventory getInventory() {
+        return model.getInventory();
     }
 
     @Override
@@ -65,8 +65,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getInventoryFilePath() {
+        return model.getInventoryFilePath();
     }
 
     @Override

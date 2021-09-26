@@ -6,7 +6,7 @@ import static fridgy.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
-import fridgy.model.AddressBook;
+import fridgy.model.Inventory;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
 import fridgy.model.UserPrefs;
@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(TypicalIngredients.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalIngredients.getTypicalInventory(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -32,7 +32,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
         expectedModel.setIngredient(model.getFilteredIngredientList().get(0), editedIngredient);
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -53,7 +53,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
         expectedModel.setIngredient(lastIngredient, editedIngredient);
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -66,7 +66,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -82,7 +82,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
         expectedModel.setIngredient(model.getFilteredIngredientList().get(0), editedIngredient);
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -102,7 +102,7 @@ public class EditCommandTest {
         CommandTestUtil.showIngredientAtIndex(model, TypicalIndexes.INDEX_FIRST_INGREDIENT);
 
         // edit Ingredient in filtered list into a duplicate in address book
-        Ingredient IngredientInList = model.getAddressBook().getIngredientList().get(TypicalIndexes.INDEX_SECOND_INGREDIENT.getZeroBased());
+        Ingredient IngredientInList = model.getInventory().getIngredientList().get(TypicalIndexes.INDEX_SECOND_INGREDIENT.getZeroBased());
         EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT,
                 new EditIngredientDescriptorBuilder(IngredientInList).build());
 
@@ -127,7 +127,7 @@ public class EditCommandTest {
         CommandTestUtil.showIngredientAtIndex(model, TypicalIndexes.INDEX_FIRST_INGREDIENT);
         Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_INGREDIENT;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getIngredientList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getInventory().getIngredientList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditIngredientDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB).build());

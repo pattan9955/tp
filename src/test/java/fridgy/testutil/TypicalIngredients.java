@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import fridgy.model.AddressBook;
+import fridgy.model.Inventory;
 import fridgy.model.ingredient.Ingredient;
 
 /**
@@ -60,10 +60,10 @@ public class TypicalIngredients {
     private TypicalIngredients() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical ingredients.
+     * Returns an {@code Inventory} with all the typical ingredients.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static Inventory getTypicalInventory() {
+        Inventory ab = new Inventory();
         for (Ingredient ingredient : getTypicalIngredients()) {
             ab.addIngredient(ingredient);
         }

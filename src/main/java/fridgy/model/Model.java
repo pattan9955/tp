@@ -35,47 +35,47 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' Inventory file path.
      */
-    Path getAddressBookFilePath();
+    Path getInventoryFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' Inventory file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setInventoryFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces Inventory data with the data in {@code addressBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setInventory(ReadOnlyInventory addressBook);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the Inventory */
+    ReadOnlyInventory getInventory();
 
     /**
-     * Returns true if a ingredient with the same identity as {@code ingredient} exists in the address book.
+     * Returns true if a ingredient with the same identity as {@code ingredient} exists in the Inventory.
      * @param ingredient
      */
     boolean hasIngredient(Ingredient ingredient);
 
     /**
      * Deletes the given ingredient.
-     * The ingredient must exist in the address book.
+     * The ingredient must exist in the Inventory.
      */
     void deleteIngredient(Ingredient target);
 
     /**
      * Adds the given ingredient.
-     * {@code ingredient} must not already exist in the address book.
+     * {@code ingredient} must not already exist in the Inventory.
      * @param ingredient
      */
     void addIngredient(Ingredient ingredient);
 
     /**
      * Replaces the given ingredient {@code target} with {@code editedIngredient}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the Inventory.
      * The ingredient identity of {@code editedIngredient} must not be the same as
-     * another existing ingredient in the address book.
+     * another existing ingredient in the Inventory.
      */
     void setIngredient(Ingredient target, Ingredient editedIngredient);
 

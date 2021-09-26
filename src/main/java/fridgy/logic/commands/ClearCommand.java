@@ -2,11 +2,11 @@ package fridgy.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import fridgy.model.AddressBook;
+import fridgy.model.Inventory;
 import fridgy.model.Model;
 
 /**
- * Clears the address book.
+ * Clears the Inventory.
  */
 public class ClearCommand extends Command {
 
@@ -17,7 +17,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setInventory(new Inventory());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

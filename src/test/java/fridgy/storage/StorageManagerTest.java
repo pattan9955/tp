@@ -2,13 +2,13 @@ package fridgy.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static fridgy.testutil.TypicalIngredients.getTypicalAddressBook;
+import static fridgy.testutil.TypicalIngredients.getTypicalInventory;
 
 import java.nio.file.Path;
 
 import fridgy.commons.core.GuiSettings;
-import fridgy.model.AddressBook;
-import fridgy.model.ReadOnlyAddressBook;
+import fridgy.model.Inventory;
+import fridgy.model.ReadOnlyInventory;
 import fridgy.model.UserPrefs;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonInventoryStorage addressBookStorage = new JsonInventoryStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }
@@ -50,18 +50,18 @@ public class StorageManagerTest {
     public void addressBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonInventoryStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonInventoryStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        Inventory original = getTypicalInventory();
+        storageManager.saveInventory(original);
+        ReadOnlyInventory retrieved = storageManager.readInventory().get();
+        assertEquals(original, new Inventory(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getInventoryFilePath() {
+        assertNotNull(storageManager.getInventoryFilePath());
     }
 
 }

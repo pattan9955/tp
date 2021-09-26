@@ -12,7 +12,7 @@ import javafx.collections.ObservableList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameIngredient comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class Inventory implements ReadOnlyInventory {
 
     private final UniqueIngredientList ingredients;
 
@@ -27,12 +27,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         ingredients = new UniqueIngredientList();
     }
 
-    public AddressBook() {}
+    public Inventory() {}
 
     /**
-     * Creates an AddressBook using the Ingredients in the {@code toBeCopied}
+     * Creates an Inventory using the Ingredients in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public Inventory(ReadOnlyInventory toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -48,9 +48,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code Inventory} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyInventory newData) {
         requireNonNull(newData);
 
         setIngredients(newData.getIngredientList());
@@ -59,7 +59,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// ingredient-level operations
 
     /**
-     * Returns true if a ingredient with the same identity as {@code ingredient} exists in the address book.
+     * Returns true if a ingredient with the same identity as {@code ingredient} exists in the Inventory.
      */
     public boolean hasIngredient(Ingredient ingredient) {
         requireNonNull(ingredient);
@@ -67,8 +67,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a ingredient to the address book.
-     * The ingredient must not already exist in the address book.
+     * Adds a ingredient to the Inventory.
+     * The ingredient must not already exist in the Inventory.
      */
     public void addIngredient(Ingredient p) {
         ingredients.add(p);
@@ -76,9 +76,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given ingredient {@code target} in the list with {@code editedIngredient}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the Inventory.
      * The ingredient identity of {@code editedIngredient} must not be the same as
-     * another existing ingredient in the address book.
+     * another existing ingredient in the Inventory.
      */
     public void setIngredient(Ingredient target, Ingredient editedIngredient) {
         requireNonNull(editedIngredient);
@@ -87,8 +87,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code Inventory}.
+     * {@code key} must exist in the Inventory.
      */
     public void removeIngredient(Ingredient key) {
         ingredients.remove(key);
@@ -110,8 +110,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && ingredients.equals(((AddressBook) other).ingredients));
+                || (other instanceof Inventory // instanceof handles nulls
+                && ingredients.equals(((Inventory) other).ingredients));
     }
 
     @Override

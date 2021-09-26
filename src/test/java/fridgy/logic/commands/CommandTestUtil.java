@@ -11,7 +11,7 @@ import java.util.List;
 import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.CliSyntax;
-import fridgy.model.AddressBook;
+import fridgy.model.Inventory;
 import fridgy.model.Model;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 import fridgy.model.ingredient.Ingredient;
@@ -101,11 +101,11 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        Inventory expectedInventory = new Inventory(actualModel.getInventory());
         List<Ingredient> expectedFilteredList = new ArrayList<>(actualModel.getFilteredIngredientList());
 
         Assert.assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedInventory, actualModel.getInventory());
         assertEquals(expectedFilteredList, actualModel.getFilteredIngredientList());
     }
     /**
