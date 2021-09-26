@@ -14,19 +14,13 @@ import fridgy.commons.util.CollectionUtil;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.CliSyntax;
 import fridgy.model.Model;
-<<<<<<< HEAD
 import fridgy.model.tag.Tag;
-=======
->>>>>>> 366dfd3... Fix checkstyle for non-test classes
 import fridgy.model.ingredient.Address;
 import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Phone;
-<<<<<<< HEAD
-=======
-import fridgy.model.tag.Tag;
->>>>>>> 366dfd3... Fix checkstyle for non-test classes
+
 
 /**
  * Edits the details of an existing ingredient in the address book.

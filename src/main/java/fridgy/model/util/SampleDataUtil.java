@@ -5,20 +5,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import fridgy.model.AddressBook;
-<<<<<<< HEAD
-import fridgy.model.tag.Tag;
-=======
->>>>>>> 366dfd3... Fix checkstyle for non-test classes
 import fridgy.model.ReadOnlyAddressBook;
 import fridgy.model.ingredient.Address;
 import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Phone;
-<<<<<<< HEAD
-=======
 import fridgy.model.tag.Tag;
->>>>>>> 366dfd3... Fix checkstyle for non-test classes
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.

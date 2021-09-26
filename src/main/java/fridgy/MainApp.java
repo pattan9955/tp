@@ -13,34 +13,24 @@ import fridgy.commons.util.ConfigUtil;
 import fridgy.commons.util.StringUtil;
 import fridgy.logic.Logic;
 import fridgy.logic.LogicManager;
-import fridgy.model.util.SampleDataUtil;
-import fridgy.ui.Ui;
-import fridgy.ui.UiManager;
-import javafx.application.Application;
-import javafx.stage.Stage;
 import fridgy.model.AddressBook;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
 import fridgy.model.ReadOnlyAddressBook;
 import fridgy.model.ReadOnlyUserPrefs;
 import fridgy.model.UserPrefs;
-<<<<<<< HEAD
-=======
 import fridgy.model.util.SampleDataUtil;
->>>>>>> 366dfd3... Fix checkstyle for non-test classes
 import fridgy.storage.AddressBookStorage;
 import fridgy.storage.JsonAddressBookStorage;
 import fridgy.storage.JsonUserPrefsStorage;
 import fridgy.storage.Storage;
 import fridgy.storage.StorageManager;
 import fridgy.storage.UserPrefsStorage;
-<<<<<<< HEAD
-=======
 import fridgy.ui.Ui;
 import fridgy.ui.UiManager;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
->>>>>>> 366dfd3... Fix checkstyle for non-test classes
 
 /**
  * Runs the application.
