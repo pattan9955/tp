@@ -49,12 +49,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Scheduling and tracking + Git expert
 
-### James Doe
+### Patrick Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/pattan9955.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/pattan9955)]
+[[portfolio](team/pattan9955.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Documentation + Testing
