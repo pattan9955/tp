@@ -37,7 +37,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/naylin-h99.md)]
 
 * Role: Developer
-* Responsibilities: Code quality, Integration
+* Responsibilities: Code quality + Integration
+
+### Alissa
+
+<img src="images/alissayarmantho.png" width="200px">
+
+[[github](http://github.com/alissayarmantho)]
+[[portfolio](team/alissayarmantho.md)]
+
+* Role: Developer
+* Responsibilities: Scheduling and tracking + Git expert
 
 ### Patrick Tan
 
@@ -48,13 +58,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Documentation + Testing
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
