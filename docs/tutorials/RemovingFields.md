@@ -15,7 +15,7 @@ This tutorial aims to give you some practice on such a code 'removal' activity b
 **If you have done the [Add `remark` command tutorial](AddRemark.html)  already**, you should know where the code had to be updated to add the field `remark`. From that experience, you can deduce where the code needs to be changed to _remove_ that field too. The removing of the `address` field can be done similarly.
 <br>
 <br>
-However, if you have no such prior knowledge, removing a field can take a quite a bit of detective work. This tutorial takes you through that process. **At least have a read even if you don't actually do the steps yourself.**
+However, if you have no such prior knowledge, removing a field can take a quite a bit of detective work. This tutorial takes you through that process. **At least have a read even if you don't actually do the step yourself.**
 </div>
 
 
@@ -55,7 +55,7 @@ Let’s try removing references to `Address` in `EditPersonDescriptor`.
    :bulb: **Tip:** Removing usages may result in errors. Exercise discretion and fix them. For example, removing the `address` field from the `Person` class will require you to modify its constructor.
    </div>
 
-1. Repeat the steps for the remaining usages of `Address`
+1. Repeat the step for the remaining usages of `Address`
 
 After you are done, verify that the application still works by compiling and running it again.
 

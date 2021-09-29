@@ -40,7 +40,7 @@ This project uses GitHub Actions for CI. The project comes with the necessary Gi
 
 ### Code coverage
 
-As part of CI, this project uses Codecov to generate coverage reports. Here are the steps to set up CodeCov for a fork of this repository.
+As part of CI, this project uses Codecov to generate coverage reports. Here are the step to set up CodeCov for a fork of this repository.
 
 1. Sign up with Codecov using your GitHub account [here](https://codecov.io/signup).
 1. Once you are inside Codecov web app, add your fork to CodeCov.
@@ -71,7 +71,7 @@ Any warnings or errors will be printed out to the console.
 
 ## Making a release
 
-Here are the steps to create a new release.
+Here are the step to create a new release.
 
 1. Update the version number in [`MainApp.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java).
 1. Generate a fat JAR file using Gradle (i.e., `gradlew shadowJar`).
