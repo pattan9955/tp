@@ -35,7 +35,7 @@ public class IngredientCard extends UiPart<Region> {
     @FXML
     private Label quantity;
     @FXML
-    private Label address;
+    private Label description;
     @FXML
     private Label email;
     @FXML
@@ -50,7 +50,7 @@ public class IngredientCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(ingredient.getName().fullName);
         quantity.setText(ingredient.getQuantity().value);
-        address.setText(ingredient.getDescription().value);
+        description.setText(ingredient.getDescription().value);
         email.setText(ingredient.getEmail().value);
         ingredient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

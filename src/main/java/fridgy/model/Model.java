@@ -53,7 +53,7 @@ public interface Model {
     ReadOnlyInventory getInventory();
 
     /**
-     * Returns true if a ingredient with the same identity as {@code ingredient} exists in the Inventory.
+     * Returns true if an ingredient with the same identity as {@code ingredient} exists in the Inventory.
      * @param ingredient
      */
     boolean hasIngredient(Ingredient ingredient);

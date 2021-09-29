@@ -9,7 +9,7 @@ import fridgy.commons.util.CollectionUtil;
 import fridgy.model.tag.Tag;
 
 /**
- * Represents a Ingredient in the Inventory.
+ * Represents an ingredient in the Inventory.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Ingredient {
@@ -20,18 +20,18 @@ public class Ingredient {
     private final Email email;
 
     // Data fields
-    private final Description address;
+    private final Description description;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Ingredient(Name name, Quantity quantity, Email email, Description address, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, quantity, email, address, tags);
+    public Ingredient(Name name, Quantity quantity, Email email, Description description, Set<Tag> tags) {
+        CollectionUtil.requireAllNonNull(name, quantity, email, description, tags);
         this.name = name;
         this.quantity = quantity;
         this.email = email;
-        this.address = address;
+        this.description = description;
         this.tags.addAll(tags);
     }
 
@@ -48,7 +48,7 @@ public class Ingredient {
     }
 
     public Description getDescription() {
-        return address;
+        return description;
     }
 
     /**
@@ -97,7 +97,7 @@ public class Ingredient {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, quantity, email, address, tags);
+        return Objects.hash(name, quantity, email, description, tags);
     }
 
     @Override

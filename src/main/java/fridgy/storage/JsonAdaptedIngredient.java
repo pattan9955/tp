@@ -27,7 +27,7 @@ class JsonAdaptedIngredient {
     private final String name;
     private final String quantity;
     private final String email;
-    private final String address;
+    private final String description;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -35,12 +35,12 @@ class JsonAdaptedIngredient {
      */
     @JsonCreator
     public JsonAdaptedIngredient(@JsonProperty("name") String name, @JsonProperty("quantity") String quantity,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("email") String email, @JsonProperty("description") String description,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.quantity = quantity;
         this.email = email;
-        this.address = address;
+        this.description = description;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -53,7 +53,7 @@ class JsonAdaptedIngredient {
         name = source.getName().fullName;
         quantity = source.getQuantity().value;
         email = source.getEmail().value;
-        address = source.getDescription().value;
+        description = source.getDescription().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -79,7 +79,8 @@ class JsonAdaptedIngredient {
         final Name modelName = new Name(name);
 
         if (quantity == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Quantity.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Quantity.class.getSimpleName()));
         }
         if (!Quantity.isValidQuantity(quantity)) {
             throw new IllegalValueException(Quantity.MESSAGE_CONSTRAINTS);
@@ -94,13 +95,14 @@ class JsonAdaptedIngredient {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+        if (description == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
         }
-        if (!Description.isValidDescription(address)) {
+        if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
-        final Description modelDescription = new Description(address);
+        final Description modelDescription = new Description(description);
 
         final Set<Tag> modelTags = new HashSet<>(ingredientTags);
         return new Ingredient(modelName, modelQuantity, modelEmail, modelDescription, modelTags);

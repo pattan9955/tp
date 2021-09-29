@@ -12,26 +12,26 @@ import fridgy.model.Model;
 import fridgy.model.ingredient.Ingredient;
 
 /**
- * Adds a ingredient to the Inventory.
+ * Adds an ingredient to the Inventory.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a ingredient to the Inventory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an ingredient to the Inventory. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_QUANTITY + "QUANTITY "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_DESCRIPTION + "DESCRIPTION "
+            + PREFIX_NAME + " NAME "
+            + PREFIX_QUANTITY + " QUANTITY "
+            + PREFIX_EMAIL + " EMAIL "
+            + PREFIX_DESCRIPTION + " DESCRIPTION "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_QUANTITY + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_DESCRIPTION + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_NAME + " John Doe "
+            + PREFIX_QUANTITY + " 98765432 "
+            + PREFIX_EMAIL + " johnd@example.com "
+            + PREFIX_DESCRIPTION + " 311, Clementi Ave 2, #02-25 "
+            + PREFIX_TAG + " friends "
+            + PREFIX_TAG + " owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New ingredient added: %1$s";
     public static final String MESSAGE_DUPLICATE_INGREDIENT = "This ingredient already exists in the Inventory";

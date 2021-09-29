@@ -93,7 +93,8 @@ public class EditCommand extends Command {
         Name updatedName = editIngredientDescriptor.getName().orElse(ingredientToEdit.getName());
         Quantity updatedQuantity = editIngredientDescriptor.getQuantity().orElse(ingredientToEdit.getQuantity());
         Email updatedEmail = editIngredientDescriptor.getEmail().orElse(ingredientToEdit.getEmail());
-        Description updatedDescription = editIngredientDescriptor.getDescription().orElse(ingredientToEdit.getDescription());
+        Description updatedDescription = editIngredientDescriptor.getDescription()
+                .orElse(ingredientToEdit.getDescription());
         Set<Tag> updatedTags = editIngredientDescriptor.getTags().orElse(ingredientToEdit.getTags());
 
         return new Ingredient(updatedName, updatedQuantity, updatedEmail, updatedDescription, updatedTags);
@@ -125,7 +126,7 @@ public class EditCommand extends Command {
         private Name name;
         private Quantity quantity;
         private Email email;
-        private Description address;
+        private Description description;
         private Set<Tag> tags;
 
         public EditIngredientDescriptor() {}
@@ -138,7 +139,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setQuantity(toCopy.quantity);
             setEmail(toCopy.email);
-            setDescription(toCopy.address);
+            setDescription(toCopy.description);
             setTags(toCopy.tags);
         }
 
@@ -146,7 +147,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, quantity, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, quantity, email, description, tags);
         }
 
         public void setName(Name name) {
@@ -173,12 +174,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setDescription(Description address) {
-            this.address = address;
+        public void setDescription(Description description) {
+            this.description = description;
         }
 
         public Optional<Description> getDescription() {
-            return Optional.ofNullable(address);
+            return Optional.ofNullable(description);
         }
 
         /**

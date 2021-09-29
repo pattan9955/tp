@@ -5,15 +5,15 @@ import static java.util.Objects.requireNonNull;
 import fridgy.commons.util.AppUtil;
 
 /**
- * Represents a Ingredient's address in the Inventory.
+ * Represents an ingredient's description in the Inventory.
  * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description {
 
-    public static final String MESSAGE_CONSTRAINTS = "Descriptiones can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Descriptions can take any values, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the description must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
@@ -23,12 +23,12 @@ public class Description {
     /**
      * Constructs an {@code Description}.
      *
-     * @param address A valid address.
+     * @param description A valid description.
      */
-    public Description(String address) {
-        requireNonNull(address);
-        AppUtil.checkArgument(isValidDescription(address), MESSAGE_CONSTRAINTS);
-        value = address;
+    public Description(String description) {
+        requireNonNull(description);
+        AppUtil.checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
+        value = description;
     }
 
     /**

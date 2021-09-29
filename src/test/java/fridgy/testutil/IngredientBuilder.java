@@ -24,7 +24,7 @@ public class IngredientBuilder {
     private Name name;
     private Quantity quantity;
     private Email email;
-    private Description address;
+    private Description description;
     private Set<Tag> tags;
 
     /**
@@ -34,7 +34,7 @@ public class IngredientBuilder {
         name = new Name(DEFAULT_NAME);
         quantity = new Quantity(DEFAULT_QUANTITY);
         email = new Email(DEFAULT_EMAIL);
-        address = new Description(DEFAULT_DESCRIPTION);
+        description = new Description(DEFAULT_DESCRIPTION);
         tags = new HashSet<>();
     }
 
@@ -45,7 +45,7 @@ public class IngredientBuilder {
         name = ingredientToCopy.getName();
         quantity = ingredientToCopy.getQuantity();
         email = ingredientToCopy.getEmail();
-        address = ingredientToCopy.getDescription();
+        description = ingredientToCopy.getDescription();
         tags = new HashSet<>(ingredientToCopy.getTags());
     }
 
@@ -68,8 +68,8 @@ public class IngredientBuilder {
     /**
      * Sets the {@code Description} of the {@code Ingredient} that we are building.
      */
-    public IngredientBuilder withDescription(String address) {
-        this.address = new Description(address);
+    public IngredientBuilder withDescription(String description) {
+        this.description = new Description(description);
         return this;
     }
 
@@ -90,7 +90,7 @@ public class IngredientBuilder {
     }
 
     public Ingredient build() {
-        return new Ingredient(name, quantity, email, address, tags);
+        return new Ingredient(name, quantity, email, description, tags);
     }
 
 }

@@ -66,8 +66,8 @@ public class EditIngredientDescriptorBuilder {
     /**
      * Sets the {@code Description} of the {@code EditIngredientDescriptor} that we are building.
      */
-    public EditIngredientDescriptorBuilder withDescription(String address) {
-        descriptor.setDescription(new Description(address));
+    public EditIngredientDescriptorBuilder withDescription(String description) {
+        descriptor.setDescription(new Description(description));
         return this;
     }
 
