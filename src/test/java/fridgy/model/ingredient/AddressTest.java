@@ -4,35 +4,35 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static fridgy.testutil.Assert.assertThrows;
 
-import fridgy.model.ingredient.Address;
+import fridgy.model.ingredient.Description;
 import fridgy.testutil.Assert;
 import org.junit.jupiter.api.Test;
 
-public class AddressTest {
+public class DescriptionTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new Address(null));
+        Assert.assertThrows(NullPointerException.class, () -> new Description(null));
     }
 
     @Test
-    public void constructor_invalidAddress_throwsIllegalArgumentException() {
-        String invalidAddress = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new Address(invalidAddress));
+    public void constructor_invalidDescription_throwsIllegalArgumentException() {
+        String invalidDescription = "";
+        Assert.assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription));
     }
 
     @Test
-    public void isValidAddress() {
+    public void isValidDescription() {
         // null address
-        Assert.assertThrows(NullPointerException.class, () -> Address.isValidAddress(null));
+        Assert.assertThrows(NullPointerException.class, () -> Description.isValidDescription(null));
 
         // invalid addresses
-        assertFalse(Address.isValidAddress("")); // empty string
-        assertFalse(Address.isValidAddress(" ")); // spaces only
+        assertFalse(Description.isValidDescription("")); // empty string
+        assertFalse(Description.isValidDescription(" ")); // spaces only
 
         // valid addresses
-        assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));
-        assertTrue(Address.isValidAddress("-")); // one character
-        assertTrue(Address.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Description.isValidDescription("Blk 456, Den Road, #01-355"));
+        assertTrue(Description.isValidDescription("-")); // one character
+        assertTrue(Description.isValidDescription("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
     }
 }

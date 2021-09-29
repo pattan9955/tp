@@ -16,20 +16,20 @@ public class Ingredient {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
+    private final Quantity quantity;
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Description address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Ingredient(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, phone, email, address, tags);
+    public Ingredient(Name name, Quantity quantity, Email email, Description address, Set<Tag> tags) {
+        CollectionUtil.requireAllNonNull(name, quantity, email, address, tags);
         this.name = name;
-        this.phone = phone;
+        this.quantity = quantity;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
@@ -39,15 +39,15 @@ public class Ingredient {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Quantity getQuantity() {
+        return quantity;
     }
 
     public Email getEmail() {
         return email;
     }
 
-    public Address getAddress() {
+    public Description getDescription() {
         return address;
     }
 
@@ -88,28 +88,28 @@ public class Ingredient {
 
         Ingredient otherIngredient = (Ingredient) other;
         return otherIngredient.getName().equals(getName())
-                && otherIngredient.getPhone().equals(getPhone())
+                && otherIngredient.getQuantity().equals(getQuantity())
                 && otherIngredient.getEmail().equals(getEmail())
-                && otherIngredient.getAddress().equals(getAddress())
+                && otherIngredient.getDescription().equals(getDescription())
                 && otherIngredient.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, quantity, email, address, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
+                .append("; Quantity: ")
+                .append(getQuantity())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append("; Description: ")
+                .append(getDescription());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
