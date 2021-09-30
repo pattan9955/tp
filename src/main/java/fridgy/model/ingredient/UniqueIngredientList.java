@@ -13,11 +13,11 @@ import javafx.collections.ObservableList;
 
 /**
  * A list of ingredients that enforces uniqueness between its elements and does not allow nulls.
- * A ingredient is considered unique by comparing using {@code RecipeIngredient#isSameIngredient(RecipeIngredient)}.
- * As such, adding and updating of ingredients uses RecipeIngredient#isSameIngredient(RecipeIngredient)
+ * A ingredient is considered unique by comparing using {@code Ingredient#isSameIngredient(Ingredient)}.
+ * As such, adding and updating of ingredients uses Ingredient#isSameIngredient(Ingredient)
  * for equality so as to ensure that the ingredient being added or updated is
  * unique in terms of identity in the UniqueIngredientList.
- * However, the removal of a ingredient uses RecipeIngredient#equals(Object) so
+ * However, the removal of a ingredient uses Ingredient#equals(Object) so
  * as to ensure that the ingredient with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.

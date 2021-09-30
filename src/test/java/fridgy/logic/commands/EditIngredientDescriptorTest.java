@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.logic.commands.EditCommand.EditIngredientDescriptor;
 
-public class EditRecipeIngredientDescriptorTest {
+public class EditIngredientDescriptorTest {
 
     @Test
     public void equals() {

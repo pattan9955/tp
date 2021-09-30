@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 /**
- * An UI component that displays information of a {@code RecipeIngredient}.
+ * An UI component that displays information of a {@code Ingredient}.
  */
 public class IngredientCard extends UiPart<Region> {
 
@@ -42,7 +42,7 @@ public class IngredientCard extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code IngredientCode} with the given {@code RecipeIngredient} and index to display.
+     * Creates a {@code IngredientCode} with the given {@code Ingredient} and index to display.
      */
     public IngredientCard(Ingredient ingredient, int displayedIndex) {
         super(FXML);

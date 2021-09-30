@@ -20,7 +20,7 @@ import fridgy.testutil.IngredientBuilder;
 import fridgy.testutil.TypicalIngredients;
 import org.junit.jupiter.api.Test;
 
-public class UniqueRecipeIngredientListTest {
+public class UniqueIngredientListTest {
 
     private final UniqueIngredientList uniqueIngredientList = new UniqueIngredientList();
 

@@ -16,7 +16,7 @@ import fridgy.model.ingredient.Phone;
 import fridgy.testutil.Assert;
 import org.junit.jupiter.api.Test;
 
-public class JsonAdaptedRecipeIngredientTest {
+public class JsonAdaptedIngredientTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";

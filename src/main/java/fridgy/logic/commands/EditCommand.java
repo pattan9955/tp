@@ -41,7 +41,7 @@ public class EditCommand extends Command {
             + CliSyntax.PREFIX_PHONE + "91234567 "
             + CliSyntax.PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_INGREDIENT_SUCCESS = "Edited RecipeIngredient: %1$s";
+    public static final String MESSAGE_EDIT_INGREDIENT_SUCCESS = "Edited Ingredient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_INGREDIENT = "This ingredient already exists in the Inventory.";
 
@@ -82,7 +82,7 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code RecipeIngredient} with the details of {@code ingredientToEdit}
+     * Creates and returns a {@code Ingredient} with the details of {@code ingredientToEdit}
      * edited with {@code editIngredientDescriptor}.
      */
     private static Ingredient createEditedIngredient(Ingredient ingredientToEdit,

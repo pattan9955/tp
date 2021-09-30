@@ -167,10 +167,10 @@ public class ModelManager implements Model {
         recipeBook.setRecipe(target, editedRecipe);
     }
 
-    //=========== Filtered RecipeIngredient List Accessors =============================================================
+    //=========== Filtered Ingredient List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code RecipeIngredient} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Ingredient} backed by the internal list of
      * {@code versionedInventory}
      */
     @Override

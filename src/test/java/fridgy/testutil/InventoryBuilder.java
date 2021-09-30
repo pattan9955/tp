@@ -21,7 +21,7 @@ public class InventoryBuilder {
     }
 
     /**
-     * Adds a new {@code RecipeIngredient} to the {@code Inventory} that we are building.
+     * Adds a new {@code Ingredient} to the {@code Inventory} that we are building.
      */
     public InventoryBuilder withIngredient(Ingredient Ingredient) {
         addressBook.addIngredient(Ingredient);

@@ -1,17 +1,15 @@
 package fridgy.logic.commands;
 
 import static fridgy.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static fridgy.logic.commands.CommandTestUtil.showIngredientAtIndex;
-import static fridgy.testutil.TypicalIndexes.INDEX_FIRST_INGREDIENT;
-import static fridgy.testutil.TypicalIngredients.getTypicalInventory;
-import static fridgy.testutil.TypicalRecipes.getTypicalRecipeBook;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
+import fridgy.model.RecipeBook;
 import fridgy.model.UserPrefs;
+import fridgy.testutil.TypicalIndexes;
+import fridgy.testutil.TypicalIngredients;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -23,18 +21,18 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalInventory(), getTypicalRecipeBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getInventory(), getTypicalRecipeBook(), new UserPrefs());
+        model = new ModelManager(TypicalIngredients.getTypicalInventory(), new RecipeBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
     }
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showIngredientAtIndex(model, INDEX_FIRST_INGREDIENT);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.showIngredientAtIndex(model, TypicalIndexes.INDEX_FIRST_INGREDIENT);
+        CommandTestUtil.assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

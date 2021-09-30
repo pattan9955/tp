@@ -9,7 +9,7 @@ import fridgy.model.tag.Tag;
 import fridgy.logic.commands.EditCommand.EditIngredientDescriptor;
 
 /**
- * A utility class for RecipeIngredient.
+ * A utility class for Ingredient.
  */
 public class IngredientUtil {
 

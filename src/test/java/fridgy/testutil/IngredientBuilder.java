@@ -12,7 +12,7 @@ import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Phone;
 
 /**
- * A utility class to help with building RecipeIngredient objects.
+ * A utility class to help with building Ingredient objects.
  */
 public class IngredientBuilder {
 
@@ -50,7 +50,7 @@ public class IngredientBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code RecipeIngredient} that we are building.
+     * Sets the {@code Name} of the {@code Ingredient} that we are building.
      */
     public IngredientBuilder withName(String name) {
         this.name = new Name(name);
@@ -58,7 +58,7 @@ public class IngredientBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code RecipeIngredient} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Ingredient} that we are building.
      */
     public IngredientBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -66,7 +66,7 @@ public class IngredientBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code RecipeIngredient} that we are building.
+     * Sets the {@code Address} of the {@code Ingredient} that we are building.
      */
     public IngredientBuilder withAddress(String address) {
         this.address = new Address(address);
@@ -74,7 +74,7 @@ public class IngredientBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code RecipeIngredient} that we are building.
+     * Sets the {@code Phone} of the {@code Ingredient} that we are building.
      */
     public IngredientBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
@@ -82,7 +82,7 @@ public class IngredientBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code RecipeIngredient} that we are building.
+     * Sets the {@code Email} of the {@code Ingredient} that we are building.
      */
     public IngredientBuilder withEmail(String email) {
         this.email = new Email(email);

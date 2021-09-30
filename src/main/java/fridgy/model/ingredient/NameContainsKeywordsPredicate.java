@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import fridgy.commons.util.StringUtil;
 
 /**
- * Tests that a {@code RecipeIngredient}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Ingredient}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Ingredient> {
     private final List<String> keywords;

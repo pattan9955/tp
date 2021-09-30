@@ -19,7 +19,7 @@ import fridgy.model.Inventory;
 import fridgy.model.ingredient.Ingredient;
 
 /**
- * A utility class containing a list of {@code RecipeIngredient} objects to be used in tests.
+ * A utility class containing a list of {@code Ingredient} objects to be used in tests.
  */
 public class TypicalIngredients {
 
@@ -48,7 +48,7 @@ public class TypicalIngredients {
     public static final Ingredient IDA = new IngredientBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
-    // Manually added - RecipeIngredient's details found in {@code CommandTestUtil}
+    // Manually added - Ingredient's details found in {@code CommandTestUtil}
     public static final Ingredient AMY = new IngredientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Ingredient BOB = new IngredientBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)

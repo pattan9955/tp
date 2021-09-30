@@ -22,7 +22,7 @@ import fridgy.model.tag.Tag;
  */
 class JsonAdaptedIngredient {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "RecipeIngredient's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Ingredient's %s field is missing!";
 
     private final String name;
     private final String phone;
@@ -47,7 +47,7 @@ class JsonAdaptedIngredient {
     }
 
     /**
-     * Converts a given {@code RecipeIngredient} into this class for Jackson use.
+     * Converts a given {@code Ingredient} into this class for Jackson use.
      */
     public JsonAdaptedIngredient(Ingredient source) {
         name = source.getName().fullName;
@@ -60,7 +60,7 @@ class JsonAdaptedIngredient {
     }
 
     /**
-     * Converts this Jackson-friendly adapted ingredient object into the model's {@code RecipeIngredient} object.
+     * Converts this Jackson-friendly adapted ingredient object into the model's {@code Ingredient} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted ingredient.
      */
