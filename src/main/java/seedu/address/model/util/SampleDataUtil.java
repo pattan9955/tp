@@ -1,16 +1,22 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyRecipeBook;
+import seedu.address.model.RecipeBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.recipe.Ingredient;
+import seedu.address.model.recipe.Recipe;
+import seedu.address.model.recipe.Step;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,12 +46,44 @@ public class SampleDataUtil {
         };
     }
 
+    public static Recipe[] getSampleRecipes() {
+        return new Recipe[] {
+            new Recipe(
+                new seedu.address.model.recipe.Name("Burger"),
+                Arrays.asList(new Ingredient("Bread"), new Ingredient("patty")),
+                Arrays.asList(new Step("B1"), new Step("B2")),
+                Optional.of("Desc B")
+            ),
+            new Recipe(
+                    new seedu.address.model.recipe.Name("Maggie"),
+                    Arrays.asList(new Ingredient("Maggie")),
+                    Arrays.asList(new Step("M1"), new Step("M2")),
+                    Optional.of("Desc M")
+            ),
+            new Recipe(
+                    new seedu.address.model.recipe.Name("Recipe"),
+                    Arrays.asList(new Ingredient("Ingredient 1"), new Ingredient("Ingredient 2")),
+                    Arrays.asList(new Step("Step 1"), new Step("Step 2")),
+                    Optional.empty()
+            ),
+        };
+
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlyRecipeBook getSampleRecipeBook() {
+        RecipeBook sampleRb = new RecipeBook();
+        for (Recipe sampleRecipe: getSampleRecipes()) {
+            sampleRb.addRecipe(sampleRecipe);
+        }
+        return sampleRb;
     }
 
     /**

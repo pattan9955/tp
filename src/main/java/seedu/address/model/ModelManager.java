@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.recipe.Recipe;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -20,25 +21,31 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final RecipeBook recipeBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Recipe> filteredRecipes;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyRecipeBook recipeBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook
+                + " Initializing with recipe book: " + addressBook
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.recipeBook = new RecipeBook(recipeBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredRecipes = new FilteredList<>(this.recipeBook.getRecipeList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new RecipeBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -74,6 +81,17 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public Path getRecipeBookFilePath() {
+        return userPrefs.getRecipeBookFilePath();
+    }
+
+    @Override
+    public void setRecipeBookFilePath(Path recipeBookFilePath) {
+        requireNonNull(recipeBookFilePath);
+        userPrefs.setRecipeBookFilePath(recipeBookFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -112,6 +130,42 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    //=========== RecipeBook ================================================================================
+
+    @Override
+    public void setRecipeBook(ReadOnlyRecipeBook recipeBook) {
+        this.recipeBook.resetData(recipeBook);
+    }
+
+    @Override
+    public ReadOnlyRecipeBook getRecipeBook() {
+        return recipeBook;
+    }
+
+    @Override
+    public boolean hasRecipe(Recipe recipe) {
+        requireNonNull(recipe);
+        return recipeBook.hasRecipe(recipe);
+    }
+
+    @Override
+    public void deleteRecipe(Recipe target) {
+        recipeBook.removeRecipe(target);
+    }
+
+    @Override
+    public void addRecipe(Recipe recipe) {
+        recipeBook.addRecipe(recipe);
+        updateFilteredRecipeList(PREDICATE_SHOW_ALL_RECIPES);
+    }
+
+    @Override
+    public void setRecipe(Recipe target, Recipe editedRecipe) {
+        requireAllNonNull(target, editedRecipe);
+
+        recipeBook.setRecipe(target, editedRecipe);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -129,6 +183,23 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Filtered Recipe List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Recipe} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Recipe> getFilteredRecipeList() {
+        return filteredRecipes;
+    }
+
+    @Override
+    public void updateFilteredRecipeList(Predicate<Recipe> predicate) {
+        requireNonNull(predicate);
+        filteredRecipes.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -144,8 +215,10 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
+                && recipeBook.equals(other.recipeBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredRecipes.equals(other.filteredRecipes);
     }
 
 }

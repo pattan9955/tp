@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.model.Model;
+import seedu.address.model.PersonModel;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -26,7 +26,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(PersonModel model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(

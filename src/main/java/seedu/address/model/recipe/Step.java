@@ -21,6 +21,10 @@ public class Step {
         this.step = step;
     }
 
+    public String getStep() {
+        return step;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
