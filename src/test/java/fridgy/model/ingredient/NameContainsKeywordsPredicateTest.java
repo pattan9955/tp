@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 import fridgy.testutil.IngredientBuilder;
 import org.junit.jupiter.api.Test;
 

@@ -18,6 +18,8 @@ public class Ingredient {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final ExpiryDate expiryDate;
+    private final Type ingredientType;
 
     // Data fields
     private final Address address;
@@ -26,12 +28,15 @@ public class Ingredient {
     /**
      * Every field must be present and not null.
      */
-    public Ingredient(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Ingredient(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                      Type ingredientType, ExpiryDate expiryDate) {
         CollectionUtil.requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.ingredientType = ingredientType;
+        this.expiryDate = expiryDate;
         this.tags.addAll(tags);
     }
 
@@ -49,6 +54,14 @@ public class Ingredient {
 
     public Address getAddress() {
         return address;
+    }
+
+    public ExpiryDate getExpiryDate() {
+        return expiryDate;
+    }
+
+    public Type getType() {
+        return ingredientType;
     }
 
     /**
@@ -91,13 +104,15 @@ public class Ingredient {
                 && otherIngredient.getPhone().equals(getPhone())
                 && otherIngredient.getEmail().equals(getEmail())
                 && otherIngredient.getAddress().equals(getAddress())
-                && otherIngredient.getTags().equals(getTags());
+                && otherIngredient.getTags().equals(getTags())
+                && otherIngredient.getType().equals(getType())
+                && otherIngredient.getExpiryDate().equals((getExpiryDate()));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, ingredientType, expiryDate);
     }
 
     @Override
@@ -109,7 +124,11 @@ public class Ingredient {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Ingredient Type: ")
+                .append(getType())
+                .append("; Expiry Date: ")
+                .append(getExpiryDate());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

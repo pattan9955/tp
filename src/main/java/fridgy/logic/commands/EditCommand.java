@@ -16,9 +16,11 @@ import fridgy.logic.parser.CliSyntax;
 import fridgy.model.Model;
 import fridgy.model.ingredient.Address;
 import fridgy.model.ingredient.Email;
+import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Phone;
+import fridgy.model.ingredient.Type;
 import fridgy.model.tag.Tag;
 
 
@@ -37,6 +39,8 @@ public class EditCommand extends Command {
             + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
             + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
             + "[" + CliSyntax.PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + CliSyntax.PREFIX_TYPE + "TYPE] "
+            + "[" + CliSyntax.PREFIX_EXPIRY + "EXPIRY DATE] "
             + "[" + CliSyntax.PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + CliSyntax.PREFIX_PHONE + "91234567 "
@@ -95,8 +99,12 @@ public class EditCommand extends Command {
         Email updatedEmail = editIngredientDescriptor.getEmail().orElse(ingredientToEdit.getEmail());
         Address updatedAddress = editIngredientDescriptor.getAddress().orElse(ingredientToEdit.getAddress());
         Set<Tag> updatedTags = editIngredientDescriptor.getTags().orElse(ingredientToEdit.getTags());
+        Type updatedIngredientType = editIngredientDescriptor.getType().orElse(ingredientToEdit.getType());
+        ExpiryDate updatedExpiryDate = editIngredientDescriptor.getExpiryDate()
+                .orElse(ingredientToEdit.getExpiryDate());
 
-        return new Ingredient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Ingredient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedIngredientType, updatedExpiryDate);
     }
 
     @Override
@@ -127,6 +135,8 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private ExpiryDate expiryDate;
+        private Type ingredientType;
 
         public EditIngredientDescriptor() {}
 
@@ -140,13 +150,15 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setType(toCopy.ingredientType);
+            setExpiry(toCopy.expiryDate);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, ingredientType, expiryDate);
         }
 
         public void setName(Name name) {
@@ -179,6 +191,22 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setExpiry(ExpiryDate expiryDate) {
+            this.expiryDate = expiryDate;
+        }
+
+        public Optional<ExpiryDate> getExpiryDate() {
+            return Optional.ofNullable(expiryDate);
+        }
+
+        public void setType(Type ingredientType) {
+            this.ingredientType = ingredientType;
+        }
+
+        public Optional<Type> getType() {
+            return Optional.ofNullable(ingredientType);
         }
 
         /**
@@ -217,7 +245,9 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getType().equals(e.getType())
+                    && getExpiryDate().equals(e.getExpiryDate());
         }
     }
 }

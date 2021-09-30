@@ -3,11 +3,15 @@
     "name": "Valid Ingredient",
     "phone": "9482424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "type" : "solid",
+    "expiryDate" : "20-08-2010"
   }, {
     "name": "Ingredient With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "type" : "solid",
+    "expiryDate" : "20-08-2010"
   } ]
 }

@@ -4,13 +4,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import fridgy.model.tag.Tag;
-import fridgy.logic.commands.EditCommand.EditIngredientDescriptor;
 import fridgy.model.ingredient.Address;
 import fridgy.model.ingredient.Email;
-import fridgy.model.ingredient.Name;
+import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Phone;
+import fridgy.model.ingredient.Type;
+import fridgy.model.tag.Tag;
+import fridgy.logic.commands.EditCommand.EditIngredientDescriptor;
 
 /**
  * A utility class to help with building EditIngredientDescriptor objects.
@@ -36,6 +38,8 @@ public class EditIngredientDescriptorBuilder {
         descriptor.setPhone(ingredient.getPhone());
         descriptor.setEmail(ingredient.getEmail());
         descriptor.setAddress(ingredient.getAddress());
+        descriptor.setType(ingredient.getType());
+        descriptor.setExpiry(ingredient.getExpiryDate());
         descriptor.setTags(ingredient.getTags());
     }
 
@@ -68,6 +72,22 @@ public class EditIngredientDescriptorBuilder {
      */
     public EditIngredientDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Type} of the {@code EditIngredientDescriptor} that we are building.
+     */
+    public EditIngredientDescriptorBuilder withType(String type) {
+        descriptor.setType(new Type(type));
+        return this;
+    }
+
+    /**
+     * Sets the {@code ExpiryDate} of the {@code EditIngredientDescriptor} that we are building.
+     */
+    public EditIngredientDescriptorBuilder withExpiry(String expiryDate) {
+        descriptor.setExpiry(new ExpiryDate(expiryDate));
         return this;
     }
 

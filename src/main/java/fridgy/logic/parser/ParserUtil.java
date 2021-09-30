@@ -11,8 +11,10 @@ import fridgy.commons.util.StringUtil;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.ingredient.Address;
 import fridgy.model.ingredient.Email;
+import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Phone;
+import fridgy.model.ingredient.Type;
 import fridgy.model.tag.Tag;
 
 /**
@@ -35,6 +37,33 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    /**
+     * Parses {@code String date} into an {@code ExpiryDate} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified date is invalid (not of DD-MM-YYYY format).
+     */
+    public static ExpiryDate parseExpiry(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!ExpiryDate.isValidExpiry(trimmedDate)) {
+            throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
+        }
+        return new ExpiryDate(trimmedDate);
+    }
+
+    /**
+     * Parses {@code String type} into an {@code Type} (of ingredient) and returns it. Leading and trailing whitespaces
+     * will be trimmed.
+     * @throws ParseException if the specified type is invalid (Not "solid", "liquid" or "discrete")
+     */
+    public static Type parseType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim();
+        if (!Type.isValidType(trimmedType)) {
+            throw new ParseException(Type.MESSAGE_CONSTRAINTS);
+        }
+        return new Type(trimmedType);
+    }
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
