@@ -7,7 +7,10 @@ title: User Guide
 Fridgy is a **desktop app for managing an inventory of food as well as a list of recipes, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Fridgy can get your fridge inventory and recipe sorted out faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
+* Table of Contents
+  {:toc}
 
+--------------------------------------------------------------------------------------------------------------------
 # UI
 
 ![Ui](images/Ui.png)
@@ -31,7 +34,8 @@ Fridgy is a **desktop app for managing an inventory of food as well as a list of
 
 ## Ingredients
 
-### Add Ingredients: `add ingredient`
+### Add Ingredients: 
+`add ingredient`
 
 Add an ingredient to the inventory of ingredients
 
@@ -82,3 +86,11 @@ Format: `delete recipe <index>`
 Examples: 
 1. `delete recipe 1`
     </br>Expected Output: `Your recipe for 'mom's spaghetti' has been deleted.`
+-----
+# Command Summary
+Action | Format
+--------|------------------
+**Add Ingredient** | `add ingredient -n <name> -t <type> -q <quantity> [-d <description>] -e <expiry date>`
+**Delete Ingredient** | `delete ingredient <index>`
+**Add Recipe** | `add recipe -n <name> -i <ingredient> <quantity> [-d <optional description>] -s <steps>...`
+**Delete Recipe** | `delete recipe <index>`
