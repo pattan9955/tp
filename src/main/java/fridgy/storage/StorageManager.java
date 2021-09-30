@@ -1,0 +1,79 @@
+package fridgy.storage;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Optional;
+import java.util.logging.Logger;
+
+import fridgy.commons.core.LogsCenter;
+import fridgy.commons.exceptions.DataConversionException;
+import fridgy.model.ReadOnlyInventory;
+import fridgy.model.ReadOnlyUserPrefs;
+import fridgy.model.UserPrefs;
+
+/**
+ * Manages storage of Inventory data in local storage.
+ */
+public class StorageManager implements Storage {
+
+    private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
+    private InventoryStorage addressBookStorage;
+    private UserPrefsStorage userPrefsStorage;
+
+    /**
+     * Creates a {@code StorageManager} with the given {@code InventoryStorage} and {@code UserPrefStorage}.
+     */
+    public StorageManager(InventoryStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+        super();
+        this.addressBookStorage = addressBookStorage;
+        this.userPrefsStorage = userPrefsStorage;
+    }
+
+    // ================ UserPrefs methods ==============================
+
+    @Override
+    public Path getUserPrefsFilePath() {
+        return userPrefsStorage.getUserPrefsFilePath();
+    }
+
+    @Override
+    public Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException {
+        return userPrefsStorage.readUserPrefs();
+    }
+
+    @Override
+    public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
+        userPrefsStorage.saveUserPrefs(userPrefs);
+    }
+
+
+    // ================ Inventory methods ==============================
+
+    @Override
+    public Path getInventoryFilePath() {
+        return addressBookStorage.getInventoryFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyInventory> readInventory() throws DataConversionException, IOException {
+        return readInventory(addressBookStorage.getInventoryFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyInventory> readInventory(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return addressBookStorage.readInventory(filePath);
+    }
+
+    @Override
+    public void saveInventory(ReadOnlyInventory addressBook) throws IOException {
+        saveInventory(addressBook, addressBookStorage.getInventoryFilePath());
+    }
+
+    @Override
+    public void saveInventory(ReadOnlyInventory addressBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        addressBookStorage.saveInventory(addressBook, filePath);
+    }
+
+}
