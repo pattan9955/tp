@@ -2,191 +2,98 @@
 layout: page
 title: User Guide
 ---
+# Introduction
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Fridgy is a **desktop app for managing an inventory of food as well as a list of recipes, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Fridgy can get your fridge inventory and recipe sorted out faster than traditional GUI apps.
 
+--------------------------------------------------------------------------------------------------------------------
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+# UI
 
-## Quick start
+![Ui](images/Ui.png)
 
-1. Ensure you have Java `11` or above installed in your Computer.
+# Features
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+**Notes about the Command Format:**
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+- Words between `<` and`>` are parameters to be supplied by the user.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+  e.g. in `add ingredient -n <name>`, `<name>` is a parameter which can be used as `add ingredient -n tomato`.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+- Items in square brackets are optional.
 
-   * **`list`** : Lists all contacts.
+  e.g. `add ingredient -n <name> [-d <description>]` can be used as
+     1. `add ingredient -n tomato -d from Africa` or as
+     2. `add ingredient -n tomato`
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-
-   * **`clear`** : Deletes all contacts.
-
-   * **`exit`** : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Features
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-</div>
-
-### Viewing help : `help`
-
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
+- Items with `…` after them can be used multiple times.
 
 
-### Adding a person: `add`
+## Ingredients
 
-Adds a person to the address book.
+### Add Ingredients:
+`add ingredient`
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Add an ingredient to the inventory of ingredients
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `add ingredient -n <name> -t <type> -q <quantity> [-d <description>] -e <expiry date>`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+1. `add ingredient -n tomato -d from africa -t discrete -q 500 -e 27/09/2021`
+    </br>Expected Output: `Your ingredient '500 units of tomato' has been added to the inventory.`
 
-### Listing all persons : `list`
+2. `add ingredient -n milk -d fresh -t liquid -q 500 -e 27/09/2021`
+    </br>Expected Output: `Your ingredient '500ml of milk' has been added to the inventory.`
 
-Shows a list of all persons in the address book.
+3. `add ingredient -n flour -d fresh -t solid -q 500 -e 27/09/2021`
+    </br>Expected Output: `Your ingredient '500g of flour' has been added to the inventory.`
 
-Format: `list`
 
-### Editing a person : `edit`
+### Delete Ingredients:
+`delete ingredient`
 
-Edits an existing person in the address book.
+Delete an ingredient from the inventory of ingredients
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `delete ingredient <index>`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+Example:
+1. `delete ingredient 1`
+    </br>Expected Output: `Your ingredient '500 units of tomato' has been deleted from the inventory.`
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+## Recipes
 
-### Locating persons by name: `find`
+### Add Recipes:
+`add recipe`
 
-Finds persons whose names contain any of the given keywords.
+Add a recipe to the library of recipes
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Format: `add recipe -n <name> -i <ingredient> <quantity> [-d <optional description>] -s <steps>...`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+1. `add recipe -n pasta -i tomato 1 -i milk 100ml -i chicken breast 200g -s 1. Chicken chicken -s 2. Chicken chicken`
+    </br>Expected Output: `Your recipe for 'pasta' has been added.`
 
-### Deleting a person : `delete`
+2. `add recipe -n aglio olio -i pasta 200g -d grandmother aglio olio recipe -s 1. aglioli olioli 2. aglioli olioli`
+    </br>Expected Output: `Your recipe for 'aglio olio' has been added.`
 
-Deletes the specified person from the address book.
+### Delete Recipes
+`delete recipe`
 
-Format: `delete INDEX`
+Delete a recipe from the library of recipes
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Format: `delete recipe <index>`
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
---------------------------------------------------------------------------------------------------------------------
-
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action | Format, Examples
+1. `delete recipe 1`
+    </br>Expected Output: `Your recipe for 'mom's spaghetti' has been deleted.`
+-----
+# Command Summary
+Action | Format
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+**Add Ingredient** | `add ingredient -n <name> -t <type> -q <quantity> [-d <description>] -e <expiry date>`
+**Delete Ingredient** | `delete ingredient <index>`
+**Add Recipe** | `add recipe -n <name> -i <ingredient> <quantity> [-d <optional description>] -s <steps>...`
+**Delete Recipe** | `delete recipe <index>`
