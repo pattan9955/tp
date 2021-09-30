@@ -257,13 +257,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of recipeIngredients and recipes
+* has a need to manage a significant number of ingredients and recipes
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage recipeIngredients and recipes faster than a typical mouse/GUI driven app
+**Value proposition**: manage ingredients and recipes faster than a typical mouse/GUI driven app
 
 
 ### User stories
@@ -273,20 +273,20 @@ Priorities: High (must have) - `H`, Medium (nice to have) - `M`, Low (unlikely t
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `H`  | new user                                   | see the help menu                  | refer to instructions when I forget how to use the App
-| `M`  | new user exploring the app                 | see my inventory populated with some sample recipeIngredients and recipes        | test out the features              |
+| `M`  | new user exploring the app                 | see my inventory populated with some sample ingredients and recipes        | test out the features              |
 | `M`  | new user ready to start using the app      | purge all current data             | get rid of sample/experimental data I used for exploring the app           |
-| `H`  | user                                       | add recipeIngredients to my inventory    | keep track of the quantity and expiry date                                 | 
-| `H`  | user                                       | add recipes                        | keep track of quantity of recipeIngredients needed for a recipe                  |
-| `H`  | user                                       | delete an recipeIngredient               | stop keeping track of the recipeIngredient                                       | 
+| `H`  | user                                       | add ingredients to my inventory    | keep track of the quantity and expiry date                                 | 
+| `H`  | user                                       | add recipes                        | keep track of quantity of ingredients needed for a recipe                  |
+| `H`  | user                                       | delete an ingredient               | stop keeping track of the ingredient                                       | 
 | `H`  | user                                       | delete a recipe                    | stop keeping track of the recipe                                           |
-| `H`  | user                                       | find an recipeIngredient by name         | locate details of recipeIngredients without having to go through the entire list |
+| `H`  | user                                       | find an ingredient by name         | locate details of ingredients without having to go through the entire list |
 | `H`  | user                                       | find a recipe by name              | locate details of recipes without having to go through the entire list     |
-| `H`  | user                                       | list all recipeIngredients               | easily see all recipeIngredients                                                 |
+| `H`  | user                                       | list all ingredients               | easily see all ingredients                                                 |
 | `H`  | user                                       | list all recipes                   | easily see all recipes                                                     |
-| `H`  | user                                       | sort recipeIngredients by expiry date    | locate recipeIngredients that are expired or expiring soon                       |
-| `H`  | user                                       | automatically update the inventory list after executing a recipe | update the recipeIngredients I have used           |
-| `H`  | user                                       | view recipeIngredient tags               | view details about the recipeIngredient (ie. its expiry status)                  |
-| `H`  | user                                       | update recipeIngredients                 | update the quantity of recipeIngredients as needed                               |
+| `H`  | user                                       | sort ingredients by expiry date    | locate ingredients that are expired or expiring soon                       |
+| `H`  | user                                       | automatically update the inventory list after executing a recipe | update the ingredients I have used           |
+| `H`  | user                                       | view ingredient tags               | view details about the ingredient (ie. its expiry status)                  |
+| `H`  | user                                       | update ingredients                 | update the quantity of ingredients as needed                               |
 | `H`  | user                                       | update recipes                     | update the recipe as needed                                                |
 | `M`  | user                                       | import my saved database           | start using it again quickly                                               |
 
@@ -297,12 +297,12 @@ Priorities: High (must have) - `H`, Medium (nice to have) - `M`, Low (unlikely t
 
 (For all use cases below, the **System** is `Fridgy` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Delete recipeIngredient**
+**Use case: UC01 - Delete ingredient**
 
 **MSS**
 
-1.  `User` requests to delete a specific recipeIngredient by specifying its index.
-2.  `Fridgy` removes the full quantity of the recipeIngredient.
+1.  `User` requests to delete a specific ingredient by specifying its index.
+2.  `Fridgy` removes the full quantity of the ingredient.
 
     Use case ends.
 
@@ -317,17 +317,17 @@ Priorities: High (must have) - `H`, Medium (nice to have) - `M`, Low (unlikely t
 
 **MSS**
 
-1.  `User` requests to add a specific recipe by specifying its name, recipeIngredients and quantity, steps, and an optional description.
+1.  `User` requests to add a specific recipe by specifying its name, ingredients and quantity, steps, and an optional description.
 2.  `Fridgy` creates the recipe.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The recipeIngredient name is invalid.
+* 1a. The ingredient name is invalid.
     * `Fridgy` throws an error message.
-* 1b. The quantity of recipeIngredients is invalid.
-    * `Fridgy` throws an error message and informs the user of quantity of missing recipeIngredients.
+* 1b. The quantity of ingredients is invalid.
+    * `Fridgy` throws an error message and informs the user of quantity of missing ingredients.
 
   Use case ends.
 
@@ -336,7 +336,7 @@ Priorities: High (must have) - `H`, Medium (nice to have) - `M`, Low (unlikely t
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 recipeIngredients / recipes without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 ingredients / recipes without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be able to function without internet access.
 5. Should be able to perform all actions from the command line.
@@ -364,7 +364,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample recipeIngredients and recipes. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample ingredients and recipes. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -375,17 +375,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting an recipeIngredient
+### Deleting an ingredient
 
-1. Deleting an recipeIngredient while all recipeIngredients are being shown
+1. Deleting an ingredient while all ingredients are being shown
 
-   1. Prerequisites: List all recipeIngredients using the `list` command. Multiple recipeIngredients in the list.
+   1. Prerequisites: List all ingredients using the `list` command. Multiple ingredients in the list.
 
    2. Test case: `delete 2`<br>
-      Expected: Second recipeIngredient is deleted from the list. Details of the deleted recipeIngredient shown in the status message.
+      Expected: Second ingredient is deleted from the list. Details of the deleted ingredient shown in the status message.
 
    3. Test case: `delete 0`<br>
-      Expected: No recipeIngredient is deleted. Error details shown in the status message.
+      Expected: No ingredient is deleted. Error details shown in the status message.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

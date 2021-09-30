@@ -321,7 +321,7 @@ public PersonCard(Person person, int displayedIndex) {
 
 ## Putting everything together
 
-After the previous step, we notice a peculiar regression — we went from displaying something to nothing at all. However, this is expected behavior as we are yet to update the `RemarkCommand` to make use of the code we've been adding in the last few step.
+After the previous step, we notice a peculiar regression — we went from displaying something to nothing at all. However, this is expected behavior as we are yet to update the `RemarkCommand` to make use of the code we've been adding in the last few steps.
 
 ### Update `RemarkCommand` and `RemarkCommandParser`
 
