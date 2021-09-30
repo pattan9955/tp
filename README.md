@@ -1,15 +1,36 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/AY2122S1-CS2103T-W11-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-W11-1/tp/actions)
+
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-W11-1/tp/branch/master/graph/badge.svg?token=R2UHGI070A)](https://codecov.io/gh/AY2122S1-CS2103T-W11-1/tp)
 
+# Fridgy
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+## What is Fridgy?
+---
+* Fridgy is **a Food Inventory Manager** that makes it easy to reduce food waste by keeping track of what you have and when it expires.
+* Fridgy's built-in **Recipe Tracker** matches recipe ingredients to ingredients in your inventory and helps to keep track of the quantity of ingredients.
+
+## Our Motivation
+---
+
+It can be hard for the typical adult who cooks often to stay on top of the ingredients that they have in their pantry, as they may be too busy to actively keep track of them.
+
+This can result in food wastage, in the form of constantly throwing away expired food.
+
+Fridgy was thus developed to solve the issue of having to manually track ingredients (and their expiry dates) in a pantry.
+
+## Who is it meant for?
+---
+* Households or individuals who want to keep track of groceries for meal preparation.
+* Households or individuals who want to reduce food wastage.
+* Individuals who are comfortable with a Command Line Interface (CLI).
+
+## Example Usages
+---
+* As a user, you can add an ingredient (along with quantity and expiry information) in your pantry for tracking through the Command Line.
+  * You can also delete, view or edit information related to the ingredient.
+* As a user, you can add a recipe to Fridgy through the Command Line.
+  * You can also delete, view or edit the recipe.
+* Easily search for a previously added recipe or ingredient by name. 
+---
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
