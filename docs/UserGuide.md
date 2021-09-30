@@ -52,7 +52,8 @@ Examples:
     </br>Expected Output: `Your ingredient '500g of flour' has been added to the inventory.`
 
 
-### Delete Ingredients: `delete ingredient`
+### Delete Ingredients:
+`delete ingredient`
 
 Delete an ingredient from the inventory of ingredients
 
@@ -64,7 +65,8 @@ Example:
 
 ## Recipes
 
-### Add Recipes
+### Add Recipes:
+`add recipe`
 
 Add a recipe to the library of recipes
 
@@ -78,6 +80,7 @@ Examples:
     </br>Expected Output: `Your recipe for 'aglio olio' has been added.`
 
 ### Delete Recipes
+`delete recipe`
 
 Delete a recipe from the library of recipes
 
