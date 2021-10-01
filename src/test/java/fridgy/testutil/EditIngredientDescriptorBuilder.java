@@ -1,5 +1,6 @@
 package fridgy.testutil;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -67,7 +68,7 @@ public class EditIngredientDescriptorBuilder {
      * Sets the {@code Description} of the {@code EditIngredientDescriptor} that we are building.
      */
     public EditIngredientDescriptorBuilder withDescription(String description) {
-        descriptor.setDescription(new Description(description));
+        descriptor.setDescription(new Description(Optional.ofNullable(description)));
         return this;
     }
 

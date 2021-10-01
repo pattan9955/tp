@@ -4,10 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static fridgy.testutil.Assert.assertThrows;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.ingredient.Description;
@@ -103,26 +100,27 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDescription_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription((String) null));
+    public void parseDescription_null_returnsEmptyDescription(){
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDescription(Optional.of("")));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDescription(Optional.of(" ")));
     }
 
     @Test
     public void parseDescription_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDescription(INVALID_DESCRIPTION));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDescription(Optional.of(INVALID_DESCRIPTION)));
     }
 
     @Test
     public void parseDescription_validValueWithoutWhitespace_returnsDescription() throws Exception {
-        Description expectedDescription = new Description(VALID_DESCRIPTION);
-        assertEquals(expectedDescription, ParserUtil.parseDescription(VALID_DESCRIPTION));
+        Description expectedDescription = new Description(Optional.of(VALID_DESCRIPTION));
+        assertEquals(expectedDescription, ParserUtil.parseDescription(Optional.of(VALID_DESCRIPTION)));
     }
 
     @Test
     public void parseDescription_validValueWithWhitespace_returnsTrimmedDescription() throws Exception {
         String addressWithWhitespace = WHITESPACE + VALID_DESCRIPTION + WHITESPACE;
-        Description expectedDescription = new Description(VALID_DESCRIPTION);
-        assertEquals(expectedDescription, ParserUtil.parseDescription(addressWithWhitespace));
+        Description expectedDescription = new Description(Optional.of(VALID_DESCRIPTION));
+        assertEquals(expectedDescription, ParserUtil.parseDescription(Optional.of(addressWithWhitespace)));
     }
 
     @Test

@@ -28,7 +28,7 @@ public class IngredientUtil {
         sb.append(CliSyntax.PREFIX_NAME + ingredient.getName().fullName + " ");
         sb.append(CliSyntax.PREFIX_QUANTITY + ingredient.getQuantity().value + " ");
         sb.append(CliSyntax.PREFIX_EMAIL + ingredient.getEmail().value + " ");
-        sb.append(CliSyntax.PREFIX_DESCRIPTION + ingredient.getDescription().value + " ");
+        sb.append(CliSyntax.PREFIX_DESCRIPTION + ingredient.getDescription().value.orElse("") + " ");
         ingredient.getTags().stream().forEach(
             s -> sb.append(CliSyntax.PREFIX_TAG + s.tagName + " ")
         );
@@ -43,7 +43,7 @@ public class IngredientUtil {
         descriptor.getName().ifPresent(name -> sb.append(CliSyntax.PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getQuantity().ifPresent(quantity -> sb.append(CliSyntax.PREFIX_QUANTITY).append(quantity.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(CliSyntax.PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getDescription().ifPresent(description -> sb.append(CliSyntax.PREFIX_DESCRIPTION).append(description.value).append(" "));
+        descriptor.getDescription().ifPresent(description -> sb.append(CliSyntax.PREFIX_DESCRIPTION).append(description.value.orElse("")).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

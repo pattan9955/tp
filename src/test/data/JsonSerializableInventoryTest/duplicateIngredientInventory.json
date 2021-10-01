@@ -3,12 +3,16 @@
     "name": "Alice Pauline",
     "quantity": "94351253",
     "email": "alice@example.com",
-    "description": "123, Jurong West Ave 6, #08-111",
+    "description" : {
+      "value" : "123, Jurong West Ave 6, #08-111"
+    },
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "quantity": "94351253",
     "email": "pauline@example.com",
-    "description": "4th street"
+    "description" : {
+      "value" : "4th street"
+    }
   } ]
 }

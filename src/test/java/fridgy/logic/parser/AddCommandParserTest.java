@@ -14,6 +14,8 @@ import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Quantity;
 
+import java.util.Optional;
+
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
@@ -29,7 +31,7 @@ public class AddCommandParserTest {
         CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.QUANTITY_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
                 + CommandTestUtil.DESCRIPTION_DESC_BOB + CommandTestUtil.TAG_DESC_FRIEND, new AddCommand(expectedIngredient));
 
-        // multiple quantitys - last quantity accepted
+        // multiple quantities - last quantity accepted
         CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.QUANTITY_DESC_AMY + CommandTestUtil.QUANTITY_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
                 + CommandTestUtil.DESCRIPTION_DESC_BOB + CommandTestUtil.TAG_DESC_FRIEND, new AddCommand(expectedIngredient));
 
@@ -37,7 +39,7 @@ public class AddCommandParserTest {
         CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.QUANTITY_DESC_BOB + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.EMAIL_DESC_BOB
                 + CommandTestUtil.DESCRIPTION_DESC_BOB + CommandTestUtil.TAG_DESC_FRIEND, new AddCommand(expectedIngredient));
 
-        // multiple addresses - last address accepted
+        // multiple descriptions - last description accepted
         CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.QUANTITY_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.DESCRIPTION_DESC_AMY
                 + CommandTestUtil.DESCRIPTION_DESC_BOB + CommandTestUtil.TAG_DESC_FRIEND, new AddCommand(expectedIngredient));
 
@@ -72,10 +74,6 @@ public class AddCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.QUANTITY_DESC_BOB + CommandTestUtil.VALID_EMAIL_BOB + CommandTestUtil.DESCRIPTION_DESC_BOB,
                 expectedMessage);
 
-        // missing address prefix
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.QUANTITY_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.VALID_DESCRIPTION_BOB,
-                expectedMessage);
-
         // all prefixes missing
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_NAME_BOB + CommandTestUtil.VALID_QUANTITY_BOB + CommandTestUtil.VALID_EMAIL_BOB + CommandTestUtil.VALID_DESCRIPTION_BOB,
                 expectedMessage);
@@ -95,8 +93,12 @@ public class AddCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.QUANTITY_DESC_BOB + CommandTestUtil.INVALID_EMAIL_DESC + CommandTestUtil.DESCRIPTION_DESC_BOB
                 + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
-        // invalid address
+        // invalid description
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.QUANTITY_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_DESCRIPTION_DESC
+                + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND, Description.MESSAGE_CONSTRAINTS);
+
+        // invalid description
+        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.QUANTITY_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_DESCRIPTION_DESC_TWO
                 + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND, Description.MESSAGE_CONSTRAINTS);
 
         // invalid tag

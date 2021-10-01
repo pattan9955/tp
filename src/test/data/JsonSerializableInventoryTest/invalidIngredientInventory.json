@@ -3,6 +3,8 @@
     "name": "Hans Muster",
     "quantity": "9482424",
     "email": "invalid@email!3e",
-    "description": "4th street"
+    "description" : {
+      "value" : "4th street"
+    }
   } ]
 }

@@ -1,6 +1,7 @@
 package fridgy.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import fridgy.model.tag.Tag;
@@ -34,7 +35,7 @@ public class IngredientBuilder {
         name = new Name(DEFAULT_NAME);
         quantity = new Quantity(DEFAULT_QUANTITY);
         email = new Email(DEFAULT_EMAIL);
-        description = new Description(DEFAULT_DESCRIPTION);
+        description = new Description(Optional.of(DEFAULT_DESCRIPTION));
         tags = new HashSet<>();
     }
 
@@ -69,7 +70,7 @@ public class IngredientBuilder {
      * Sets the {@code Description} of the {@code Ingredient} that we are building.
      */
     public IngredientBuilder withDescription(String description) {
-        this.description = new Description(description);
+        this.description = new Description(Optional.ofNullable(description));
         return this;
     }
 

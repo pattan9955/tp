@@ -3,6 +3,7 @@ package fridgy.model.ingredient;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import fridgy.commons.util.CollectionUtil;
@@ -24,10 +25,22 @@ public class Ingredient {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Constructs an ingredient reference with an empty description.
+     */
+    public Ingredient(Name name, Quantity quantity, Email email, Set<Tag> tags) {
+        CollectionUtil.requireAllNonNull(name, quantity, email, tags);
+        this.name = name;
+        this.quantity = quantity;
+        this.email = email;
+        this.description = new Description(Optional.empty());
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Constructs an ingredient reference where all fields must be present and not null.
      */
     public Ingredient(Name name, Quantity quantity, Email email, Description description, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, quantity, email, description, tags);
+        CollectionUtil.requireAllNonNull(name, quantity, email, tags);
         this.name = name;
         this.quantity = quantity;
         this.email = email;
@@ -107,9 +120,13 @@ public class Ingredient {
                 .append("; Quantity: ")
                 .append(getQuantity())
                 .append("; Email: ")
-                .append(getEmail())
-                .append("; Description: ")
-                .append(getDescription());
+                .append(getEmail());
+
+        Description description = getDescription();
+        if (!description.value.equals(Optional.empty())) {
+            builder.append("; Description: ")
+                    .append(getDescription());
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

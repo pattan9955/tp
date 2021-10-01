@@ -3,6 +3,8 @@
     "name": "Ingredient with invalid name field: Ha!ns Mu@ster",
     "quantity": "9482424",
     "email": "hans@example.com",
-    "description": "4th street"
+    "description" : {
+      "value" : "4th street"
+    }
   } ]
 }

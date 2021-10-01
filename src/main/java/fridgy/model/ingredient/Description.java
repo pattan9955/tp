@@ -2,11 +2,13 @@ package fridgy.model.ingredient;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+
 import fridgy.commons.util.AppUtil;
 
 /**
  * Represents an ingredient's description in the Inventory.
- * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidDescription(Optional)}
  */
 public class Description {
 
@@ -15,32 +17,34 @@ public class Description {
     /*
      * The first character of the description must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
+     * Only accepts ASCII characters.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "^[\\p{ASCII}][\\p{ASCII} ]*";
 
-    public final String value;
+    public final Optional<String> value;
 
     /**
      * Constructs an {@code Description}.
      *
      * @param description A valid description.
      */
-    public Description(String description) {
+    public Description(Optional<String> description) {
         requireNonNull(description);
         AppUtil.checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
         value = description;
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid description.
+     * @param test
      */
-    public static boolean isValidDescription(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValidDescription(Optional<String> test) {
+        return test.equals(Optional.empty()) || test.get().matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return value;
+        return value.orElse("");
     }
 
     @Override

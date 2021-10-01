@@ -6,6 +6,7 @@ import static fridgy.testutil.TypicalIngredients.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import fridgy.commons.exceptions.IllegalValueException;
@@ -19,14 +20,14 @@ import org.junit.jupiter.api.Test;
 public class JsonAdaptedIngredientTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_QUANTITY = "+651234";
-    private static final String INVALID_DESCRIPTION = " ";
+    private static final Optional<String> INVALID_DESCRIPTION = Optional.of("˚¬˙µ");
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_QUANTITY = BENSON.getQuantity().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_DESCRIPTION = BENSON.getDescription().toString();
+    private static final Optional<String> VALID_DESCRIPTION = Optional.ofNullable(BENSON.getDescription().toString());
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());

@@ -4,10 +4,13 @@ import static fridgy.logic.commands.CommandTestUtil.VALID_DESCRIPTION_AMY;
 import static fridgy.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BOB;
 import static fridgy.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static fridgy.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static fridgy.logic.commands.CommandTestUtil.VALID_EMAIL_FISH;
 import static fridgy.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static fridgy.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static fridgy.logic.commands.CommandTestUtil.VALID_NAME_FISH;
 import static fridgy.logic.commands.CommandTestUtil.VALID_QUANTITY_AMY;
 import static fridgy.logic.commands.CommandTestUtil.VALID_QUANTITY_BOB;
+import static fridgy.logic.commands.CommandTestUtil.VALID_QUANTITY_FISH;
 import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -54,6 +57,8 @@ public class TypicalIngredients {
     public static final Ingredient BOB = new IngredientBuilder().withName(VALID_NAME_BOB).withQuantity(VALID_QUANTITY_BOB)
             .withEmail(VALID_EMAIL_BOB).withDescription(VALID_DESCRIPTION_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
+    public static final Ingredient FISH = new IngredientBuilder().withName(VALID_NAME_FISH).withQuantity(VALID_QUANTITY_FISH)
+            .withEmail(VALID_EMAIL_FISH).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

@@ -3,11 +3,15 @@
     "name": "Valid Ingredient",
     "quantity": "9482424",
     "email": "hans@example.com",
-    "description": "4th street"
+    "description" : {
+      "value" : "4th street"
+    }
   }, {
     "name": "Ingredient With Invalid Quantity Field",
     "quantity": "948asdf2424",
     "email": "hans@example.com",
-    "description": "4th street"
+    "description" : {
+      "value" : "4th street"
+    }
   } ]
 }

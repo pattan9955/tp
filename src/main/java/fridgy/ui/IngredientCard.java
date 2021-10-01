@@ -50,7 +50,7 @@ public class IngredientCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(ingredient.getName().fullName);
         quantity.setText(ingredient.getQuantity().value);
-        description.setText(ingredient.getDescription().value);
+        description.setText(ingredient.getDescription().value.orElse(""));
         email.setText(ingredient.getEmail().value);
         ingredient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

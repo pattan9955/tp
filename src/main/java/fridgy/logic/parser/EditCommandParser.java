@@ -56,7 +56,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             editIngredientDescriptor.setDescription(
-                    ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
+                    ParserUtil.parseDescription(Optional.of(argMultimap.getValue(PREFIX_DESCRIPTION).get())));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editIngredientDescriptor::setTags);
 

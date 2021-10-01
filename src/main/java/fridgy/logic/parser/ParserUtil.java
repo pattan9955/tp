@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import fridgy.commons.core.index.Index;
@@ -71,13 +72,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code description} is invalid.
      */
-    public static Description parseDescription(String description) throws ParseException {
+    public static Description parseDescription(Optional<String> description) throws ParseException {
         requireNonNull(description);
-        String trimmedDescription = description.trim();
-        if (!Description.isValidDescription(trimmedDescription)) {
+        String trimmedDescription = description.get().trim();
+        if (!Description.isValidDescription(Optional.of(trimmedDescription))) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
-        return new Description(trimmedDescription);
+        return new Description(Optional.of(trimmedDescription));
     }
 
     /**

@@ -3,6 +3,7 @@ package fridgy.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ class JsonAdaptedIngredient {
     private final String name;
     private final String quantity;
     private final String email;
-    private final String description;
+    private final Optional<String> description;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -35,7 +36,7 @@ class JsonAdaptedIngredient {
      */
     @JsonCreator
     public JsonAdaptedIngredient(@JsonProperty("name") String name, @JsonProperty("quantity") String quantity,
-            @JsonProperty("email") String email, @JsonProperty("description") String description,
+            @JsonProperty("email") String email, @JsonProperty("description") Optional<String> description,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.quantity = quantity;
