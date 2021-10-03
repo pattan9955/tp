@@ -3,7 +3,7 @@ package fridgy.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static fridgy.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BOB;
 import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static fridgy.testutil.Assert.assertThrows;
 
@@ -46,7 +46,7 @@ public class InventoryTest {
     @Test
     public void resetData_withDuplicateIngredients_throwsDuplicateIngredientException() {
         // Two ingredients with the same identity fields
-        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withDescription(VALID_DESCRIPTION_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Ingredient> newIngredients = Arrays.asList(TypicalIngredients.ALICE, editedAlice);
         InventoryStub newData = new InventoryStub(newIngredients);
@@ -73,7 +73,7 @@ public class InventoryTest {
     @Test
     public void hasIngredient_ingredientWithSameIdentityFieldsInInventory_returnsTrue() {
         addressBook.addIngredient(TypicalIngredients.ALICE);
-        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withDescription(VALID_DESCRIPTION_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasIngredient(editedAlice));
     }

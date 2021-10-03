@@ -1,22 +1,23 @@
 package fridgy.logic.parser;
 
-import static fridgy.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static fridgy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static fridgy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static fridgy.logic.parser.CliSyntax.PREFIX_NAME;
-import static fridgy.logic.parser.CliSyntax.PREFIX_PHONE;
+import static fridgy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static fridgy.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import fridgy.commons.core.Messages;
 import fridgy.logic.commands.AddCommand;
 import fridgy.logic.parser.exceptions.ParseException;
-import fridgy.model.ingredient.Address;
+import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
-import fridgy.model.ingredient.Phone;
+import fridgy.model.ingredient.Quantity;
 import fridgy.model.tag.Tag;
 
 /**
@@ -31,20 +32,27 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_EMAIL,
+                        PREFIX_DESCRIPTION, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Ingredient ingredient = new Ingredient(name, phone, email, address, tagList);
+        Ingredient ingredient = new Ingredient(name, quantity, email, tagList);
+
+        if (arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION)) {
+            Description description = ParserUtil.parseDescription(
+                    Optional.of(argMultimap.getValue(PREFIX_DESCRIPTION)
+                            .orElse("")));
+            ingredient = new Ingredient(name, quantity, email, description, tagList);
+        }
 
         return new AddCommand(ingredient);
     }

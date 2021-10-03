@@ -44,11 +44,11 @@ public class EditCommandTest {
         Ingredient lastIngredient = model.getFilteredIngredientList().get(indexLastIngredient.getZeroBased());
 
         IngredientBuilder IngredientInList = new IngredientBuilder(lastIngredient);
-        Ingredient editedIngredient = IngredientInList.withName(CommandTestUtil.VALID_NAME_BOB).withPhone(CommandTestUtil.VALID_PHONE_BOB)
+        Ingredient editedIngredient = IngredientInList.withName(CommandTestUtil.VALID_NAME_BOB).withQuantity(CommandTestUtil.VALID_QUANTITY_BOB)
                 .withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
 
         EditCommand.EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB)
-                .withPhone(CommandTestUtil.VALID_PHONE_BOB).withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
+                .withQuantity(CommandTestUtil.VALID_QUANTITY_BOB).withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastIngredient, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);

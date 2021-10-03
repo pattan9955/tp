@@ -4,10 +4,10 @@ import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.CommandTestUtil;
 import fridgy.logic.commands.EditCommand;
-import fridgy.model.ingredient.Address;
+import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.Name;
-import fridgy.model.ingredient.Phone;
+import fridgy.model.ingredient.Quantity;
 import fridgy.model.tag.Tag;
 import fridgy.testutil.EditIngredientDescriptorBuilder;
 import fridgy.testutil.TypicalIndexes;
@@ -52,17 +52,17 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_QUANTITY_DESC, Quantity.MESSAGE_CONSTRAINTS); // invalid quantity
         CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS); // invalid address
         CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
-        // invalid phone followed by valid email
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+        // invalid quantity followed by valid email
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_QUANTITY_DESC + CommandTestUtil.EMAIL_DESC_AMY, Quantity.MESSAGE_CONSTRAINTS);
 
-        // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
+        // valid quantity followed by invalid quantity. The test case for invalid quantity followed by valid quantity
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.QUANTITY_DESC_BOB + CommandTestUtil.INVALID_QUANTITY_DESC, Quantity.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Ingredient} being edited,
         // parsing it together with a valid tag results in error
@@ -71,18 +71,18 @@ public class EditCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, "1" + TAG_EMPTY + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.INVALID_EMAIL_DESC + CommandTestUtil.VALID_ADDRESS_AMY + CommandTestUtil.VALID_PHONE_AMY,
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.INVALID_EMAIL_DESC + CommandTestUtil.VALID_DESCRIPTION_AMY + CommandTestUtil.VALID_QUANTITY_AMY,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = TypicalIndexes.INDEX_SECOND_INGREDIENT;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND
-                + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND;
+        String userInput = targetIndex.getOneBased() + CommandTestUtil.QUANTITY_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND
+                + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.DESCRIPTION_DESC_AMY + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND;
 
         EditCommand.EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_AMY)
-                .withPhone(CommandTestUtil.VALID_PHONE_BOB).withEmail(CommandTestUtil.VALID_EMAIL_AMY).withAddress(CommandTestUtil.VALID_ADDRESS_AMY)
+                .withQuantity(CommandTestUtil.VALID_QUANTITY_BOB).withEmail(CommandTestUtil.VALID_EMAIL_AMY).withDescription(CommandTestUtil.VALID_DESCRIPTION_AMY)
                 .withTags(CommandTestUtil.VALID_TAG_HUSBAND, CommandTestUtil.VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -92,9 +92,9 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = TypicalIndexes.INDEX_FIRST_INGREDIENT;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + CommandTestUtil.QUANTITY_DESC_BOB + CommandTestUtil.EMAIL_DESC_AMY;
 
-        EditCommand.EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_BOB)
+        EditCommand.EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder().withQuantity(CommandTestUtil.VALID_QUANTITY_BOB)
                 .withEmail(CommandTestUtil.VALID_EMAIL_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -110,9 +110,9 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
 
-        // phone
-        userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_AMY;
-        descriptor = new EditIngredientDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_AMY).build();
+        // quantity
+        userInput = targetIndex.getOneBased() + CommandTestUtil.QUANTITY_DESC_AMY;
+        descriptor = new EditIngredientDescriptorBuilder().withQuantity(CommandTestUtil.VALID_QUANTITY_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -123,8 +123,8 @@ public class EditCommandParserTest {
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
-        userInput = targetIndex.getOneBased() + CommandTestUtil.ADDRESS_DESC_AMY;
-        descriptor = new EditIngredientDescriptorBuilder().withAddress(CommandTestUtil.VALID_ADDRESS_AMY).build();
+        userInput = targetIndex.getOneBased() + CommandTestUtil.DESCRIPTION_DESC_AMY;
+        descriptor = new EditIngredientDescriptorBuilder().withDescription(CommandTestUtil.VALID_DESCRIPTION_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -138,12 +138,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = TypicalIndexes.INDEX_FIRST_INGREDIENT;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY
-                + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND
-                + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND;
+        String userInput = targetIndex.getOneBased() + CommandTestUtil.QUANTITY_DESC_AMY + CommandTestUtil.DESCRIPTION_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY
+                + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.QUANTITY_DESC_AMY + CommandTestUtil.DESCRIPTION_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND
+                + CommandTestUtil.QUANTITY_DESC_BOB + CommandTestUtil.DESCRIPTION_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND;
 
-        EditCommand.EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_BOB)
-                .withEmail(CommandTestUtil.VALID_EMAIL_BOB).withAddress(CommandTestUtil.VALID_ADDRESS_BOB).withTags(CommandTestUtil.VALID_TAG_FRIEND, CommandTestUtil.VALID_TAG_HUSBAND)
+        EditCommand.EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder().withQuantity(CommandTestUtil.VALID_QUANTITY_BOB)
+                .withEmail(CommandTestUtil.VALID_EMAIL_BOB).withDescription(CommandTestUtil.VALID_DESCRIPTION_BOB).withTags(CommandTestUtil.VALID_TAG_FRIEND, CommandTestUtil.VALID_TAG_HUSBAND)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -154,16 +154,16 @@ public class EditCommandParserTest {
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
         Index targetIndex = TypicalIndexes.INDEX_FIRST_INGREDIENT;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.PHONE_DESC_BOB;
-        EditCommand.EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_BOB).build();
+        String userInput = targetIndex.getOneBased() + CommandTestUtil.INVALID_QUANTITY_DESC + CommandTestUtil.QUANTITY_DESC_BOB;
+        EditCommand.EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder().withQuantity(CommandTestUtil.VALID_QUANTITY_BOB).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.ADDRESS_DESC_BOB
-                + CommandTestUtil.PHONE_DESC_BOB;
-        descriptor = new EditIngredientDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_BOB).withEmail(CommandTestUtil.VALID_EMAIL_BOB)
-                .withAddress(CommandTestUtil.VALID_ADDRESS_BOB).build();
+        userInput = targetIndex.getOneBased() + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_QUANTITY_DESC + CommandTestUtil.DESCRIPTION_DESC_BOB
+                + CommandTestUtil.QUANTITY_DESC_BOB;
+        descriptor = new EditIngredientDescriptorBuilder().withQuantity(CommandTestUtil.VALID_QUANTITY_BOB).withEmail(CommandTestUtil.VALID_EMAIL_BOB)
+                .withDescription(CommandTestUtil.VALID_DESCRIPTION_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
     }

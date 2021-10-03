@@ -3,35 +3,48 @@ package fridgy.model.ingredient;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import fridgy.commons.util.CollectionUtil;
 import fridgy.model.tag.Tag;
 
 /**
- * Represents a Ingredient in the Inventory.
+ * Represents an ingredient in the Inventory.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Ingredient {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
+    private final Quantity quantity;
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Description description;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Constructs an ingredient reference with an empty description.
      */
-    public Ingredient(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, phone, email, address, tags);
+    public Ingredient(Name name, Quantity quantity, Email email, Set<Tag> tags) {
+        CollectionUtil.requireAllNonNull(name, quantity, email, tags);
         this.name = name;
-        this.phone = phone;
+        this.quantity = quantity;
         this.email = email;
-        this.address = address;
+        this.description = new Description(Optional.empty());
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Constructs an ingredient reference where all fields must be present and not null.
+     */
+    public Ingredient(Name name, Quantity quantity, Email email, Description description, Set<Tag> tags) {
+        CollectionUtil.requireAllNonNull(name, quantity, email, tags);
+        this.name = name;
+        this.quantity = quantity;
+        this.email = email;
+        this.description = description;
         this.tags.addAll(tags);
     }
 
@@ -39,16 +52,16 @@ public class Ingredient {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Quantity getQuantity() {
+        return quantity;
     }
 
     public Email getEmail() {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Description getDescription() {
+        return description;
     }
 
     /**
@@ -88,28 +101,32 @@ public class Ingredient {
 
         Ingredient otherIngredient = (Ingredient) other;
         return otherIngredient.getName().equals(getName())
-                && otherIngredient.getPhone().equals(getPhone())
+                && otherIngredient.getQuantity().equals(getQuantity())
                 && otherIngredient.getEmail().equals(getEmail())
-                && otherIngredient.getAddress().equals(getAddress())
+                && otherIngredient.getDescription().equals(getDescription())
                 && otherIngredient.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, quantity, email, description, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
+                .append("; Quantity: ")
+                .append(getQuantity())
                 .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append(getEmail());
+
+        Description description = getDescription();
+        if (!description.value.equals(Optional.empty())) {
+            builder.append("; Description: ")
+                    .append(getDescription());
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

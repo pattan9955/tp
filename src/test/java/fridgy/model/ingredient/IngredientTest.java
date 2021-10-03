@@ -2,10 +2,10 @@ package fridgy.model.ingredient;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static fridgy.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BOB;
 import static fridgy.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static fridgy.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static fridgy.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static fridgy.logic.commands.CommandTestUtil.VALID_QUANTITY_BOB;
 import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static fridgy.testutil.Assert.assertThrows;
 
@@ -33,8 +33,8 @@ public class IngredientTest {
         Assertions.assertFalse(TypicalIngredients.ALICE.isSameIngredient(null));
 
         // same name, all other attributes different -> returns true
-        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withQuantity(VALID_QUANTITY_BOB).withEmail(VALID_EMAIL_BOB)
+                .withDescription(VALID_DESCRIPTION_BOB).withTags(VALID_TAG_HUSBAND).build();
         Assertions.assertTrue(TypicalIngredients.ALICE.isSameIngredient(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -73,8 +73,8 @@ public class IngredientTest {
         Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withName(VALID_NAME_BOB).build();
         Assertions.assertFalse(TypicalIngredients.ALICE.equals(editedAlice));
 
-        // different phone -> returns false
-        editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withPhone(VALID_PHONE_BOB).build();
+        // different quantity -> returns false
+        editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withQuantity(VALID_QUANTITY_BOB).build();
         Assertions.assertFalse(TypicalIngredients.ALICE.equals(editedAlice));
 
         // different email -> returns false
@@ -82,7 +82,7 @@ public class IngredientTest {
         Assertions.assertFalse(TypicalIngredients.ALICE.equals(editedAlice));
 
         // different address -> returns false
-        editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withDescription(VALID_DESCRIPTION_BOB).build();
         Assertions.assertFalse(TypicalIngredients.ALICE.equals(editedAlice));
 
         // different tags -> returns false

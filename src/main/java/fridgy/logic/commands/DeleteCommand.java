@@ -11,7 +11,7 @@ import fridgy.model.Model;
 import fridgy.model.ingredient.Ingredient;
 
 /**
- * Deletes a ingredient identified using it's displayed index from the Inventory.
+ * Deletes an ingredient identified using it's displayed index from the Inventory.
  */
 public class DeleteCommand extends Command {
 

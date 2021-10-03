@@ -17,7 +17,7 @@ import javafx.collections.ObservableList;
  * As such, adding and updating of ingredients uses Ingredient#isSameIngredient(Ingredient)
  * for equality so as to ensure that the ingredient being added or updated is
  * unique in terms of identity in the UniqueIngredientList.
- * However, the removal of a ingredient uses Ingredient#equals(Object) so
+ * However, the removal of an ingredient uses Ingredient#equals(Object) so
  * as to ensure that the ingredient with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -39,7 +39,7 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
     }
 
     /**
-     * Adds a ingredient to the list.
+     * Adds an ingredient to the list.
      * The ingredient must not already exist in the list.
      */
     public void add(Ingredient toAdd) {

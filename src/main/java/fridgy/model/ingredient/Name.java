@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import fridgy.commons.util.AppUtil;
 
 /**
- * Represents a Ingredient's name in the Inventory.
+ * Represents an ingredient's name in the Inventory.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
@@ -14,7 +14,7 @@ public class Name {
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the description must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";

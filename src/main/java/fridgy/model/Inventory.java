@@ -59,7 +59,7 @@ public class Inventory implements ReadOnlyInventory {
     //// ingredient-level operations
 
     /**
-     * Returns true if a ingredient with the same identity as {@code ingredient} exists in the Inventory.
+     * Returns true if an ingredient with the same identity as {@code ingredient} exists in the Inventory.
      */
     public boolean hasIngredient(Ingredient ingredient) {
         requireNonNull(ingredient);
@@ -67,7 +67,7 @@ public class Inventory implements ReadOnlyInventory {
     }
 
     /**
-     * Adds a ingredient to the Inventory.
+     * Adds an ingredient to the Inventory.
      * The ingredient must not already exist in the Inventory.
      */
     public void addIngredient(Ingredient p) {

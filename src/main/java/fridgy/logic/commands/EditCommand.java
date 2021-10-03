@@ -14,11 +14,11 @@ import fridgy.commons.util.CollectionUtil;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.CliSyntax;
 import fridgy.model.Model;
-import fridgy.model.ingredient.Address;
+import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
-import fridgy.model.ingredient.Phone;
+import fridgy.model.ingredient.Quantity;
 import fridgy.model.tag.Tag;
 
 
@@ -34,12 +34,12 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + CliSyntax.PREFIX_NAME + "NAME] "
-            + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
+            + "[" + CliSyntax.PREFIX_QUANTITY + "QUANTITY] "
             + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
-            + "[" + CliSyntax.PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + CliSyntax.PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + CliSyntax.PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + CliSyntax.PREFIX_PHONE + "91234567 "
+            + CliSyntax.PREFIX_QUANTITY + "91234567 "
             + CliSyntax.PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_INGREDIENT_SUCCESS = "Edited Ingredient: %1$s";
@@ -91,12 +91,13 @@ public class EditCommand extends Command {
         assert ingredientToEdit != null;
 
         Name updatedName = editIngredientDescriptor.getName().orElse(ingredientToEdit.getName());
-        Phone updatedPhone = editIngredientDescriptor.getPhone().orElse(ingredientToEdit.getPhone());
+        Quantity updatedQuantity = editIngredientDescriptor.getQuantity().orElse(ingredientToEdit.getQuantity());
         Email updatedEmail = editIngredientDescriptor.getEmail().orElse(ingredientToEdit.getEmail());
-        Address updatedAddress = editIngredientDescriptor.getAddress().orElse(ingredientToEdit.getAddress());
+        Description updatedDescription = editIngredientDescriptor.getDescription()
+                .orElse(ingredientToEdit.getDescription());
         Set<Tag> updatedTags = editIngredientDescriptor.getTags().orElse(ingredientToEdit.getTags());
 
-        return new Ingredient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Ingredient(updatedName, updatedQuantity, updatedEmail, updatedDescription, updatedTags);
     }
 
     @Override
@@ -123,9 +124,9 @@ public class EditCommand extends Command {
      */
     public static class EditIngredientDescriptor {
         private Name name;
-        private Phone phone;
+        private Quantity quantity;
         private Email email;
-        private Address address;
+        private Description description;
         private Set<Tag> tags;
 
         public EditIngredientDescriptor() {}
@@ -136,9 +137,9 @@ public class EditCommand extends Command {
          */
         public EditIngredientDescriptor(EditIngredientDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
+            setQuantity(toCopy.quantity);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setDescription(toCopy.description);
             setTags(toCopy.tags);
         }
 
@@ -146,7 +147,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, quantity, email, description, tags);
         }
 
         public void setName(Name name) {
@@ -157,12 +158,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setQuantity(Quantity quantity) {
+            this.quantity = quantity;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<Quantity> getQuantity() {
+            return Optional.ofNullable(quantity);
         }
 
         public void setEmail(Email email) {
@@ -173,12 +174,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setDescription(Description description) {
+            this.description = description;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Description> getDescription() {
+            return Optional.ofNullable(description);
         }
 
         /**
@@ -214,9 +215,9 @@ public class EditCommand extends Command {
             EditIngredientDescriptor e = (EditIngredientDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
+                    && getQuantity().equals(e.getQuantity())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
+                    && getDescription().equals(e.getDescription())
                     && getTags().equals(e.getTags());
         }
     }

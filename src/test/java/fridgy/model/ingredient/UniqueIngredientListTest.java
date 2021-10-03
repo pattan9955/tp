@@ -3,7 +3,7 @@ package fridgy.model.ingredient;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static fridgy.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BOB;
 import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static fridgy.testutil.Assert.assertThrows;
 
@@ -43,7 +43,7 @@ public class UniqueIngredientListTest {
     @Test
     public void contains_ingredientWithSameIdentityFieldsInList_returnsTrue() {
         uniqueIngredientList.add(TypicalIngredients.ALICE);
-        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withDescription(VALID_DESCRIPTION_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueIngredientList.contains(editedAlice));
     }
@@ -86,7 +86,7 @@ public class UniqueIngredientListTest {
     @Test
     public void setIngredient_editedIngredientHasSameIdentity_success() {
         uniqueIngredientList.add(TypicalIngredients.ALICE);
-        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withDescription(VALID_DESCRIPTION_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueIngredientList.setIngredient(TypicalIngredients.ALICE, editedAlice);
         UniqueIngredientList expectedUniqueIngredientList = new UniqueIngredientList();
