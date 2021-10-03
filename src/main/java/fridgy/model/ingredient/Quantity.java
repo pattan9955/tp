@@ -12,8 +12,8 @@ public class Quantity {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Quantity numbers should be from 1 to 10 digits long";
-    public static final String VALIDATION_REGEX = "^\\d{1,10}$";
+            "Quantity should be greater than zero and less than 10 digits long";
+    public static final String VALIDATION_REGEX = "(?=^[0-9]*[1-9][0-9]*$)\\d{1,10}$";
     public final String value;
 
     /**
@@ -24,7 +24,8 @@ public class Quantity {
     public Quantity(String quantity) {
         requireNonNull(quantity);
         AppUtil.checkArgument(isValidQuantity(quantity), MESSAGE_CONSTRAINTS);
-        value = quantity;
+        // Removes leading zeros
+        value = quantity.replaceFirst("^0+(?!$)", "");
     }
 
     /**
