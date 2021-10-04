@@ -19,7 +19,8 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String INGREDIENT_KEYWORD = "ingredient";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an ingredient to the Inventory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + INGREDIENT_KEYWORD + ": Adds an ingredient to the Inventory. "
             + "Parameters: "
             + PREFIX_NAME + " NAME "
             + PREFIX_QUANTITY + " QUANTITY "
@@ -32,7 +33,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + " johnd@example.com "
             + PREFIX_DESCRIPTION + " Got any grapes? "
             + PREFIX_TAG + " fruit "
-            + PREFIX_TAG + " poultry";
+            + PREFIX_TAG + " sweet";
 
     public static final String MESSAGE_SUCCESS = "New ingredient added: %1$s";
     public static final String MESSAGE_DUPLICATE_INGREDIENT = "This ingredient already exists in the Inventory";
