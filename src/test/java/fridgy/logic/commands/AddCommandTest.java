@@ -54,16 +54,16 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Ingredient alice = new IngredientBuilder().withName("Alice").build();
-        Ingredient bob = new IngredientBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Ingredient almond = new IngredientBuilder().withName("Alice").build();
+        Ingredient basil = new IngredientBuilder().withName("Basil").build();
+        AddCommand addAliceCommand = new AddCommand(almond);
+        AddCommand addBasilCommand = new AddCommand(basil);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        AddCommand addAliceCommandCopy = new AddCommand(almond);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -73,7 +73,7 @@ public class AddCommandTest {
         assertFalse(addAliceCommand.equals(null));
 
         // different Ingredient -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(addAliceCommand.equals(addBasilCommand));
     }
 
     /**

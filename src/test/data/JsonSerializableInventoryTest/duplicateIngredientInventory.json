@@ -1,14 +1,14 @@
 {
   "ingredients": [ {
-    "name": "Alice Pauline",
+    "name": "Apple Sauce",
     "quantity": "94351253",
-    "email": "alice@example.com",
+    "email": "almond@example.com",
     "description" : {
       "value" : "123, Jurong West Ave 6, #08-111"
     },
     "tagged": [ "friends" ]
   }, {
-    "name": "Alice Pauline",
+    "name": "Apple Sauce",
     "quantity": "94351253",
     "email": "pauline@example.com",
     "description" : {

@@ -76,9 +76,9 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.QUANTITY_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY
-                + CommandTestUtil.DESCRIPTION_DESC_AMY;
-        Ingredient expectedIngredient = new IngredientBuilder(TypicalIngredients.AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_ALMOND + CommandTestUtil.QUANTITY_DESC_ALMOND + CommandTestUtil.EMAIL_DESC_ALMOND
+                + CommandTestUtil.DESCRIPTION_DESC_ALMOND;
+        Ingredient expectedIngredient = new IngredientBuilder(TypicalIngredients.ALMOND).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addIngredient(expectedIngredient);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

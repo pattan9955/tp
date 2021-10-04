@@ -78,13 +78,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasIngredient_ingredientNotInInventory_returnsFalse() {
-        assertFalse(modelManager.hasIngredient(TypicalIngredients.ALICE));
+        assertFalse(modelManager.hasIngredient(TypicalIngredients.APPLE));
     }
 
     @Test
     public void hasIngredient_ingredientInInventory_returnsTrue() {
-        modelManager.addIngredient(TypicalIngredients.ALICE);
-        assertTrue(modelManager.hasIngredient(TypicalIngredients.ALICE));
+        modelManager.addIngredient(TypicalIngredients.APPLE);
+        assertTrue(modelManager.hasIngredient(TypicalIngredients.APPLE));
     }
 
     @Test
@@ -94,7 +94,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        Inventory addressBook = new InventoryBuilder().withIngredient(TypicalIngredients.ALICE).withIngredient(TypicalIngredients.BENSON).build();
+        Inventory addressBook = new InventoryBuilder().withIngredient(TypicalIngredients.APPLE).withIngredient(TypicalIngredients.BANANA).build();
         Inventory differentInventory = new Inventory();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -116,7 +116,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentInventory, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = TypicalIngredients.ALICE.getName().fullName.split("\\s+");
+        String[] keywords = TypicalIngredients.APPLE.getName().fullName.split("\\s+");
         modelManager.updateFilteredIngredientList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

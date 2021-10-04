@@ -42,19 +42,19 @@ public class NameContainsKeywordsPredicateTest {
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
-        assertTrue(predicate.test(new IngredientBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new IngredientBuilder().withName("Alice Basil").build()));
 
         // Multiple keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(new IngredientBuilder().withName("Alice Bob").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Basil"));
+        assertTrue(predicate.test(new IngredientBuilder().withName("Alice Basil").build()));
 
         // Only one matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Basil", "Carol"));
         assertTrue(predicate.test(new IngredientBuilder().withName("Alice Carol").build()));
 
         // Mixed-case keywords
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
-        assertTrue(predicate.test(new IngredientBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new IngredientBuilder().withName("Alice Basil").build()));
     }
 
     @Test
@@ -65,11 +65,11 @@ public class NameContainsKeywordsPredicateTest {
 
         // Non-matching keyword
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
-        assertFalse(predicate.test(new IngredientBuilder().withName("Alice Bob").build()));
+        assertFalse(predicate.test(new IngredientBuilder().withName("Alice Basil").build()));
 
         // Keywords match quantity, email and address, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "almond@email.com", "Main", "Street"));
         assertFalse(predicate.test(new IngredientBuilder().withName("Alice").withQuantity("12345")
-                .withEmail("alice@email.com").withDescription("Main Street").build()));
+                .withEmail("almond@email.com").withDescription("Main Street").build()));
     }
 }

@@ -1,15 +1,15 @@
 {
   "_comment": "Inventory save file which contains the same Ingredient values as in TypicalIngredients#getTypicalInventory()",
   "ingredients" : [ {
-    "name" : "Alice Pauline",
+    "name" : "Apple Sauce",
     "quantity" : "94351253",
-    "email" : "alice@example.com",
+    "email" : "almond@example.com",
     "description" : {
       "value" : "123, Jurong West Ave 6, #08-111"
     },
     "tagged" : [ "friends" ]
   }, {
-    "name" : "Benson Meier",
+    "name" : "Banana",
     "quantity" : "98765432",
     "email" : "johnd@example.com",
     "description" : {
@@ -17,7 +17,7 @@
     },
     "tagged" : [ "owesMoney", "friends" ]
   }, {
-    "name" : "Carl Kurz",
+    "name" : "Carrot Slices",
     "quantity" : "95352563",
     "email" : "heinz@example.com",
     "description" : {
@@ -25,7 +25,7 @@
     },
     "tagged" : [ ]
   }, {
-    "name" : "Daniel Meier",
+    "name" : "Duck breast",
     "quantity" : "87652533",
     "email" : "cornelia@example.com",
     "description" : {
@@ -33,7 +33,7 @@
     },
     "tagged" : [ "friends" ]
   }, {
-    "name" : "Elle Meyer",
+    "name" : "Egg mayo",
     "quantity" : "9482224",
     "email" : "werner@example.com",
     "description" : {
@@ -41,7 +41,7 @@
     },
     "tagged" : [ ]
   }, {
-    "name" : "Fiona Kunz",
+    "name" : "Fig jam",
     "quantity" : "9482427",
     "email" : "lydia@example.com",
     "description" : {
@@ -49,7 +49,7 @@
     },
     "tagged" : [ ]
   }, {
-    "name" : "George Best",
+    "name" : "Grape juice",
     "quantity" : "9482442",
     "email" : "anna@example.com",
     "description" : {

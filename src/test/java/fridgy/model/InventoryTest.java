@@ -3,7 +3,7 @@ package fridgy.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BOB;
+import static fridgy.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static fridgy.testutil.Assert.assertThrows;
 
@@ -46,9 +46,9 @@ public class InventoryTest {
     @Test
     public void resetData_withDuplicateIngredients_throwsDuplicateIngredientException() {
         // Two ingredients with the same identity fields
-        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withDescription(VALID_DESCRIPTION_BOB).withTags(VALID_TAG_HUSBAND)
+        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.APPLE).withDescription(VALID_DESCRIPTION_BASIL).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Ingredient> newIngredients = Arrays.asList(TypicalIngredients.ALICE, editedAlice);
+        List<Ingredient> newIngredients = Arrays.asList(TypicalIngredients.APPLE, editedAlice);
         InventoryStub newData = new InventoryStub(newIngredients);
 
         Assert.assertThrows(DuplicateIngredientException.class, () -> addressBook.resetData(newData));
@@ -61,19 +61,19 @@ public class InventoryTest {
 
     @Test
     public void hasIngredient_ingredientNotInInventory_returnsFalse() {
-        assertFalse(addressBook.hasIngredient(TypicalIngredients.ALICE));
+        assertFalse(addressBook.hasIngredient(TypicalIngredients.APPLE));
     }
 
     @Test
     public void hasIngredient_ingredientInInventory_returnsTrue() {
-        addressBook.addIngredient(TypicalIngredients.ALICE);
-        assertTrue(addressBook.hasIngredient(TypicalIngredients.ALICE));
+        addressBook.addIngredient(TypicalIngredients.APPLE);
+        assertTrue(addressBook.hasIngredient(TypicalIngredients.APPLE));
     }
 
     @Test
     public void hasIngredient_ingredientWithSameIdentityFieldsInInventory_returnsTrue() {
-        addressBook.addIngredient(TypicalIngredients.ALICE);
-        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.ALICE).withDescription(VALID_DESCRIPTION_BOB).withTags(VALID_TAG_HUSBAND)
+        addressBook.addIngredient(TypicalIngredients.APPLE);
+        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.APPLE).withDescription(VALID_DESCRIPTION_BASIL).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasIngredient(editedAlice));
     }

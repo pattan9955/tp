@@ -3,7 +3,7 @@ package fridgy.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static fridgy.testutil.Assert.assertThrows;
-import static fridgy.testutil.TypicalIngredients.ALICE;
+import static fridgy.testutil.TypicalIngredients.APPLE;
 import static fridgy.testutil.TypicalIngredients.HOON;
 import static fridgy.testutil.TypicalIngredients.IDA;
 import static fridgy.testutil.TypicalIngredients.getTypicalInventory;
@@ -73,7 +73,7 @@ public class JsonInventoryStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         original.addIngredient(HOON);
-        original.removeIngredient(ALICE);
+        original.removeIngredient(APPLE);
         jsonInventoryStorage.saveInventory(original, filePath);
         readBack = jsonInventoryStorage.readInventory(filePath).get();
         assertEquals(original, new Inventory(readBack));
