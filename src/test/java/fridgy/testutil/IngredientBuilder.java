@@ -17,7 +17,7 @@ import fridgy.model.ingredient.Quantity;
  */
 public class IngredientBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_NAME = "Almond Bee";
     public static final String DEFAULT_QUANTITY = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_DESCRIPTION = "123, Jurong West Ave 6, #08-111";

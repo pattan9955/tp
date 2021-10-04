@@ -16,6 +16,7 @@ import fridgy.model.ingredient.Ingredient;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
+    public static final String INGREDIENT_KEYWORD = "ingredient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the ingredient identified by the index number used in the displayed ingredient list.\n"

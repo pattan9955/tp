@@ -63,11 +63,11 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multipleIngredientsFound() {
         String expectedMessage = String.format(Messages.MESSAGE_INGREDIENTS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        NameContainsKeywordsPredicate predicate = preparePredicate("Carrot Slices Egg mayo Fig jam");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredIngredientList(predicate);
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TypicalIngredients.CARL, TypicalIngredients.ELLE, TypicalIngredients.FIONA), model.getFilteredIngredientList());
+        assertEquals(Arrays.asList(TypicalIngredients.CARROT, TypicalIngredients.EGG, TypicalIngredients.FIGS), model.getFilteredIngredientList());
     }
 
     /**

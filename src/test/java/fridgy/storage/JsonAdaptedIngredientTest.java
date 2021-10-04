@@ -2,7 +2,7 @@ package fridgy.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static fridgy.testutil.Assert.assertThrows;
-import static fridgy.testutil.TypicalIngredients.BENSON;
+import static fridgy.testutil.TypicalIngredients.BANANA;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,18 +24,18 @@ public class JsonAdaptedIngredientTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
-    private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_QUANTITY = BENSON.getQuantity().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final Optional<String> VALID_DESCRIPTION = Optional.ofNullable(BENSON.getDescription().toString());
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final String VALID_NAME = BANANA.getName().toString();
+    private static final String VALID_QUANTITY = BANANA.getQuantity().toString();
+    private static final String VALID_EMAIL = BANANA.getEmail().toString();
+    private static final Optional<String> VALID_DESCRIPTION = Optional.ofNullable(BANANA.getDescription().toString());
+    private static final List<JsonAdaptedTag> VALID_TAGS = BANANA.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validIngredientDetails_returnsIngredient() throws Exception {
-        JsonAdaptedIngredient ingredient = new JsonAdaptedIngredient(BENSON);
-        assertEquals(BENSON, ingredient.toModelType());
+        JsonAdaptedIngredient ingredient = new JsonAdaptedIngredient(BANANA);
+        assertEquals(BANANA, ingredient.toModelType());
     }
 
     @Test

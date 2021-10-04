@@ -1,5 +1,6 @@
 package fridgy.logic.parser;
 
+import static fridgy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static fridgy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static fridgy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static fridgy.logic.parser.CliSyntax.PREFIX_NAME;
@@ -11,6 +12,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
@@ -24,6 +27,9 @@ import fridgy.model.tag.Tag;
  */
 public class EditCommandParser implements Parser<EditCommand> {
 
+    private static final Pattern INGREDIENT_EDIT_COMMAND_ARGUMENT_FORMAT = Pattern
+            .compile(EditCommand.INGREDIENT_KEYWORD + "(?<arguments>.*)");
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -31,8 +37,15 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        final Matcher matcher = INGREDIENT_EDIT_COMMAND_ARGUMENT_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditCommand.MESSAGE_USAGE));
+        }
+
+        final String arguments = matcher.group("arguments");
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_EMAIL,
+                ArgumentTokenizer.tokenize(arguments, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_EMAIL,
                         PREFIX_DESCRIPTION, PREFIX_TAG);
 
         Index index;
