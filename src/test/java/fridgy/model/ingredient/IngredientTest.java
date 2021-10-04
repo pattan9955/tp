@@ -32,13 +32,13 @@ public class IngredientTest {
         Assertions.assertFalse(TypicalIngredients.APPLE.isSameIngredient(null));
 
         // same name, all other attributes different -> returns true
-        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.APPLE).withQuantity(VALID_QUANTITY_BASIL).withEmail(VALID_EMAIL_BASIL)
+        Ingredient editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withQuantity(VALID_QUANTITY_BASIL).withEmail(VALID_EMAIL_BASIL)
                 .withDescription(VALID_DESCRIPTION_BASIL).withTags(VALID_TAG_HUSBAND).build();
-        Assertions.assertTrue(TypicalIngredients.APPLE.isSameIngredient(editedAlice));
+        Assertions.assertTrue(TypicalIngredients.APPLE.isSameIngredient(editedAlmond));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new IngredientBuilder(TypicalIngredients.APPLE).withName(VALID_NAME_BASIL).build();
-        Assertions.assertFalse(TypicalIngredients.APPLE.isSameIngredient(editedAlice));
+        editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withName(VALID_NAME_BASIL).build();
+        Assertions.assertFalse(TypicalIngredients.APPLE.isSameIngredient(editedAlmond));
 
         // name differs in case, all other attributes same -> returns false
         Ingredient editedBasil = new IngredientBuilder(TypicalIngredients.BASIL).withName(VALID_NAME_BASIL.toLowerCase()).build();
@@ -69,23 +69,23 @@ public class IngredientTest {
         Assertions.assertFalse(TypicalIngredients.APPLE.equals(TypicalIngredients.BASIL));
 
         // different name -> returns false
-        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.APPLE).withName(VALID_NAME_BASIL).build();
-        Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlice));
+        Ingredient editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withName(VALID_NAME_BASIL).build();
+        Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlmond));
 
         // different quantity -> returns false
-        editedAlice = new IngredientBuilder(TypicalIngredients.APPLE).withQuantity(VALID_QUANTITY_BASIL).build();
-        Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlice));
+        editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withQuantity(VALID_QUANTITY_BASIL).build();
+        Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlmond));
 
         // different email -> returns false
-        editedAlice = new IngredientBuilder(TypicalIngredients.APPLE).withEmail(VALID_EMAIL_BASIL).build();
-        Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlice));
+        editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withEmail(VALID_EMAIL_BASIL).build();
+        Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlmond));
 
         // different address -> returns false
-        editedAlice = new IngredientBuilder(TypicalIngredients.APPLE).withDescription(VALID_DESCRIPTION_BASIL).build();
-        Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlice));
+        editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withDescription(VALID_DESCRIPTION_BASIL).build();
+        Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlmond));
 
         // different tags -> returns false
-        editedAlice = new IngredientBuilder(TypicalIngredients.APPLE).withTags(VALID_TAG_HUSBAND).build();
-        Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlice));
+        editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withTags(VALID_TAG_HUSBAND).build();
+        Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlmond));
     }
 }

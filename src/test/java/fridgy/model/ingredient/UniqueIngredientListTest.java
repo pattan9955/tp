@@ -41,9 +41,9 @@ public class UniqueIngredientListTest {
     @Test
     public void contains_ingredientWithSameIdentityFieldsInList_returnsTrue() {
         uniqueIngredientList.add(TypicalIngredients.APPLE);
-        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.APPLE).withDescription(VALID_DESCRIPTION_BASIL).withTags(VALID_TAG_HUSBAND)
+        Ingredient editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withDescription(VALID_DESCRIPTION_BASIL).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(uniqueIngredientList.contains(editedAlice));
+        assertTrue(uniqueIngredientList.contains(editedAlmond));
     }
 
     @Test
@@ -84,11 +84,11 @@ public class UniqueIngredientListTest {
     @Test
     public void setIngredient_editedIngredientHasSameIdentity_success() {
         uniqueIngredientList.add(TypicalIngredients.APPLE);
-        Ingredient editedAlice = new IngredientBuilder(TypicalIngredients.APPLE).withDescription(VALID_DESCRIPTION_BASIL).withTags(VALID_TAG_HUSBAND)
+        Ingredient editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withDescription(VALID_DESCRIPTION_BASIL).withTags(VALID_TAG_HUSBAND)
                 .build();
-        uniqueIngredientList.setIngredient(TypicalIngredients.APPLE, editedAlice);
+        uniqueIngredientList.setIngredient(TypicalIngredients.APPLE, editedAlmond);
         UniqueIngredientList expectedUniqueIngredientList = new UniqueIngredientList();
-        expectedUniqueIngredientList.add(editedAlice);
+        expectedUniqueIngredientList.add(editedAlmond);
         assertEquals(expectedUniqueIngredientList, uniqueIngredientList);
     }
 
