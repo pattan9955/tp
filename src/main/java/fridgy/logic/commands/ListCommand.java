@@ -1,23 +1,24 @@
 package fridgy.logic.commands;
 
+import static fridgy.model.IngredientModel.PREDICATE_SHOW_ALL_INGREDIENTS;
 import static java.util.Objects.requireNonNull;
 
-import fridgy.model.Model;
+import fridgy.model.IngredientModel;
 
 /**
- * Lists all ingredients in the Inventory to the user.
+ * Lists all persons in the address book to the user.
  */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all ingredients";
+    public static final String MESSAGE_SUCCESS = "Listed all persons";
 
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(IngredientModel model) {
         requireNonNull(model);
-        model.updateFilteredIngredientList(Model.PREDICATE_SHOW_ALL_INGREDIENTS);
+        model.updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

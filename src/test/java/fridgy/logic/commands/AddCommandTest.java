@@ -11,36 +11,34 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import fridgy.commons.core.GuiSettings;
-import fridgy.logic.commands.exceptions.CommandException;
-import fridgy.model.Inventory;
-import fridgy.model.Model;
-import fridgy.model.ReadOnlyInventory;
-import fridgy.model.ReadOnlyUserPrefs;
-import fridgy.model.ingredient.Ingredient;
-import fridgy.model.ingredient.Ingredient;
-import fridgy.testutil.Assert;
-import fridgy.testutil.IngredientBuilder;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import fridgy.commons.core.GuiSettings;
+import fridgy.logic.commands.exceptions.CommandException;
+import fridgy.model.Inventory;
+import fridgy.model.IngredientModel;
+import fridgy.model.ReadOnlyInventory;
+import fridgy.model.ReadOnlyUserPrefs;
+import fridgy.model.ingredient.Ingredient;
+import fridgy.testutil.IngredientBuilder;
 
 public class AddCommandTest {
 
     @Test
     public void constructor_nullIngredient_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_IngredientAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_ingredientAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingIngredientAdded modelStub = new ModelStubAcceptingIngredientAdded();
         Ingredient validIngredient = new IngredientBuilder().build();
 
         CommandResult commandResult = new AddCommand(validIngredient).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validIngredient), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validIngredient), modelStub.IngredientsAdded);
+        assertEquals(Arrays.asList(validIngredient), modelStub.ingredientsAdded);
     }
 
     @Test
@@ -49,7 +47,7 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validIngredient);
         ModelStub modelStub = new ModelStubWithIngredient(validIngredient);
 
-        Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_INGREDIENT, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_INGREDIENT, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -72,14 +70,14 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different Ingredient -> returns false
+        // different ingredient -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    private class ModelStub implements IngredientModel {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -149,42 +147,43 @@ public class AddCommandTest {
         public void updateFilteredIngredientList(Predicate<Ingredient> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
     }
 
     /**
-     * A Model stub that contains a single Ingredient.
+     * A Model stub that contains a single ingredient.
      */
     private class ModelStubWithIngredient extends ModelStub {
-        private final Ingredient Ingredient;
+        private final Ingredient ingredient;
 
-        ModelStubWithIngredient(Ingredient Ingredient) {
-            requireNonNull(Ingredient);
-            this.Ingredient = Ingredient;
+        ModelStubWithIngredient(Ingredient ingredient) {
+            requireNonNull(ingredient);
+            this.ingredient = ingredient;
         }
 
         @Override
         public boolean hasIngredient(Ingredient ingredient) {
             requireNonNull(ingredient);
-            return this.Ingredient.isSameIngredient(ingredient);
+            return this.ingredient.isSameIngredient(ingredient);
         }
     }
 
     /**
-     * A Model stub that always accept the Ingredient being added.
+     * A Model stub that always accept the ingredient being added.
      */
     private class ModelStubAcceptingIngredientAdded extends ModelStub {
-        final ArrayList<Ingredient> IngredientsAdded = new ArrayList<>();
+        final ArrayList<Ingredient> ingredientsAdded = new ArrayList<>();
 
         @Override
         public boolean hasIngredient(Ingredient ingredient) {
             requireNonNull(ingredient);
-            return IngredientsAdded.stream().anyMatch(ingredient::isSameIngredient);
+            return ingredientsAdded.stream().anyMatch(ingredient::isSameIngredient);
         }
 
         @Override
         public void addIngredient(Ingredient ingredient) {
             requireNonNull(ingredient);
-            IngredientsAdded.add(ingredient);
+            ingredientsAdded.add(ingredient);
         }
 
         @Override

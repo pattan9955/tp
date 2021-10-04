@@ -8,8 +8,9 @@ import static fridgy.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
 import fridgy.logic.commands.exceptions.CommandException;
-import fridgy.model.Model;
+import fridgy.model.IngredientModel;
 import fridgy.model.ingredient.Ingredient;
+
 
 /**
  * Adds a ingredient to the Inventory.
@@ -47,7 +48,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(IngredientModel model) throws CommandException {
         requireNonNull(model);
 
         if (model.hasIngredient(toAdd)) {

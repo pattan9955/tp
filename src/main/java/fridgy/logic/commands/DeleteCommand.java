@@ -7,7 +7,7 @@ import java.util.List;
 import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.exceptions.CommandException;
-import fridgy.model.Model;
+import fridgy.model.IngredientModel;
 import fridgy.model.ingredient.Ingredient;
 
 /**
@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(IngredientModel model) throws CommandException {
         requireNonNull(model);
         List<Ingredient> lastShownList = model.getFilteredIngredientList();
 

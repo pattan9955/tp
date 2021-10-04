@@ -11,6 +11,7 @@ import java.util.Collections;
 import fridgy.commons.core.Messages;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
+import fridgy.model.RecipeBook;
 import fridgy.model.UserPrefs;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 import fridgy.testutil.TypicalIngredients;
@@ -20,8 +21,8 @@ import org.junit.jupiter.api.Test;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(TypicalIngredients.getTypicalInventory(), new UserPrefs());
-    private Model expectedModel = new ModelManager(TypicalIngredients.getTypicalInventory(), new UserPrefs());
+    private Model model = new ModelManager(TypicalIngredients.getTypicalInventory(), new RecipeBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(TypicalIngredients.getTypicalInventory(), new RecipeBook(), new UserPrefs());
 
     @Test
     public void equals() {

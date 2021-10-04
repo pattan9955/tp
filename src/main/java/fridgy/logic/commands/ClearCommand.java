@@ -2,8 +2,9 @@ package fridgy.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import fridgy.model.IngredientModel;
 import fridgy.model.Inventory;
-import fridgy.model.Model;
+
 
 /**
  * Clears the Inventory.
@@ -15,7 +16,7 @@ public class ClearCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(IngredientModel model) {
         requireNonNull(model);
         model.setInventory(new Inventory());
         return new CommandResult(MESSAGE_SUCCESS);

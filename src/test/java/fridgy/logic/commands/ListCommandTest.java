@@ -4,6 +4,7 @@ import static fridgy.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
+import fridgy.model.RecipeBook;
 import fridgy.model.UserPrefs;
 import fridgy.testutil.TypicalIndexes;
 import fridgy.testutil.TypicalIngredients;
@@ -20,8 +21,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalIngredients.getTypicalInventory(), new UserPrefs());
-        expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
+        model = new ModelManager(TypicalIngredients.getTypicalInventory(), new RecipeBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
     }
 
     @Test

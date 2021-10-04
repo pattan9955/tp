@@ -9,6 +9,7 @@ import fridgy.commons.core.index.Index;
 import fridgy.model.Inventory;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
+import fridgy.model.RecipeBook;
 import fridgy.model.UserPrefs;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.testutil.EditIngredientDescriptorBuilder;
@@ -22,7 +23,7 @@ import org.junit.jupiter.api.Test;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(TypicalIngredients.getTypicalInventory(), new UserPrefs());
+    private Model model = new ModelManager(TypicalIngredients.getTypicalInventory(), new RecipeBook(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -32,7 +33,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
 
-        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new RecipeBook(), new UserPrefs());
         expectedModel.setIngredient(model.getFilteredIngredientList().get(0), editedIngredient);
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -53,7 +54,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
 
-        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new RecipeBook(), new UserPrefs());
         expectedModel.setIngredient(lastIngredient, editedIngredient);
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -66,7 +67,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
 
-        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new RecipeBook(), new UserPrefs());
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -82,7 +83,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
 
-        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new RecipeBook(), new UserPrefs());
         expectedModel.setIngredient(model.getFilteredIngredientList().get(0), editedIngredient);
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
