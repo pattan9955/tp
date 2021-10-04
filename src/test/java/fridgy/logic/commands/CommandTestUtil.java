@@ -23,6 +23,8 @@ import fridgy.testutil.EditIngredientDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String VALID_INGREDIENT_ARGUMENT_FORMAT = "ingredient";
+
     public static final String VALID_NAME_ALMOND = "Almond Bee";
     public static final String VALID_NAME_BASIL = "Basil Choo";
     public static final String VALID_NAME_FISH = "Fish Choo";
@@ -53,6 +55,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    public static final String INVALID_INGREDIENT_ARGUMENT_FORMAT = "monkegredient";
     public static final String INVALID_NAME_DESC = " " + CliSyntax.PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_QUANTITY_DESC = " " + CliSyntax.PREFIX_QUANTITY + "911a"; // 'a' not allowed in quantities
     public static final String INVALID_EMAIL_DESC = " " + CliSyntax.PREFIX_EMAIL + "basil!yahoo"; // missing '@' symbol

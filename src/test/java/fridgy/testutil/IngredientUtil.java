@@ -17,7 +17,8 @@ public class IngredientUtil {
      * Returns an add command string for adding the {@code ingredient}.
      */
     public static String getAddCommand(Ingredient ingredient) {
-        return AddCommand.COMMAND_WORD + " " + getIngredientDetails(ingredient);
+        return AddCommand.COMMAND_WORD + " " + AddCommand.INGREDIENT_KEYWORD + " "
+                + (ingredient);
     }
 
     /**

@@ -17,6 +17,7 @@ import fridgy.model.ingredient.Ingredient;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final String INGREDIENT_KEYWORD = "ingredient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an ingredient to the Inventory. "
             + "Parameters: "
@@ -26,10 +27,10 @@ public class AddCommand extends Command {
             + PREFIX_DESCRIPTION + " DESCRIPTION "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " John Doe "
-            + PREFIX_QUANTITY + " 98765432 "
+            + PREFIX_NAME + " Grapes "
+            + PREFIX_QUANTITY + " 4 "
             + PREFIX_EMAIL + " johnd@example.com "
-            + PREFIX_DESCRIPTION + " 311, Clementi Ave 2, #02-25 "
+            + PREFIX_DESCRIPTION + " Got any grapes? "
             + PREFIX_TAG + " fruit "
             + PREFIX_TAG + " poultry";
 

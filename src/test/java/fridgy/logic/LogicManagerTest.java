@@ -55,7 +55,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "delete ingredient 9";
         assertCommandException(deleteCommand, Messages.MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX);
     }
 
@@ -76,7 +76,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_ALMOND + CommandTestUtil.QUANTITY_DESC_ALMOND + CommandTestUtil.EMAIL_DESC_ALMOND
+        String addCommand = AddCommand.COMMAND_WORD + " " + AddCommand.INGREDIENT_KEYWORD + " "
+                + CommandTestUtil.NAME_DESC_ALMOND + CommandTestUtil.QUANTITY_DESC_ALMOND + CommandTestUtil.EMAIL_DESC_ALMOND
                 + CommandTestUtil.DESCRIPTION_DESC_ALMOND;
         Ingredient expectedIngredient = new IngredientBuilder(TypicalIngredients.ALMOND).withTags().build();
         ModelManager expectedModel = new ModelManager();
