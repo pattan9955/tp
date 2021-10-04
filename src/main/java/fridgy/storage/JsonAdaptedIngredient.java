@@ -28,7 +28,7 @@ class JsonAdaptedIngredient {
     private final String name;
     private final String quantity;
     private final String email;
-    private final Optional<String> description;
+    private final String description;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -36,7 +36,7 @@ class JsonAdaptedIngredient {
      */
     @JsonCreator
     public JsonAdaptedIngredient(@JsonProperty("name") String name, @JsonProperty("quantity") String quantity,
-            @JsonProperty("email") String email, @JsonProperty("description") Optional<String> description,
+            @JsonProperty("email") String email, @JsonProperty("description") String description,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.quantity = quantity;
@@ -54,7 +54,7 @@ class JsonAdaptedIngredient {
         name = source.getName().fullName;
         quantity = source.getQuantity().value;
         email = source.getEmail().value;
-        description = source.getDescription().value;
+        description = source.getDescription().value.orElse("");
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -96,17 +96,17 @@ class JsonAdaptedIngredient {
         }
         final Email modelEmail = new Email(email);
 
+        final Optional<String> modelDescription = Optional.ofNullable(description);
         if (description == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Description.class.getSimpleName()));
         }
-        if (!Description.isValidDescription(description)) {
+        if (!Description.isValidDescription(modelDescription)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
-        final Description modelDescription = new Description(description);
 
         final Set<Tag> modelTags = new HashSet<>(ingredientTags);
-        return new Ingredient(modelName, modelQuantity, modelEmail, modelDescription, modelTags);
+        return new Ingredient(modelName, modelQuantity, modelEmail, new Description(modelDescription), modelTags);
     }
 
 }

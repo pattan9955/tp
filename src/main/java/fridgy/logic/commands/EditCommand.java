@@ -30,7 +30,8 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
     public static final String INGREDIENT_KEYWORD = "ingredient";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the ingredient identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + INGREDIENT_KEYWORD + ": Edits the details of the ingredient identified "
             + "by the index number used in the displayed ingredient list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "

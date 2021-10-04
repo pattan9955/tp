@@ -3,16 +3,12 @@
     "name": "Apple Sauce",
     "quantity": "94351253",
     "email": "almond@example.com",
-    "description" : {
-      "value" : "123, Jurong West Ave 6, #08-111"
-    },
+    "description" : "123, Jurong West Ave 6, #08-111",
     "tagged": [ "friends" ]
   }, {
     "name": "Apple Sauce",
     "quantity": "94351253",
     "email": "pauline@example.com",
-    "description" : {
-      "value" : "4th street"
-    }
+    "description" : "4th street"
   } ]
 }
