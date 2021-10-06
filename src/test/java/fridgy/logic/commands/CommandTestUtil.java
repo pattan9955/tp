@@ -2,7 +2,6 @@ package fridgy.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,8 +12,8 @@ import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.CliSyntax;
 import fridgy.model.Inventory;
 import fridgy.model.Model;
-import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 import fridgy.testutil.Assert;
 import fridgy.testutil.EditIngredientDescriptorBuilder;
 
@@ -39,6 +38,8 @@ public class CommandTestUtil {
     public static final String VALID_DESCRIPTION_FISH = " ";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_EXPIRY_DATE = "20-08-2010";
+    public static final String VALID_TYPE = "solid";
 
     public static final String NAME_DESC_ALMOND = " " + CliSyntax.PREFIX_NAME + VALID_NAME_ALMOND;
     public static final String NAME_DESC_BASIL = " " + CliSyntax.PREFIX_NAME + VALID_NAME_BASIL;
@@ -52,14 +53,18 @@ public class CommandTestUtil {
     public static final String DESCRIPTION_DESC_ALMOND = " " + CliSyntax.PREFIX_DESCRIPTION + VALID_DESCRIPTION_ALMOND;
     public static final String DESCRIPTION_DESC_BASIL = " " + CliSyntax.PREFIX_DESCRIPTION + VALID_DESCRIPTION_BASIL;
     public static final String DESCRIPTION_DESC_FISH = " " + CliSyntax.PREFIX_DESCRIPTION + VALID_DESCRIPTION_FISH;
+    public static final String EXPIRY_DATE_DESC = " " + CliSyntax.PREFIX_EXPIRY + VALID_EXPIRY_DATE;
+    public static final String TYPE_DESC = " " + CliSyntax.PREFIX_TYPE + VALID_TYPE;
     public static final String TAG_DESC_FRIEND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_INGREDIENT_ARGUMENT_FORMAT = "monkegredient";
     public static final String INVALID_NAME_DESC = " " + CliSyntax.PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_QUANTITY_DESC = " " + CliSyntax.PREFIX_QUANTITY + "911a"; // 'a' not allowed in quantities
+    public static final String INVALID_QUANTITY_DESC = " "
+            + CliSyntax.PREFIX_QUANTITY + "911a"; // 'a' not allowed in quantities
     public static final String INVALID_EMAIL_DESC = " " + CliSyntax.PREFIX_EMAIL + "basil!yahoo"; // missing '@' symbol
-    public static final String INVALID_DESCRIPTION_DESC = " " + CliSyntax.PREFIX_DESCRIPTION; // empty string not allowed for description
+    public static final String INVALID_DESCRIPTION_DESC = " "
+            + CliSyntax.PREFIX_DESCRIPTION; // empty string not allowed for description
     public static final String INVALID_DESCRIPTION_DESC_TWO = " " + CliSyntax.PREFIX_DESCRIPTION
             + "ƗØƀĐǤ "; // non-ascii characters not allowed for description
     public static final String INVALID_TAG_DESC = " " + CliSyntax.PREFIX_TAG + "hubby*"; // '*' not allowed in tags
@@ -73,14 +78,18 @@ public class CommandTestUtil {
 
     static {
         DESC_ALMOND = new EditIngredientDescriptorBuilder().withName(VALID_NAME_ALMOND)
-                .withQuantity(VALID_QUANTITY_ALMOND).withEmail(VALID_EMAIL_ALMOND).withDescription(VALID_DESCRIPTION_ALMOND)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withQuantity(VALID_QUANTITY_ALMOND).withEmail(VALID_EMAIL_ALMOND)
+                .withDescription(VALID_DESCRIPTION_ALMOND).withTags(VALID_TAG_FRIEND)
+                .withType(VALID_TYPE).withExpiry(VALID_EXPIRY_DATE).build();
         DESC_BASIL = new EditIngredientDescriptorBuilder().withName(VALID_NAME_BASIL)
-                .withQuantity(VALID_QUANTITY_BASIL).withEmail(VALID_EMAIL_BASIL).withDescription(VALID_DESCRIPTION_BASIL)
+                .withQuantity(VALID_QUANTITY_BASIL).withEmail(VALID_EMAIL_BASIL)
+                .withDescription(VALID_DESCRIPTION_BASIL)
+                .withType(VALID_TYPE).withExpiry(VALID_EXPIRY_DATE)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         DESC_FISH = new EditIngredientDescriptorBuilder().withName(VALID_NAME_FISH)
-                .withQuantity(VALID_QUANTITY_FISH).withEmail(VALID_EMAIL_FISH).withDescription(VALID_DESCRIPTION_FISH)
-                .build();
+                .withQuantity(VALID_QUANTITY_FISH).withEmail(VALID_EMAIL_FISH)
+                .withDescription(VALID_DESCRIPTION_FISH).withType(VALID_TYPE)
+                .withExpiry(VALID_EXPIRY_DATE).build();
     }
 
     /**

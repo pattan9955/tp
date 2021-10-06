@@ -1,19 +1,17 @@
 package fridgy.model.ingredient;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static fridgy.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_EMAIL_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_NAME_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_QUANTITY_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static fridgy.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import fridgy.testutil.Assert;
 import fridgy.testutil.IngredientBuilder;
 import fridgy.testutil.TypicalIngredients;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public class IngredientTest {
 
@@ -32,7 +30,8 @@ public class IngredientTest {
         Assertions.assertFalse(TypicalIngredients.APPLE.isSameIngredient(null));
 
         // same name, all other attributes different -> returns true
-        Ingredient editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withQuantity(VALID_QUANTITY_BASIL).withEmail(VALID_EMAIL_BASIL)
+        Ingredient editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE)
+                .withQuantity(VALID_QUANTITY_BASIL).withEmail(VALID_EMAIL_BASIL)
                 .withDescription(VALID_DESCRIPTION_BASIL).withTags(VALID_TAG_HUSBAND).build();
         Assertions.assertTrue(TypicalIngredients.APPLE.isSameIngredient(editedAlmond));
 
@@ -41,7 +40,8 @@ public class IngredientTest {
         Assertions.assertFalse(TypicalIngredients.APPLE.isSameIngredient(editedAlmond));
 
         // name differs in case, all other attributes same -> returns false
-        Ingredient editedBasil = new IngredientBuilder(TypicalIngredients.BASIL).withName(VALID_NAME_BASIL.toLowerCase()).build();
+        Ingredient editedBasil = new IngredientBuilder(TypicalIngredients.BASIL)
+                .withName(VALID_NAME_BASIL.toLowerCase()).build();
         Assertions.assertFalse(TypicalIngredients.BASIL.isSameIngredient(editedBasil));
 
         // name has trailing spaces, all other attributes same -> returns false

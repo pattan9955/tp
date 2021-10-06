@@ -3,6 +3,8 @@
     "name": "Hans Muster",
     "quantity": "9482424",
     "email": "invalid@email!3e",
-    "description" : "4th street"
+    "description" : "4th street",
+    "type" : "solid",
+    "expiryDate" : "20-08-2010"
   } ]
 }

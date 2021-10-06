@@ -3,10 +3,11 @@ package fridgy.model.ingredient;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import fridgy.testutil.Assert;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
+import fridgy.testutil.Assert;
 
 public class DescriptionTest {
 
@@ -34,6 +35,7 @@ public class DescriptionTest {
         assertTrue(Description.isValidDescription(Optional.of(" "))); // spaces only, trimmed to empty string
         assertTrue(Description.isValidDescription(Optional.of("Blk 456, Den Road, #01-355")));
         assertTrue(Description.isValidDescription(Optional.of("-"))); // one character
-        assertTrue(Description.isValidDescription(Optional.of("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA"))); // long address
+        assertTrue(Description.isValidDescription(
+                Optional.of("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA"))); // long address
     }
 }

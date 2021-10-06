@@ -3,9 +3,11 @@ package fridgy.logic.parser;
 import static fridgy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static fridgy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static fridgy.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static fridgy.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static fridgy.logic.parser.CliSyntax.PREFIX_NAME;
 import static fridgy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static fridgy.logic.parser.CliSyntax.PREFIX_TAG;
+import static fridgy.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.Optional;
 import java.util.Set;
@@ -18,9 +20,11 @@ import fridgy.logic.commands.AddCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.Email;
+import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
+import fridgy.model.ingredient.Type;
 import fridgy.model.tag.Tag;
 
 /**
@@ -47,9 +51,10 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(arguments, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_EMAIL,
-                        PREFIX_DESCRIPTION, PREFIX_TAG);
+                        PREFIX_DESCRIPTION, PREFIX_TAG, PREFIX_TYPE, PREFIX_EXPIRY);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_EMAIL,
+                PREFIX_TYPE, PREFIX_EXPIRY)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -58,14 +63,16 @@ public class AddCommandParser implements Parser<AddCommand> {
         Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Type ingredientType = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
+        ExpiryDate expiryDate = ParserUtil.parseExpiry(argMultimap.getValue(PREFIX_EXPIRY).get());
 
-        Ingredient ingredient = new Ingredient(name, quantity, email, tagList);
+        Ingredient ingredient = new Ingredient(name, quantity, email, tagList, ingredientType, expiryDate);
 
         if (arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION)) {
             Description description = ParserUtil.parseDescription(
                     Optional.of(argMultimap.getValue(PREFIX_DESCRIPTION)
                             .orElse("")));
-            ingredient = new Ingredient(name, quantity, email, description, tagList);
+            ingredient = new Ingredient(name, quantity, email, description, tagList, ingredientType, expiryDate);
         }
 
         return new AddCommand(ingredient);

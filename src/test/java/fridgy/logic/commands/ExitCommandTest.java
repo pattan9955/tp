@@ -2,9 +2,9 @@ package fridgy.logic.commands;
 
 import static fridgy.logic.commands.CommandTestUtil.assertCommandSuccess;
 
-import fridgy.model.Model;
 import org.junit.jupiter.api.Test;
 
+import fridgy.model.Model;
 import fridgy.model.ModelManager;
 
 public class ExitCommandTest {

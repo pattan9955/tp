@@ -1,17 +1,16 @@
 package fridgy.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static fridgy.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import org.junit.jupiter.api.Test;
 
 import fridgy.commons.exceptions.IllegalValueException;
 import fridgy.commons.util.JsonUtil;
 import fridgy.model.Inventory;
 import fridgy.testutil.Assert;
-import org.junit.jupiter.api.Test;
-
 import fridgy.testutil.TypicalIngredients;
 
 public class JsonSerializableInventoryTest {

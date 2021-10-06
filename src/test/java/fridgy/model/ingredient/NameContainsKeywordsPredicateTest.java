@@ -7,9 +7,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import fridgy.model.ingredient.NameContainsKeywordsPredicate;
-import fridgy.testutil.IngredientBuilder;
 import org.junit.jupiter.api.Test;
+
+import fridgy.testutil.IngredientBuilder;
 
 public class NameContainsKeywordsPredicateTest {
 
@@ -41,7 +41,8 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Almond"));
+        NameContainsKeywordsPredicate predicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("Almond"));
         assertTrue(predicate.test(new IngredientBuilder().withName("Almond Basil").build()));
 
         // Multiple keywords

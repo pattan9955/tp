@@ -19,6 +19,8 @@ public class Ingredient {
     private final Name name;
     private final Quantity quantity;
     private final Email email;
+    private final ExpiryDate expiryDate;
+    private final Type ingredientType;
 
     // Data fields
     private final Description description;
@@ -27,24 +29,30 @@ public class Ingredient {
     /**
      * Constructs an ingredient reference with an empty description.
      */
-    public Ingredient(Name name, Quantity quantity, Email email, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, quantity, email, tags);
+    public Ingredient(Name name, Quantity quantity, Email email, Set<Tag> tags,
+                      Type ingredientType, ExpiryDate expiryDate) {
+        CollectionUtil.requireAllNonNull(name, quantity, email, ingredientType, expiryDate, tags);
         this.name = name;
         this.quantity = quantity;
         this.email = email;
         this.description = new Description(Optional.empty());
+        this.ingredientType = ingredientType;
+        this.expiryDate = expiryDate;
         this.tags.addAll(tags);
     }
 
     /**
      * Constructs an ingredient reference where all fields must be present and not null.
      */
-    public Ingredient(Name name, Quantity quantity, Email email, Description description, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, quantity, email, tags);
+    public Ingredient(Name name, Quantity quantity, Email email, Description description, Set<Tag> tags,
+                      Type ingredientType, ExpiryDate expiryDate) {
+        CollectionUtil.requireAllNonNull(name, quantity, email, ingredientType, expiryDate, tags);
         this.name = name;
         this.quantity = quantity;
         this.email = email;
         this.description = description;
+        this.ingredientType = ingredientType;
+        this.expiryDate = expiryDate;
         this.tags.addAll(tags);
     }
 
@@ -62,6 +70,14 @@ public class Ingredient {
 
     public Description getDescription() {
         return description;
+    }
+
+    public ExpiryDate getExpiryDate() {
+        return expiryDate;
+    }
+
+    public Type getType() {
+        return ingredientType;
     }
 
     /**
@@ -103,6 +119,8 @@ public class Ingredient {
         return otherIngredient.getName().equals(getName())
                 && otherIngredient.getQuantity().equals(getQuantity())
                 && otherIngredient.getEmail().equals(getEmail())
+                && otherIngredient.getType().equals(getType())
+                && otherIngredient.getExpiryDate().equals((getExpiryDate()))
                 && otherIngredient.getDescription().equals(getDescription())
                 && otherIngredient.getTags().equals(getTags());
     }
@@ -110,7 +128,7 @@ public class Ingredient {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, quantity, email, description, tags);
+        return Objects.hash(name, quantity, email, description, tags, ingredientType, expiryDate);
     }
 
     @Override
@@ -120,7 +138,11 @@ public class Ingredient {
                 .append("; Quantity: ")
                 .append(getQuantity())
                 .append("; Email: ")
-                .append(getEmail());
+                .append(getEmail())
+                .append("; Ingredient Type: ")
+                .append(getType())
+                .append("; Expiry Date: ")
+                .append(getExpiryDate());
 
         Description description = getDescription();
         if (!description.value.equals(Optional.empty())) {

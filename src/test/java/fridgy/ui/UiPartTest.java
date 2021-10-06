@@ -2,16 +2,15 @@ package fridgy.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static fridgy.testutil.Assert.assertThrows;
 
 import java.net.URL;
 import java.nio.file.Path;
 
-import fridgy.MainApp;
-import fridgy.testutil.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import fridgy.MainApp;
+import fridgy.testutil.Assert;
 import javafx.fxml.FXML;
 
 public class UiPartTest {

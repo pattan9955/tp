@@ -3,10 +3,11 @@ package fridgy.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import java.util.Arrays;
 import java.util.Collections;
+
+import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.Messages;
 import fridgy.model.Model;
@@ -14,7 +15,6 @@ import fridgy.model.ModelManager;
 import fridgy.model.UserPrefs;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 import fridgy.testutil.TypicalIngredients;
-import org.junit.jupiter.api.Test;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -67,7 +67,8 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredIngredientList(predicate);
         CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TypicalIngredients.CARROT, TypicalIngredients.EGG, TypicalIngredients.FIGS), model.getFilteredIngredientList());
+        assertEquals(Arrays.asList(TypicalIngredients.CARROT, TypicalIngredients.EGG, TypicalIngredients.FIGS),
+                model.getFilteredIngredientList());
     }
 
     /**

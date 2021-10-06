@@ -2,9 +2,15 @@ package fridgy.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.testutil.Assert.assertThrows;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.ingredient.Description;
@@ -14,8 +20,7 @@ import fridgy.model.ingredient.Quantity;
 import fridgy.model.tag.Tag;
 import fridgy.testutil.Assert;
 import fridgy.testutil.TypicalIndexes;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -100,7 +105,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDescription_null_returnsEmptyDescription(){
+    public void parseDescription_null_returnsEmptyDescription() {
         Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDescription(Optional.of("")));
         Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDescription(Optional.of(" ")));
     }

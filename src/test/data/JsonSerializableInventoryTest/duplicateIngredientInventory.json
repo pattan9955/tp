@@ -1,14 +1,19 @@
 {
   "ingredients": [ {
-    "name": "Apple Sauce",
+    "name": "Apple",
     "quantity": "94351253",
     "email": "almond@example.com",
     "description" : "123, Jurong West Ave 6, #08-111",
-    "tagged": [ "friends" ]
+    "tagged": [ "friends" ],
+    "type" : "solid",
+    "expiryDate" : "20-08-2010"
   }, {
-    "name": "Apple Sauce",
+    "name": "Apple",
     "quantity": "94351253",
     "email": "pauline@example.com",
-    "description" : "4th street"
+    "description" : "4th street",
+    "address": "4th street",
+    "type" : "solid",
+    "expiryDate" : "20-08-2010"
   } ]
 }

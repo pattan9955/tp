@@ -1,10 +1,13 @@
 package fridgy.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static fridgy.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import fridgy.commons.core.Messages;
 import fridgy.logic.commands.AddCommand;
@@ -14,6 +17,7 @@ import fridgy.logic.commands.ListCommand;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.Model;
+import fridgy.model.ModelManager;
 import fridgy.model.ReadOnlyInventory;
 import fridgy.model.UserPrefs;
 import fridgy.model.ingredient.Ingredient;
@@ -23,11 +27,7 @@ import fridgy.storage.StorageManager;
 import fridgy.testutil.Assert;
 import fridgy.testutil.IngredientBuilder;
 import fridgy.testutil.TypicalIngredients;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
-import fridgy.model.ModelManager;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -77,8 +77,9 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + " " + AddCommand.INGREDIENT_KEYWORD + " "
-                + CommandTestUtil.NAME_DESC_ALMOND + CommandTestUtil.QUANTITY_DESC_ALMOND + CommandTestUtil.EMAIL_DESC_ALMOND
-                + CommandTestUtil.DESCRIPTION_DESC_ALMOND;
+                + CommandTestUtil.NAME_DESC_ALMOND + CommandTestUtil.QUANTITY_DESC_ALMOND
+                + CommandTestUtil.EMAIL_DESC_ALMOND + CommandTestUtil.DESCRIPTION_DESC_ALMOND
+                + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC;
         Ingredient expectedIngredient = new IngredientBuilder(TypicalIngredients.ALMOND).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addIngredient(expectedIngredient);

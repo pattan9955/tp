@@ -10,6 +10,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_QUANTITY = new Prefix("-q");
     public static final Prefix PREFIX_EMAIL = new Prefix("-m");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("-d");
-    public static final Prefix PREFIX_TAG = new Prefix("-t");
+    public static final Prefix PREFIX_TAG = new Prefix("-x");
+    public static final Prefix PREFIX_TYPE = new Prefix("-t");
+    public static final Prefix PREFIX_EXPIRY = new Prefix("-e");
 
 }
