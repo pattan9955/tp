@@ -2,7 +2,6 @@ package fridgy.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,8 +12,8 @@ import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.CliSyntax;
 import fridgy.model.Inventory;
 import fridgy.model.Model;
-import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 import fridgy.testutil.Assert;
 import fridgy.testutil.EditIngredientDescriptorBuilder;
 
@@ -23,51 +22,74 @@ import fridgy.testutil.EditIngredientDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_NAME_AMY = "Amy Bee";
-    public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_INGREDIENT_ARGUMENT_FORMAT = "ingredient";
+
+    public static final String VALID_NAME_ALMOND = "Almond Bee";
+    public static final String VALID_NAME_BASIL = "Basil Choo";
+    public static final String VALID_NAME_FISH = "Fish Choo";
+    public static final String VALID_QUANTITY_ALMOND = "11111111";
+    public static final String VALID_QUANTITY_BASIL = "22222222";
+    public static final String VALID_QUANTITY_FISH = "22222222";
+    public static final String VALID_EMAIL_ALMOND = "amy@example.com";
+    public static final String VALID_EMAIL_BASIL = "basil@example.com";
+    public static final String VALID_EMAIL_FISH = "fish@example.com";
+    public static final String VALID_DESCRIPTION_ALMOND = "Block 312, Almond Street 1";
+    public static final String VALID_DESCRIPTION_BASIL = "Block 123, Basilby Street 3";
+    public static final String VALID_DESCRIPTION_FISH = " ";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_EXPIRY_DATE = "20-08-2010";
     public static final String VALID_TYPE = "solid";
 
-    public static final String NAME_DESC_AMY = " " + CliSyntax.PREFIX_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + CliSyntax.PREFIX_NAME + VALID_NAME_BOB;
-    public static final String PHONE_DESC_AMY = " " + CliSyntax.PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + CliSyntax.PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + CliSyntax.PREFIX_ADDRESS + VALID_ADDRESS_AMY;
+    public static final String NAME_DESC_ALMOND = " " + CliSyntax.PREFIX_NAME + VALID_NAME_ALMOND;
+    public static final String NAME_DESC_BASIL = " " + CliSyntax.PREFIX_NAME + VALID_NAME_BASIL;
+    public static final String NAME_DESC_FISH = " " + CliSyntax.PREFIX_NAME + VALID_NAME_FISH;
+    public static final String QUANTITY_DESC_ALMOND = " " + CliSyntax.PREFIX_QUANTITY + VALID_QUANTITY_ALMOND;
+    public static final String QUANTITY_DESC_BASIL = " " + CliSyntax.PREFIX_QUANTITY + VALID_QUANTITY_BASIL;
+    public static final String QUANTITY_DESC_FISH = " " + CliSyntax.PREFIX_QUANTITY + VALID_QUANTITY_FISH;
+    public static final String EMAIL_DESC_ALMOND = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_ALMOND;
+    public static final String EMAIL_DESC_BASIL = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_BASIL;
+    public static final String EMAIL_DESC_FISH = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_FISH;
+    public static final String DESCRIPTION_DESC_ALMOND = " " + CliSyntax.PREFIX_DESCRIPTION + VALID_DESCRIPTION_ALMOND;
+    public static final String DESCRIPTION_DESC_BASIL = " " + CliSyntax.PREFIX_DESCRIPTION + VALID_DESCRIPTION_BASIL;
+    public static final String DESCRIPTION_DESC_FISH = " " + CliSyntax.PREFIX_DESCRIPTION + VALID_DESCRIPTION_FISH;
     public static final String EXPIRY_DATE_DESC = " " + CliSyntax.PREFIX_EXPIRY + VALID_EXPIRY_DATE;
     public static final String TYPE_DESC = " " + CliSyntax.PREFIX_TYPE + VALID_TYPE;
-    public static final String ADDRESS_DESC_BOB = " " + CliSyntax.PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    public static final String INVALID_INGREDIENT_ARGUMENT_FORMAT = "monkegredient";
     public static final String INVALID_NAME_DESC = " " + CliSyntax.PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + CliSyntax.PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + CliSyntax.PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + CliSyntax.PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_QUANTITY_DESC = " "
+            + CliSyntax.PREFIX_QUANTITY + "911a"; // 'a' not allowed in quantities
+    public static final String INVALID_EMAIL_DESC = " " + CliSyntax.PREFIX_EMAIL + "basil!yahoo"; // missing '@' symbol
+    public static final String INVALID_DESCRIPTION_DESC = " "
+            + CliSyntax.PREFIX_DESCRIPTION; // empty string not allowed for description
+    public static final String INVALID_DESCRIPTION_DESC_TWO = " " + CliSyntax.PREFIX_DESCRIPTION
+            + "ƗØƀĐǤ "; // non-ascii characters not allowed for description
     public static final String INVALID_TAG_DESC = " " + CliSyntax.PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditIngredientDescriptor DESC_AMY;
-    public static final EditCommand.EditIngredientDescriptor DESC_BOB;
+    public static final EditCommand.EditIngredientDescriptor DESC_ALMOND;
+    public static final EditCommand.EditIngredientDescriptor DESC_BASIL;
+    public static final EditCommand.EditIngredientDescriptor DESC_FISH;
 
     static {
-        DESC_AMY = new EditIngredientDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).withType(VALID_TYPE).withExpiry(VALID_EXPIRY_DATE).build();
-        DESC_BOB = new EditIngredientDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+        DESC_ALMOND = new EditIngredientDescriptorBuilder().withName(VALID_NAME_ALMOND)
+                .withQuantity(VALID_QUANTITY_ALMOND).withEmail(VALID_EMAIL_ALMOND)
+                .withDescription(VALID_DESCRIPTION_ALMOND).withTags(VALID_TAG_FRIEND)
+                .withType(VALID_TYPE).withExpiry(VALID_EXPIRY_DATE).build();
+        DESC_BASIL = new EditIngredientDescriptorBuilder().withName(VALID_NAME_BASIL)
+                .withQuantity(VALID_QUANTITY_BASIL).withEmail(VALID_EMAIL_BASIL)
+                .withDescription(VALID_DESCRIPTION_BASIL)
+                .withType(VALID_TYPE).withExpiry(VALID_EXPIRY_DATE)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_FISH = new EditIngredientDescriptorBuilder().withName(VALID_NAME_FISH)
+                .withQuantity(VALID_QUANTITY_FISH).withEmail(VALID_EMAIL_FISH)
+                .withDescription(VALID_DESCRIPTION_FISH).withType(VALID_TYPE)
+                .withExpiry(VALID_EXPIRY_DATE).build();
     }
 
     /**

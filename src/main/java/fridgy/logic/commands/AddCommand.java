@@ -1,10 +1,10 @@
 package fridgy.logic.commands;
 
-import static fridgy.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static fridgy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static fridgy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static fridgy.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static fridgy.logic.parser.CliSyntax.PREFIX_NAME;
-import static fridgy.logic.parser.CliSyntax.PREFIX_PHONE;
+import static fridgy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static fridgy.logic.parser.CliSyntax.PREFIX_TAG;
 import static fridgy.logic.parser.CliSyntax.PREFIX_TYPE;
 import static java.util.Objects.requireNonNull;
@@ -14,28 +14,32 @@ import fridgy.model.Model;
 import fridgy.model.ingredient.Ingredient;
 
 /**
- * Adds a ingredient to the Inventory.
+ * Adds an ingredient to the Inventory.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final String INGREDIENT_KEYWORD = "ingredient";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a ingredient to the Inventory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + INGREDIENT_KEYWORD + ": Adds an ingredient to the Inventory. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_NAME + " NAME "
+            + PREFIX_QUANTITY + " QUANTITY "
+            + PREFIX_EMAIL + " EMAIL "
+            + PREFIX_DESCRIPTION + " DESCRIPTION "
+            + PREFIX_TYPE + " TYPE "
+            + PREFIX_EXPIRY + " EXPIRY DATE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney"
-            + PREFIX_TYPE + "solid"
-            + PREFIX_EXPIRY + "20-08-2010";
+            + PREFIX_NAME + " Grapes "
+            + PREFIX_QUANTITY + " 4 "
+            + PREFIX_EMAIL + " johnd@example.com "
+            + PREFIX_DESCRIPTION + " Got any grapes? "
+            + PREFIX_TYPE + " solid "
+            + PREFIX_EXPIRY + " 20-08-2010 "
+            + PREFIX_TAG + " fruit "
+            + PREFIX_TAG + " sweet";
 
     public static final String MESSAGE_SUCCESS = "New ingredient added: %1$s";
     public static final String MESSAGE_DUPLICATE_INGREDIENT = "This ingredient already exists in the Inventory";

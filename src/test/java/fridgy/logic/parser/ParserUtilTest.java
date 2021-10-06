@@ -2,34 +2,36 @@ package fridgy.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
-import fridgy.logic.parser.exceptions.ParseException;
-import fridgy.model.ingredient.Address;
-import fridgy.model.ingredient.Email;
-import fridgy.model.ingredient.Name;
-import fridgy.model.ingredient.Phone;
-import fridgy.model.tag.Tag;
-import fridgy.testutil.Assert;
-import fridgy.testutil.TypicalIndexes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import fridgy.logic.parser.exceptions.ParseException;
+import fridgy.model.ingredient.Description;
+import fridgy.model.ingredient.Email;
+import fridgy.model.ingredient.Name;
+import fridgy.model.ingredient.Quantity;
+import fridgy.model.tag.Tag;
+import fridgy.testutil.Assert;
+import fridgy.testutil.TypicalIndexes;
+
+
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
+    private static final String INVALID_QUANTITY = "+651234";
+    private static final String INVALID_DESCRIPTION = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_QUANTITY = "123456";
+    private static final String VALID_DESCRIPTION = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -80,49 +82,50 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePhone_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+    public void parseQuantity_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseQuantity((String) null));
     }
 
     @Test
-    public void parsePhone_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parsePhone(INVALID_PHONE));
+    public void parseQuantity_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseQuantity(INVALID_QUANTITY));
     }
 
     @Test
-    public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(VALID_PHONE));
+    public void parseQuantity_validValueWithoutWhitespace_returnsQuantity() throws Exception {
+        Quantity expectedQuantity = new Quantity(VALID_QUANTITY);
+        assertEquals(expectedQuantity, ParserUtil.parseQuantity(VALID_QUANTITY));
     }
 
     @Test
-    public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
-        String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
+    public void parseQuantity_validValueWithWhitespace_returnsTrimmedQuantity() throws Exception {
+        String quantityWithWhitespace = WHITESPACE + VALID_QUANTITY + WHITESPACE;
+        Quantity expectedQuantity = new Quantity(VALID_QUANTITY);
+        assertEquals(expectedQuantity, ParserUtil.parseQuantity(quantityWithWhitespace));
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+    public void parseDescription_null_returnsEmptyDescription() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDescription(Optional.of("")));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDescription(Optional.of(" ")));
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
+    public void parseDescription_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDescription(Optional.of(INVALID_DESCRIPTION)));
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
+    public void parseDescription_validValueWithoutWhitespace_returnsDescription() throws Exception {
+        Description expectedDescription = new Description(Optional.of(VALID_DESCRIPTION));
+        assertEquals(expectedDescription, ParserUtil.parseDescription(Optional.of(VALID_DESCRIPTION)));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
+    public void parseDescription_validValueWithWhitespace_returnsTrimmedDescription() throws Exception {
+        String addressWithWhitespace = WHITESPACE + VALID_DESCRIPTION + WHITESPACE;
+        Description expectedDescription = new Description(Optional.of(VALID_DESCRIPTION));
+        assertEquals(expectedDescription, ParserUtil.parseDescription(Optional.of(addressWithWhitespace)));
     }
 
     @Test

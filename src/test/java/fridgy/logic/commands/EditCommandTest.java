@@ -2,7 +2,8 @@ package fridgy.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.logic.commands.CommandTestUtil.assertCommandSuccess;
+
+import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
@@ -15,7 +16,6 @@ import fridgy.testutil.EditIngredientDescriptorBuilder;
 import fridgy.testutil.IngredientBuilder;
 import fridgy.testutil.TypicalIndexes;
 import fridgy.testutil.TypicalIngredients;
-import org.junit.jupiter.api.Test;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -43,12 +43,16 @@ public class EditCommandTest {
         Index indexLastIngredient = Index.fromOneBased(model.getFilteredIngredientList().size());
         Ingredient lastIngredient = model.getFilteredIngredientList().get(indexLastIngredient.getZeroBased());
 
-        IngredientBuilder IngredientInList = new IngredientBuilder(lastIngredient);
-        Ingredient editedIngredient = IngredientInList.withName(CommandTestUtil.VALID_NAME_BOB).withPhone(CommandTestUtil.VALID_PHONE_BOB)
+        IngredientBuilder ingredientInList = new IngredientBuilder(lastIngredient);
+        Ingredient editedIngredient = ingredientInList
+                .withName(CommandTestUtil.VALID_NAME_BASIL)
+                .withQuantity(CommandTestUtil.VALID_QUANTITY_BASIL)
                 .withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
 
-        EditCommand.EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB)
-                .withPhone(CommandTestUtil.VALID_PHONE_BOB).withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
+        EditCommand.EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder()
+                .withName(CommandTestUtil.VALID_NAME_BASIL)
+                .withQuantity(CommandTestUtil.VALID_QUANTITY_BASIL)
+                .withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastIngredient, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
@@ -61,8 +65,11 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT, new EditCommand.EditIngredientDescriptor());
-        Ingredient editedIngredient = model.getFilteredIngredientList().get(TypicalIndexes.INDEX_FIRST_INGREDIENT.getZeroBased());
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT,
+                new EditCommand.EditIngredientDescriptor());
+        Ingredient editedIngredient = model
+                .getFilteredIngredientList()
+                .get(TypicalIndexes.INDEX_FIRST_INGREDIENT.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
 
@@ -75,10 +82,12 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         CommandTestUtil.showIngredientAtIndex(model, TypicalIndexes.INDEX_FIRST_INGREDIENT);
 
-        Ingredient IngredientInFilteredList = model.getFilteredIngredientList().get(TypicalIndexes.INDEX_FIRST_INGREDIENT.getZeroBased());
-        Ingredient editedIngredient = new IngredientBuilder(IngredientInFilteredList).withName(CommandTestUtil.VALID_NAME_BOB).build();
+        Ingredient ingredientInFilteredList = model.getFilteredIngredientList()
+                .get(TypicalIndexes.INDEX_FIRST_INGREDIENT.getZeroBased());
+        Ingredient editedIngredient = new IngredientBuilder(ingredientInFilteredList)
+                .withName(CommandTestUtil.VALID_NAME_BASIL).build();
         EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT,
-                new EditIngredientDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB).build());
+                new EditIngredientDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BASIL).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
 
@@ -90,7 +99,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicateIngredientUnfilteredList_failure() {
-        Ingredient firstIngredient = model.getFilteredIngredientList().get(TypicalIndexes.INDEX_FIRST_INGREDIENT.getZeroBased());
+        Ingredient firstIngredient = model.getFilteredIngredientList()
+                .get(TypicalIndexes.INDEX_FIRST_INGREDIENT.getZeroBased());
         EditCommand.EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder(firstIngredient).build();
         EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_SECOND_INGREDIENT, descriptor);
 
@@ -102,9 +112,10 @@ public class EditCommandTest {
         CommandTestUtil.showIngredientAtIndex(model, TypicalIndexes.INDEX_FIRST_INGREDIENT);
 
         // edit Ingredient in filtered list into a duplicate in address book
-        Ingredient IngredientInList = model.getInventory().getIngredientList().get(TypicalIndexes.INDEX_SECOND_INGREDIENT.getZeroBased());
+        Ingredient ingredientInList = model.getInventory().getIngredientList()
+                .get(TypicalIndexes.INDEX_SECOND_INGREDIENT.getZeroBased());
         EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT,
-                new EditIngredientDescriptorBuilder(IngredientInList).build());
+                new EditIngredientDescriptorBuilder(ingredientInList).build());
 
         CommandTestUtil.assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_INGREDIENT);
     }
@@ -112,7 +123,8 @@ public class EditCommandTest {
     @Test
     public void execute_invalidIngredientIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredIngredientList().size() + 1);
-        EditCommand.EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB).build();
+        EditCommand.EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder()
+                .withName(CommandTestUtil.VALID_NAME_BASIL).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         CommandTestUtil.assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX);
@@ -130,18 +142,21 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getInventory().getIngredientList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditIngredientDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB).build());
+                new EditIngredientDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BASIL).build());
 
         CommandTestUtil.assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT, CommandTestUtil.DESC_AMY);
+        final EditCommand standardCommand =
+                new EditCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT, CommandTestUtil.DESC_ALMOND);
 
         // same values -> returns true
-        EditCommand.EditIngredientDescriptor copyDescriptor = new EditCommand.EditIngredientDescriptor(CommandTestUtil.DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT, copyDescriptor);
+        EditCommand.EditIngredientDescriptor copyDescriptor =
+                new EditCommand.EditIngredientDescriptor(CommandTestUtil.DESC_ALMOND);
+        EditCommand commandWithSameValues =
+                new EditCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -154,10 +169,12 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(TypicalIndexes.INDEX_SECOND_INGREDIENT, CommandTestUtil.DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(TypicalIndexes.INDEX_SECOND_INGREDIENT,
+                CommandTestUtil.DESC_ALMOND)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT, CommandTestUtil.DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT,
+                CommandTestUtil.DESC_BASIL)));
     }
 
 }

@@ -1,13 +1,12 @@
 package fridgy.logic.commands;
 
-import static fridgy.logic.commands.CommandTestUtil.assertCommandSuccess;
+import org.junit.jupiter.api.Test;
 
 import fridgy.model.Inventory;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
 import fridgy.model.UserPrefs;
 import fridgy.testutil.TypicalIngredients;
-import org.junit.jupiter.api.Test;
 
 public class ClearCommandTest {
 

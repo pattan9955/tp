@@ -1,6 +1,7 @@
 package fridgy.logic.commands;
 
-import static fridgy.logic.commands.CommandTestUtil.assertCommandSuccess;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
@@ -8,8 +9,6 @@ import fridgy.model.UserPrefs;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.testutil.IngredientBuilder;
 import fridgy.testutil.TypicalIngredients;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -37,7 +36,8 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_duplicateIngredient_throwsCommandException() {
         Ingredient ingredientInList = model.getInventory().getIngredientList().get(0);
-        CommandTestUtil.assertCommandFailure(new AddCommand(ingredientInList), model, AddCommand.MESSAGE_DUPLICATE_INGREDIENT);
+        CommandTestUtil.assertCommandFailure(new AddCommand(ingredientInList), model,
+                AddCommand.MESSAGE_DUPLICATE_INGREDIENT);
     }
 
 }

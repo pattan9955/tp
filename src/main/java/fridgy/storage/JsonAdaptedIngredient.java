@@ -3,6 +3,7 @@ package fridgy.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,12 +11,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fridgy.commons.exceptions.IllegalValueException;
-import fridgy.model.ingredient.Address;
+import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
-import fridgy.model.ingredient.Phone;
+import fridgy.model.ingredient.Quantity;
 import fridgy.model.ingredient.Type;
 import fridgy.model.tag.Tag;
 
@@ -27,27 +28,27 @@ class JsonAdaptedIngredient {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Ingredient's %s field is missing!";
 
     private final String name;
-    private final String phone;
+    private final String quantity;
     private final String email;
-    private final String address;
     private final String type;
     private final String expiryDate;
+    private final String description;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedIngredient} with the given ingredient details.
      */
     @JsonCreator
-    public JsonAdaptedIngredient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
+    public JsonAdaptedIngredient(@JsonProperty("name") String name, @JsonProperty("quantity") String quantity,
+            @JsonProperty("email") String email, @JsonProperty("description") String description,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("type") String type,
                                  @JsonProperty("expiryDate") String expiryDate) {
         this.name = name;
-        this.phone = phone;
+        this.quantity = quantity;
         this.email = email;
-        this.address = address;
         this.type = type;
         this.expiryDate = expiryDate;
+        this.description = description;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -58,11 +59,11 @@ class JsonAdaptedIngredient {
      */
     public JsonAdaptedIngredient(Ingredient source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
+        quantity = source.getQuantity().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
         type = source.getType().value;
         expiryDate = source.getExpiryDate().toString();
+        description = source.getDescription().value.orElse("");
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -88,14 +89,14 @@ class JsonAdaptedIngredient {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
+        if (quantity == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Phone.class.getSimpleName()));
+                    Quantity.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        if (!Quantity.isValidQuantity(quantity)) {
+            throw new IllegalValueException(Quantity.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        final Quantity modelQuantity = new Quantity(quantity);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -106,14 +107,14 @@ class JsonAdaptedIngredient {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
+        final Optional<String> modelDescription = Optional.ofNullable(description);
+        if (description == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Address.class.getSimpleName()));
+                    Description.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!Description.isValidDescription(modelDescription)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
 
         if (expiryDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -134,7 +135,9 @@ class JsonAdaptedIngredient {
         final Type modelType = new Type(type);
 
         final Set<Tag> modelTags = new HashSet<>(ingredientTags);
-        return new Ingredient(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelType, modelExpiryDate);
+
+        return new Ingredient(modelName, modelQuantity, modelEmail, new Description(modelDescription), modelTags,
+                modelType, modelExpiryDate);
     }
 
 }

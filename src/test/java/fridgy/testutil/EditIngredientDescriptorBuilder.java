@@ -1,18 +1,19 @@
 package fridgy.testutil;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import fridgy.model.ingredient.Address;
+import fridgy.logic.commands.EditCommand.EditIngredientDescriptor;
+import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
-import fridgy.model.ingredient.Phone;
+import fridgy.model.ingredient.Quantity;
 import fridgy.model.ingredient.Type;
 import fridgy.model.tag.Tag;
-import fridgy.logic.commands.EditCommand.EditIngredientDescriptor;
 
 /**
  * A utility class to help with building EditIngredientDescriptor objects.
@@ -35,9 +36,9 @@ public class EditIngredientDescriptorBuilder {
     public EditIngredientDescriptorBuilder(Ingredient ingredient) {
         descriptor = new EditIngredientDescriptor();
         descriptor.setName(ingredient.getName());
-        descriptor.setPhone(ingredient.getPhone());
+        descriptor.setQuantity(ingredient.getQuantity());
         descriptor.setEmail(ingredient.getEmail());
-        descriptor.setAddress(ingredient.getAddress());
+        descriptor.setDescription(ingredient.getDescription());
         descriptor.setType(ingredient.getType());
         descriptor.setExpiry(ingredient.getExpiryDate());
         descriptor.setTags(ingredient.getTags());
@@ -52,10 +53,10 @@ public class EditIngredientDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditIngredientDescriptor} that we are building.
+     * Sets the {@code Quantity} of the {@code EditIngredientDescriptor} that we are building.
      */
-    public EditIngredientDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
+    public EditIngredientDescriptorBuilder withQuantity(String quantity) {
+        descriptor.setQuantity(new Quantity(quantity));
         return this;
     }
 
@@ -68,10 +69,10 @@ public class EditIngredientDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditIngredientDescriptor} that we are building.
+     * Sets the {@code Description} of the {@code EditIngredientDescriptor} that we are building.
      */
-    public EditIngredientDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+    public EditIngredientDescriptorBuilder withDescription(String description) {
+        descriptor.setDescription(new Description(Optional.ofNullable(description)));
         return this;
     }
 

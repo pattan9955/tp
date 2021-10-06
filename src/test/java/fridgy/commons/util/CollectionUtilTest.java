@@ -2,16 +2,15 @@ package fridgy.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.commons.util.CollectionUtil.requireAllNonNull;
-import static fridgy.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import fridgy.testutil.Assert;
 import org.junit.jupiter.api.Test;
+
+import fridgy.testutil.Assert;
 
 public class CollectionUtilTest {
     @Test

@@ -3,19 +3,19 @@ package fridgy.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
-import fridgy.commons.core.GuiSettings;
-import fridgy.model.ingredient.NameContainsKeywordsPredicate;
-import fridgy.testutil.InventoryBuilder;
-import fridgy.testutil.Assert;
-import fridgy.testutil.TypicalIngredients;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import fridgy.commons.core.GuiSettings;
+import fridgy.model.ingredient.NameContainsKeywordsPredicate;
+import fridgy.testutil.Assert;
+import fridgy.testutil.InventoryBuilder;
+import fridgy.testutil.TypicalIngredients;
 
 public class ModelManagerTest {
 
@@ -78,23 +78,25 @@ public class ModelManagerTest {
 
     @Test
     public void hasIngredient_ingredientNotInInventory_returnsFalse() {
-        assertFalse(modelManager.hasIngredient(TypicalIngredients.ALICE));
+        assertFalse(modelManager.hasIngredient(TypicalIngredients.APPLE));
     }
 
     @Test
     public void hasIngredient_ingredientInInventory_returnsTrue() {
-        modelManager.addIngredient(TypicalIngredients.ALICE);
-        assertTrue(modelManager.hasIngredient(TypicalIngredients.ALICE));
+        modelManager.addIngredient(TypicalIngredients.APPLE);
+        assertTrue(modelManager.hasIngredient(TypicalIngredients.APPLE));
     }
 
     @Test
     public void getFilteredIngredientList_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredIngredientList().remove(0));
+        Assert.assertThrows(UnsupportedOperationException.class, () ->
+                modelManager.getFilteredIngredientList().remove(0));
     }
 
     @Test
     public void equals() {
-        Inventory addressBook = new InventoryBuilder().withIngredient(TypicalIngredients.ALICE).withIngredient(TypicalIngredients.BENSON).build();
+        Inventory addressBook = new InventoryBuilder().withIngredient(TypicalIngredients.APPLE)
+                .withIngredient(TypicalIngredients.BANANA).build();
         Inventory differentInventory = new Inventory();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -116,7 +118,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentInventory, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = TypicalIngredients.ALICE.getName().fullName.split("\\s+");
+        String[] keywords = TypicalIngredients.APPLE.getName().fullName.split("\\s+");
         modelManager.updateFilteredIngredientList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

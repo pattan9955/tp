@@ -1,5 +1,22 @@
 package fridgy.testutil;
 
+import static fridgy.logic.commands.CommandTestUtil.VALID_DESCRIPTION_ALMOND;
+import static fridgy.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BASIL;
+import static fridgy.logic.commands.CommandTestUtil.VALID_DESCRIPTION_FISH;
+import static fridgy.logic.commands.CommandTestUtil.VALID_EMAIL_ALMOND;
+import static fridgy.logic.commands.CommandTestUtil.VALID_EMAIL_BASIL;
+import static fridgy.logic.commands.CommandTestUtil.VALID_EMAIL_FISH;
+import static fridgy.logic.commands.CommandTestUtil.VALID_EXPIRY_DATE;
+import static fridgy.logic.commands.CommandTestUtil.VALID_NAME_ALMOND;
+import static fridgy.logic.commands.CommandTestUtil.VALID_NAME_BASIL;
+import static fridgy.logic.commands.CommandTestUtil.VALID_NAME_FISH;
+import static fridgy.logic.commands.CommandTestUtil.VALID_QUANTITY_ALMOND;
+import static fridgy.logic.commands.CommandTestUtil.VALID_QUANTITY_BASIL;
+import static fridgy.logic.commands.CommandTestUtil.VALID_QUANTITY_FISH;
+import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static fridgy.logic.commands.CommandTestUtil.VALID_TYPE;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,60 +24,54 @@ import java.util.List;
 import fridgy.model.Inventory;
 import fridgy.model.ingredient.Ingredient;
 
-import static fridgy.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static fridgy.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static fridgy.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static fridgy.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static fridgy.logic.commands.CommandTestUtil.VALID_EXPIRY_DATE;
-import static fridgy.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static fridgy.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static fridgy.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static fridgy.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static fridgy.logic.commands.CommandTestUtil.VALID_TYPE;
-
 /**
  * A utility class containing a list of {@code Ingredient} objects to be used in tests.
  */
 public class TypicalIngredients {
 
-    public static final Ingredient ALICE = new IngredientBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com").withPhone("94351253")
-            .withTags("friends").withType("solid").withExpiryDate("20-08-2010").build();
-    public static final Ingredient BENSON = new IngredientBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").withType("solid").withExpiryDate("20-08-2010").build();
-    public static final Ingredient CARL = new IngredientBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street")
+    public static final Ingredient APPLE = new IngredientBuilder().withName("Apple")
+            .withDescription("123, Jurong West Ave 6, #08-111").withEmail("almond@example.com")
+            .withQuantity("94351253").withTags("friends")
             .withType("solid").withExpiryDate("20-08-2010").build();
-    public static final Ingredient DANIEL = new IngredientBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
+    public static final Ingredient BANANA = new IngredientBuilder().withName("Banana")
+            .withDescription("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com")
+            .withQuantity("98765432").withTags("owesMoney", "friends")
             .withType("solid").withExpiryDate("20-08-2010").build();
-    public static final Ingredient ELLE = new IngredientBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave")
+    public static final Ingredient CARROT = new IngredientBuilder().withName("Carrot Slices").withQuantity("95352563")
+            .withEmail("heinz@example.com").withDescription("wall street")
             .withType("solid").withExpiryDate("20-08-2010").build();
-    public static final Ingredient FIONA = new IngredientBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo")
+    public static final Ingredient DUCK = new IngredientBuilder().withName("Duck breast").withQuantity("87652533")
+            .withEmail("cornelia@example.com").withDescription("10th street").withTags("friends")
             .withType("solid").withExpiryDate("20-08-2010").build();
-    public static final Ingredient GEORGE = new IngredientBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street")
+    public static final Ingredient EGG = new IngredientBuilder().withName("Egg mayo").withQuantity("9482224")
+            .withEmail("werner@example.com").withDescription("michegan ave")
+            .withType("solid").withExpiryDate("20-08-2010").build();
+    public static final Ingredient FIGS = new IngredientBuilder().withName("Fig jam").withQuantity("9482427")
+            .withEmail("lydia@example.com").withDescription("little tokyo")
+            .withType("solid").withExpiryDate("20-08-2010").build();
+    public static final Ingredient GRAPES = new IngredientBuilder().withName("Grape").withQuantity("9482442")
+            .withEmail("anna@example.com").withDescription("4th street")
             .withType("solid").withExpiryDate("20-08-2010").build();
 
     // Manually added
-    public static final Ingredient HOON = new IngredientBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withAddress("little india")
+    public static final Ingredient HOON = new IngredientBuilder().withName("Hoon Meier").withQuantity("8482424")
+            .withEmail("stefan@example.com").withDescription("little india")
             .withType("solid").withExpiryDate("20-08-2010").build();
-    public static final Ingredient IDA = new IngredientBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withAddress("chicago ave")
+    public static final Ingredient IDA = new IngredientBuilder().withName("Ida Mueller").withQuantity("8482131")
+            .withEmail("hans@example.com").withDescription("chicago ave")
             .withType("solid").withExpiryDate("20-08-2010").build();
 
     // Manually added - Ingredient's details found in {@code CommandTestUtil}
-    public static final Ingredient AMY = new IngredientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND)
-            .withType(VALID_TYPE).withExpiryDate(VALID_EXPIRY_DATE).build();
-    public static final Ingredient BOB = new IngredientBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+    public static final Ingredient ALMOND = new IngredientBuilder().withName(VALID_NAME_ALMOND)
+            .withQuantity(VALID_QUANTITY_ALMOND).withEmail(VALID_EMAIL_ALMOND)
+            .withDescription(VALID_DESCRIPTION_ALMOND).withTags(VALID_TAG_FRIEND).build();
+    public static final Ingredient BASIL = new IngredientBuilder().withName(VALID_NAME_BASIL)
+            .withQuantity(VALID_QUANTITY_BASIL).withEmail(VALID_EMAIL_BASIL)
+            .withDescription(VALID_DESCRIPTION_BASIL).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withType("solid").withExpiryDate("20-08-2010").build();
+    public static final Ingredient FISH = new IngredientBuilder().withName(VALID_NAME_FISH)
+            .withQuantity(VALID_QUANTITY_FISH).withEmail(VALID_EMAIL_FISH)
+            .withDescription(VALID_DESCRIPTION_FISH)
             .withType(VALID_TYPE).withExpiryDate(VALID_EXPIRY_DATE).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
@@ -79,6 +90,6 @@ public class TypicalIngredients {
     }
 
     public static List<Ingredient> getTypicalIngredients() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(APPLE, BANANA, CARROT, DUCK, EGG, FIGS, GRAPES));
     }
 }

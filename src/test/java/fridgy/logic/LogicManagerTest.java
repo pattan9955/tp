@@ -1,10 +1,13 @@
 package fridgy.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static fridgy.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import fridgy.commons.core.Messages;
 import fridgy.logic.commands.AddCommand;
@@ -14,6 +17,7 @@ import fridgy.logic.commands.ListCommand;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.Model;
+import fridgy.model.ModelManager;
 import fridgy.model.ReadOnlyInventory;
 import fridgy.model.UserPrefs;
 import fridgy.model.ingredient.Ingredient;
@@ -23,11 +27,7 @@ import fridgy.storage.StorageManager;
 import fridgy.testutil.Assert;
 import fridgy.testutil.IngredientBuilder;
 import fridgy.testutil.TypicalIngredients;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
-import fridgy.model.ModelManager;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -55,13 +55,13 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "delete ingredient 9";
         assertCommandException(deleteCommand, Messages.MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
+        String listCommand = ListCommand.COMMAND_WORD + " " + ListCommand.INGREDIENT_KEYWORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
 
@@ -76,9 +76,11 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY
-                + CommandTestUtil.ADDRESS_DESC_AMY + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC;
-        Ingredient expectedIngredient = new IngredientBuilder(TypicalIngredients.AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + " " + AddCommand.INGREDIENT_KEYWORD + " "
+                + CommandTestUtil.NAME_DESC_ALMOND + CommandTestUtil.QUANTITY_DESC_ALMOND
+                + CommandTestUtil.EMAIL_DESC_ALMOND + CommandTestUtil.DESCRIPTION_DESC_ALMOND
+                + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC;
+        Ingredient expectedIngredient = new IngredientBuilder(TypicalIngredients.ALMOND).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addIngredient(expectedIngredient);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
