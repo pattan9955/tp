@@ -32,7 +32,7 @@ class JsonAdaptedIngredient {
     private final String email;
     private final String type;
     private final String expiryDate;
-    private final String description;
+    private String description = null;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -48,7 +48,9 @@ class JsonAdaptedIngredient {
         this.email = email;
         this.type = type;
         this.expiryDate = expiryDate;
-        this.description = description;
+        if (description != null) {
+            this.description = description;
+        }
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -63,7 +65,7 @@ class JsonAdaptedIngredient {
         email = source.getEmail().value;
         type = source.getType().value;
         expiryDate = source.getExpiryDate().toString();
-        description = source.getDescription().value.orElse("");
+        description = source.getDescription().value.orElse(null);
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -108,7 +110,7 @@ class JsonAdaptedIngredient {
         final Email modelEmail = new Email(email);
 
         final Optional<String> modelDescription = Optional.ofNullable(description);
-        if (description == null) {
+        if (description == "") {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Description.class.getSimpleName()));
         }

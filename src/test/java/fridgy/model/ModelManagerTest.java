@@ -7,14 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Comparator;
 
-import fridgy.model.ingredient.Ingredient;
-import fridgy.model.ingredient.IngredientDefaultComparator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.GuiSettings;
+import fridgy.model.ingredient.IngredientDefaultComparator;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 import fridgy.testutil.Assert;
 import fridgy.testutil.InventoryBuilder;

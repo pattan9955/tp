@@ -2,8 +2,8 @@ package fridgy.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import fridgy.model.ingredient.IngredientDefaultComparator;
 import fridgy.model.Model;
+import fridgy.model.ingredient.IngredientDefaultComparator;
 
 /**
  * Lists all ingredients in the Inventory to the user.

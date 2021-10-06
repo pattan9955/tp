@@ -185,7 +185,7 @@ public class UniqueIngredientListTest {
     }
 
     @Test
-    public void sortIngredient_sameExpiry_differentNames_Comparator_success() {
+    public void sortIngredient_sameExpiryAndDifferentNamesForComparator_success() {
         uniqueIngredientList.add(TypicalIngredients.APPLE);
         uniqueIngredientList.add(TypicalIngredients.BASIL);
         UniqueIngredientList expectedUniqueIngredientList = new UniqueIngredientList();
