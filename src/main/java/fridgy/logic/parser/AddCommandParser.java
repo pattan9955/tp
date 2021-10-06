@@ -51,7 +51,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(arguments, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_EMAIL,
-                        PREFIX_DESCRIPTION, PREFIX_TAG, PREFIX_TYPE, PREFIX_EXPIRY);
+                        PREFIX_TAG, PREFIX_TYPE, PREFIX_EXPIRY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_EMAIL,
                 PREFIX_TYPE, PREFIX_EXPIRY)
@@ -66,12 +66,17 @@ public class AddCommandParser implements Parser<AddCommand> {
         Type ingredientType = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
         ExpiryDate expiryDate = ParserUtil.parseExpiry(argMultimap.getValue(PREFIX_EXPIRY).get());
 
+        assert name != null;
+        assert quantity != null;
+        assert expiryDate != null;
+
         Ingredient ingredient = new Ingredient(name, quantity, email, tagList, ingredientType, expiryDate);
 
         if (arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION)) {
             Description description = ParserUtil.parseDescription(
                     Optional.of(argMultimap.getValue(PREFIX_DESCRIPTION)
                             .orElse("")));
+//            assert description != null;
             ingredient = new Ingredient(name, quantity, email, description, tagList, ingredientType, expiryDate);
         }
 

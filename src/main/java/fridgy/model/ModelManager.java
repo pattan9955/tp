@@ -3,6 +3,7 @@ package fridgy.model;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -19,22 +20,22 @@ import javafx.collections.transformation.FilteredList;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final Inventory addressBook;
+    private final Inventory inventory;
     private final UserPrefs userPrefs;
     private final FilteredList<Ingredient> filteredIngredients;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given inventory and userPrefs.
      */
-    public ModelManager(ReadOnlyInventory addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyInventory inventory, ReadOnlyUserPrefs userPrefs) {
         super();
-        CollectionUtil.requireAllNonNull(addressBook, userPrefs);
+        CollectionUtil.requireAllNonNull(inventory, userPrefs);
 
-        logger.fine("Initializing with Inventory: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with Inventory: " + inventory + " and user prefs " + userPrefs);
 
-        this.addressBook = new Inventory(addressBook);
+        this.inventory = new Inventory(inventory);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredIngredients = new FilteredList<>(this.addressBook.getIngredientList());
+        filteredIngredients = new FilteredList<>(this.inventory.getIngredientList());
     }
 
     public ModelManager() {
@@ -71,37 +72,37 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setInventoryFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setInventoryFilePath(addressBookFilePath);
+    public void setInventoryFilePath(Path inventoryFilePath) {
+        requireNonNull(inventoryFilePath);
+        userPrefs.setInventoryFilePath(inventoryFilePath);
     }
 
     //=========== Inventory ================================================================================
 
     @Override
-    public void setInventory(ReadOnlyInventory addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setInventory(ReadOnlyInventory inventory) {
+        this.inventory.resetData(inventory);
     }
 
     @Override
     public ReadOnlyInventory getInventory() {
-        return addressBook;
+        return inventory;
     }
 
     @Override
     public boolean hasIngredient(Ingredient ingredient) {
         requireNonNull(ingredient);
-        return addressBook.hasIngredient(ingredient);
+        return inventory.hasIngredient(ingredient);
     }
 
     @Override
     public void deleteIngredient(Ingredient target) {
-        addressBook.removeIngredient(target);
+        inventory.removeIngredient(target);
     }
 
     @Override
     public void addIngredient(Ingredient ingredient) {
-        addressBook.addIngredient(ingredient);
+        inventory.addIngredient(ingredient);
         updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
     }
 
@@ -109,7 +110,7 @@ public class ModelManager implements Model {
     public void setIngredient(Ingredient target, Ingredient editedIngredient) {
         CollectionUtil.requireAllNonNull(target, editedIngredient);
 
-        addressBook.setIngredient(target, editedIngredient);
+        inventory.setIngredient(target, editedIngredient);
     }
 
     //=========== Filtered Ingredient List Accessors =============================================================
@@ -130,6 +131,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortIngredient(Comparator<Ingredient> comparator) {
+        this.inventory.sort(comparator);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -143,7 +149,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return inventory.equals(other.inventory)
                 && userPrefs.equals(other.userPrefs)
                 && filteredIngredients.equals(other.filteredIngredients);
     }

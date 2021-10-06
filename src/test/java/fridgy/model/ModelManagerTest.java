@@ -7,7 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Comparator;
 
+import fridgy.model.ingredient.Ingredient;
+import fridgy.model.ingredient.IngredientDefaultComparator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -107,6 +110,10 @@ public class ModelManagerTest {
 
         // same object -> returns true
         assertTrue(modelManager.equals(modelManager));
+
+        // sorts object -> returns true
+        modelManager.sortIngredient(new IngredientDefaultComparator());
+        assertEquals(modelManager, modelManagerCopy);
 
         // null -> returns false
         assertFalse(modelManager.equals(null));

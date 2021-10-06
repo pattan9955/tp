@@ -2,6 +2,7 @@ package fridgy.model.ingredient;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
             throw new DuplicateIngredientException();
         }
         internalList.add(toAdd);
+        sort();
     }
 
     /**
@@ -69,6 +71,7 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
         }
 
         internalList.set(index, editedIngredient);
+        sort();
     }
 
     /**
@@ -80,6 +83,7 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
         if (!internalList.remove(toRemove)) {
             throw new IngredientNotFoundException();
         }
+        sort();
     }
 
     public void setIngredients(UniqueIngredientList replacement) {
@@ -137,4 +141,16 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
         }
         return true;
     }
+
+    public void sort() {
+        sort(new IngredientDefaultComparator());
+    }
+
+    /**
+     * Sorts the list of ingredients using the specified comparator.
+     */
+    public void sort(Comparator<Ingredient> comparator) {
+        internalList.sort(comparator);
+    }
+
 }

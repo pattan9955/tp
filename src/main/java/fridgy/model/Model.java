@@ -1,6 +1,7 @@
 package fridgy.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import fridgy.commons.core.GuiSettings;
@@ -70,6 +71,11 @@ public interface Model {
      * @param ingredient
      */
     void addIngredient(Ingredient ingredient);
+
+    /**
+     * Sorts the inventory of ingredients using the specified comparator.
+     */
+    void sortIngredient(Comparator<Ingredient> comparator);
 
     /**
      * Replaces the given ingredient {@code target} with {@code editedIngredient}.
