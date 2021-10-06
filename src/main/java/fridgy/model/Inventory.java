@@ -2,6 +2,7 @@ package fridgy.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 
 import fridgy.model.ingredient.Ingredient;
@@ -92,6 +93,13 @@ public class Inventory implements ReadOnlyInventory {
      */
     public void removeIngredient(Ingredient key) {
         ingredients.remove(key);
+    }
+
+    /**
+     * Sorts the inventory by expiry dates of ingredients.
+     */
+    public void sort(Comparator<Ingredient> comparator) {
+        ingredients.sort(comparator);
     }
 
     //// util methods

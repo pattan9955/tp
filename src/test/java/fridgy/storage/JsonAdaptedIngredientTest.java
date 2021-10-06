@@ -111,7 +111,7 @@ public class JsonAdaptedIngredientTest {
     @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
         JsonAdaptedIngredient ingredient =
-                new JsonAdaptedIngredient(VALID_NAME, VALID_QUANTITY, VALID_EMAIL, null, VALID_TAGS,
+                new JsonAdaptedIngredient(VALID_NAME, VALID_QUANTITY, VALID_EMAIL, "", VALID_TAGS,
                         VALID_TYPE, VALID_EXPIRY_DATE);
         String expectedMessage = String.format(JsonAdaptedIngredient.MISSING_FIELD_MESSAGE_FORMAT,
                 Description.class.getSimpleName());

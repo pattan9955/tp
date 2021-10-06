@@ -66,12 +66,17 @@ public class AddCommandParser implements Parser<AddCommand> {
         Type ingredientType = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
         ExpiryDate expiryDate = ParserUtil.parseExpiry(argMultimap.getValue(PREFIX_EXPIRY).get());
 
+        assert name != null;
+        assert quantity != null;
+        assert expiryDate != null;
+
         Ingredient ingredient = new Ingredient(name, quantity, email, tagList, ingredientType, expiryDate);
 
         if (arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION)) {
             Description description = ParserUtil.parseDescription(
                     Optional.of(argMultimap.getValue(PREFIX_DESCRIPTION)
-                            .orElse("")));
+                            .orElse(null)));
+            assert description != null;
             ingredient = new Ingredient(name, quantity, email, description, tagList, ingredientType, expiryDate);
         }
 

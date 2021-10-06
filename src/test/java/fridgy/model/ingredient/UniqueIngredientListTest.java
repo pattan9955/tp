@@ -183,4 +183,17 @@ public class UniqueIngredientListTest {
         Assert.assertThrows(UnsupportedOperationException.class, ()
             -> uniqueIngredientList.asUnmodifiableObservableList().remove(0));
     }
+
+    @Test
+    public void sortIngredient_sameExpiryAndDifferentNamesForComparator_success() {
+        uniqueIngredientList.add(TypicalIngredients.APPLE);
+        uniqueIngredientList.add(TypicalIngredients.BASIL);
+        UniqueIngredientList expectedUniqueIngredientList = new UniqueIngredientList();
+        expectedUniqueIngredientList.add(TypicalIngredients.BASIL);
+        expectedUniqueIngredientList.add(TypicalIngredients.APPLE);
+        uniqueIngredientList.sort();
+        expectedUniqueIngredientList.sort();
+        assertEquals(expectedUniqueIngredientList, uniqueIngredientList);
+    }
+
 }

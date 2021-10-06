@@ -3,6 +3,7 @@ package fridgy.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import fridgy.model.Model;
+import fridgy.model.ingredient.IngredientDefaultComparator;
 
 /**
  * Lists all ingredients in the Inventory to the user.
@@ -21,6 +22,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.sortIngredient(new IngredientDefaultComparator());
         model.updateFilteredIngredientList(Model.PREDICATE_SHOW_ALL_INGREDIENTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

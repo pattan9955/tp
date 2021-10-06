@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.GuiSettings;
+import fridgy.model.ingredient.IngredientDefaultComparator;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 import fridgy.testutil.Assert;
 import fridgy.testutil.InventoryBuilder;
@@ -107,6 +108,10 @@ public class ModelManagerTest {
 
         // same object -> returns true
         assertTrue(modelManager.equals(modelManager));
+
+        // sorts object -> returns true
+        modelManager.sortIngredient(new IngredientDefaultComparator());
+        assertEquals(modelManager, modelManagerCopy);
 
         // null -> returns false
         assertFalse(modelManager.equals(null));
