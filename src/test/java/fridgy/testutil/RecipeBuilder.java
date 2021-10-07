@@ -3,6 +3,7 @@ package fridgy.testutil;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import fridgy.model.recipe.RecipeIngredient;
@@ -21,7 +22,7 @@ public class RecipeBuilder {
     public static final String DEFAULT_DESCRIPTION = "Very Nice";
 
     private Name name;
-    private List<RecipeIngredient> recipeIngredients;
+    private Set<RecipeIngredient> recipeIngredients;
     private List<Step> steps;
     private Optional<String> description;
 
@@ -57,7 +58,7 @@ public class RecipeBuilder {
      * Sets the {@code RecipeIngredient} of the {@code Recipe} that we are building.
      */
     public RecipeBuilder withIngredients(List<String> ingredients) {
-        this.recipeIngredients = ingredients.stream().map(x -> new RecipeIngredient(x)).collect(Collectors.toList());
+        this.recipeIngredients = ingredients.stream().map(x -> new RecipeIngredient(x)).collect(Collectors.toSet());
         return this;
     }
 

@@ -5,6 +5,7 @@ import static fridgy.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Represents a recipe in the recipe book.
@@ -16,14 +17,14 @@ public class Recipe {
     private final Name name;
 
     // Data Fields
-    private final List<RecipeIngredient> recipeIngredients;
+    private final Set<RecipeIngredient> recipeIngredients;
     private final List<Step> steps;
     private final Optional<String> description;
 
     /**
      * Every field must be present and not null.
      */
-    public Recipe(Name name, List<RecipeIngredient> recipeIngredients, List<Step> steps, Optional<String> description) {
+    public Recipe(Name name, Set<RecipeIngredient> recipeIngredients, List<Step> steps, Optional<String> description) {
         requireAllNonNull(name, recipeIngredients, steps, description);
         this.name = name;
         this.recipeIngredients = recipeIngredients;
@@ -35,7 +36,7 @@ public class Recipe {
         return name;
     }
 
-    public List<RecipeIngredient> getIngredients() {
+    public Set<RecipeIngredient> getIngredients() {
         return recipeIngredients;
     }
 
