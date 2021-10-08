@@ -2,11 +2,10 @@ package fridgy.model.ingredient;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.testutil.Assert.assertThrows;
 
-import fridgy.model.ingredient.Name;
-import fridgy.testutil.Assert;
 import org.junit.jupiter.api.Test;
+
+import fridgy.testutil.Assert;
 
 public class NameTest {
 

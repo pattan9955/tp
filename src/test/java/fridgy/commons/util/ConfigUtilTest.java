@@ -2,7 +2,6 @@ package fridgy.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static fridgy.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -10,11 +9,12 @@ import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Level;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
 import fridgy.commons.core.Config;
 import fridgy.commons.exceptions.DataConversionException;
 import fridgy.testutil.Assert;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 public class ConfigUtilTest {
 
@@ -35,7 +35,8 @@ public class ConfigUtilTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        Assert.assertThrows(DataConversionException.class, () -> read("NotJsonFormatConfig.json"));
+        Assert.assertThrows(DataConversionException.class, () ->
+                read("NotJsonFormatConfig.json"));
     }
 
     @Test

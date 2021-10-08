@@ -2,9 +2,11 @@ package fridgy.logic.commands;
 
 import static fridgy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static fridgy.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static fridgy.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static fridgy.logic.parser.CliSyntax.PREFIX_NAME;
 import static fridgy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static fridgy.logic.parser.CliSyntax.PREFIX_TAG;
+import static fridgy.logic.parser.CliSyntax.PREFIX_TYPE;
 import static java.util.Objects.requireNonNull;
 
 import fridgy.logic.commands.exceptions.CommandException;
@@ -26,12 +28,16 @@ public class AddCommand extends Command {
             + PREFIX_QUANTITY + " QUANTITY "
             + PREFIX_EMAIL + " EMAIL "
             + PREFIX_DESCRIPTION + " DESCRIPTION "
+            + PREFIX_TYPE + " TYPE "
+            + PREFIX_EXPIRY + " EXPIRY DATE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " Grapes "
             + PREFIX_QUANTITY + " 4 "
             + PREFIX_EMAIL + " johnd@example.com "
             + PREFIX_DESCRIPTION + " Got any grapes? "
+            + PREFIX_TYPE + " solid "
+            + PREFIX_EXPIRY + " 20-08-2010 "
             + PREFIX_TAG + " fruit "
             + PREFIX_TAG + " sweet";
 

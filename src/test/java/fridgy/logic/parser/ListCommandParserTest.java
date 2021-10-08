@@ -1,8 +1,9 @@
 package fridgy.logic.parser;
 
+import org.junit.jupiter.api.Test;
+
 import fridgy.commons.core.Messages;
 import fridgy.logic.commands.ListCommand;
-import org.junit.jupiter.api.Test;
 
 public class ListCommandParserTest {
 

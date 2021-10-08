@@ -1,23 +1,23 @@
 package fridgy.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static fridgy.testutil.Assert.assertThrows;
 import static fridgy.testutil.TypicalIngredients.APPLE;
 import static fridgy.testutil.TypicalIngredients.HOON;
 import static fridgy.testutil.TypicalIngredients.IDA;
 import static fridgy.testutil.TypicalIngredients.getTypicalInventory;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
 import fridgy.commons.exceptions.DataConversionException;
 import fridgy.model.Inventory;
 import fridgy.model.ReadOnlyInventory;
 import fridgy.testutil.Assert;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 public class JsonInventoryStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonInventoryStorageTest");
@@ -47,17 +47,20 @@ public class JsonInventoryStorageTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        Assert.assertThrows(DataConversionException.class, () -> readInventory("notJsonFormatInventory.json"));
+        Assert.assertThrows(DataConversionException.class, () ->
+                readInventory("notJsonFormatInventory.json"));
     }
 
     @Test
     public void readInventory_invalidIngredientInventory_throwDataConversionException() {
-        Assert.assertThrows(DataConversionException.class, () -> readInventory("invalidIngredientInventory.json"));
+        Assert.assertThrows(DataConversionException.class, () ->
+                readInventory("invalidIngredientInventory.json"));
     }
 
     @Test
     public void readInventory_invalidAndValidIngredientInventory_throwDataConversionException() {
-        Assert.assertThrows(DataConversionException.class, () -> readInventory("invalidAndValidIngredientInventory.json"));
+        Assert.assertThrows(DataConversionException.class, () ->
+                readInventory("invalidAndValidIngredientInventory.json"));
     }
 
     @Test

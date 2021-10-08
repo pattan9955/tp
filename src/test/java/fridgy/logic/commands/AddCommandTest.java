@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.logic.commands.exceptions.CommandException;
@@ -18,11 +20,8 @@ import fridgy.model.Model;
 import fridgy.model.ReadOnlyInventory;
 import fridgy.model.ReadOnlyUserPrefs;
 import fridgy.model.ingredient.Ingredient;
-import fridgy.model.ingredient.Ingredient;
 import fridgy.testutil.Assert;
 import fridgy.testutil.IngredientBuilder;
-import org.junit.jupiter.api.Test;
-
 import javafx.collections.ObservableList;
 
 public class AddCommandTest {
@@ -33,14 +32,14 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_IngredientAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_ingredientAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingIngredientAdded modelStub = new ModelStubAcceptingIngredientAdded();
         Ingredient validIngredient = new IngredientBuilder().build();
 
         CommandResult commandResult = new AddCommand(validIngredient).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validIngredient), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validIngredient), modelStub.IngredientsAdded);
+        assertEquals(Arrays.asList(validIngredient), modelStub.ingredientsAdded);
     }
 
     @Test
@@ -49,7 +48,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validIngredient);
         ModelStub modelStub = new ModelStubWithIngredient(validIngredient);
 
-        Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_INGREDIENT, () -> addCommand.execute(modelStub));
+        Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_INGREDIENT, () ->
+                addCommand.execute(modelStub));
     }
 
     @Test
@@ -116,6 +116,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void sortIngredient(Comparator<Ingredient> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setInventory(ReadOnlyInventory newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -155,17 +160,17 @@ public class AddCommandTest {
      * A Model stub that contains a single Ingredient.
      */
     private class ModelStubWithIngredient extends ModelStub {
-        private final Ingredient Ingredient;
+        private final Ingredient ingredient;
 
-        ModelStubWithIngredient(Ingredient Ingredient) {
-            requireNonNull(Ingredient);
-            this.Ingredient = Ingredient;
+        ModelStubWithIngredient(Ingredient ingredient) {
+            requireNonNull(ingredient);
+            this.ingredient = ingredient;
         }
 
         @Override
         public boolean hasIngredient(Ingredient ingredient) {
             requireNonNull(ingredient);
-            return this.Ingredient.isSameIngredient(ingredient);
+            return this.ingredient.isSameIngredient(ingredient);
         }
     }
 
@@ -173,18 +178,18 @@ public class AddCommandTest {
      * A Model stub that always accept the Ingredient being added.
      */
     private class ModelStubAcceptingIngredientAdded extends ModelStub {
-        final ArrayList<Ingredient> IngredientsAdded = new ArrayList<>();
+        final ArrayList<Ingredient> ingredientsAdded = new ArrayList<>();
 
         @Override
         public boolean hasIngredient(Ingredient ingredient) {
             requireNonNull(ingredient);
-            return IngredientsAdded.stream().anyMatch(ingredient::isSameIngredient);
+            return ingredientsAdded.stream().anyMatch(ingredient::isSameIngredient);
         }
 
         @Override
         public void addIngredient(Ingredient ingredient) {
             requireNonNull(ingredient);
-            IngredientsAdded.add(ingredient);
+            ingredientsAdded.add(ingredient);
         }
 
         @Override

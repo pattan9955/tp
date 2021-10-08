@@ -1,9 +1,8 @@
 package fridgy.model.tag;
 
-import static fridgy.testutil.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
 
 import fridgy.testutil.Assert;
-import org.junit.jupiter.api.Test;
 
 public class TagTest {
 

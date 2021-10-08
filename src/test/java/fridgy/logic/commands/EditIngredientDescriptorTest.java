@@ -1,7 +1,5 @@
 package fridgy.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static fridgy.logic.commands.CommandTestUtil.DESC_ALMOND;
 import static fridgy.logic.commands.CommandTestUtil.DESC_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BASIL;
@@ -9,11 +7,13 @@ import static fridgy.logic.commands.CommandTestUtil.VALID_EMAIL_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_NAME_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_QUANTITY_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import fridgy.testutil.EditIngredientDescriptorBuilder;
 import org.junit.jupiter.api.Test;
 
 import fridgy.logic.commands.EditCommand.EditIngredientDescriptor;
+import fridgy.testutil.EditIngredientDescriptorBuilder;
 
 public class EditIngredientDescriptorTest {
 
@@ -36,7 +36,8 @@ public class EditIngredientDescriptorTest {
         assertFalse(DESC_ALMOND.equals(DESC_BASIL));
 
         // different name -> returns false
-        EditIngredientDescriptor editedAlmond = new EditIngredientDescriptorBuilder(DESC_ALMOND).withName(VALID_NAME_BASIL).build();
+        EditIngredientDescriptor editedAlmond = new EditIngredientDescriptorBuilder(DESC_ALMOND)
+                .withName(VALID_NAME_BASIL).build();
         assertFalse(DESC_ALMOND.equals(editedAlmond));
 
         // different quantity -> returns false
@@ -48,7 +49,8 @@ public class EditIngredientDescriptorTest {
         assertFalse(DESC_ALMOND.equals(editedAlmond));
 
         // different address -> returns false
-        editedAlmond = new EditIngredientDescriptorBuilder(DESC_ALMOND).withDescription(VALID_DESCRIPTION_BASIL).build();
+        editedAlmond = new EditIngredientDescriptorBuilder(DESC_ALMOND)
+                .withDescription(VALID_DESCRIPTION_BASIL).build();
         assertFalse(DESC_ALMOND.equals(editedAlmond));
 
         // different tags -> returns false
