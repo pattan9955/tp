@@ -33,8 +33,9 @@ public class QuantityCalc {
         Double amount = Double.parseDouble(parsedResults.get(0));
         String units = parsedResults.get(1);
         char[] unitsChar = units.toCharArray();
+        char baseUnit = unitsChar.length == 1 ? unitsChar[0] : unitsChar[1];
 
-        switch (unitsChar[1]) {
+        switch (baseUnit) {
         case GRAMS:
             // conversion to kilograms
             if (unitsChar.length == 2) {
