@@ -13,7 +13,6 @@ import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
-import fridgy.model.ingredient.Type;
 import fridgy.model.tag.Tag;
 
 /**
@@ -24,22 +23,22 @@ public class SampleDataUtil {
         return new Ingredient[] {
             new Ingredient(new Name("Alex Yeoh"), new Quantity("87438807"), new Email("alexyeoh@example.com"),
                 new Description(Optional.of("Blk 30 Geylang Street 29, #06-40")),
-                getTagSet("fruit"), new Type("solid"), new ExpiryDate("20-08-2010")),
+                getTagSet("fruit"), new ExpiryDate("20-08-2010")),
             new Ingredient(new Name("Bernice Yu"), new Quantity("99272758"), new Email("berniceyu@example.com"),
                 new Description(Optional.of("Blk 30 Lorong 3 Serangoon Gardens, #07-18")),
-                getTagSet("colleagues", "fruit"), new Type("solid"), new ExpiryDate("20-08-2010")),
+                getTagSet("colleagues", "fruit"), new ExpiryDate("20-08-2010")),
             new Ingredient(new Name("Charlotte Oliveiro"), new Quantity("93210283"), new Email("charlotte@example.com"),
                 new Description(Optional.of("Blk 11 Ang Mo Kio Street 74, #11-04")),
-                getTagSet("neighbours"), new Type("solid"), new ExpiryDate("20-08-2010")),
+                getTagSet("neighbours"), new ExpiryDate("20-08-2010")),
             new Ingredient(new Name("David Li"), new Quantity("91031282"), new Email("lidavid@example.com"),
                 new Description(Optional.of("Blk 436 Serangoon Gardens Street 26, #16-43")),
-                getTagSet("family"), new Type("solid"), new ExpiryDate("20-08-2010")),
+                getTagSet("family"), new ExpiryDate("20-08-2010")),
             new Ingredient(new Name("Irfan Ibrahim"), new Quantity("92492021"), new Email("irfan@example.com"),
                 new Description(Optional.of("Blk 47 Tampines Street 20, #17-35")),
-                getTagSet("classmates"), new Type("solid"), new ExpiryDate("20-08-2010")),
+                getTagSet("classmates"), new ExpiryDate("20-08-2010")),
             new Ingredient(new Name("Roy Balakrishnan"), new Quantity("92624417"), new Email("royb@example.com"),
                 new Description(Optional.of("Blk 45 Aljunied Street 85, #11-31")),
-                getTagSet("colleagues"), new Type("solid"), new ExpiryDate("20-08-2010"))
+                getTagSet("colleagues"), new ExpiryDate("20-08-2010"))
         };
     }
 

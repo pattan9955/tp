@@ -31,7 +31,6 @@ public class JsonAdaptedIngredientTest {
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
     private static final String VALID_EXPIRY_DATE = BANANA.getExpiryDate().toString();
-    private static final String VALID_TYPE = BANANA.getType().toString();
 
     @Test
     public void toModelType_validIngredientDetails_returnsIngredient() throws Exception {
@@ -43,7 +42,7 @@ public class JsonAdaptedIngredientTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedIngredient ingredient =
                 new JsonAdaptedIngredient(INVALID_NAME, VALID_QUANTITY, VALID_EMAIL, VALID_DESCRIPTION, VALID_TAGS,
-                        VALID_TYPE, VALID_EXPIRY_DATE);
+                        VALID_EXPIRY_DATE);
 
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, ingredient::toModelType);
@@ -52,7 +51,7 @@ public class JsonAdaptedIngredientTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedIngredient ingredient = new JsonAdaptedIngredient(null, VALID_QUANTITY, VALID_EMAIL,
-                VALID_DESCRIPTION, VALID_TAGS, VALID_TYPE, VALID_EXPIRY_DATE);
+                VALID_DESCRIPTION, VALID_TAGS, VALID_EXPIRY_DATE);
 
         String expectedMessage = String.format(JsonAdaptedIngredient.MISSING_FIELD_MESSAGE_FORMAT,
                 Name.class.getSimpleName());
@@ -63,7 +62,7 @@ public class JsonAdaptedIngredientTest {
     public void toModelType_invalidQuantity_throwsIllegalValueException() {
         JsonAdaptedIngredient ingredient =
                 new JsonAdaptedIngredient(VALID_NAME, INVALID_QUANTITY, VALID_EMAIL, VALID_DESCRIPTION, VALID_TAGS,
-                        VALID_TYPE, VALID_EXPIRY_DATE);
+                        VALID_EXPIRY_DATE);
         String expectedMessage = Quantity.MESSAGE_CONSTRAINTS;
 
         Assert.assertThrows(IllegalValueException.class, expectedMessage, ingredient::toModelType);
@@ -72,7 +71,7 @@ public class JsonAdaptedIngredientTest {
     @Test
     public void toModelType_nullQuantity_throwsIllegalValueException() {
         JsonAdaptedIngredient ingredient = new JsonAdaptedIngredient(VALID_NAME, null, VALID_EMAIL,
-                VALID_DESCRIPTION, VALID_TAGS, VALID_TYPE, VALID_EXPIRY_DATE);
+                VALID_DESCRIPTION, VALID_TAGS, VALID_EXPIRY_DATE);
         String expectedMessage = String.format(JsonAdaptedIngredient.MISSING_FIELD_MESSAGE_FORMAT,
                 Quantity.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, ingredient::toModelType);
@@ -82,7 +81,7 @@ public class JsonAdaptedIngredientTest {
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedIngredient ingredient =
                 new JsonAdaptedIngredient(VALID_NAME, VALID_QUANTITY, INVALID_EMAIL, VALID_DESCRIPTION, VALID_TAGS,
-                        VALID_TYPE, VALID_EXPIRY_DATE);
+                        VALID_EXPIRY_DATE);
 
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, ingredient::toModelType);
@@ -91,7 +90,7 @@ public class JsonAdaptedIngredientTest {
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedIngredient ingredient = new JsonAdaptedIngredient(VALID_NAME, VALID_QUANTITY, null,
-                VALID_DESCRIPTION, VALID_TAGS, VALID_TYPE, VALID_EXPIRY_DATE);
+                VALID_DESCRIPTION, VALID_TAGS, VALID_EXPIRY_DATE);
 
         String expectedMessage = String.format(JsonAdaptedIngredient.MISSING_FIELD_MESSAGE_FORMAT,
                 Email.class.getSimpleName());
@@ -102,7 +101,7 @@ public class JsonAdaptedIngredientTest {
     public void toModelType_invalidDescription_throwsIllegalValueException() {
         JsonAdaptedIngredient ingredient =
                 new JsonAdaptedIngredient(VALID_NAME, VALID_QUANTITY, VALID_EMAIL, INVALID_DESCRIPTION, VALID_TAGS,
-                        VALID_TYPE, VALID_EXPIRY_DATE);
+                        VALID_EXPIRY_DATE);
         String expectedMessage = Description.MESSAGE_CONSTRAINTS;
 
         Assert.assertThrows(IllegalValueException.class, expectedMessage, ingredient::toModelType);
@@ -112,7 +111,7 @@ public class JsonAdaptedIngredientTest {
     public void toModelType_nullDescription_throwsIllegalValueException() {
         JsonAdaptedIngredient ingredient =
                 new JsonAdaptedIngredient(VALID_NAME, VALID_QUANTITY, VALID_EMAIL, "", VALID_TAGS,
-                        VALID_TYPE, VALID_EXPIRY_DATE);
+                        VALID_EXPIRY_DATE);
         String expectedMessage = String.format(JsonAdaptedIngredient.MISSING_FIELD_MESSAGE_FORMAT,
                 Description.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, ingredient::toModelType);
@@ -124,7 +123,7 @@ public class JsonAdaptedIngredientTest {
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedIngredient ingredient =
                 new JsonAdaptedIngredient(VALID_NAME, VALID_QUANTITY, VALID_EMAIL, VALID_DESCRIPTION, invalidTags,
-                        VALID_TYPE, VALID_EXPIRY_DATE);
+                        VALID_EXPIRY_DATE);
         Assert.assertThrows(IllegalValueException.class, ingredient::toModelType);
     }
 

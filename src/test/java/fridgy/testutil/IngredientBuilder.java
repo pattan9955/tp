@@ -10,7 +10,6 @@ import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
-import fridgy.model.ingredient.Type;
 import fridgy.model.tag.Tag;
 import fridgy.model.util.SampleDataUtil;
 
@@ -24,7 +23,6 @@ public class IngredientBuilder {
     public static final String DEFAULT_QUANTITY = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_DESCRIPTION = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_TYPE = "solid";
     public static final String DEFAULT_EXPIRY_DATE = "20-08-2010";
 
     private Name name;
@@ -32,7 +30,6 @@ public class IngredientBuilder {
     private Email email;
     private Description description;
     private Set<Tag> tags;
-    private Type type;
     private ExpiryDate expiryDate;
 
     /**
@@ -44,7 +41,6 @@ public class IngredientBuilder {
         email = new Email(DEFAULT_EMAIL);
         description = new Description(Optional.of(DEFAULT_DESCRIPTION));
         tags = new HashSet<>();
-        type = new Type(DEFAULT_TYPE);
         expiryDate = new ExpiryDate(DEFAULT_EXPIRY_DATE);
     }
 
@@ -57,7 +53,6 @@ public class IngredientBuilder {
         email = ingredientToCopy.getEmail();
         description = ingredientToCopy.getDescription();
         tags = new HashSet<>(ingredientToCopy.getTags());
-        type = ingredientToCopy.getType();
         expiryDate = ingredientToCopy.getExpiryDate();
     }
 
@@ -109,16 +104,8 @@ public class IngredientBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Type} of the {@code IngredientBuilder} that we are building.
-     */
-    public IngredientBuilder withType(String type) {
-        this.type = new Type(type);
-        return this;
-    }
-
     public Ingredient build() {
-        return new Ingredient(name, quantity, email, description, tags, type, expiryDate);
+        return new Ingredient(name, quantity, email, description, tags, expiryDate);
     }
 
 }

@@ -6,7 +6,6 @@
     "email" : "almond@example.com",
     "description" : "123, Jurong West Ave 6, #08-111",
     "tagged" : [ "friends" ],
-    "type" : "solid",
     "expiryDate" : "20-08-2010"
   }, {
     "name" : "Banana",
@@ -14,7 +13,6 @@
     "email" : "johnd@example.com",
     "description" : "311, Clementi Ave 2, #02-25",
     "tagged" : [ "owesMoney", "friends" ],
-    "type" : "solid",
     "expiryDate" : "20-08-2010"
   }, {
     "name" : "Carrot Slices",
@@ -22,7 +20,6 @@
     "email" : "heinz@example.com",
     "description" : "wall street",
     "tagged" : [ ],
-    "type" : "solid",
     "expiryDate" : "20-08-2010"
   }, {
     "name" : "Duck breast",
@@ -30,7 +27,6 @@
     "email" : "cornelia@example.com",
     "description" : "10th street",
     "tagged" : [ "friends" ],
-    "type" : "solid",
     "expiryDate" : "20-08-2010"
   }, {
     "name" : "Egg mayo",
@@ -38,7 +34,6 @@
     "email" : "werner@example.com",
     "description" : "michegan ave",
     "tagged" : [ ],
-    "type" : "solid",
     "expiryDate" : "20-08-2010"
   }, {
     "name" : "Fig jam",
@@ -46,7 +41,6 @@
     "email" : "lydia@example.com",
     "description" : "little tokyo",
     "tagged" : [ ],
-    "type" : "solid",
     "expiryDate" : "20-08-2010"
   }, {
     "name" : "Grape",
@@ -54,7 +48,6 @@
     "email" : "anna@example.com",
     "description" : "4th street",
     "tagged" : [ ],
-    "type" : "solid",
     "expiryDate" : "20-08-2010"
   } ]
 }

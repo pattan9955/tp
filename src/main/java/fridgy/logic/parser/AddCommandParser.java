@@ -7,7 +7,6 @@ import static fridgy.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static fridgy.logic.parser.CliSyntax.PREFIX_NAME;
 import static fridgy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static fridgy.logic.parser.CliSyntax.PREFIX_TAG;
-import static fridgy.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.Optional;
 import java.util.Set;
@@ -24,7 +23,6 @@ import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
-import fridgy.model.ingredient.Type;
 import fridgy.model.tag.Tag;
 
 /**
@@ -51,10 +49,9 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(arguments, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_EMAIL,
-                        PREFIX_DESCRIPTION, PREFIX_TAG, PREFIX_TYPE, PREFIX_EXPIRY);
+                        PREFIX_DESCRIPTION, PREFIX_TAG, PREFIX_EXPIRY);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_EMAIL,
-                PREFIX_TYPE, PREFIX_EXPIRY)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_EMAIL, PREFIX_EXPIRY)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -63,21 +60,19 @@ public class AddCommandParser implements Parser<AddCommand> {
         Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Type ingredientType = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
         ExpiryDate expiryDate = ParserUtil.parseExpiry(argMultimap.getValue(PREFIX_EXPIRY).get());
 
         assert name != null;
         assert quantity != null;
         assert expiryDate != null;
 
-        Ingredient ingredient = new Ingredient(name, quantity, email, tagList, ingredientType, expiryDate);
+        Ingredient ingredient = new Ingredient(name, quantity, email, tagList, expiryDate);
 
         if (arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION)) {
             Description description = ParserUtil.parseDescription(
-                    Optional.of(argMultimap.getValue(PREFIX_DESCRIPTION)
-                            .orElse(null)));
+                    Optional.of(argMultimap.getValue(PREFIX_DESCRIPTION).orElse(null)));
             assert description != null;
-            ingredient = new Ingredient(name, quantity, email, description, tagList, ingredientType, expiryDate);
+            ingredient = new Ingredient(name, quantity, email, description, tagList, expiryDate);
         }
 
         return new AddCommand(ingredient);

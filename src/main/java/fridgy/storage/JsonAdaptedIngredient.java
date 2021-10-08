@@ -17,7 +17,6 @@ import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
-import fridgy.model.ingredient.Type;
 import fridgy.model.tag.Tag;
 
 /**
@@ -30,7 +29,6 @@ class JsonAdaptedIngredient {
     private final String name;
     private final String quantity;
     private final String email;
-    private final String type;
     private final String expiryDate;
     private String description = null;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -41,12 +39,10 @@ class JsonAdaptedIngredient {
     @JsonCreator
     public JsonAdaptedIngredient(@JsonProperty("name") String name, @JsonProperty("quantity") String quantity,
             @JsonProperty("email") String email, @JsonProperty("description") String description,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("type") String type,
-                                 @JsonProperty("expiryDate") String expiryDate) {
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("expiryDate") String expiryDate) {
         this.name = name;
         this.quantity = quantity;
         this.email = email;
-        this.type = type;
         this.expiryDate = expiryDate;
         if (description != null) {
             this.description = description;
@@ -63,7 +59,6 @@ class JsonAdaptedIngredient {
         name = source.getName().fullName;
         quantity = source.getQuantity().value;
         email = source.getEmail().value;
-        type = source.getType().value;
         expiryDate = source.getExpiryDate().toString();
         description = source.getDescription().value.orElse(null);
         tagged.addAll(source.getTags().stream()
@@ -127,19 +122,10 @@ class JsonAdaptedIngredient {
         }
         final ExpiryDate modelExpiryDate = new ExpiryDate(expiryDate);
 
-        if (type == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Type.class.getSimpleName()));
-        }
-        if (!Type.isValidType(type)) {
-            throw new IllegalValueException(Type.MESSAGE_CONSTRAINTS);
-        }
-        final Type modelType = new Type(type);
-
         final Set<Tag> modelTags = new HashSet<>(ingredientTags);
 
         return new Ingredient(modelName, modelQuantity, modelEmail, new Description(modelDescription), modelTags,
-                modelType, modelExpiryDate);
+                modelExpiryDate);
     }
 
 }

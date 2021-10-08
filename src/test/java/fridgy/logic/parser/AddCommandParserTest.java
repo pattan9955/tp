@@ -26,7 +26,7 @@ public class AddCommandParserTest {
         CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
                 + CommandTestUtil.NAME_DESC_BASIL + CommandTestUtil.QUANTITY_DESC_BASIL
                 + CommandTestUtil.EMAIL_DESC_BASIL + CommandTestUtil.DESCRIPTION_DESC_BASIL
-                + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC,
+                + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.EXPIRY_DATE_DESC,
                 new AddCommand(expectedIngredient));
 
         // multiple names - last name accepted
@@ -34,7 +34,7 @@ public class AddCommandParserTest {
                 + CommandTestUtil.NAME_DESC_ALMOND + CommandTestUtil.NAME_DESC_BASIL
                 + CommandTestUtil.QUANTITY_DESC_BASIL + CommandTestUtil.EMAIL_DESC_BASIL
                 + CommandTestUtil.DESCRIPTION_DESC_BASIL + CommandTestUtil.TAG_DESC_FRIEND
-                + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC,
+                + CommandTestUtil.EXPIRY_DATE_DESC,
                 new AddCommand(expectedIngredient));
 
         // multiple quantities - last quantity accepted
@@ -42,7 +42,7 @@ public class AddCommandParserTest {
                 + CommandTestUtil.NAME_DESC_BASIL + CommandTestUtil.QUANTITY_DESC_ALMOND
                 + CommandTestUtil.QUANTITY_DESC_BASIL + CommandTestUtil.EMAIL_DESC_BASIL
                 + CommandTestUtil.DESCRIPTION_DESC_BASIL + CommandTestUtil.TAG_DESC_FRIEND
-                + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC,
+                + CommandTestUtil.EXPIRY_DATE_DESC,
                 new AddCommand(expectedIngredient));
 
         // multiple emails - last email accepted
@@ -50,7 +50,7 @@ public class AddCommandParserTest {
                 + CommandTestUtil.NAME_DESC_BASIL + CommandTestUtil.QUANTITY_DESC_BASIL
                 + CommandTestUtil.EMAIL_DESC_ALMOND + CommandTestUtil.EMAIL_DESC_BASIL
                 + CommandTestUtil.DESCRIPTION_DESC_BASIL + CommandTestUtil.TAG_DESC_FRIEND
-                + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC,
+                + CommandTestUtil.EXPIRY_DATE_DESC,
                 new AddCommand(expectedIngredient));
 
         // multiple descriptions - last description accepted
@@ -58,7 +58,7 @@ public class AddCommandParserTest {
                 + CommandTestUtil.NAME_DESC_BASIL + CommandTestUtil.QUANTITY_DESC_BASIL
                 + CommandTestUtil.EMAIL_DESC_BASIL + CommandTestUtil.DESCRIPTION_DESC_ALMOND
                 + CommandTestUtil.DESCRIPTION_DESC_BASIL + CommandTestUtil.TAG_DESC_FRIEND
-                + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC,
+                + CommandTestUtil.EXPIRY_DATE_DESC,
                 new AddCommand(expectedIngredient));
 
         // multiple tags - all accepted
@@ -70,7 +70,7 @@ public class AddCommandParserTest {
                 + CommandTestUtil.NAME_DESC_BASIL + CommandTestUtil.QUANTITY_DESC_BASIL
                 + CommandTestUtil.EMAIL_DESC_BASIL + CommandTestUtil.DESCRIPTION_DESC_BASIL
                 + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND
-                + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC,
+                + CommandTestUtil.EXPIRY_DATE_DESC,
                 new AddCommand(expectedIngredientMultipleTags));
     }
 
@@ -82,7 +82,7 @@ public class AddCommandParserTest {
         CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
                 + CommandTestUtil.NAME_DESC_ALMOND + CommandTestUtil.QUANTITY_DESC_ALMOND
                 + CommandTestUtil.EMAIL_DESC_ALMOND + CommandTestUtil.DESCRIPTION_DESC_ALMOND
-                + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC,
+                + CommandTestUtil.EXPIRY_DATE_DESC,
                 new AddCommand(expectedIngredient));
     }
 
@@ -94,25 +94,25 @@ public class AddCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
                         + CommandTestUtil.VALID_NAME_BASIL + CommandTestUtil.QUANTITY_DESC_BASIL
                         + CommandTestUtil.EMAIL_DESC_BASIL + CommandTestUtil.DESCRIPTION_DESC_BASIL
-                        + CommandTestUtil.TYPE_DESC + CommandTestUtil.VALID_EXPIRY_DATE, expectedMessage);
+                        + CommandTestUtil.VALID_EXPIRY_DATE, expectedMessage);
 
         // missing quantity prefix
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
                         + CommandTestUtil.NAME_DESC_BASIL + CommandTestUtil.VALID_QUANTITY_BASIL
                         + CommandTestUtil.EMAIL_DESC_BASIL + CommandTestUtil.DESCRIPTION_DESC_BASIL
-                        + CommandTestUtil.TYPE_DESC + CommandTestUtil.VALID_EXPIRY_DATE, expectedMessage);
+                        + CommandTestUtil.VALID_EXPIRY_DATE, expectedMessage);
 
         // missing email prefix
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
                         + CommandTestUtil.NAME_DESC_BASIL + CommandTestUtil.QUANTITY_DESC_BASIL
                         + CommandTestUtil.VALID_EMAIL_BASIL + CommandTestUtil.DESCRIPTION_DESC_BASIL
-                        + CommandTestUtil.TYPE_DESC + CommandTestUtil.VALID_EXPIRY_DATE, expectedMessage);
+                        + CommandTestUtil.VALID_EXPIRY_DATE, expectedMessage);
 
         // all prefixes missing
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
                         + CommandTestUtil.VALID_NAME_BASIL + CommandTestUtil.VALID_QUANTITY_BASIL
                         + CommandTestUtil.VALID_EMAIL_BASIL + CommandTestUtil.VALID_DESCRIPTION_BASIL
-                        + CommandTestUtil.TYPE_DESC + CommandTestUtil.VALID_EXPIRY_DATE, expectedMessage);
+                        + CommandTestUtil.VALID_EXPIRY_DATE, expectedMessage);
     }
 
     @Test
@@ -122,49 +122,49 @@ public class AddCommandParserTest {
                 + CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.QUANTITY_DESC_BASIL
                 + CommandTestUtil.EMAIL_DESC_BASIL + CommandTestUtil.DESCRIPTION_DESC_BASIL
                 + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND
-                + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC, Name.MESSAGE_CONSTRAINTS);
+                + CommandTestUtil.EXPIRY_DATE_DESC, Name.MESSAGE_CONSTRAINTS);
 
         // invalid quantity
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
                 + CommandTestUtil.NAME_DESC_BASIL + CommandTestUtil.INVALID_QUANTITY_DESC
                 + CommandTestUtil.EMAIL_DESC_BASIL + CommandTestUtil.DESCRIPTION_DESC_BASIL
                 + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND
-                + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC, Quantity.MESSAGE_CONSTRAINTS);
+                + CommandTestUtil.EXPIRY_DATE_DESC, Quantity.MESSAGE_CONSTRAINTS);
 
         // invalid email
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
                 + CommandTestUtil.NAME_DESC_BASIL + CommandTestUtil.QUANTITY_DESC_BASIL
                 + CommandTestUtil.INVALID_EMAIL_DESC + CommandTestUtil.DESCRIPTION_DESC_BASIL
                 + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND
-                + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC, Email.MESSAGE_CONSTRAINTS);
+                + CommandTestUtil.EXPIRY_DATE_DESC, Email.MESSAGE_CONSTRAINTS);
 
         // invalid description
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
                 + CommandTestUtil.NAME_DESC_BASIL + CommandTestUtil.QUANTITY_DESC_BASIL
                 + CommandTestUtil.EMAIL_DESC_BASIL + CommandTestUtil.INVALID_DESCRIPTION_DESC
                 + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND
-                + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC, Description.MESSAGE_CONSTRAINTS);
+                + CommandTestUtil.EXPIRY_DATE_DESC, Description.MESSAGE_CONSTRAINTS);
 
         // invalid description
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
                 + CommandTestUtil.NAME_DESC_BASIL + CommandTestUtil.QUANTITY_DESC_BASIL
                 + CommandTestUtil.EMAIL_DESC_BASIL + CommandTestUtil.INVALID_DESCRIPTION_DESC_TWO
                 + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND
-                + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC, Description.MESSAGE_CONSTRAINTS);
+                + CommandTestUtil.EXPIRY_DATE_DESC, Description.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         CommandParserTestUtil.assertParseFailure(parser,
                 CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT + CommandTestUtil.NAME_DESC_BASIL
                         + CommandTestUtil.QUANTITY_DESC_BASIL + CommandTestUtil.EMAIL_DESC_BASIL
                         + CommandTestUtil.DESCRIPTION_DESC_BASIL + CommandTestUtil.INVALID_TAG_DESC
-                        + CommandTestUtil.VALID_TAG_FRIEND + CommandTestUtil.TYPE_DESC
+                        + CommandTestUtil.VALID_TAG_FRIEND
                         + CommandTestUtil.EXPIRY_DATE_DESC, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
                         + CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.QUANTITY_DESC_BASIL
                         + CommandTestUtil.EMAIL_DESC_BASIL + CommandTestUtil.INVALID_DESCRIPTION_DESC
-                        + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC,
+                        + CommandTestUtil.EXPIRY_DATE_DESC,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
@@ -172,7 +172,7 @@ public class AddCommandParserTest {
                 + CommandTestUtil.PREAMBLE_NON_EMPTY + CommandTestUtil.NAME_DESC_BASIL
                 + CommandTestUtil.QUANTITY_DESC_BASIL + CommandTestUtil.EMAIL_DESC_BASIL
                 + CommandTestUtil.DESCRIPTION_DESC_BASIL + CommandTestUtil.TAG_DESC_HUSBAND
-                + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC,
+                + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.EXPIRY_DATE_DESC,
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
