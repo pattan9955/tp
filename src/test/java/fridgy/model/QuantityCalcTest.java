@@ -21,5 +21,4 @@ public class QuantityCalcTest {
         assertEquals("126", QuantityCalc.convertToStandardUnits("126"));
         assertEquals("126.29", QuantityCalc.convertToStandardUnits("126.29"));
     }
-
 }

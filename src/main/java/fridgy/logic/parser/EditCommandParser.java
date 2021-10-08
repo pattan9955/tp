@@ -7,7 +7,6 @@ import static fridgy.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static fridgy.logic.parser.CliSyntax.PREFIX_NAME;
 import static fridgy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static fridgy.logic.parser.CliSyntax.PREFIX_TAG;
-import static fridgy.logic.parser.CliSyntax.PREFIX_TYPE;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
@@ -48,7 +47,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         final String arguments = matcher.group("arguments");
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(arguments, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_EMAIL, PREFIX_TAG,
-                        PREFIX_DESCRIPTION, PREFIX_TYPE, PREFIX_EXPIRY);
+                        PREFIX_DESCRIPTION, PREFIX_EXPIRY);
 
         Index index;
 
