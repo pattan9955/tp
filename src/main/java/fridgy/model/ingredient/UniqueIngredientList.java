@@ -2,6 +2,7 @@ package fridgy.model.ingredient;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import javafx.collections.ObservableList;
  * As such, adding and updating of ingredients uses Ingredient#isSameIngredient(Ingredient)
  * for equality so as to ensure that the ingredient being added or updated is
  * unique in terms of identity in the UniqueIngredientList.
- * However, the removal of a ingredient uses Ingredient#equals(Object) so
+ * However, the removal of an ingredient uses Ingredient#equals(Object) so
  * as to ensure that the ingredient with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -39,7 +40,7 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
     }
 
     /**
-     * Adds a ingredient to the list.
+     * Adds an ingredient to the list.
      * The ingredient must not already exist in the list.
      */
     public void add(Ingredient toAdd) {
@@ -48,6 +49,7 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
             throw new DuplicateIngredientException();
         }
         internalList.add(toAdd);
+        sort();
     }
 
     /**
@@ -69,6 +71,7 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
         }
 
         internalList.set(index, editedIngredient);
+        sort();
     }
 
     /**
@@ -80,6 +83,7 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
         if (!internalList.remove(toRemove)) {
             throw new IngredientNotFoundException();
         }
+        sort();
     }
 
     public void setIngredients(UniqueIngredientList replacement) {
@@ -137,4 +141,16 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
         }
         return true;
     }
+
+    public void sort() {
+        sort(new IngredientDefaultComparator());
+    }
+
+    /**
+     * Sorts the list of ingredients using the specified comparator.
+     */
+    public void sort(Comparator<Ingredient> comparator) {
+        internalList.sort(comparator);
+    }
+
 }

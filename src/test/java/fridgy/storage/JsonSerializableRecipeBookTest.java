@@ -1,7 +1,7 @@
 package fridgy.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static fridgy.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

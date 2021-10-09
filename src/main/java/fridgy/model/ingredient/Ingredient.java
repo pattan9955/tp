@@ -3,35 +3,49 @@ package fridgy.model.ingredient;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import fridgy.commons.util.CollectionUtil;
 import fridgy.model.tag.Tag;
 
 /**
- * Represents a Ingredient in the Inventory.
+ * Represents an ingredient in the Inventory.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Ingredient {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
-    private final Email email;
+    private final Quantity quantity;
+    private final ExpiryDate expiryDate;
 
     // Data fields
-    private final Address address;
+    private final Description description;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Constructs an ingredient reference with an empty description.
      */
-    public Ingredient(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, phone, email, address, tags);
+    public Ingredient(Name name, Quantity quantity, Set<Tag> tags, ExpiryDate expiryDate) {
+        CollectionUtil.requireAllNonNull(name, quantity, expiryDate, tags);
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.quantity = quantity;
+        this.description = new Description(Optional.empty());
+        this.expiryDate = expiryDate;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Constructs an ingredient reference where all fields must be present and not null.
+     */
+    public Ingredient(Name name, Quantity quantity, Description description,
+                      Set<Tag> tags, ExpiryDate expiryDate) {
+        CollectionUtil.requireAllNonNull(name, quantity, expiryDate, tags);
+        this.name = name;
+        this.quantity = quantity;
+        this.description = description;
+        this.expiryDate = expiryDate;
         this.tags.addAll(tags);
     }
 
@@ -39,16 +53,16 @@ public class Ingredient {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Quantity getQuantity() {
+        return quantity;
     }
 
-    public Email getEmail() {
-        return email;
+    public Description getDescription() {
+        return description;
     }
 
-    public Address getAddress() {
-        return address;
+    public ExpiryDate getExpiryDate() {
+        return expiryDate;
     }
 
     /**
@@ -88,28 +102,32 @@ public class Ingredient {
 
         Ingredient otherIngredient = (Ingredient) other;
         return otherIngredient.getName().equals(getName())
-                && otherIngredient.getPhone().equals(getPhone())
-                && otherIngredient.getEmail().equals(getEmail())
-                && otherIngredient.getAddress().equals(getAddress())
+                && otherIngredient.getQuantity().equals(getQuantity())
+                && otherIngredient.getExpiryDate().equals((getExpiryDate()))
+                && otherIngredient.getDescription().equals(getDescription())
                 && otherIngredient.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, quantity, description, tags, expiryDate);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append("; Quantity: ")
+                .append(getQuantity())
+                .append("; Expiry Date: ")
+                .append(getExpiryDate());
+
+        Description description = getDescription();
+        if (!description.value.equals(Optional.empty())) {
+            builder.append("; Description: ")
+                    .append(getDescription());
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

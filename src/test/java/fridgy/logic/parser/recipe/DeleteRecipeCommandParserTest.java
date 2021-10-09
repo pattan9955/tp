@@ -7,13 +7,14 @@ import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_DEL_C
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.assertParseFailure;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.assertParseSuccess;
 
+import org.junit.jupiter.api.Test;
+
 import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.recipe.DeleteRecipeCommand;
-import org.junit.jupiter.api.Test;
 
 public class DeleteRecipeCommandParserTest {
 
-    public DeleteRecipeCommandParser testParser = new DeleteRecipeCommandParser();
+    private DeleteRecipeCommandParser testParser = new DeleteRecipeCommandParser();
 
     @Test
     public void parse_invalidKeywordProvided_fails() {

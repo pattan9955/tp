@@ -66,7 +66,7 @@ public class DeleteRecipeCommandTest {
     public void execute_targetIndexLargerThanList_throwsCommandException() {
         DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(3));
         RecipeModelStubWithRecipe testModel = new RecipeModelStubWithRecipe();
-        assertThrows(CommandException.class,() -> testCommand.execute(testModel));
+        assertThrows(CommandException.class, () -> testCommand.execute(testModel));
     }
 
     @Test
@@ -140,7 +140,7 @@ public class DeleteRecipeCommandTest {
     }
 
     private class RecipeModelStubNoRecipe extends RecipeModelStub {
-        public RecipeBook recipeBook = new RecipeBook();
+        private RecipeBook recipeBook = new RecipeBook();
 
         @Override
         public ObservableList<Recipe> getFilteredRecipeList() {

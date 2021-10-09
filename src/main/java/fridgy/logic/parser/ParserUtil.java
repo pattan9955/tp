@@ -6,15 +6,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import fridgy.commons.core.index.Index;
 import fridgy.commons.util.StringUtil;
 import fridgy.logic.parser.exceptions.ParseException;
-import fridgy.model.ingredient.Address;
-import fridgy.model.ingredient.Email;
+import fridgy.model.ingredient.Description;
+import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Name;
-import fridgy.model.ingredient.Phone;
+import fridgy.model.ingredient.Quantity;
 import fridgy.model.recipe.RecipeIngredient;
 import fridgy.model.recipe.Step;
 import fridgy.model.tag.Tag;
@@ -40,6 +41,20 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code String date} into an {@code ExpiryDate} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified date is invalid (not of DD-MM-YYYY format).
+     */
+    public static ExpiryDate parseExpiry(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!ExpiryDate.isValidExpiry(trimmedDate)) {
+            throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
+        }
+        return new ExpiryDate(trimmedDate);
+    }
+
+    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -55,48 +70,33 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String quantity} into a {@code Quantity}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code quantity} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+    public static Quantity parseQuantity(String quantity) throws ParseException {
+        requireNonNull(quantity);
+        String trimmedQuantity = quantity.trim();
+        if (!Quantity.isValidQuantity(trimmedQuantity)) {
+            throw new ParseException(Quantity.MESSAGE_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return new Quantity(trimmedQuantity);
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String description} into an {@code Description}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code description} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Description parseDescription(Optional<String> description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.get().trim();
+        if (!Description.isValidDescription(Optional.of(trimmedDescription))) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
-    }
-
-    /**
-     * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code email} is invalid.
-     */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
-        }
-        return new Email(trimmedEmail);
+        return new Description(Optional.of(trimmedDescription));
     }
 
     /**

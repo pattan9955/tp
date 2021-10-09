@@ -27,14 +27,14 @@ public class RecipeCommandParserTestUtil {
 
     //-----------------------------------VALID ADD RECIPE COMMANDS----------------------------------------------------
     public static final String VALID_ADD_COMMAND_MISSING_DESCRIPTION = "add recipe -n monke -i ingr1 -s why tho";
-    public static final String VALID_ADD_COMMAND_ALL_PREFIX_PRESENT = "add recipe -n monke -i ingr1 " +
-            "-s why tho -d optional";
-    public static final String VALID_ADD_COMMAND_MULTIPLE_STEPS = "add recipe -n monke -i ingr1 -s why tho " +
-            "-s but why tho -d optional";
-    public static final String VALID_ADD_COMMAND_MULTIPLE_INGREDIENTS = "add recipe -n monke -i ingr1 -i ingr2 " +
-            "-s why tho -d optional";
-    public static final String VALID_ADD_COMMAND_REPEATED_INGREDIENTS = "add recipe -n monke -i ingr1 -i ingr1 " +
-            "-s why tho -d optional";
+    public static final String VALID_ADD_COMMAND_ALL_PREFIX_PRESENT = "add recipe -n monke -i ingr1 "
+            + "-s why tho -d optional";
+    public static final String VALID_ADD_COMMAND_MULTIPLE_STEPS = "add recipe -n monke -i ingr1 -s why tho "
+            + "-s but why tho -d optional";
+    public static final String VALID_ADD_COMMAND_MULTIPLE_INGREDIENTS = "add recipe -n monke -i ingr1 -i ingr2 "
+            + "-s why tho -d optional";
+    public static final String VALID_ADD_COMMAND_REPEATED_INGREDIENTS = "add recipe -n monke -i ingr1 -i ingr1 "
+            + "-s why tho -d optional";
 
     //--------------------------------INVALID DELETE RECIPE COMMANDS-------------------------------------------------
     public static final String INVALID_DEL_COMMAND_WRONG_KEYWORD = "delete kekw 2";

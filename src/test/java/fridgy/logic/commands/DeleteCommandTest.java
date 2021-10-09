@@ -2,7 +2,8 @@ package fridgy.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.logic.commands.CommandTestUtil.assertCommandSuccess;
+
+import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
@@ -13,7 +14,6 @@ import fridgy.model.UserPrefs;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.testutil.TypicalIndexes;
 import fridgy.testutil.TypicalIngredients;
-import org.junit.jupiter.api.Test;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -25,13 +25,14 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Ingredient IngredientToDelete = model.getFilteredIngredientList().get(TypicalIndexes.INDEX_FIRST_INGREDIENT.getZeroBased());
+        Ingredient ingredientToDelete = model.getFilteredIngredientList()
+                .get(TypicalIndexes.INDEX_FIRST_INGREDIENT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, IngredientToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, ingredientToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
-        expectedModel.deleteIngredient(IngredientToDelete);
+        expectedModel.deleteIngredient(ingredientToDelete);
 
         CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -48,13 +49,14 @@ public class DeleteCommandTest {
     public void execute_validIndexFilteredList_success() {
         CommandTestUtil.showIngredientAtIndex(model, TypicalIndexes.INDEX_FIRST_INGREDIENT);
 
-        Ingredient IngredientToDelete = model.getFilteredIngredientList().get(TypicalIndexes.INDEX_FIRST_INGREDIENT.getZeroBased());
+        Ingredient ingredientToDelete = model.getFilteredIngredientList()
+                .get(TypicalIndexes.INDEX_FIRST_INGREDIENT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, IngredientToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, ingredientToDelete);
 
         Model expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
-        expectedModel.deleteIngredient(IngredientToDelete);
+        expectedModel.deleteIngredient(ingredientToDelete);
         showNoIngredient(expectedModel);
 
         CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);

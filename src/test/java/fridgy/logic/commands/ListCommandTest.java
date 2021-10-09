@@ -1,6 +1,7 @@
 package fridgy.logic.commands;
 
-import static fridgy.logic.commands.CommandTestUtil.assertCommandSuccess;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
@@ -8,8 +9,6 @@ import fridgy.model.RecipeBook;
 import fridgy.model.UserPrefs;
 import fridgy.testutil.TypicalIndexes;
 import fridgy.testutil.TypicalIngredients;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.

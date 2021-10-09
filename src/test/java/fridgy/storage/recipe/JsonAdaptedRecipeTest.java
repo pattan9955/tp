@@ -1,19 +1,19 @@
 package fridgy.storage.recipe;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static fridgy.storage.recipe.JsonAdaptedRecipe.MISSING_FIELD_MESSAGE_FORMAT;
 import static fridgy.testutil.Assert.assertThrows;
 import static fridgy.testutil.TypicalRecipes.BURGER;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import fridgy.model.recipe.RecipeIngredient;
 import org.junit.jupiter.api.Test;
 
 import fridgy.commons.exceptions.IllegalValueException;
 import fridgy.model.recipe.Name;
+import fridgy.model.recipe.RecipeIngredient;
 
 class JsonAdaptedRecipeTest {
     private static final String INVALID_NAME = "B@rg@r";

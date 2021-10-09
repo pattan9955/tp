@@ -4,30 +4,32 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
 import fridgy.commons.core.GuiSettings;
 import fridgy.logic.commands.exceptions.CommandException;
-import fridgy.model.Inventory;
 import fridgy.model.IngredientModel;
+import fridgy.model.Inventory;
 import fridgy.model.ReadOnlyInventory;
 import fridgy.model.ReadOnlyUserPrefs;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.testutil.Assert;
 import fridgy.testutil.IngredientBuilder;
+import javafx.collections.ObservableList;
+
 
 public class AddCommandTest {
 
     @Test
     public void constructor_nullIngredient_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        Assert.assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
@@ -47,31 +49,33 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validIngredient);
         ModelStub modelStub = new ModelStubWithIngredient(validIngredient);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_INGREDIENT, () -> addCommand.execute(modelStub));
+        Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_INGREDIENT, () ->
+                addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Ingredient alice = new IngredientBuilder().withName("Alice").build();
-        Ingredient bob = new IngredientBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Ingredient almond = new IngredientBuilder().withName("Almond").build();
+        Ingredient basil = new IngredientBuilder().withName("Basil").build();
+        AddCommand addAlmondCommand = new AddCommand(almond);
+        AddCommand addBasilCommand = new AddCommand(basil);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addAlmondCommand.equals(addAlmondCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddCommand addAlmondCommandCopy = new AddCommand(almond);
+        assertTrue(addAlmondCommand.equals(addAlmondCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addAlmondCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addAlmondCommand.equals(null));
 
-        // different ingredient -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different Ingredient -> returns false
+        assertFalse(addAlmondCommand.equals(addBasilCommand));
+
     }
 
     /**
@@ -110,6 +114,11 @@ public class AddCommandTest {
 
         @Override
         public void addIngredient(Ingredient ingredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortIngredient(Comparator<Ingredient> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -37,17 +37,17 @@ public class RecipeParserTest {
     }
 
     @Test
-    public void parse_AddRecipeInvalidFormat_throwsParseException() {
+    public void parse_addRecipeInvalidFormat_throwsParseException() {
         assertThrows(ParseException.class, () -> testParser.parseCommand(INVALID_ADD_COMMAND_WRONG_FORMAT));
     }
 
     @Test
-    public void parse_AddRecipeNoKeywordSpecified_throwsParseException() {
+    public void parse_addRecipeNoKeywordSpecified_throwsParseException() {
         assertThrows(ParseException.class, () -> testParser.parseCommand(INVALID_ADD_COMMAND_NO_KEYWORD));
     }
 
     @Test
-    public void parse_AddRecipeCommandValid_returnsRecipeCommand() {
+    public void parse_addRecipeCommandValid_returnsRecipeCommand() {
         Recipe base = new RecipeBuilder()
                 .withName("monke")
                 .withIngredients(Arrays.asList("ingr1"))
@@ -84,22 +84,22 @@ public class RecipeParserTest {
     }
 
     @Test
-    public void parse_DeleteRecipeCommandInvalidFormat_throwsParseException() {
+    public void parse_deleteRecipeCommandInvalidFormat_throwsParseException() {
         assertThrows(ParseException.class, () -> testParser.parseCommand(INVALID_DEL_COMMAND_WRONG_FORMAT));
     }
 
     @Test
-    public void parse_DeleteRecipeNoKeywordSpecified_throwsParseException() {
+    public void parse_deleteRecipeNoKeywordSpecified_throwsParseException() {
         assertThrows(ParseException.class, () -> testParser.parseCommand(INVALID_DEL_COMMAND_NO_KEYWORD));
     }
 
     @Test
-    public void parse_DeleteRecipeWrongKeywordSpecified_throwsParseException() {
+    public void parse_deleteRecipeWrongKeywordSpecified_throwsParseException() {
         assertThrows(ParseException.class, () -> testParser.parseCommand(INVALID_DEL_COMMAND_WRONG_KEYWORD));
     }
 
     @Test
-    public void parse_DeleteRecipeValidCommand_returnsRecipeCommand() {
+    public void parse_deleteRecipeValidCommand_returnsRecipeCommand() {
         DeleteRecipeCommand expected = new DeleteRecipeCommand(Index.fromOneBased(1));
         try {
             RecipeCommand result = testParser.parseCommand(VALID_DEL_COMMAND);

@@ -1,18 +1,19 @@
 package fridgy.storage;
 
+import static fridgy.testutil.TypicalIngredients.getTypicalInventory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static fridgy.testutil.TypicalIngredients.getTypicalInventory;
 
 import java.nio.file.Path;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.model.Inventory;
 import fridgy.model.ReadOnlyInventory;
 import fridgy.model.UserPrefs;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 public class StorageManagerTest {
 

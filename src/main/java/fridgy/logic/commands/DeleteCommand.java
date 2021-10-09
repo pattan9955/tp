@@ -11,13 +11,14 @@ import fridgy.model.IngredientModel;
 import fridgy.model.ingredient.Ingredient;
 
 /**
- * Deletes a ingredient identified using it's displayed index from the Inventory.
+ * Deletes an ingredient identified using it's displayed index from the Inventory.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
+    public static final String INGREDIENT_KEYWORD = "ingredient";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + INGREDIENT_KEYWORD
             + ": Deletes the ingredient identified by the index number used in the displayed ingredient list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";

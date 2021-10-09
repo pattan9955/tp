@@ -14,11 +14,12 @@ import fridgy.commons.util.CollectionUtil;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.CliSyntax;
 import fridgy.model.IngredientModel;
-import fridgy.model.ingredient.Address;
-import fridgy.model.ingredient.Email;
+import fridgy.model.ingredient.Description;
+import fridgy.model.ingredient.ExpiryDate;
+import fridgy.model.ingredient.ExpiryStatusUpdater;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
-import fridgy.model.ingredient.Phone;
+import fridgy.model.ingredient.Quantity;
 import fridgy.model.tag.Tag;
 
 /**
@@ -27,19 +28,20 @@ import fridgy.model.tag.Tag;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String INGREDIENT_KEYWORD = "ingredient";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the ingredient identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + INGREDIENT_KEYWORD + ": Edits the details of the ingredient identified "
             + "by the index number used in the displayed ingredient list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + CliSyntax.PREFIX_NAME + "NAME] "
-            + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
-            + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
-            + "[" + CliSyntax.PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + CliSyntax.PREFIX_QUANTITY + "QUANTITY] "
+            + "[" + CliSyntax.PREFIX_EXPIRY + "EXPIRY DATE] "
+            + "[" + CliSyntax.PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + CliSyntax.PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + CliSyntax.PREFIX_PHONE + "91234567 "
-            + CliSyntax.PREFIX_EMAIL + "johndoe@example.com";
+            + CliSyntax.PREFIX_QUANTITY + "91234567 ";
 
     public static final String MESSAGE_EDIT_INGREDIENT_SUCCESS = "Edited Ingredient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -90,12 +92,16 @@ public class EditCommand extends Command {
         assert ingredientToEdit != null;
 
         Name updatedName = editIngredientDescriptor.getName().orElse(ingredientToEdit.getName());
-        Phone updatedPhone = editIngredientDescriptor.getPhone().orElse(ingredientToEdit.getPhone());
-        Email updatedEmail = editIngredientDescriptor.getEmail().orElse(ingredientToEdit.getEmail());
-        Address updatedAddress = editIngredientDescriptor.getAddress().orElse(ingredientToEdit.getAddress());
+        Quantity updatedQuantity = editIngredientDescriptor.getQuantity().orElse(ingredientToEdit.getQuantity());
+        Description updatedDescription = editIngredientDescriptor.getDescription()
+                .orElse(ingredientToEdit.getDescription());
         Set<Tag> updatedTags = editIngredientDescriptor.getTags().orElse(ingredientToEdit.getTags());
+        ExpiryDate updatedExpiryDate = editIngredientDescriptor.getExpiryDate()
+                .orElse(ingredientToEdit.getExpiryDate());
 
-        return new Ingredient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        Ingredient editedIngredient = new Ingredient(updatedName, updatedQuantity, updatedDescription,
+                updatedTags, updatedExpiryDate);
+        return ExpiryStatusUpdater.updateExpiryTags(editedIngredient);
     }
 
     @Override
@@ -122,10 +128,10 @@ public class EditCommand extends Command {
      */
     public static class EditIngredientDescriptor {
         private Name name;
-        private Phone phone;
-        private Email email;
-        private Address address;
+        private Quantity quantity;
+        private Description description;
         private Set<Tag> tags;
+        private ExpiryDate expiryDate;
 
         public EditIngredientDescriptor() {}
 
@@ -135,17 +141,17 @@ public class EditCommand extends Command {
          */
         public EditIngredientDescriptor(EditIngredientDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setQuantity(toCopy.quantity);
+            setDescription(toCopy.description);
             setTags(toCopy.tags);
+            setExpiry(toCopy.expiryDate);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, quantity, description, tags, expiryDate);
         }
 
         public void setName(Name name) {
@@ -156,28 +162,28 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setQuantity(Quantity quantity) {
+            this.quantity = quantity;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<Quantity> getQuantity() {
+            return Optional.ofNullable(quantity);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setDescription(Description description) {
+            this.description = description;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<Description> getDescription() {
+            return Optional.ofNullable(description);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setExpiry(ExpiryDate expiryDate) {
+            this.expiryDate = expiryDate;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<ExpiryDate> getExpiryDate() {
+            return Optional.ofNullable(expiryDate);
         }
 
         /**
@@ -213,10 +219,10 @@ public class EditCommand extends Command {
             EditIngredientDescriptor e = (EditIngredientDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getQuantity().equals(e.getQuantity())
+                    && getDescription().equals(e.getDescription())
+                    && getTags().equals(e.getTags())
+                    && getExpiryDate().equals(e.getExpiryDate());
         }
     }
 }

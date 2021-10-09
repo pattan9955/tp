@@ -1,11 +1,17 @@
 package fridgy.logic.commands.recipe;
 
+import static fridgy.logic.commands.recipe.AddRecipeCommand.MESSAGE_SUCCESS;
+import static fridgy.testutil.Assert.assertThrows;
 import static fridgy.testutil.TypicalRecipes.BURGER;
 import static fridgy.testutil.TypicalRecipes.MAGGIE;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static fridgy.testutil.Assert.assertThrows;
-import static fridgy.logic.commands.recipe.AddRecipeCommand.MESSAGE_SUCCESS;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
@@ -14,11 +20,6 @@ import fridgy.model.RecipeBook;
 import fridgy.model.RecipeModel;
 import fridgy.model.recipe.Recipe;
 import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import java.nio.file.Path;
-import java.util.function.Predicate;
 
 public class AddRecipeCommandTest {
     @Test
@@ -29,8 +30,8 @@ public class AddRecipeCommandTest {
     @Test
     public void execute_nullModel_throwsNullPointerException() {
         RecipeModel nullModel = null;
-        assertThrows(NullPointerException.class,
-                () -> new AddRecipeCommand(BURGER).execute(nullModel));
+        assertThrows(NullPointerException.class, () ->
+                new AddRecipeCommand(BURGER).execute(nullModel));
     }
 
     @Test
@@ -70,8 +71,8 @@ public class AddRecipeCommandTest {
     public void execute_duplicateRecipeProvided_throwsCommandException() {
         AddRecipeCommand testCommand = new AddRecipeCommand(BURGER);
         RecipeModelStubWithRecipe testModel = new RecipeModelStubWithRecipe();
-        assertThrows(CommandException.class,
-                () -> testCommand.execute(testModel));
+        assertThrows(CommandException.class, () ->
+                testCommand.execute(testModel));
     }
 
     @Test
@@ -140,7 +141,7 @@ public class AddRecipeCommandTest {
     }
 
     private class RecipeModelStubNoRecipe extends RecipeModelStub {
-        public RecipeBook recipeBook = new RecipeBook();
+        private RecipeBook recipeBook = new RecipeBook();
 
         @Override
         public boolean hasRecipe(Recipe recipe) {

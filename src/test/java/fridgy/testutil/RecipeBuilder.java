@@ -6,9 +6,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import fridgy.model.recipe.RecipeIngredient;
 import fridgy.model.recipe.Name;
 import fridgy.model.recipe.Recipe;
+import fridgy.model.recipe.RecipeIngredient;
 import fridgy.model.recipe.Step;
 
 /**

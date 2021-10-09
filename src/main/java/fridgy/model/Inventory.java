@@ -2,6 +2,7 @@ package fridgy.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 
 import fridgy.model.ingredient.Ingredient;
@@ -59,7 +60,7 @@ public class Inventory implements ReadOnlyInventory {
     //// ingredient-level operations
 
     /**
-     * Returns true if a ingredient with the same identity as {@code ingredient} exists in the Inventory.
+     * Returns true if an ingredient with the same identity as {@code ingredient} exists in the Inventory.
      */
     public boolean hasIngredient(Ingredient ingredient) {
         requireNonNull(ingredient);
@@ -67,7 +68,7 @@ public class Inventory implements ReadOnlyInventory {
     }
 
     /**
-     * Adds a ingredient to the Inventory.
+     * Adds an ingredient to the Inventory.
      * The ingredient must not already exist in the Inventory.
      */
     public void addIngredient(Ingredient p) {
@@ -92,6 +93,13 @@ public class Inventory implements ReadOnlyInventory {
      */
     public void removeIngredient(Ingredient key) {
         ingredients.remove(key);
+    }
+
+    /**
+     * Sorts the inventory by expiry dates of ingredients.
+     */
+    public void sort(Comparator<Ingredient> comparator) {
+        ingredients.sort(comparator);
     }
 
     //// util methods

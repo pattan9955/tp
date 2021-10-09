@@ -33,11 +33,11 @@ public class IngredientCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label quantity;
     @FXML
-    private Label address;
+    private Label description;
     @FXML
-    private Label email;
+    private Label expiryDate;
     @FXML
     private FlowPane tags;
 
@@ -49,9 +49,9 @@ public class IngredientCard extends UiPart<Region> {
         this.ingredient = ingredient;
         id.setText(displayedIndex + ". ");
         name.setText(ingredient.getName().fullName);
-        phone.setText(ingredient.getPhone().value);
-        address.setText(ingredient.getAddress().value);
-        email.setText(ingredient.getEmail().value);
+        quantity.setText(ingredient.getQuantity().value);
+        description.setText(ingredient.getDescription().value.orElse(""));
+        expiryDate.setText(ingredient.getExpiryDate().toString());
         ingredient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

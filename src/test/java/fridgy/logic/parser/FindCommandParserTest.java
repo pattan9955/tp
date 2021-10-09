@@ -2,10 +2,11 @@ package fridgy.logic.parser;
 
 import java.util.Arrays;
 
+import org.junit.jupiter.api.Test;
+
 import fridgy.commons.core.Messages;
 import fridgy.logic.commands.FindCommand;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;
-import org.junit.jupiter.api.Test;
 
 public class FindCommandParserTest {
 
@@ -13,18 +14,19 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, "     ", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        CommandParserTestUtil.assertParseFailure(parser, "     ",
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        CommandParserTestUtil.assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Almond", "Basil")));
+        CommandParserTestUtil.assertParseSuccess(parser, "Almond Basil", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        CommandParserTestUtil.assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        CommandParserTestUtil.assertParseSuccess(parser, " \n Almond \n \t Basil  \t", expectedFindCommand);
     }
 
 }

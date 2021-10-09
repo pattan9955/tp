@@ -1,11 +1,11 @@
 package fridgy.model.recipe;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static fridgy.testutil.Assert.assertThrows;
 import static fridgy.testutil.TypicalRecipes.BURGER;
 import static fridgy.testutil.TypicalRecipes.MAGGIE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
