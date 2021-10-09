@@ -28,7 +28,6 @@ public class IngredientUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(CliSyntax.PREFIX_NAME + ingredient.getName().fullName + " ");
         sb.append(CliSyntax.PREFIX_QUANTITY + ingredient.getQuantity().value + " ");
-        sb.append(CliSyntax.PREFIX_EMAIL + ingredient.getEmail().value + " ");
         sb.append(CliSyntax.PREFIX_DESCRIPTION + ingredient.getDescription().value.orElse("") + " ");
         sb.append(CliSyntax.PREFIX_EXPIRY + ingredient.getExpiryDate().toString() + " ");
 
@@ -46,7 +45,6 @@ public class IngredientUtil {
         descriptor.getName().ifPresent(name -> sb.append(CliSyntax.PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getQuantity().ifPresent(quantity -> sb.append(CliSyntax.PREFIX_QUANTITY).append(quantity.value)
                 .append(" "));
-        descriptor.getEmail().ifPresent(email -> sb.append(CliSyntax.PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getDescription().ifPresent(description -> sb.append(CliSyntax.PREFIX_DESCRIPTION)
                 .append(description.value.orElse("")).append(" "));
         descriptor.getExpiryDate().ifPresent(expiryDate -> sb.append(CliSyntax.PREFIX_EXPIRY).append(expiryDate)

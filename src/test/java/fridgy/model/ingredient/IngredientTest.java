@@ -1,7 +1,6 @@
 package fridgy.model.ingredient;
 
 import static fridgy.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BASIL;
-import static fridgy.logic.commands.CommandTestUtil.VALID_EMAIL_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_NAME_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_QUANTITY_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -31,7 +30,7 @@ public class IngredientTest {
 
         // same name, all other attributes different -> returns true
         Ingredient editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE)
-                .withQuantity(VALID_QUANTITY_BASIL).withEmail(VALID_EMAIL_BASIL)
+                .withQuantity(VALID_QUANTITY_BASIL)
                 .withDescription(VALID_DESCRIPTION_BASIL).withTags(VALID_TAG_HUSBAND).build();
         Assertions.assertTrue(TypicalIngredients.APPLE.isSameIngredient(editedAlmond));
 
@@ -74,10 +73,6 @@ public class IngredientTest {
 
         // different quantity -> returns false
         editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withQuantity(VALID_QUANTITY_BASIL).build();
-        Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlmond));
-
-        // different email -> returns false
-        editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withEmail(VALID_EMAIL_BASIL).build();
         Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlmond));
 
         // different address -> returns false

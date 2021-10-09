@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fridgy.commons.exceptions.IllegalValueException;
 import fridgy.model.ingredient.Description;
-import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.ExpiryStatusUpdater;
 import fridgy.model.ingredient.Ingredient;
@@ -29,7 +28,6 @@ class JsonAdaptedIngredient {
 
     private final String name;
     private final String quantity;
-    private final String email;
     private final String expiryDate;
     private String description = null;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -39,11 +37,10 @@ class JsonAdaptedIngredient {
      */
     @JsonCreator
     public JsonAdaptedIngredient(@JsonProperty("name") String name, @JsonProperty("quantity") String quantity,
-            @JsonProperty("email") String email, @JsonProperty("description") String description,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("expiryDate") String expiryDate) {
+            @JsonProperty("description") String description, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                                 @JsonProperty("expiryDate") String expiryDate) {
         this.name = name;
         this.quantity = quantity;
-        this.email = email;
         this.expiryDate = expiryDate;
         if (description != null) {
             this.description = description;
@@ -59,7 +56,6 @@ class JsonAdaptedIngredient {
     public JsonAdaptedIngredient(Ingredient source) {
         name = source.getName().fullName;
         quantity = source.getQuantity().value;
-        email = source.getEmail().value;
         expiryDate = source.getExpiryDate().toString();
         description = source.getDescription().value.orElse(null);
         tagged.addAll(source.getTags().stream()
@@ -96,15 +92,6 @@ class JsonAdaptedIngredient {
         }
         final Quantity modelQuantity = new Quantity(quantity);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
-
         final Optional<String> modelDescription = Optional.ofNullable(description);
         if (description == "") {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -125,7 +112,7 @@ class JsonAdaptedIngredient {
 
         final Set<Tag> modelTags = new HashSet<>(ingredientTags);
 
-        Ingredient ingredient = new Ingredient(modelName, modelQuantity, modelEmail, new Description(modelDescription),
+        Ingredient ingredient = new Ingredient(modelName, modelQuantity, new Description(modelDescription),
                 modelTags, modelExpiryDate);
 
         return ExpiryStatusUpdater.updateExpiryTags(ingredient);

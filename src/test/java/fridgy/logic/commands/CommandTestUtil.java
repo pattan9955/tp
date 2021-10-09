@@ -30,9 +30,6 @@ public class CommandTestUtil {
     public static final String VALID_QUANTITY_ALMOND = "11111111";
     public static final String VALID_QUANTITY_BASIL = "22222222";
     public static final String VALID_QUANTITY_FISH = "22222222";
-    public static final String VALID_EMAIL_ALMOND = "amy@example.com";
-    public static final String VALID_EMAIL_BASIL = "basil@example.com";
-    public static final String VALID_EMAIL_FISH = "fish@example.com";
     public static final String VALID_DESCRIPTION_ALMOND = "Block 312, Almond Street 1";
     public static final String VALID_DESCRIPTION_BASIL = "Block 123, Basilby Street 3";
     public static final String VALID_DESCRIPTION_FISH = " ";
@@ -46,9 +43,6 @@ public class CommandTestUtil {
     public static final String QUANTITY_DESC_ALMOND = " " + CliSyntax.PREFIX_QUANTITY + VALID_QUANTITY_ALMOND;
     public static final String QUANTITY_DESC_BASIL = " " + CliSyntax.PREFIX_QUANTITY + VALID_QUANTITY_BASIL;
     public static final String QUANTITY_DESC_FISH = " " + CliSyntax.PREFIX_QUANTITY + VALID_QUANTITY_FISH;
-    public static final String EMAIL_DESC_ALMOND = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_ALMOND;
-    public static final String EMAIL_DESC_BASIL = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_BASIL;
-    public static final String EMAIL_DESC_FISH = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_FISH;
     public static final String DESCRIPTION_DESC_ALMOND = " " + CliSyntax.PREFIX_DESCRIPTION + VALID_DESCRIPTION_ALMOND;
     public static final String DESCRIPTION_DESC_BASIL = " " + CliSyntax.PREFIX_DESCRIPTION + VALID_DESCRIPTION_BASIL;
     public static final String DESCRIPTION_DESC_FISH = " " + CliSyntax.PREFIX_DESCRIPTION + VALID_DESCRIPTION_FISH;
@@ -60,7 +54,6 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + CliSyntax.PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_QUANTITY_DESC = " "
             + CliSyntax.PREFIX_QUANTITY + "911a"; // 'a' not allowed in quantities
-    public static final String INVALID_EMAIL_DESC = " " + CliSyntax.PREFIX_EMAIL + "basil!yahoo"; // missing '@' symbol
     public static final String INVALID_DESCRIPTION_DESC = " "
             + CliSyntax.PREFIX_DESCRIPTION; // empty string not allowed for description
     public static final String INVALID_DESCRIPTION_DESC_TWO = " " + CliSyntax.PREFIX_DESCRIPTION
@@ -76,16 +69,16 @@ public class CommandTestUtil {
 
     static {
         DESC_ALMOND = new EditIngredientDescriptorBuilder().withName(VALID_NAME_ALMOND)
-                .withQuantity(VALID_QUANTITY_ALMOND).withEmail(VALID_EMAIL_ALMOND)
+                .withQuantity(VALID_QUANTITY_ALMOND)
                 .withDescription(VALID_DESCRIPTION_ALMOND).withTags(VALID_TAG_FRIEND)
                 .withExpiry(VALID_EXPIRY_DATE).build();
         DESC_BASIL = new EditIngredientDescriptorBuilder().withName(VALID_NAME_BASIL)
-                .withQuantity(VALID_QUANTITY_BASIL).withEmail(VALID_EMAIL_BASIL)
+                .withQuantity(VALID_QUANTITY_BASIL)
                 .withDescription(VALID_DESCRIPTION_BASIL)
                 .withExpiry(VALID_EXPIRY_DATE)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         DESC_FISH = new EditIngredientDescriptorBuilder().withName(VALID_NAME_FISH)
-                .withQuantity(VALID_QUANTITY_FISH).withEmail(VALID_EMAIL_FISH)
+                .withQuantity(VALID_QUANTITY_FISH)
                 .withDescription(VALID_DESCRIPTION_FISH)
                 .withExpiry(VALID_EXPIRY_DATE).build();
     }

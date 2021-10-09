@@ -3,7 +3,6 @@ package fridgy.logic.commands;
 import static fridgy.logic.commands.CommandTestUtil.DESC_ALMOND;
 import static fridgy.logic.commands.CommandTestUtil.DESC_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BASIL;
-import static fridgy.logic.commands.CommandTestUtil.VALID_EMAIL_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_NAME_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_QUANTITY_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -44,9 +43,6 @@ public class EditIngredientDescriptorTest {
         editedAlmond = new EditIngredientDescriptorBuilder(DESC_ALMOND).withQuantity(VALID_QUANTITY_BASIL).build();
         assertFalse(DESC_ALMOND.equals(editedAlmond));
 
-        // different email -> returns false
-        editedAlmond = new EditIngredientDescriptorBuilder(DESC_ALMOND).withEmail(VALID_EMAIL_BASIL).build();
-        assertFalse(DESC_ALMOND.equals(editedAlmond));
 
         // different address -> returns false
         editedAlmond = new EditIngredientDescriptorBuilder(DESC_ALMOND)

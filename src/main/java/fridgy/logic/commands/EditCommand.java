@@ -15,7 +15,6 @@ import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.CliSyntax;
 import fridgy.model.Model;
 import fridgy.model.ingredient.Description;
-import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.ExpiryStatusUpdater;
 import fridgy.model.ingredient.Ingredient;
@@ -39,13 +38,11 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + CliSyntax.PREFIX_NAME + "NAME] "
             + "[" + CliSyntax.PREFIX_QUANTITY + "QUANTITY] "
-            + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
             + "[" + CliSyntax.PREFIX_EXPIRY + "EXPIRY DATE] "
             + "[" + CliSyntax.PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + CliSyntax.PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + CliSyntax.PREFIX_QUANTITY + "91234567 "
-            + CliSyntax.PREFIX_EMAIL + "johndoe@example.com";
+            + CliSyntax.PREFIX_QUANTITY + "91234567 ";
 
     public static final String MESSAGE_EDIT_INGREDIENT_SUCCESS = "Edited Ingredient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -97,15 +94,14 @@ public class EditCommand extends Command {
 
         Name updatedName = editIngredientDescriptor.getName().orElse(ingredientToEdit.getName());
         Quantity updatedQuantity = editIngredientDescriptor.getQuantity().orElse(ingredientToEdit.getQuantity());
-        Email updatedEmail = editIngredientDescriptor.getEmail().orElse(ingredientToEdit.getEmail());
         Description updatedDescription = editIngredientDescriptor.getDescription()
                 .orElse(ingredientToEdit.getDescription());
         Set<Tag> updatedTags = editIngredientDescriptor.getTags().orElse(ingredientToEdit.getTags());
         ExpiryDate updatedExpiryDate = editIngredientDescriptor.getExpiryDate()
                 .orElse(ingredientToEdit.getExpiryDate());
 
-        Ingredient editedIngredient = new Ingredient(updatedName, updatedQuantity, updatedEmail,
-                updatedDescription, updatedTags, updatedExpiryDate);
+        Ingredient editedIngredient = new Ingredient(updatedName, updatedQuantity, updatedDescription,
+                updatedTags, updatedExpiryDate);
         return ExpiryStatusUpdater.updateExpiryTags(editedIngredient);
     }
 
@@ -134,7 +130,6 @@ public class EditCommand extends Command {
     public static class EditIngredientDescriptor {
         private Name name;
         private Quantity quantity;
-        private Email email;
         private Description description;
         private Set<Tag> tags;
         private ExpiryDate expiryDate;
@@ -148,7 +143,6 @@ public class EditCommand extends Command {
         public EditIngredientDescriptor(EditIngredientDescriptor toCopy) {
             setName(toCopy.name);
             setQuantity(toCopy.quantity);
-            setEmail(toCopy.email);
             setDescription(toCopy.description);
             setTags(toCopy.tags);
             setExpiry(toCopy.expiryDate);
@@ -158,7 +152,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, quantity, email, description, tags, expiryDate);
+            return CollectionUtil.isAnyNonNull(name, quantity, description, tags, expiryDate);
         }
 
         public void setName(Name name) {
@@ -175,14 +169,6 @@ public class EditCommand extends Command {
 
         public Optional<Quantity> getQuantity() {
             return Optional.ofNullable(quantity);
-        }
-
-        public void setEmail(Email email) {
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
         }
 
         public void setDescription(Description description) {
@@ -235,7 +221,6 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getQuantity().equals(e.getQuantity())
-                    && getEmail().equals(e.getEmail())
                     && getDescription().equals(e.getDescription())
                     && getTags().equals(e.getTags())
                     && getExpiryDate().equals(e.getExpiryDate());

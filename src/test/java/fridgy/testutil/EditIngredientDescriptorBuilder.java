@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 
 import fridgy.logic.commands.EditCommand.EditIngredientDescriptor;
 import fridgy.model.ingredient.Description;
-import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
@@ -36,7 +35,6 @@ public class EditIngredientDescriptorBuilder {
         descriptor = new EditIngredientDescriptor();
         descriptor.setName(ingredient.getName());
         descriptor.setQuantity(ingredient.getQuantity());
-        descriptor.setEmail(ingredient.getEmail());
         descriptor.setDescription(ingredient.getDescription());
         descriptor.setExpiry(ingredient.getExpiryDate());
         descriptor.setTags(ingredient.getTags());
@@ -55,14 +53,6 @@ public class EditIngredientDescriptorBuilder {
      */
     public EditIngredientDescriptorBuilder withQuantity(String quantity) {
         descriptor.setQuantity(new Quantity(quantity));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Email} of the {@code EditIngredientDescriptor} that we are building.
-     */
-    public EditIngredientDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
         return this;
     }
 

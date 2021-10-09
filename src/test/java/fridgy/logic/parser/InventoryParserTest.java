@@ -22,7 +22,6 @@ import fridgy.logic.commands.FindCommand;
 import fridgy.logic.commands.HelpCommand;
 import fridgy.logic.commands.ListCommand;
 import fridgy.logic.parser.exceptions.ParseException;
-import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
@@ -37,12 +36,12 @@ import fridgy.testutil.TypicalIndexes;
 public class InventoryParserTest {
 
     private static final String VALID_ADD_INGREDIENT_ARGUMENT =
-            AddCommand.INGREDIENT_KEYWORD + " -n Ingredient -q 5 -m almond@gmail.com -e 20-08-2010";
+            AddCommand.INGREDIENT_KEYWORD + " -n Ingredient -q 5 -e 20-08-2010";
     private static final String INVALID_ADD_INGREDIENT_ARGUMENT =
             CommandTestUtil.INVALID_INGREDIENT_ARGUMENT_FORMAT
-                    + " -n Ingredient -q 5 -m almond@gmail.com -e 20-08-2010";
+                    + " -n Ingredient -q 5 -e 20-08-2010";
     private static final Ingredient VALID_INGREDIENT = new Ingredient(new Name("Ingredient"),
-            new Quantity("5"), new Email("almond@gmail.com"), new HashSet<>(), new ExpiryDate("20-08-2010"));
+            new Quantity("5"), new HashSet<>(), new ExpiryDate("20-08-2010"));
     private final InventoryParser parser = new InventoryParser();
 
     @Test

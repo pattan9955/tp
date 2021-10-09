@@ -2,7 +2,6 @@
   "ingredients": [ {
     "name": "Ingredient with invalid name field: Ha!ns Mu@ster",
     "quantity": "9482424",
-    "email": "hans@example.com",
     "expiryDate" : "20-08-2010",
     "description" : "4th street"
   } ]

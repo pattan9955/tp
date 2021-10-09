@@ -18,7 +18,6 @@ public class Ingredient {
     // Identity fields
     private final Name name;
     private final Quantity quantity;
-    private final Email email;
     private final ExpiryDate expiryDate;
 
     // Data fields
@@ -28,11 +27,10 @@ public class Ingredient {
     /**
      * Constructs an ingredient reference with an empty description.
      */
-    public Ingredient(Name name, Quantity quantity, Email email, Set<Tag> tags, ExpiryDate expiryDate) {
-        CollectionUtil.requireAllNonNull(name, quantity, email, expiryDate, tags);
+    public Ingredient(Name name, Quantity quantity, Set<Tag> tags, ExpiryDate expiryDate) {
+        CollectionUtil.requireAllNonNull(name, quantity, expiryDate, tags);
         this.name = name;
         this.quantity = quantity;
-        this.email = email;
         this.description = new Description(Optional.empty());
         this.expiryDate = expiryDate;
         this.tags.addAll(tags);
@@ -41,12 +39,11 @@ public class Ingredient {
     /**
      * Constructs an ingredient reference where all fields must be present and not null.
      */
-    public Ingredient(Name name, Quantity quantity, Email email, Description description,
+    public Ingredient(Name name, Quantity quantity, Description description,
                       Set<Tag> tags, ExpiryDate expiryDate) {
-        CollectionUtil.requireAllNonNull(name, quantity, email, expiryDate, tags);
+        CollectionUtil.requireAllNonNull(name, quantity, expiryDate, tags);
         this.name = name;
         this.quantity = quantity;
-        this.email = email;
         this.description = description;
         this.expiryDate = expiryDate;
         this.tags.addAll(tags);
@@ -58,10 +55,6 @@ public class Ingredient {
 
     public Quantity getQuantity() {
         return quantity;
-    }
-
-    public Email getEmail() {
-        return email;
     }
 
     public Description getDescription() {
@@ -110,7 +103,6 @@ public class Ingredient {
         Ingredient otherIngredient = (Ingredient) other;
         return otherIngredient.getName().equals(getName())
                 && otherIngredient.getQuantity().equals(getQuantity())
-                && otherIngredient.getEmail().equals(getEmail())
                 && otherIngredient.getExpiryDate().equals((getExpiryDate()))
                 && otherIngredient.getDescription().equals(getDescription())
                 && otherIngredient.getTags().equals(getTags());
@@ -119,7 +111,7 @@ public class Ingredient {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, quantity, email, description, tags, expiryDate);
+        return Objects.hash(name, quantity, description, tags, expiryDate);
     }
 
     @Override
@@ -128,8 +120,6 @@ public class Ingredient {
         builder.append(getName())
                 .append("; Quantity: ")
                 .append(getQuantity())
-                .append("; Email: ")
-                .append(getEmail())
                 .append("; Expiry Date: ")
                 .append(getExpiryDate());
 

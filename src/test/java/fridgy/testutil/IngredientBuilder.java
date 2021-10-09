@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import fridgy.model.ingredient.Description;
-import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.ExpiryStatusUpdater;
 import fridgy.model.ingredient.Ingredient;
@@ -22,14 +21,12 @@ public class IngredientBuilder {
 
     public static final String DEFAULT_NAME = "Almond Bee";
     public static final String DEFAULT_QUANTITY = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_DESCRIPTION = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_EXPIRY_DATE = "20-08-2010";
     public static final Set<Tag> DEFAULT_TAGS = Set.of(Tag.EXPIRED);
 
     private Name name;
     private Quantity quantity;
-    private Email email;
     private Description description;
     private Set<Tag> tags;
     private ExpiryDate expiryDate;
@@ -40,7 +37,6 @@ public class IngredientBuilder {
     public IngredientBuilder() {
         name = new Name(DEFAULT_NAME);
         quantity = new Quantity(DEFAULT_QUANTITY);
-        email = new Email(DEFAULT_EMAIL);
         description = new Description(Optional.of(DEFAULT_DESCRIPTION));
         tags = DEFAULT_TAGS;
         expiryDate = new ExpiryDate(DEFAULT_EXPIRY_DATE);
@@ -52,7 +48,6 @@ public class IngredientBuilder {
     public IngredientBuilder(Ingredient ingredientToCopy) {
         name = ingredientToCopy.getName();
         quantity = ingredientToCopy.getQuantity();
-        email = ingredientToCopy.getEmail();
         description = ingredientToCopy.getDescription();
         tags = new HashSet<>(ingredientToCopy.getTags());
         expiryDate = ingredientToCopy.getExpiryDate();
@@ -91,15 +86,8 @@ public class IngredientBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Ingredient} that we are building.
-     */
-    public IngredientBuilder withEmail(String email) {
-        this.email = new Email(email);
-        return this;
-    }
-
-    /**
      * Sets the {@code ExpiryDate} of the {@code Ingredient} that we are building.
+     * Do note the expiry tags will not be updated by this method.
      */
     public IngredientBuilder withExpiryDate(String expiryDate) {
         this.expiryDate = new ExpiryDate(expiryDate);
@@ -113,7 +101,7 @@ public class IngredientBuilder {
      */
     public Ingredient build() {
         return ExpiryStatusUpdater.updateExpiryTags(
-                new Ingredient(name, quantity, email, description, tags, expiryDate));
+                new Ingredient(name, quantity, description, tags, expiryDate));
     }
 
 }
