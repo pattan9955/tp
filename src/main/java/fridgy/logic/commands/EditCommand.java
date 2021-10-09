@@ -13,7 +13,7 @@ import fridgy.commons.core.index.Index;
 import fridgy.commons.util.CollectionUtil;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.CliSyntax;
-import fridgy.model.Model;
+import fridgy.model.IngredientModel;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.ExpiryStatusUpdater;
@@ -21,7 +21,6 @@ import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
 import fridgy.model.tag.Tag;
-
 
 /**
  * Edits the details of an existing ingredient in the Inventory.
@@ -64,7 +63,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(IngredientModel model) throws CommandException {
         requireNonNull(model);
         List<Ingredient> lastShownList = model.getFilteredIngredientList();
 
@@ -80,7 +79,7 @@ public class EditCommand extends Command {
         }
 
         model.setIngredient(ingredientToEdit, editedIngredient);
-        model.updateFilteredIngredientList(Model.PREDICATE_SHOW_ALL_INGREDIENTS);
+        model.updateFilteredIngredientList(IngredientModel.PREDICATE_SHOW_ALL_INGREDIENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient));
     }
 

@@ -29,8 +29,6 @@ public class Quantity {
     public Quantity(String quantity) {
         requireNonNull(quantity);
         AppUtil.checkArgument(isValidQuantity(quantity), MESSAGE_CONSTRAINTS);
-        // Removes leading zeros
-        quantity = quantity.replaceFirst("^0+(?!$)", "");
         value = convertToStandardUnit(quantity);
     }
 

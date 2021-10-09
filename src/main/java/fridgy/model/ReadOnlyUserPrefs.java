@@ -10,7 +10,7 @@ import fridgy.commons.core.GuiSettings;
 public interface ReadOnlyUserPrefs {
 
     GuiSettings getGuiSettings();
-
     Path getInventoryFilePath();
+    Path getRecipeBookFilePath();
 
 }

@@ -15,14 +15,15 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.logic.commands.exceptions.CommandException;
+import fridgy.model.IngredientModel;
 import fridgy.model.Inventory;
-import fridgy.model.Model;
 import fridgy.model.ReadOnlyInventory;
 import fridgy.model.ReadOnlyUserPrefs;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.testutil.Assert;
 import fridgy.testutil.IngredientBuilder;
 import javafx.collections.ObservableList;
+
 
 public class AddCommandTest {
 
@@ -74,12 +75,13 @@ public class AddCommandTest {
 
         // different Ingredient -> returns false
         assertFalse(addAlmondCommand.equals(addBasilCommand));
+
     }
 
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    private class ModelStub implements IngredientModel {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -154,10 +156,11 @@ public class AddCommandTest {
         public void updateFilteredIngredientList(Predicate<Ingredient> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
     }
 
     /**
-     * A Model stub that contains a single Ingredient.
+     * A Model stub that contains a single ingredient.
      */
     private class ModelStubWithIngredient extends ModelStub {
         private final Ingredient ingredient;
@@ -175,7 +178,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the Ingredient being added.
+     * A Model stub that always accept the ingredient being added.
      */
     private class ModelStubAcceptingIngredientAdded extends ModelStub {
         final ArrayList<Ingredient> ingredientsAdded = new ArrayList<>();

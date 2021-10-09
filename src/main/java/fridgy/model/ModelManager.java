@@ -1,5 +1,6 @@
 package fridgy.model;
 
+import static fridgy.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
@@ -9,37 +10,46 @@ import java.util.logging.Logger;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.commons.core.LogsCenter;
-import fridgy.commons.util.CollectionUtil;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.recipe.Recipe;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
+
 /**
- * Represents the in-memory model of the Inventory data.
+ * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+
     private final Inventory inventory;
+    private final RecipeBook recipeBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Ingredient> filteredIngredients;
+    private final FilteredList<Recipe> filteredRecipes;
 
     /**
      * Initializes a ModelManager with the given inventory and userPrefs.
      */
-    public ModelManager(ReadOnlyInventory inventory, ReadOnlyUserPrefs userPrefs) {
-        super();
-        CollectionUtil.requireAllNonNull(inventory, userPrefs);
 
-        logger.fine("Initializing with Inventory: " + inventory + " and user prefs " + userPrefs);
+    public ModelManager(ReadOnlyInventory inventory, ReadOnlyRecipeBook recipeBook, ReadOnlyUserPrefs userPrefs) {
+        super();
+        requireAllNonNull(inventory, userPrefs);
+
+        logger.fine("Initializing with address book: " + inventory
+                + " Initializing with recipe book: " + inventory
+                + " and user prefs " + userPrefs);
 
         this.inventory = new Inventory(inventory);
+        this.recipeBook = new RecipeBook(recipeBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredIngredients = new FilteredList<>(this.inventory.getIngredientList());
+        filteredRecipes = new FilteredList<>(this.recipeBook.getRecipeList());
     }
 
     public ModelManager() {
-        this(new Inventory(), new UserPrefs());
+        this(new Inventory(), new RecipeBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -77,6 +87,17 @@ public class ModelManager implements Model {
         userPrefs.setInventoryFilePath(inventoryFilePath);
     }
 
+    @Override
+    public Path getRecipeBookFilePath() {
+        return userPrefs.getRecipeBookFilePath();
+    }
+
+    @Override
+    public void setRecipeBookFilePath(Path recipeBookFilePath) {
+        requireNonNull(recipeBookFilePath);
+        userPrefs.setRecipeBookFilePath(recipeBookFilePath);
+    }
+
     //=========== Inventory ================================================================================
 
     @Override
@@ -108,9 +129,45 @@ public class ModelManager implements Model {
 
     @Override
     public void setIngredient(Ingredient target, Ingredient editedIngredient) {
-        CollectionUtil.requireAllNonNull(target, editedIngredient);
+        requireAllNonNull(target, editedIngredient);
 
         inventory.setIngredient(target, editedIngredient);
+    }
+
+    //=========== RecipeBook ================================================================================
+
+    @Override
+    public void setRecipeBook(ReadOnlyRecipeBook recipeBook) {
+        this.recipeBook.resetData(recipeBook);
+    }
+
+    @Override
+    public ReadOnlyRecipeBook getRecipeBook() {
+        return recipeBook;
+    }
+
+    @Override
+    public boolean hasRecipe(Recipe recipe) {
+        requireNonNull(recipe);
+        return recipeBook.hasRecipe(recipe);
+    }
+
+    @Override
+    public void deleteRecipe(Recipe target) {
+        recipeBook.removeRecipe(target);
+    }
+
+    @Override
+    public void addRecipe(Recipe recipe) {
+        recipeBook.addRecipe(recipe);
+        updateFilteredRecipeList(PREDICATE_SHOW_ALL_RECIPES);
+    }
+
+    @Override
+    public void setRecipe(Recipe target, Recipe editedRecipe) {
+        requireAllNonNull(target, editedRecipe);
+
+        recipeBook.setRecipe(target, editedRecipe);
     }
 
     //=========== Filtered Ingredient List Accessors =============================================================
@@ -128,6 +185,23 @@ public class ModelManager implements Model {
     public void updateFilteredIngredientList(Predicate<Ingredient> predicate) {
         requireNonNull(predicate);
         filteredIngredients.setPredicate(predicate);
+    }
+
+    //=========== Filtered Recipe List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Recipe} backed by the internal list of
+     * {@code versionedInventory}
+     */
+    @Override
+    public ObservableList<Recipe> getFilteredRecipeList() {
+        return filteredRecipes;
+    }
+
+    @Override
+    public void updateFilteredRecipeList(Predicate<Recipe> predicate) {
+        requireNonNull(predicate);
+        filteredRecipes.setPredicate(predicate);
     }
 
     @Override
@@ -149,9 +223,12 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
+
         return inventory.equals(other.inventory)
+                && recipeBook.equals(other.recipeBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredIngredients.equals(other.filteredIngredients);
+                && filteredIngredients.equals(other.filteredIngredients)
+                && filteredRecipes.equals(other.filteredRecipes);
     }
 
 }

@@ -7,11 +7,16 @@ import java.util.stream.Collectors;
 
 import fridgy.model.Inventory;
 import fridgy.model.ReadOnlyInventory;
+import fridgy.model.ReadOnlyRecipeBook;
+import fridgy.model.RecipeBook;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
+import fridgy.model.recipe.Recipe;
+import fridgy.model.recipe.RecipeIngredient;
+import fridgy.model.recipe.Step;
 import fridgy.model.tag.Tag;
 
 /**
@@ -41,12 +46,45 @@ public class SampleDataUtil {
         };
     }
 
+    public static Recipe[] getSampleRecipes() {
+        return new Recipe[] {
+            new Recipe(
+                new fridgy.model.recipe.Name("Burger"),
+                Set.of(new RecipeIngredient("Bread"), new RecipeIngredient("patty")),
+                Arrays.asList(new Step("B1"), new Step("B2")),
+                Optional.of("Desc B")
+            ),
+            new Recipe(
+                    new fridgy.model.recipe.Name("Maggie"),
+                    Set.of(new RecipeIngredient("Maggie")),
+                    Arrays.asList(new Step("M1"), new Step("M2")),
+                    Optional.of("Desc M")
+            ),
+            new Recipe(
+                    new fridgy.model.recipe.Name("Recipe"),
+                    Set.of(new RecipeIngredient("RecipeIngredient 1"),
+                            new RecipeIngredient("RecipeIngredient 2")),
+                    Arrays.asList(new Step("Step 1"), new Step("Step 2")),
+                    Optional.empty()
+            ),
+        };
+
+    }
+
     public static ReadOnlyInventory getSampleInventory() {
         Inventory sampleAb = new Inventory();
         for (Ingredient sampleIngredient : getSampleIngredients()) {
             sampleAb.addIngredient(sampleIngredient);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlyRecipeBook getSampleRecipeBook() {
+        RecipeBook sampleRb = new RecipeBook();
+        for (Recipe sampleRecipe: getSampleRecipes()) {
+            sampleRb.addRecipe(sampleRecipe);
+        }
+        return sampleRb;
     }
 
     /**

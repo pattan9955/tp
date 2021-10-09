@@ -2,8 +2,10 @@ package fridgy.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -14,6 +16,8 @@ import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
+import fridgy.model.recipe.RecipeIngredient;
+import fridgy.model.recipe.Step;
 import fridgy.model.tag.Tag;
 
 /**
@@ -120,5 +124,56 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String name} into a {@code Name}
+     */
+    public static fridgy.model.recipe.Name parseRecipeName(String name) {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        return new fridgy.model.recipe.Name(trimmedName);
+    }
+
+    /**
+     * Parses {@code List<String> ingredients} into a {@code Set<RecipeIngredient>}.
+     */
+    public static Set<RecipeIngredient> parseIngredients(List<String> ingredients) {
+        requireNonNull(ingredients);
+        final Set<RecipeIngredient> ingredientSet = new HashSet<>();
+        for (String ingredient : ingredients) {
+            ingredientSet.add(parseIngredient(ingredient));
+        }
+        return ingredientSet;
+    }
+
+    /**
+     * Parses {@code String ingredient} into a {@code RecipeIngredient}.
+     */
+    public static RecipeIngredient parseIngredient(String ingredient) {
+        requireNonNull(ingredient);
+        String trimmedIngredient = ingredient.trim();
+        return new RecipeIngredient(trimmedIngredient);
+    }
+
+    /**
+     * Parses {@code List<String> steps} into a {@code List<Step>}.
+     */
+    public static List<Step> parseSteps(List<String> steps) {
+        requireNonNull(steps);
+        final ArrayList<Step> stepList = new ArrayList<>();
+        for (String step : steps) {
+            stepList.add(parseStep(step));
+        }
+        return stepList;
+    }
+
+    /**
+     * Parses {@code String step} into a {@code Step}.
+     */
+    public static Step parseStep(String step) {
+        requireNonNull(step);
+        String trimmedStep = step.trim();
+        return new Step(trimmedStep);
     }
 }

@@ -1,0 +1,19 @@
+{
+  "_comment": "RecipeBook save file which contains the same Recipe values as in TypicalRecipes#getTypicalRecipeBook()",
+  "recipes" : [ {
+    "name" : "Burger",
+    "ingredients" : [ "Burger Ingredient 1", "Burger Ingredient 2" ],
+    "steps" : [ "Burger STEP 1", "Burger STEP 2" ],
+    "description" : "Very Nice"
+  }, {
+    "name" : "Maggie",
+    "ingredients" : [ "Maggie Ingredient 1", "Maggie Ingredient 2" ],
+    "steps" : [ "Maggie STEP 1", "Maggie STEP 2" ],
+    "description" : "Easy to make"
+  }, {
+    "name" : "Fries",
+    "ingredients" : [ "Fries Ingredient 1", "Fries Ingredient 2" ],
+    "steps" : [ "Fries STEP 1", "Fries STEP 2" ],
+    "description" : "More SALT!"
+  } ]
+}

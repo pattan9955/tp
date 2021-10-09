@@ -19,9 +19,11 @@ import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
 import fridgy.model.ReadOnlyInventory;
+import fridgy.model.ReadOnlyRecipeBook;
 import fridgy.model.UserPrefs;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.storage.JsonInventoryStorage;
+import fridgy.storage.JsonRecipeBookStorage;
 import fridgy.storage.JsonUserPrefsStorage;
 import fridgy.storage.StorageManager;
 import fridgy.testutil.Assert;
@@ -42,8 +44,11 @@ public class LogicManagerTest {
     public void setUp() {
         JsonInventoryStorage addressBookStorage =
                 new JsonInventoryStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonRecipeBookStorage recipeBookStorage =
+                new JsonRecipeBookStorage(temporaryFolder.resolve("recipeBook.json"));
+
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, recipeBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -70,9 +75,11 @@ public class LogicManagerTest {
         // Setup LogicManager with JsonInventoryIoExceptionThrowingStub
         JsonInventoryStorage addressBookStorage =
                 new JsonInventoryIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionInventory.json"));
+        JsonRecipeBookStorage recipeBookStorage =
+                new JsonRecipeBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionRecipeBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, recipeBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -128,7 +135,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), model.getRecipeBook(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -155,6 +162,20 @@ public class LogicManagerTest {
 
         @Override
         public void saveInventory(ReadOnlyInventory addressBook, Path filePath) throws IOException {
+            throw DUMMY_IO_EXCEPTION;
+        }
+    }
+
+    /**
+     * A stub class to throw an {@code IOException} when the save method is called.
+     */
+    private static class JsonRecipeBookIoExceptionThrowingStub extends JsonRecipeBookStorage {
+        private JsonRecipeBookIoExceptionThrowingStub(Path filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void saveRecipeBook(ReadOnlyRecipeBook recipeBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

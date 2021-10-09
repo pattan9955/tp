@@ -3,7 +3,7 @@ package fridgy.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import fridgy.commons.core.Messages;
-import fridgy.model.Model;
+import fridgy.model.IngredientModel;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 
 /**
@@ -26,7 +26,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(IngredientModel model) {
         requireNonNull(model);
         model.updateFilteredIngredientList(predicate);
         return new CommandResult(

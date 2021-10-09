@@ -9,6 +9,7 @@ import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
+import fridgy.model.RecipeBook;
 import fridgy.model.UserPrefs;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.testutil.TypicalIndexes;
@@ -20,7 +21,7 @@ import fridgy.testutil.TypicalIngredients;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(TypicalIngredients.getTypicalInventory(), new UserPrefs());
+    private Model model = new ModelManager(TypicalIngredients.getTypicalInventory(), new RecipeBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -30,7 +31,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, ingredientToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
         expectedModel.deleteIngredient(ingredientToDelete);
 
         CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -54,7 +55,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, ingredientToDelete);
 
-        Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
         expectedModel.deleteIngredient(ingredientToDelete);
         showNoIngredient(expectedModel);
 

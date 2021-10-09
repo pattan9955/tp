@@ -1,0 +1,13 @@
+{
+  "recipes": [ {
+    "name" : "Burger",
+    "ingredients" : [ "Burger Ingredient 1", "Burger Ingredient 2" ],
+    "steps" : [ "Burger STEP 1", "Burger STEP 2" ],
+    "description" : "Very Nice"
+  }, {
+    "name" : "Burger",
+    "ingredients" : [ "Maggie Ingredient 1", "Maggie Ingredient 2" ],
+    "steps" : [ "Maggie STEP 1", "Maggie STEP 2" ],
+    "description" : "Very Nice"
+  } ]
+}

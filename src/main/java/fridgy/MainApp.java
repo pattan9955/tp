@@ -17,12 +17,16 @@ import fridgy.model.Inventory;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
 import fridgy.model.ReadOnlyInventory;
+import fridgy.model.ReadOnlyRecipeBook;
 import fridgy.model.ReadOnlyUserPrefs;
+import fridgy.model.RecipeBook;
 import fridgy.model.UserPrefs;
 import fridgy.model.util.SampleDataUtil;
 import fridgy.storage.InventoryStorage;
 import fridgy.storage.JsonInventoryStorage;
+import fridgy.storage.JsonRecipeBookStorage;
 import fridgy.storage.JsonUserPrefsStorage;
+import fridgy.storage.RecipeBookStorage;
 import fridgy.storage.Storage;
 import fridgy.storage.StorageManager;
 import fridgy.storage.UserPrefsStorage;
@@ -30,6 +34,7 @@ import fridgy.ui.Ui;
 import fridgy.ui.UiManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
+
 
 /**
  * Runs the application.
@@ -57,7 +62,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         InventoryStorage addressBookStorage = new JsonInventoryStorage(userPrefs.getInventoryFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        RecipeBookStorage recipeBookStorage = new JsonRecipeBookStorage(userPrefs.getRecipeBookFilePath());
+        storage = new StorageManager(addressBookStorage, recipeBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -69,28 +75,49 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s Inventory and {@code userPrefs}. <br>
+
+     * Returns a {@code ModelManager} with the data from {@code storage}'s Inventory, recipe book
+     * and {@code userPrefs}. <br>
      * The data from the sample Inventory will be used instead if {@code storage}'s Inventory is not found,
      * or an empty Inventory will be used instead if errors occur when reading {@code storage}'s Inventory.
+     * The data from the sample recipe book will be used instead if {@code storage}'s recipe book is not found,
+     * or an empty recipe book will be used instead if errors occur when reading {@code storage}'s recipe book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyInventory> addressBookOptional;
-        ReadOnlyInventory initialData;
+        ReadOnlyInventory initialInventory;
         try {
             addressBookOptional = storage.readInventory();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample Inventory");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleInventory);
+
+            initialInventory = addressBookOptional.orElseGet(SampleDataUtil::getSampleInventory);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty Inventory");
-            initialData = new Inventory();
+            initialInventory = new Inventory();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty Inventory");
-            initialData = new Inventory();
+            initialInventory = new Inventory();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        Optional<ReadOnlyRecipeBook> recipeBookOptional;
+        ReadOnlyRecipeBook initialRecipeBook;
+        try {
+            recipeBookOptional = storage.readRecipeBook();
+            if (!recipeBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample Inventory");
+            }
+            initialRecipeBook = recipeBookOptional.orElseGet(SampleDataUtil::getSampleRecipeBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty Inventory");
+            initialRecipeBook = new RecipeBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty Inventory");
+            initialRecipeBook = new RecipeBook();
+        }
+
+        return new ModelManager(initialInventory, initialRecipeBook, userPrefs);
     }
 
     private void initLogging(Config config) {
