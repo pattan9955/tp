@@ -39,7 +39,6 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_EXPIRY_DATE = "20-08-2010";
-    public static final String VALID_TYPE = "solid";
 
     public static final String NAME_DESC_ALMOND = " " + CliSyntax.PREFIX_NAME + VALID_NAME_ALMOND;
     public static final String NAME_DESC_BASIL = " " + CliSyntax.PREFIX_NAME + VALID_NAME_BASIL;
@@ -54,7 +53,6 @@ public class CommandTestUtil {
     public static final String DESCRIPTION_DESC_BASIL = " " + CliSyntax.PREFIX_DESCRIPTION + VALID_DESCRIPTION_BASIL;
     public static final String DESCRIPTION_DESC_FISH = " " + CliSyntax.PREFIX_DESCRIPTION + VALID_DESCRIPTION_FISH;
     public static final String EXPIRY_DATE_DESC = " " + CliSyntax.PREFIX_EXPIRY + VALID_EXPIRY_DATE;
-    public static final String TYPE_DESC = " " + CliSyntax.PREFIX_TYPE + VALID_TYPE;
     public static final String TAG_DESC_FRIEND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -80,15 +78,15 @@ public class CommandTestUtil {
         DESC_ALMOND = new EditIngredientDescriptorBuilder().withName(VALID_NAME_ALMOND)
                 .withQuantity(VALID_QUANTITY_ALMOND).withEmail(VALID_EMAIL_ALMOND)
                 .withDescription(VALID_DESCRIPTION_ALMOND).withTags(VALID_TAG_FRIEND)
-                .withType(VALID_TYPE).withExpiry(VALID_EXPIRY_DATE).build();
+                .withExpiry(VALID_EXPIRY_DATE).build();
         DESC_BASIL = new EditIngredientDescriptorBuilder().withName(VALID_NAME_BASIL)
                 .withQuantity(VALID_QUANTITY_BASIL).withEmail(VALID_EMAIL_BASIL)
                 .withDescription(VALID_DESCRIPTION_BASIL)
-                .withType(VALID_TYPE).withExpiry(VALID_EXPIRY_DATE)
+                .withExpiry(VALID_EXPIRY_DATE)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         DESC_FISH = new EditIngredientDescriptorBuilder().withName(VALID_NAME_FISH)
                 .withQuantity(VALID_QUANTITY_FISH).withEmail(VALID_EMAIL_FISH)
-                .withDescription(VALID_DESCRIPTION_FISH).withType(VALID_TYPE)
+                .withDescription(VALID_DESCRIPTION_FISH)
                 .withExpiry(VALID_EXPIRY_DATE).build();
     }
 

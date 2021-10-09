@@ -12,7 +12,6 @@ import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
-import fridgy.model.ingredient.Type;
 import fridgy.model.tag.Tag;
 
 /**
@@ -39,7 +38,6 @@ public class EditIngredientDescriptorBuilder {
         descriptor.setQuantity(ingredient.getQuantity());
         descriptor.setEmail(ingredient.getEmail());
         descriptor.setDescription(ingredient.getDescription());
-        descriptor.setType(ingredient.getType());
         descriptor.setExpiry(ingredient.getExpiryDate());
         descriptor.setTags(ingredient.getTags());
     }
@@ -73,14 +71,6 @@ public class EditIngredientDescriptorBuilder {
      */
     public EditIngredientDescriptorBuilder withDescription(String description) {
         descriptor.setDescription(new Description(Optional.ofNullable(description)));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Type} of the {@code EditIngredientDescriptor} that we are building.
-     */
-    public EditIngredientDescriptorBuilder withType(String type) {
-        descriptor.setType(new Type(type));
         return this;
     }
 

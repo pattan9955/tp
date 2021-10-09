@@ -30,7 +30,6 @@ public class IngredientUtil {
         sb.append(CliSyntax.PREFIX_QUANTITY + ingredient.getQuantity().value + " ");
         sb.append(CliSyntax.PREFIX_EMAIL + ingredient.getEmail().value + " ");
         sb.append(CliSyntax.PREFIX_DESCRIPTION + ingredient.getDescription().value.orElse("") + " ");
-        sb.append(CliSyntax.PREFIX_TYPE + ingredient.getType().toString() + " ");
         sb.append(CliSyntax.PREFIX_EXPIRY + ingredient.getExpiryDate().toString() + " ");
 
         ingredient.getTags().stream().forEach(
@@ -50,7 +49,6 @@ public class IngredientUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(CliSyntax.PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getDescription().ifPresent(description -> sb.append(CliSyntax.PREFIX_DESCRIPTION)
                 .append(description.value.orElse("")).append(" "));
-        descriptor.getType().ifPresent(type -> sb.append(CliSyntax.PREFIX_TYPE).append(type.value).append(" "));
         descriptor.getExpiryDate().ifPresent(expiryDate -> sb.append(CliSyntax.PREFIX_EXPIRY).append(expiryDate)
                 .append(" "));
 

@@ -3,6 +3,7 @@ package fridgy.model.ingredient;
 import static java.util.Objects.requireNonNull;
 
 import fridgy.commons.util.AppUtil;
+import fridgy.model.QuantityCalc;
 
 /**
  * Represents an ingredient's quantity number in the Inventory.
@@ -12,20 +13,25 @@ public class Quantity {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Quantity should be greater than zero and less than 10 digits long";
-    public static final String VALIDATION_REGEX = "(?=^[0-9]*[1-9][0-9]*$)\\d{1,10}$";
+            "Quantity should be greater than zero. \n"
+                    + "Include units in grams (g) or litres (l) when applicable. \n"
+                    + "Do not input units for discrete ingredients (i.e. bottle, pieces, etc.) \n"
+                    + "SI prefixes for units: milli (m) and kilo (k) are accepted. \n";
+    public static final String VALIDATION_REGEX = "^(?=.*[1-9])\\d+(\\.\\d+)?\\h*((m|k)?(g|l)){0,1}$";
     public final String value;
 
     /**
-     * Constructs a {@code Quantity}.
+     * Constructs a {@code Quantity}. Standard Units are "kg", "l" or none for discrete.
+     * Accepted prefixes are milli (m) and kilo (k).
      *
-     * @param quantity A valid quantity number.
+     * @param quantity A valid quantity of ingredients, converted to standard units.
      */
     public Quantity(String quantity) {
         requireNonNull(quantity);
         AppUtil.checkArgument(isValidQuantity(quantity), MESSAGE_CONSTRAINTS);
         // Removes leading zeros
-        value = quantity.replaceFirst("^0+(?!$)", "");
+        quantity = quantity.replaceFirst("^0+(?!$)", "");
+        value = convertToStandardUnit(quantity);
     }
 
     /**
@@ -52,4 +58,7 @@ public class Quantity {
         return value.hashCode();
     }
 
+    private String convertToStandardUnit(String quantity) {
+        return QuantityCalc.convertToStandardUnits(quantity);
+    }
 }

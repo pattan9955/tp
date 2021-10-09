@@ -79,7 +79,7 @@ public class LogicManagerTest {
         String addCommand = AddCommand.COMMAND_WORD + " " + AddCommand.INGREDIENT_KEYWORD + " "
                 + CommandTestUtil.NAME_DESC_ALMOND + CommandTestUtil.QUANTITY_DESC_ALMOND
                 + CommandTestUtil.EMAIL_DESC_ALMOND + CommandTestUtil.DESCRIPTION_DESC_ALMOND
-                + CommandTestUtil.TYPE_DESC + CommandTestUtil.EXPIRY_DATE_DESC;
+                + CommandTestUtil.EXPIRY_DATE_DESC;
         Ingredient expectedIngredient = new IngredientBuilder(TypicalIngredients.ALMOND).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addIngredient(expectedIngredient);

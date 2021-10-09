@@ -15,7 +15,6 @@ import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
-import fridgy.model.ingredient.Type;
 import fridgy.model.tag.Tag;
 
 /**
@@ -50,20 +49,6 @@ public class ParserUtil {
             throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
         }
         return new ExpiryDate(trimmedDate);
-    }
-
-    /**
-     * Parses {@code String type} into an {@code Type} (of ingredient) and returns it. Leading and trailing whitespaces
-     * will be trimmed.
-     * @throws ParseException if the specified type is invalid (Not "solid", "liquid" or "discrete")
-     */
-    public static Type parseType(String type) throws ParseException {
-        requireNonNull(type);
-        String trimmedType = type.trim();
-        if (!Type.isValidType(trimmedType)) {
-            throw new ParseException(Type.MESSAGE_CONSTRAINTS);
-        }
-        return new Type(trimmedType);
     }
 
     /**
