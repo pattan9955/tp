@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import fridgy.commons.core.Messages;
 import fridgy.logic.commands.HelpCommand;
 import fridgy.logic.commands.recipe.AddRecipeCommand;
+import fridgy.logic.commands.recipe.DeleteRecipeCommand;
 import fridgy.logic.commands.recipe.RecipeCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 
@@ -34,10 +35,12 @@ public class RecipeParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         switch (commandWord) {
         case AddRecipeCommand.COMMAND_WORD:
             return new AddRecipeCommandParser().parse(arguments);
-
+        case DeleteRecipeCommand.COMMAND_WORD:
+            return new DeleteRecipeCommandParser().parse(arguments);
         default:
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);
         }

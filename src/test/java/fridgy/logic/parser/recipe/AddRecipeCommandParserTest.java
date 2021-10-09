@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static fridgy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_COMMAND_MESSAGE;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_ADD_COMMAND_MESSAGE;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_ADD_COMMAND_WRONG_KEYWORD;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_ADD_COMMAND_MISSING_INGREDIENT;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_ADD_COMMAND_MISSING_NAME;
@@ -35,13 +35,13 @@ public class AddRecipeCommandParserTest {
     public void parse_missingRequiredPrefixes_failure() {
         AddRecipeCommandParser testParser = new AddRecipeCommandParser();
         RecipeCommandParserTestUtil.assertParseFailure(testParser,
-                INVALID_ADD_COMMAND_MISSING_NAME.replace("add ", ""), INVALID_COMMAND_MESSAGE);
+                INVALID_ADD_COMMAND_MISSING_NAME.replace("add ", ""), INVALID_ADD_COMMAND_MESSAGE);
 
         RecipeCommandParserTestUtil.assertParseFailure(testParser,
-                INVALID_ADD_COMMAND_MISSING_INGREDIENT.replace("add ", ""), INVALID_COMMAND_MESSAGE);
+                INVALID_ADD_COMMAND_MISSING_INGREDIENT.replace("add ", ""), INVALID_ADD_COMMAND_MESSAGE);
 
         RecipeCommandParserTestUtil.assertParseFailure(testParser,
-                INVALID_ADD_COMMAND_MISSING_STEPS.replace("add ", ""), INVALID_COMMAND_MESSAGE);
+                INVALID_ADD_COMMAND_MISSING_STEPS.replace("add ", ""), INVALID_ADD_COMMAND_MESSAGE);
     }
 
     @Test

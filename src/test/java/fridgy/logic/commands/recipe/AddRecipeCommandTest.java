@@ -61,6 +61,12 @@ public class AddRecipeCommandTest {
     }
 
     @Test
+    public void equals_targetObjectNull_returnsFalse() {
+        AddRecipeCommand testCommand = new AddRecipeCommand(BURGER);
+        assertFalse(testCommand.equals(null));
+    }
+
+    @Test
     public void execute_duplicateRecipeProvided_throwsCommandException() {
         AddRecipeCommand testCommand = new AddRecipeCommand(BURGER);
         RecipeModelStubWithRecipe testModel = new RecipeModelStubWithRecipe();

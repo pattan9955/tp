@@ -19,7 +19,9 @@ public class AddRecipeCommand extends RecipeCommand {
     public static final String COMMAND_WORD = "add";
     public static final String RECIPE_KEYWORD = "recipe";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a recipe to the RecipeBook. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + RECIPE_KEYWORD
+            + ": Adds a recipe to the RecipeBook. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_INGREDIENT + "INGREDIENTS"
@@ -39,7 +41,7 @@ public class AddRecipeCommand extends RecipeCommand {
     private final Recipe toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Ingredient}
+     * Creates an AddRecipeCommand to add the specified {@code Recipe}
      */
     public AddRecipeCommand(Recipe recipe) {
         requireNonNull(recipe);
