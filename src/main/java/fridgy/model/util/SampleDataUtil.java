@@ -50,19 +50,19 @@ public class SampleDataUtil {
         return new Recipe[] {
             new Recipe(
                 new fridgy.model.recipe.Name("Burger"),
-                Arrays.asList(new RecipeIngredient("Bread"), new RecipeIngredient("patty")),
+                Set.of(new RecipeIngredient("Bread"), new RecipeIngredient("patty")),
                 Arrays.asList(new Step("B1"), new Step("B2")),
                 Optional.of("Desc B")
             ),
             new Recipe(
                     new fridgy.model.recipe.Name("Maggie"),
-                    Arrays.asList(new RecipeIngredient("Maggie")),
+                    Set.of(new RecipeIngredient("Maggie")),
                     Arrays.asList(new Step("M1"), new Step("M2")),
                     Optional.of("Desc M")
             ),
             new Recipe(
                     new fridgy.model.recipe.Name("Recipe"),
-                    Arrays.asList(new RecipeIngredient("RecipeIngredient 1"),
+                    Set.of(new RecipeIngredient("RecipeIngredient 1"),
                             new RecipeIngredient("RecipeIngredient 2")),
                     Arrays.asList(new Step("Step 1"), new Step("Step 2")),
                     Optional.empty()
