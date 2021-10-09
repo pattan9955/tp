@@ -1,4 +1,4 @@
-package fridgy.model;
+package fridgy.model.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,8 @@ public class QuantityCalc {
         default:
             // other units are currently not supported
         }
-        return amount + " " + units;
+        // return in quantity standardised to 3 decimal places
+        return String.format("%.3f %s", amount, units);
     }
 
     private static List<String> parseQuantityString(String quantity) {

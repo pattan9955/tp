@@ -11,7 +11,6 @@ import fridgy.commons.core.index.Index;
 import fridgy.commons.util.StringUtil;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.ingredient.Description;
-import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
@@ -94,21 +93,6 @@ public class ParserUtil {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Description(Optional.of(trimmedDescription));
-    }
-
-    /**
-     * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code email} is invalid.
-     */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
-        }
-        return new Email(trimmedEmail);
     }
 
     /**

@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.ingredient.Description;
-import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
 import fridgy.model.tag.Tag;
@@ -26,13 +25,11 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_QUANTITY = "+651234";
     private static final String INVALID_DESCRIPTION = " ";
-    private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_QUANTITY = "123456";
     private static final String VALID_DESCRIPTION = "123 Main Street #0505";
-    private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -126,29 +123,6 @@ public class ParserUtilTest {
         String addressWithWhitespace = WHITESPACE + VALID_DESCRIPTION + WHITESPACE;
         Description expectedDescription = new Description(Optional.of(VALID_DESCRIPTION));
         assertEquals(expectedDescription, ParserUtil.parseDescription(Optional.of(addressWithWhitespace)));
-    }
-
-    @Test
-    public void parseEmail_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
-    }
-
-    @Test
-    public void parseEmail_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_EMAIL));
-    }
-
-    @Test
-    public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
-    }
-
-    @Test
-    public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
     }
 
     @Test

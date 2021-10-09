@@ -45,7 +45,7 @@ public class ExpiryStatusUpdater {
                 }
             }
         }
-        return new Ingredient(ingredient.getName(), ingredient.getQuantity(), ingredient.getEmail(),
+        return new Ingredient(ingredient.getName(), ingredient.getQuantity(),
                 ingredient.getDescription(), tagSet, ingredient.getExpiryDate());
     }
 }

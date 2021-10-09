@@ -1,7 +1,6 @@
 package fridgy.logic.commands;
 
 import static fridgy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static fridgy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static fridgy.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static fridgy.logic.parser.CliSyntax.PREFIX_NAME;
 import static fridgy.logic.parser.CliSyntax.PREFIX_QUANTITY;
@@ -26,14 +25,12 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + " NAME "
             + PREFIX_QUANTITY + " QUANTITY "
-            + PREFIX_EMAIL + " EMAIL "
             + PREFIX_DESCRIPTION + " DESCRIPTION "
             + PREFIX_EXPIRY + " EXPIRY DATE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " Grapes "
             + PREFIX_QUANTITY + " 4 "
-            + PREFIX_EMAIL + " johnd@example.com "
             + PREFIX_DESCRIPTION + " Got any grapes? "
             + PREFIX_EXPIRY + " 20-08-2010 "
             + PREFIX_TAG + " fruit "

@@ -1,8 +1,7 @@
 {
   "ingredients": [ {
     "name": "Hans Muster",
-    "quantity": "9482424",
-    "email": "invalid@email!3e",
+    "quantity": "ooga9482424",
     "description" : "4th street",
     "expiryDate" : "20-08-2010"
   } ]

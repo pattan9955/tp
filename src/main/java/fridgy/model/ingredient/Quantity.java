@@ -3,7 +3,7 @@ package fridgy.model.ingredient;
 import static java.util.Objects.requireNonNull;
 
 import fridgy.commons.util.AppUtil;
-import fridgy.model.QuantityCalc;
+import fridgy.model.util.QuantityCalc;
 
 /**
  * Represents an ingredient's quantity number in the Inventory.

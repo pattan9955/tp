@@ -2,7 +2,6 @@ package fridgy.logic.parser;
 
 import static fridgy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static fridgy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static fridgy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static fridgy.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static fridgy.logic.parser.CliSyntax.PREFIX_NAME;
 import static fridgy.logic.parser.CliSyntax.PREFIX_QUANTITY;
@@ -46,7 +45,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         final String arguments = matcher.group("arguments");
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(arguments, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_EMAIL, PREFIX_TAG,
+                ArgumentTokenizer.tokenize(arguments, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_TAG,
                         PREFIX_DESCRIPTION, PREFIX_EXPIRY);
 
         Index index;
@@ -64,9 +63,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
             editIngredientDescriptor.setQuantity(ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editIngredientDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             editIngredientDescriptor.setDescription(
