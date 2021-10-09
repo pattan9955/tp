@@ -10,6 +10,7 @@ import static java.util.Objects.requireNonNull;
 
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.Model;
+import fridgy.model.ingredient.ExpiryStatusUpdater;
 import fridgy.model.ingredient.Ingredient;
 
 /**
@@ -48,7 +49,7 @@ public class AddCommand extends Command {
      */
     public AddCommand(Ingredient ingredient) {
         requireNonNull(ingredient);
-        toAdd = ingredient;
+        toAdd = ExpiryStatusUpdater.updateExpiryTags(ingredient);
     }
 
     @Override

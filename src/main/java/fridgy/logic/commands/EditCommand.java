@@ -17,6 +17,7 @@ import fridgy.model.Model;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.ExpiryDate;
+import fridgy.model.ingredient.ExpiryStatusUpdater;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
@@ -103,8 +104,9 @@ public class EditCommand extends Command {
         ExpiryDate updatedExpiryDate = editIngredientDescriptor.getExpiryDate()
                 .orElse(ingredientToEdit.getExpiryDate());
 
-        return new Ingredient(updatedName, updatedQuantity, updatedEmail, updatedDescription, updatedTags,
-                updatedExpiryDate);
+        Ingredient editedIngredient = new Ingredient(updatedName, updatedQuantity, updatedEmail,
+                updatedDescription, updatedTags, updatedExpiryDate);
+        return ExpiryStatusUpdater.updateExpiryTags(editedIngredient);
     }
 
     @Override

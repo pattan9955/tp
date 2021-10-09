@@ -14,6 +14,7 @@ import fridgy.commons.exceptions.IllegalValueException;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.ExpiryDate;
+import fridgy.model.ingredient.ExpiryStatusUpdater;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
@@ -124,8 +125,10 @@ class JsonAdaptedIngredient {
 
         final Set<Tag> modelTags = new HashSet<>(ingredientTags);
 
-        return new Ingredient(modelName, modelQuantity, modelEmail, new Description(modelDescription), modelTags,
-                modelExpiryDate);
+        Ingredient ingredient = new Ingredient(modelName, modelQuantity, modelEmail, new Description(modelDescription),
+                modelTags, modelExpiryDate);
+
+        return ExpiryStatusUpdater.updateExpiryTags(ingredient);
     }
 
 }

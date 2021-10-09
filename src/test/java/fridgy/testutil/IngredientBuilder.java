@@ -7,6 +7,7 @@ import java.util.Set;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.Email;
 import fridgy.model.ingredient.ExpiryDate;
+import fridgy.model.ingredient.ExpiryStatusUpdater;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
@@ -24,6 +25,7 @@ public class IngredientBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_DESCRIPTION = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_EXPIRY_DATE = "20-08-2010";
+    public static final Set<Tag> DEFAULT_TAGS = Set.of(Tag.EXPIRED);
 
     private Name name;
     private Quantity quantity;
@@ -40,7 +42,7 @@ public class IngredientBuilder {
         quantity = new Quantity(DEFAULT_QUANTITY);
         email = new Email(DEFAULT_EMAIL);
         description = new Description(Optional.of(DEFAULT_DESCRIPTION));
-        tags = new HashSet<>();
+        tags = DEFAULT_TAGS;
         expiryDate = new ExpiryDate(DEFAULT_EXPIRY_DATE);
     }
 
@@ -104,8 +106,14 @@ public class IngredientBuilder {
         return this;
     }
 
+    /**
+     * Build {@code Ingredient} with the specified parameters.
+     *
+     * @return the ingredient built
+     */
     public Ingredient build() {
-        return new Ingredient(name, quantity, email, description, tags, expiryDate);
+        return ExpiryStatusUpdater.updateExpiryTags(
+                new Ingredient(name, quantity, email, description, tags, expiryDate));
     }
 
 }
