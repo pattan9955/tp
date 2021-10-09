@@ -12,7 +12,8 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
-
+    public static final Tag EXPIRED = new Tag("expired");
+    public static final Tag EXPIRING = new Tag("expiring");
     public final String tagName;
 
     /**

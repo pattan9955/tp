@@ -16,8 +16,8 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
     public static final String MESSAGE_CONSTRAINTS =
             "Expiry Date should be in the format DD-MM-YYYY";
     public static final String VALIDATION_REGEX = "^([0-2]\\d|3[01])-([0]\\d|1[0-2])-\\d{4}$";
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d-MM-yyyy");
-    public final LocalDate localDate;
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public final LocalDate expiryDate;
 
     /**
      * Constructs a {@code ExpiryDate}.
@@ -27,7 +27,7 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
     public ExpiryDate(String date) {
         requireNonNull(date);
         AppUtil.checkArgument(isValidExpiry(date), MESSAGE_CONSTRAINTS);
-        localDate = LocalDate.parse(date, DATE_FORMATTER);
+        expiryDate = LocalDate.parse(date, DATE_FORMATTER);
     }
 
     /**
@@ -39,23 +39,23 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
 
     @Override
     public String toString() {
-        return localDate.format(DATE_FORMATTER);
+        return expiryDate.format(DATE_FORMATTER);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ExpiryDate // instanceof handles nulls
-                && localDate.equals(((ExpiryDate) other).localDate)); // state check
+                && expiryDate.equals(((ExpiryDate) other).expiryDate)); // state check
     }
 
     @Override
     public int hashCode() {
-        return localDate.hashCode();
+        return expiryDate.hashCode();
     }
 
     @Override
     public int compareTo(ExpiryDate o) {
-        return localDate.compareTo(o.localDate);
+        return expiryDate.compareTo(o.expiryDate);
     }
 }
