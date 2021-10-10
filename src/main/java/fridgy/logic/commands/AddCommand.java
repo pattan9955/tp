@@ -29,7 +29,9 @@ public class AddCommand extends Command {
             + PREFIX_DESCRIPTION + " DESCRIPTION "
             + PREFIX_EXPIRY + " EXPIRY DATE "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: "
+            + COMMAND_WORD + " "
+            + INGREDIENT_KEYWORD
             + PREFIX_NAME + " Grapes "
             + PREFIX_QUANTITY + " 4 "
             + PREFIX_DESCRIPTION + " Got any grapes? "
