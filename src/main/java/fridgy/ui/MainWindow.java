@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  */
 public class MainWindow extends UiPart<Stage> {
 
-    private static final String FXML = "MainWindow1.fxml";
+    private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -32,6 +32,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private IngredientListPanel ingredientListPanel;
+    private IngredientListPanel ingredientListPanel2;
+    private RecipeListPanel recipeListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,6 +45,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane ingredientListPanelPlaceholder;
+
+    @FXML
+    private StackPane recipeListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -112,6 +117,12 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
         ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
+
+        System.out.println(logic.getFilteredRecipeList());
+        recipeListPanel = new RecipeListPanel(logic.getFilteredRecipeList());
+        recipeListPanelPlaceholder.getChildren().add(recipeListPanel.getRoot());
+//        ingredientListPanel2 = new IngredientListPanel(logic.getFilteredIngredientList());
+//        recipeListPanelPlaceholder.getChildren().add(ingredientListPanel2.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

@@ -8,7 +8,7 @@
     -fx-faint-focus-color: transparent;
 }
 
-/*menu bar*/
+/*Menu bar*/
 .menu-bar {
     -fx-background-color: #0046fe;
 }
@@ -25,10 +25,7 @@
     -fx-opacity: 0.9;
 }
 
-.split-pane {
-    -fx-background-color: #FFFFFF;
-}
-
+/*Status bar*/
 .status-bar {
     -fx-background-color: #0046fe;
     -fx-pref-height: 30px;
@@ -39,6 +36,8 @@
     -fx-font-weight: normal;
     -fx-padding: 4px;
 }
+
+/*Text area (result display)*/
 .text-area {
     -fx-background-color: #EBECF0;
     -fx-background-radius: 15;
@@ -49,14 +48,16 @@
 .text-area .scroll-pane {
     -fx-background-color: transparent;
 }
+
 .text-area .scroll-pane .viewport{
     -fx-background-color: transparent;
 }
+
 .text-area .scroll-pane .content{
     -fx-background-color: transparent;
 }
 
-/* This doesn't actually disable the shifting, just make it transparent*/
+/* Make split pane divider transparent*/
 .split-pane:horizontal > .split-pane-divider {
     -fx-background-color: transparent;
 }
@@ -64,12 +65,9 @@
     -fx-background-color: transparent;
 }
 
-/*.result-display .content{*/
-/*    -fx-background-color: #EBECF0;*/
-/*    -fx-font-family: "Montserrat Light";*/
-/*    -fx-font-size: 13pt;*/
-/*    -fx-border-radius: 10, 10;*/
-/*}*/
+.split-pane {
+    -fx-background-color: #FFFFFF;
+}
 
 /* tab pane*/
 .tab-pane .tab-header-background {
@@ -103,11 +101,13 @@
     -fx-border-color: transparent transparent transparent transparent;
 }
 
+/*Change tab header color on hover*/
 .tab-pane .tab:hover
 {
     -fx-background-color: #EBF2FA;
 }
 
+/*Underline and bold tab header when selected*/
 .tab-pane .tab:selected
 {
     -fx-background-color: white;
@@ -116,14 +116,14 @@
     -fx-border-width: 0 0 2 0;
 }
 
+/*Color tab header label when selected*/
 .tab:selected .tab-label {
     -fx-text-fill: #0046fe;
 }
 
-/*text field*/
+/*Text field*/
 .text-field {
     -fx-focus-color: #4059A9;
-    -fx-unfocus-color: #4d4d4d;
     -fx-padding: 0.333333em 0 0.333333em 0;
     -fx-background-color: transparent, transparent, transparent;
     -fx-border-color: transparent transparent #EBF2FA transparent;
@@ -147,17 +147,17 @@
     -fx-prompt-text-fill: #C5C5C5;
 }
 
-/*The list view*/
+/*List view*/
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#FFFFFF, 20%);
+    -fx-background-color: #FFFFFF;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 10 10 10 10;
 }
 
 .list-cell:filled:even {
@@ -201,6 +201,21 @@
     -fx-font-size: 11;
 }
 
+#ingredients {
+    -fx-hgap: 9;
+    -fx-vgap: 4;
+}
+
+#ingredients .label {
+    -fx-text-fill: white;
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-background-color:  #0046fe;
+    -fx-padding: 2 4 2 4;
+    -fx-border-radius: 5;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
 /*Scroll Bar*/
 .scroll-bar {
     -fx-background-color: white;
@@ -226,3 +241,4 @@
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
     -fx-padding: 8 1 8 1;
 }
+
