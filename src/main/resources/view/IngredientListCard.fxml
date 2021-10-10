@@ -29,8 +29,8 @@
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="quantity" styleClass="cell_small_label" text="\$quantity" />
-      <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
       <Label fx:id="expiryDate" styleClass="cell_small_label" text="\$expiryDate" />
+      <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
     </VBox>
   </GridPane>
 </HBox>

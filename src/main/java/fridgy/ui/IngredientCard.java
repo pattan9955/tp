@@ -51,7 +51,7 @@ public class IngredientCard extends UiPart<Region> {
         name.setText(ingredient.getName().fullName);
         quantity.setText(ingredient.getQuantity().value);
         description.setText(ingredient.getDescription().value.orElse(""));
-        expiryDate.setText(ingredient.getExpiryDate().toString());
+        expiryDate.setText("Expiring on: " + ingredient.getExpiryDate().toString());
         ingredient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
