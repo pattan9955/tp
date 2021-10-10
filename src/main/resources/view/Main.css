@@ -52,6 +52,7 @@
     -fx-background-radius: 15;
     -fx-border-radius: 15;
     -fx-border-color: transparent;
+    -fx-padding: 5px;
 }
 
 .text-area .scroll-pane {
@@ -227,7 +228,7 @@
 
 /*Scroll Bar*/
 .scroll-bar {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
 }
 
 .scroll-bar .thumb {
