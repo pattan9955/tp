@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  */
 public class MainWindow extends UiPart<Stage> {
 
-    private static final String FXML = "MainWindow.fxml";
+    private static final String FXML = "MainWindow1.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
