@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 /**
- * An UI component that displays information of a {@code Ingredient}.
+ * An UI component that displays information of a {@code Recipe}.
  */
 public class RecipeCard extends UiPart<Region> {
 
