@@ -275,9 +275,9 @@ Priorities: High (must have) - `H`, Medium (nice to have) - `M`, Low (unlikely t
 | `H`  | new user                                   | see the help menu                  | refer to instructions when I forget how to use the App
 | `M`  | new user exploring the app                 | see my inventory populated with some sample ingredients and recipes        | test out the features              |
 | `M`  | new user ready to start using the app      | purge all current data             | get rid of sample/experimental data I used for exploring the app           |
-| `H`  | user                                       | add ingredients to my inventory    | keep track of the quantity and expiry date                                 | 
+| `H`  | user                                       | add ingredients to my inventory    | keep track of the quantity and expiry date                                 |
 | `H`  | user                                       | add recipes                        | keep track of quantity of ingredients needed for a recipe                  |
-| `H`  | user                                       | delete an ingredient               | stop keeping track of the ingredient                                       | 
+| `H`  | user                                       | delete an ingredient               | stop keeping track of the ingredient                                       |
 | `H`  | user                                       | delete a recipe                    | stop keeping track of the recipe                                           |
 | `H`  | user                                       | find an ingredient by name         | locate details of ingredients without having to go through the entire list |
 | `H`  | user                                       | find a recipe by name              | locate details of recipes without having to go through the entire list     |
@@ -397,7 +397,7 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing/corrupted data files
 
    1a. To simulate missing file, create an empty directory and run the program. Program should create a new file in the directory.
-   
+
    1b. To simulate a corrupted file, replace content in file with wrong or unexpected content. Program should throw an error.
 
 1. _{ more test cases …​ }_
