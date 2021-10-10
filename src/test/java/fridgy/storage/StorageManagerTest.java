@@ -6,15 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.nio.file.Path;
 
-import fridgy.model.ingredient.Ingredient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.model.Inventory;
-import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.UserPrefs;
+import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.Ingredient;
 
 public class StorageManagerTest {
 

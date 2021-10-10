@@ -11,9 +11,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import fridgy.model.base.ReadOnlyDatabase;
 import org.junit.jupiter.api.Test;
 
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.exceptions.DuplicateIngredientException;
 import fridgy.testutil.Assert;
@@ -86,7 +86,7 @@ public class InventoryTest {
     }
 
     /**
-     * A stub ReadOnlyDatabase<Ingredient> whose ingredients list can violate interface constraints.
+     * A stub ReadOnlyDatabase whose ingredients list can violate interface constraints.
      */
     private static class InventoryStub implements ReadOnlyDatabase<Ingredient> {
         private final ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();

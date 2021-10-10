@@ -12,14 +12,13 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import fridgy.model.base.ReadOnlyDatabase;
-import fridgy.model.recipe.Recipe;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import fridgy.commons.exceptions.DataConversionException;
 import fridgy.model.RecipeBook;
-
+import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.recipe.Recipe;
 
 
 public class JsonRecipeBookStorageTest {

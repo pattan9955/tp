@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
-import fridgy.model.base.ReadOnlyDatabase;
 import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.GuiSettings;
@@ -19,6 +18,7 @@ import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.IngredientModel;
 import fridgy.model.Inventory;
 import fridgy.model.ReadOnlyUserPrefs;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.testutil.Assert;
 import fridgy.testutil.IngredientBuilder;

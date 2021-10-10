@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
-import fridgy.model.base.ReadOnlyDatabase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +17,7 @@ import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.RecipeBook;
 import fridgy.model.RecipeModel;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.recipe.Recipe;
 import javafx.collections.ObservableList;
 

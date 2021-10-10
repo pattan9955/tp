@@ -11,13 +11,13 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import fridgy.model.ingredient.Ingredient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import fridgy.commons.exceptions.DataConversionException;
 import fridgy.model.Inventory;
 import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.Ingredient;
 import fridgy.testutil.Assert;
 
 public class JsonInventoryStorageTest {

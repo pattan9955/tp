@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import fridgy.model.base.ReadOnlyDatabase;
-import fridgy.model.recipe.Recipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -21,7 +19,9 @@ import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
 import fridgy.model.UserPrefs;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.recipe.Recipe;
 import fridgy.storage.JsonInventoryStorage;
 import fridgy.storage.JsonRecipeBookStorage;
 import fridgy.storage.JsonUserPrefsStorage;
