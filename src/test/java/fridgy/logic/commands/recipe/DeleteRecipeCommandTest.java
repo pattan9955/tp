@@ -144,33 +144,33 @@ public class DeleteRecipeCommandTest {
 
         @Override
         public ObservableList<Recipe> getFilteredRecipeList() {
-            return recipeBook.getRecipeList();
+            return recipeBook.getList();
         }
 
         @Override
         public boolean hasRecipe(Recipe recipe) {
-            return recipeBook.hasRecipe(recipe);
+            return recipeBook.has(recipe);
         }
 
         @Override
         public void deleteRecipe(Recipe target) {
-            this.recipeBook.removeRecipe(target);
+            this.recipeBook.remove(target);
         }
 
         @Override
         public void addRecipe(Recipe recipe) {
-            this.recipeBook.addRecipe(recipe);
+            this.recipeBook.add(recipe);
         }
 
         @Override
         public void setRecipe(Recipe target, Recipe editedRecipe) {
-            this.recipeBook.setRecipe(target, editedRecipe);
+            this.recipeBook.set(target, editedRecipe);
         }
     }
 
     private class RecipeModelStubWithRecipe extends RecipeModelStubNoRecipe {
         public RecipeModelStubWithRecipe() {
-            super.recipeBook.addRecipe(BURGER);
+            super.recipeBook.add(BURGER);
         }
     }
 }

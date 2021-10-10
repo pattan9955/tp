@@ -38,7 +38,7 @@ class JsonSerializableRecipeBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableRecipeBook}.
      */
     public JsonSerializableRecipeBook(ReadOnlyRecipeBook source) {
-        recipes.addAll(source.getRecipeList().stream().map(JsonAdaptedRecipe::new).collect(Collectors.toList()));
+        recipes.addAll(source.getList().stream().map(JsonAdaptedRecipe::new).collect(Collectors.toList()));
     }
 
     /**
@@ -49,11 +49,11 @@ class JsonSerializableRecipeBook {
     public RecipeBook toModelType() throws IllegalValueException {
         RecipeBook recipeBook = new RecipeBook();
         for (JsonAdaptedRecipe jsonAdaptedRecipe : recipes) {
-            Recipe person = jsonAdaptedRecipe.toModelType();
-            if (recipeBook.hasRecipe(person)) {
+            Recipe recipe = jsonAdaptedRecipe.toModelType();
+            if (recipeBook.has(recipe)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_RECIPE);
             }
-            recipeBook.addRecipe(person);
+            recipeBook.add(recipe);
         }
         return recipeBook;
     }

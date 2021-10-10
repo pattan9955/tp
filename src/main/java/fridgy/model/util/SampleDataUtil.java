@@ -82,7 +82,7 @@ public class SampleDataUtil {
     public static ReadOnlyRecipeBook getSampleRecipeBook() {
         RecipeBook sampleRb = new RecipeBook();
         for (Recipe sampleRecipe: getSampleRecipes()) {
-            sampleRb.addRecipe(sampleRecipe);
+            sampleRb.add(sampleRecipe);
         }
         return sampleRb;
     }

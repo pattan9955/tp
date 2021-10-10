@@ -74,14 +74,14 @@ public class JsonRecipeBookStorageTest {
         assertEquals(original, new RecipeBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addRecipe(RICE);
-        original.removeRecipe(BURGER);
+        original.add(RICE);
+        original.remove(BURGER);
         jsonRecipeBookStorage.saveRecipeBook(original, filePath);
         readBack = jsonRecipeBookStorage.readRecipeBook(filePath).get();
         assertEquals(original, new RecipeBook(readBack));
 
         // Save and read without specifying file path
-        original.addRecipe(NOODLE);
+        original.add(NOODLE);
         jsonRecipeBookStorage.saveRecipeBook(original); // file path not specified
         readBack = jsonRecipeBookStorage.readRecipeBook().get(); // file path not specified
         assertEquals(original, new RecipeBook(readBack));

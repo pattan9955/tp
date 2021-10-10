@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.commons.core.LogsCenter;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import javafx.collections.ObservableList;
@@ -33,7 +34,7 @@ public class ModelManager implements Model {
      * Initializes a ModelManager with the given inventory and userPrefs.
      */
 
-    public ModelManager(ReadOnlyInventory inventory, ReadOnlyRecipeBook recipeBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyInventory inventory, ReadOnlyDatabase<Recipe> recipeBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(inventory, userPrefs);
 
@@ -45,7 +46,7 @@ public class ModelManager implements Model {
         this.recipeBook = new RecipeBook(recipeBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredIngredients = new FilteredList<>(this.inventory.getIngredientList());
-        filteredRecipes = new FilteredList<>(this.recipeBook.getRecipeList());
+        filteredRecipes = new FilteredList<>(this.recipeBook.getList());
     }
 
     public ModelManager() {
@@ -138,7 +139,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setRecipeBook(ReadOnlyRecipeBook recipeBook) {
-        this.recipeBook.resetData(recipeBook);
+        this.recipeBook.resetDatabase(recipeBook);
     }
 
     @Override
@@ -149,17 +150,17 @@ public class ModelManager implements Model {
     @Override
     public boolean hasRecipe(Recipe recipe) {
         requireNonNull(recipe);
-        return recipeBook.hasRecipe(recipe);
+        return recipeBook.has(recipe);
     }
 
     @Override
     public void deleteRecipe(Recipe target) {
-        recipeBook.removeRecipe(target);
+        recipeBook.remove(target);
     }
 
     @Override
     public void addRecipe(Recipe recipe) {
-        recipeBook.addRecipe(recipe);
+        recipeBook.add(recipe);
         updateFilteredRecipeList(PREDICATE_SHOW_ALL_RECIPES);
     }
 
@@ -167,7 +168,7 @@ public class ModelManager implements Model {
     public void setRecipe(Recipe target, Recipe editedRecipe) {
         requireAllNonNull(target, editedRecipe);
 
-        recipeBook.setRecipe(target, editedRecipe);
+        recipeBook.set(target, editedRecipe);
     }
 
     //=========== Filtered Ingredient List Accessors =============================================================

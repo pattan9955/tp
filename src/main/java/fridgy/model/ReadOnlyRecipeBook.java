@@ -1,18 +1,11 @@
 package fridgy.model;
 
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.recipe.Recipe;
-import javafx.collections.ObservableList;
-
 
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyRecipeBook {
-
-    /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
-     */
-    ObservableList<Recipe> getRecipeList();
-
+public interface ReadOnlyRecipeBook extends ReadOnlyDatabase<Recipe> {
+    // this interface is here to avoid too many code breaking changes for now
 }
