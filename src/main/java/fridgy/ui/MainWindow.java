@@ -118,11 +118,8 @@ public class MainWindow extends UiPart<Stage> {
         ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
         ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
 
-        System.out.println(logic.getFilteredRecipeList());
         recipeListPanel = new RecipeListPanel(logic.getFilteredRecipeList());
         recipeListPanelPlaceholder.getChildren().add(recipeListPanel.getRoot());
-//        ingredientListPanel2 = new IngredientListPanel(logic.getFilteredIngredientList());
-//        recipeListPanelPlaceholder.getChildren().add(ingredientListPanel2.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
