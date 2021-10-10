@@ -16,7 +16,6 @@ import fridgy.logic.LogicManager;
 import fridgy.model.Inventory;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
-import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ReadOnlyUserPrefs;
 import fridgy.model.RecipeBook;
 import fridgy.model.UserPrefs;

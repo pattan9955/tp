@@ -21,8 +21,8 @@ public interface InventoryStorage {
     Path getInventoryFilePath();
 
     /**
-     * Returns Inventory data as a {@link ReadOnlyDatabase< Ingredient >}.
-     *   Returns {@code Optional.empty()} if storage file is not found.
+     * Returns Inventory data as a {@link ReadOnlyDatabase}.
+     * Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
@@ -34,14 +34,14 @@ public interface InventoryStorage {
     Optional<ReadOnlyDatabase<Ingredient>> readInventory(Path filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyDatabase<Ingredient>} to the storage.
+     * Saves the given {@link ReadOnlyDatabase} to the storage.
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
     void saveInventory(ReadOnlyDatabase<Ingredient> addressBook) throws IOException;
 
     /**
-     * @see #saveInventory(ReadOnlyDatabase<Ingredient>)
+     * @see #saveInventory(ReadOnlyDatabase)
      */
     void saveInventory(ReadOnlyDatabase<Ingredient> addressBook, Path filePath) throws IOException;
 

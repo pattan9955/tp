@@ -66,7 +66,7 @@ public class JsonRecipeBookStorage implements RecipeBookStorage {
     }
 
     /**
-     * Similar to {@link #saveRecipeBook(ReadOnlyDatabase<Recipe>)}.
+     * Similar to {@link #saveRecipeBook(ReadOnlyDatabase)}.
      *
      * @param filePath location of the data. Cannot be null.
      */

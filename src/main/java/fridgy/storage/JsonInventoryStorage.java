@@ -66,7 +66,7 @@ public class JsonInventoryStorage implements InventoryStorage {
     }
 
     /**
-     * Similar to {@link #saveInventory(ReadOnlyDatabase<Ingredient>)}.
+     * Similar to {@link #saveInventory(ReadOnlyDatabase)}.
      *
      * @param filePath location of the data. Cannot be null.
      */

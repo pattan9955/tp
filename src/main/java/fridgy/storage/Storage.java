@@ -5,9 +5,9 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import fridgy.commons.exceptions.DataConversionException;
-import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ReadOnlyUserPrefs;
 import fridgy.model.UserPrefs;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 
 /**

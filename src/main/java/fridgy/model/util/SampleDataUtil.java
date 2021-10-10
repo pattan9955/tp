@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import fridgy.model.Inventory;
-import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.RecipeBook;
 import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Description;

@@ -109,5 +109,4 @@ public class Database<T extends Eq> implements ReadOnlyDatabase<T> {
     public int hashCode() {
         return items.hashCode();
     }
-    
 }

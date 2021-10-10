@@ -20,7 +20,7 @@ public interface RecipeBookStorage {
     Path getRecipeBookFilePath();
 
     /**
-     * Returns RecipeBook data as a {@link ReadOnlyDatabase<Recipe>}.
+     * Returns RecipeBook data as a {@link ReadOnlyDatabase}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
@@ -33,14 +33,14 @@ public interface RecipeBookStorage {
     Optional<ReadOnlyDatabase<Recipe>> readRecipeBook(Path filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyDatabase<Recipe>} to the storage.
+     * Saves the given {@link ReadOnlyDatabase} to the storage.
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
     void saveRecipeBook(ReadOnlyDatabase<Recipe> addressBook) throws IOException;
 
     /**
-     * @see #saveRecipeBook(ReadOnlyDatabase<Recipe>)
+     * @see #saveRecipeBook(ReadOnlyDatabase)
      */
     void saveRecipeBook(ReadOnlyDatabase<Recipe> addressBook, Path filePath) throws IOException;
 
