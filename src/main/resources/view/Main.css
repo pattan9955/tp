@@ -9,6 +9,14 @@
     -fx-faint-focus-color: transparent;
 }
 
+.vbox {
+    -fx-background-color: #FFFFFF;
+}
+
+.hbox {
+    -fx-background-color: #FFFFFF;
+}
+
 /*Menu bar*/
 .menu-bar {
     -fx-background-color: #0046fe;
@@ -152,7 +160,7 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: transparent;
 }
 
 .list-cell {
@@ -162,7 +170,7 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: transparent;
 }
 
 .list-cell:filled:odd {
