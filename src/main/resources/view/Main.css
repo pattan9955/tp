@@ -5,6 +5,7 @@
 
 .root {
     -fx-focus-color: transparent;
+    -fx-background-color: #FFFFFF;
     -fx-faint-focus-color: transparent;
 }
 
