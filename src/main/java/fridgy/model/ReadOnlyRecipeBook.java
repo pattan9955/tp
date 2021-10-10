@@ -10,8 +10,8 @@ import javafx.collections.ObservableList;
 public interface ReadOnlyRecipeBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the RecipeBook.
+     * This list will not contain any duplicate Recipes.
      */
     ObservableList<Recipe> getRecipeList();
 
