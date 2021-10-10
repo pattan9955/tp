@@ -16,11 +16,12 @@ import fridgy.logic.LogicManager;
 import fridgy.model.Inventory;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
-import fridgy.model.ReadOnlyInventory;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ReadOnlyUserPrefs;
 import fridgy.model.RecipeBook;
 import fridgy.model.UserPrefs;
 import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import fridgy.model.util.SampleDataUtil;
 import fridgy.storage.InventoryStorage;
@@ -85,8 +86,8 @@ public class MainApp extends Application {
      * or an empty recipe book will be used instead if errors occur when reading {@code storage}'s recipe book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyInventory> addressBookOptional;
-        ReadOnlyInventory initialInventory;
+        Optional<ReadOnlyDatabase<Ingredient>> addressBookOptional;
+        ReadOnlyDatabase<Ingredient> initialInventory;
         try {
             addressBookOptional = storage.readInventory();
             if (!addressBookOptional.isPresent()) {

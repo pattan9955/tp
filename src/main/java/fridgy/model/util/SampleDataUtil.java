@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import fridgy.model.Inventory;
-import fridgy.model.ReadOnlyInventory;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.RecipeBook;
 import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Description;
@@ -71,10 +71,10 @@ public class SampleDataUtil {
 
     }
 
-    public static ReadOnlyInventory getSampleInventory() {
+    public static ReadOnlyDatabase<Ingredient> getSampleInventory() {
         Inventory sampleAb = new Inventory();
         for (Ingredient sampleIngredient : getSampleIngredients()) {
-            sampleAb.addIngredient(sampleIngredient);
+            sampleAb.add(sampleIngredient);
         }
         return sampleAb;
     }

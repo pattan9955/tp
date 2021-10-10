@@ -11,13 +11,13 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
+import fridgy.model.base.ReadOnlyDatabase;
 import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.IngredientModel;
 import fridgy.model.Inventory;
-import fridgy.model.ReadOnlyInventory;
 import fridgy.model.ReadOnlyUserPrefs;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.testutil.Assert;
@@ -123,12 +123,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setInventory(ReadOnlyInventory newData) {
+        public void setInventory(ReadOnlyDatabase<Ingredient> newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyInventory getInventory() {
+        public ReadOnlyDatabase<Ingredient> getInventory() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -196,7 +196,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyInventory getInventory() {
+        public ReadOnlyDatabase<Ingredient> getInventory() {
             return new Inventory();
         }
     }

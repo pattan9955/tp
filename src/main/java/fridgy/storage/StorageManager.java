@@ -7,10 +7,11 @@ import java.util.logging.Logger;
 
 import fridgy.commons.core.LogsCenter;
 import fridgy.commons.exceptions.DataConversionException;
-import fridgy.model.ReadOnlyInventory;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ReadOnlyUserPrefs;
 import fridgy.model.UserPrefs;
 import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 
 /**
@@ -61,23 +62,23 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyInventory> readInventory() throws DataConversionException, IOException {
+    public Optional<ReadOnlyDatabase<Ingredient>> readInventory() throws DataConversionException, IOException {
         return readInventory(addressBookStorage.getInventoryFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyInventory> readInventory(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyDatabase<Ingredient>> readInventory(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
         return addressBookStorage.readInventory(filePath);
     }
 
     @Override
-    public void saveInventory(ReadOnlyInventory addressBook) throws IOException {
+    public void saveInventory(ReadOnlyDatabase<Ingredient> addressBook) throws IOException {
         saveInventory(addressBook, addressBookStorage.getInventoryFilePath());
     }
 
     @Override
-    public void saveInventory(ReadOnlyInventory addressBook, Path filePath) throws IOException {
+    public void saveInventory(ReadOnlyDatabase<Ingredient> addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveInventory(addressBook, filePath);
     }

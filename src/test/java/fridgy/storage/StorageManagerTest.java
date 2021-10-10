@@ -6,13 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.nio.file.Path;
 
+import fridgy.model.ingredient.Ingredient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.model.Inventory;
-import fridgy.model.ReadOnlyInventory;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -57,7 +58,7 @@ public class StorageManagerTest {
          */
         Inventory original = getTypicalInventory();
         storageManager.saveInventory(original);
-        ReadOnlyInventory retrieved = storageManager.readInventory().get();
+        ReadOnlyDatabase<Ingredient> retrieved = storageManager.readInventory().get();
         assertEquals(original, new Inventory(retrieved));
     }
 

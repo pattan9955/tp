@@ -7,7 +7,7 @@ import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.Model;
-import fridgy.model.ReadOnlyInventory;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 import javafx.collections.ObservableList;
 
@@ -29,7 +29,7 @@ public interface Logic {
      *
      * @see Model#getInventory()
      */
-    ReadOnlyInventory getInventory();
+    ReadOnlyDatabase<Ingredient> getInventory();
 
     /** Returns an unmodifiable view of the filtered list of ingredients */
     ObservableList<Ingredient> getFilteredIngredientList();

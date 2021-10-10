@@ -20,7 +20,6 @@ import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
-import fridgy.model.ReadOnlyInventory;
 import fridgy.model.UserPrefs;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.storage.JsonInventoryStorage;
@@ -162,7 +161,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveInventory(ReadOnlyInventory addressBook, Path filePath) throws IOException {
+        public void saveInventory(ReadOnlyDatabase<Ingredient> addressBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.function.Predicate;
 
 import fridgy.commons.core.GuiSettings;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 import javafx.collections.ObservableList;
 
@@ -45,10 +46,10 @@ public interface IngredientModel {
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setInventory(ReadOnlyInventory addressBook);
+    void setInventory(ReadOnlyDatabase<Ingredient> addressBook);
 
     /** Returns the Inventory */
-    ReadOnlyInventory getInventory();
+    ReadOnlyDatabase<Ingredient> getInventory();
 
     /**
      * Returns true if n ingredient with the same identity as {@code ingredient} exists in the address book.

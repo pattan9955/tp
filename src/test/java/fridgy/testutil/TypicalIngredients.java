@@ -80,7 +80,7 @@ public class TypicalIngredients {
     public static Inventory getTypicalInventory() {
         Inventory ab = new Inventory();
         for (Ingredient ingredient : getTypicalIngredients()) {
-            ab.addIngredient(ingredient);
+            ab.add(ingredient);
         }
         return ab;
     }

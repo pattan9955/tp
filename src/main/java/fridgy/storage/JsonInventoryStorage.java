@@ -12,7 +12,8 @@ import fridgy.commons.exceptions.DataConversionException;
 import fridgy.commons.exceptions.IllegalValueException;
 import fridgy.commons.util.FileUtil;
 import fridgy.commons.util.JsonUtil;
-import fridgy.model.ReadOnlyInventory;
+import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.Ingredient;
 
 /**
  * A class to access Inventory data stored as a json file on the hard disk.
@@ -32,7 +33,7 @@ public class JsonInventoryStorage implements InventoryStorage {
     }
 
     @Override
-    public Optional<ReadOnlyInventory> readInventory() throws DataConversionException {
+    public Optional<ReadOnlyDatabase<Ingredient>> readInventory() throws DataConversionException {
         return readInventory(filePath);
     }
 
@@ -42,7 +43,7 @@ public class JsonInventoryStorage implements InventoryStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyInventory> readInventory(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyDatabase<Ingredient>> readInventory(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableInventory> jsonInventory = JsonUtil.readJsonFile(
@@ -60,16 +61,16 @@ public class JsonInventoryStorage implements InventoryStorage {
     }
 
     @Override
-    public void saveInventory(ReadOnlyInventory addressBook) throws IOException {
+    public void saveInventory(ReadOnlyDatabase<Ingredient> addressBook) throws IOException {
         saveInventory(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveInventory(ReadOnlyInventory)}.
+     * Similar to {@link #saveInventory(ReadOnlyDatabase<Ingredient>)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveInventory(ReadOnlyInventory addressBook, Path filePath) throws IOException {
+    public void saveInventory(ReadOnlyDatabase<Ingredient> addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 

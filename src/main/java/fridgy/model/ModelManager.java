@@ -35,7 +35,9 @@ public class ModelManager implements Model {
      * Initializes a ModelManager with the given inventory and userPrefs.
      */
 
-    public ModelManager(ReadOnlyInventory inventory, ReadOnlyDatabase<Recipe> recipeBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyDatabase<Ingredient> inventory,
+                        ReadOnlyDatabase<Recipe> recipeBook,
+                        ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(inventory, userPrefs);
 
@@ -46,7 +48,7 @@ public class ModelManager implements Model {
         this.inventory = new Inventory(inventory);
         this.recipeBook = new Database<>(recipeBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredIngredients = new FilteredList<>(this.inventory.getIngredientList());
+        filteredIngredients = new FilteredList<>(this.inventory.getList());
         filteredRecipes = new FilteredList<>(this.recipeBook.getList());
     }
 
@@ -103,29 +105,29 @@ public class ModelManager implements Model {
     //=========== Inventory ================================================================================
 
     @Override
-    public void setInventory(ReadOnlyInventory inventory) {
-        this.inventory.resetData(inventory);
+    public void setInventory(ReadOnlyDatabase<Ingredient> inventory) {
+        this.inventory.resetDatabase(inventory);
     }
 
     @Override
-    public ReadOnlyInventory getInventory() {
+    public ReadOnlyDatabase<Ingredient> getInventory() {
         return inventory;
     }
 
     @Override
     public boolean hasIngredient(Ingredient ingredient) {
         requireNonNull(ingredient);
-        return inventory.hasIngredient(ingredient);
+        return inventory.has(ingredient);
     }
 
     @Override
     public void deleteIngredient(Ingredient target) {
-        inventory.removeIngredient(target);
+        inventory.remove(target);
     }
 
     @Override
     public void addIngredient(Ingredient ingredient) {
-        inventory.addIngredient(ingredient);
+        inventory.add(ingredient);
         updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
     }
 
@@ -133,7 +135,7 @@ public class ModelManager implements Model {
     public void setIngredient(Ingredient target, Ingredient editedIngredient) {
         requireAllNonNull(target, editedIngredient);
 
-        inventory.setIngredient(target, editedIngredient);
+        inventory.set(target, editedIngredient);
     }
 
     //=========== RecipeBook ================================================================================

@@ -5,9 +5,10 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import fridgy.commons.exceptions.DataConversionException;
-import fridgy.model.ReadOnlyInventory;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ReadOnlyUserPrefs;
 import fridgy.model.UserPrefs;
+import fridgy.model.ingredient.Ingredient;
 
 /**
  * API of the Storage component
@@ -24,9 +25,9 @@ public interface Storage extends InventoryStorage, RecipeBookStorage, UserPrefsS
     Path getInventoryFilePath();
 
     @Override
-    Optional<ReadOnlyInventory> readInventory() throws DataConversionException, IOException;
+    Optional<ReadOnlyDatabase<Ingredient>> readInventory() throws DataConversionException, IOException;
 
     @Override
-    void saveInventory(ReadOnlyInventory addressBook) throws IOException;
+    void saveInventory(ReadOnlyDatabase<Ingredient> addressBook) throws IOException;
 
 }

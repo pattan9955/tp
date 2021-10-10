@@ -2,6 +2,7 @@ package fridgy.model.base;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -83,6 +84,13 @@ public class Database<T extends Eq> implements ReadOnlyDatabase<T> {
     public String toString() {
         return items.asUnmodifiableObservableList().size() + " items";
         // TODO: refine later
+    }
+
+    /**
+     * Sorts the items by given comparator
+     */
+    public void sort(Comparator<T> comparator) {
+        items.sort(comparator);
     }
 
     @Override

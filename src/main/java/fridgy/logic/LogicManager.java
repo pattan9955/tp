@@ -12,7 +12,7 @@ import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.InventoryParser;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.Model;
-import fridgy.model.ReadOnlyInventory;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.storage.Storage;
 import javafx.collections.ObservableList;
@@ -55,7 +55,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyInventory getInventory() {
+    public ReadOnlyDatabase<Ingredient> getInventory() {
         return model.getInventory();
     }
 

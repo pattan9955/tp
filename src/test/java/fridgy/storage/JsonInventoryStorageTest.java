@@ -11,12 +11,13 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import fridgy.model.ingredient.Ingredient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import fridgy.commons.exceptions.DataConversionException;
 import fridgy.model.Inventory;
-import fridgy.model.ReadOnlyInventory;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.testutil.Assert;
 
 public class JsonInventoryStorageTest {
@@ -30,7 +31,7 @@ public class JsonInventoryStorageTest {
         Assert.assertThrows(NullPointerException.class, () -> readInventory(null));
     }
 
-    private java.util.Optional<ReadOnlyInventory> readInventory(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyDatabase<Ingredient>> readInventory(String filePath) throws Exception {
         return new JsonInventoryStorage(Paths.get(filePath)).readInventory(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -71,18 +72,18 @@ public class JsonInventoryStorageTest {
 
         // Save in new file and read back
         jsonInventoryStorage.saveInventory(original, filePath);
-        ReadOnlyInventory readBack = jsonInventoryStorage.readInventory(filePath).get();
+        ReadOnlyDatabase<Ingredient> readBack = jsonInventoryStorage.readInventory(filePath).get();
         assertEquals(original, new Inventory(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addIngredient(HOON);
-        original.removeIngredient(APPLE);
+        original.add(HOON);
+        original.remove(APPLE);
         jsonInventoryStorage.saveInventory(original, filePath);
         readBack = jsonInventoryStorage.readInventory(filePath).get();
         assertEquals(original, new Inventory(readBack));
 
         // Save and read without specifying file path
-        original.addIngredient(IDA);
+        original.add(IDA);
         jsonInventoryStorage.saveInventory(original); // file path not specified
         readBack = jsonInventoryStorage.readInventory().get(); // file path not specified
         assertEquals(original, new Inventory(readBack));
@@ -97,7 +98,7 @@ public class JsonInventoryStorageTest {
     /**
      * Saves {@code addressBook} at the specified {@code filePath}.
      */
-    private void saveInventory(ReadOnlyInventory addressBook, String filePath) {
+    private void saveInventory(ReadOnlyDatabase<Ingredient> addressBook, String filePath) {
         try {
             new JsonInventoryStorage(Paths.get(filePath))
                     .saveInventory(addressBook, addToTestDataPathIfNotNull(filePath));
