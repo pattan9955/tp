@@ -23,17 +23,17 @@ public class AddRecipeCommand extends RecipeCommand {
             + RECIPE_KEYWORD
             + ": Adds a recipe to the RecipeBook. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_INGREDIENT + "INGREDIENTS"
-            + PREFIX_STEP + "STEPS"
-            + PREFIX_DESCRIPTION + "OPTIONAL DESCRIPTION"
-            + "Example: " + COMMAND_WORD + RECIPE_KEYWORD + " "
-            + PREFIX_NAME + "Burger "
-            + PREFIX_INGREDIENT + "Buns "
-            + PREFIX_INGREDIENT + "Patty "
-            + PREFIX_STEP + "Toast the buns. "
-            + PREFIX_STEP + "Put the patty between the buns. "
-            + PREFIX_DESCRIPTION + "Great burger! ";
+            + PREFIX_NAME + " NAME "
+            + PREFIX_INGREDIENT + " INGREDIENTS"
+            + PREFIX_STEP + " STEPS"
+            + PREFIX_DESCRIPTION + " OPTIONAL DESCRIPTION\n"
+            + "Example: " + COMMAND_WORD + " " + RECIPE_KEYWORD + " "
+            + PREFIX_NAME + " Burger "
+            + PREFIX_INGREDIENT + " Buns "
+            + PREFIX_INGREDIENT + " Patty "
+            + PREFIX_STEP + " Toast the buns. "
+            + PREFIX_STEP + " Put the patty between the buns. "
+            + PREFIX_DESCRIPTION + " Great burger! ";
 
     public static final String MESSAGE_SUCCESS = "New recipe added: %1$s";
     public static final String MESSAGE_DUPLICATE_RECIPE = "This recipe already exists in the Inventory";
