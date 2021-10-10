@@ -5,8 +5,11 @@ import static java.util.Objects.requireNonNull;
 import java.util.Comparator;
 import java.util.List;
 
+import fridgy.model.base.UniqueDataList;
+import fridgy.model.base.exceptions.DuplicateItemException;
 import fridgy.model.ingredient.Ingredient;
-import fridgy.model.ingredient.UniqueIngredientList;
+import fridgy.model.ingredient.IngredientDefaultComparator;
+import fridgy.model.ingredient.exceptions.DuplicateIngredientException;
 import javafx.collections.ObservableList;
 
 /**
@@ -15,7 +18,7 @@ import javafx.collections.ObservableList;
  */
 public class Inventory implements ReadOnlyInventory {
 
-    private final UniqueIngredientList ingredients;
+    private final UniqueDataList<Ingredient> ingredients;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,7 +28,7 @@ public class Inventory implements ReadOnlyInventory {
      *   among constructors.
      */
     {
-        ingredients = new UniqueIngredientList();
+        ingredients = new UniqueDataList<>(new IngredientDefaultComparator());
     }
 
     public Inventory() {}
@@ -45,7 +48,12 @@ public class Inventory implements ReadOnlyInventory {
      * {@code ingredients} must not contain duplicate ingredients.
      */
     public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients.setIngredients(ingredients);
+        try {
+            this.ingredients.replace(ingredients);
+        } catch (DuplicateItemException e) {
+            // throw a more specific exception
+            throw new DuplicateIngredientException();
+        }
     }
 
     /**
@@ -84,7 +92,7 @@ public class Inventory implements ReadOnlyInventory {
     public void setIngredient(Ingredient target, Ingredient editedIngredient) {
         requireNonNull(editedIngredient);
 
-        ingredients.setIngredient(target, editedIngredient);
+        ingredients.set(target, editedIngredient);
     }
 
     /**

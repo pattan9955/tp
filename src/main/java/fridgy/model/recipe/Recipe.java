@@ -7,11 +7,13 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import fridgy.model.base.Eq;
+
 /**
  * Represents a recipe in the recipe book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Recipe {
+public class Recipe implements Eq {
 
     // Identity Field
     private final Name name;
@@ -60,6 +62,17 @@ public class Recipe {
 
         return otherRecipe != null
                 && otherRecipe.getName().equals(getName());
+    }
+
+    @Override
+    public boolean isSame(Eq other) {
+        if (other == this) {
+            return true;
+        }
+        if (other instanceof Recipe) {
+            return isSameRecipe((Recipe) other);
+        }
+        return false;
     }
 
     /**

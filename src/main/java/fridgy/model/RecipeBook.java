@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import fridgy.model.base.UniqueDataList;
+import fridgy.model.base.exceptions.DuplicateItemException;
 import fridgy.model.recipe.Recipe;
-import fridgy.model.recipe.UniqueRecipeList;
+import fridgy.model.recipe.exceptions.DuplicateRecipeException;
 import javafx.collections.ObservableList;
 
 
@@ -15,7 +17,7 @@ import javafx.collections.ObservableList;
  */
 public class RecipeBook implements ReadOnlyRecipeBook {
 
-    private final UniqueRecipeList recipes;
+    private final UniqueDataList<Recipe> recipes;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,7 +27,7 @@ public class RecipeBook implements ReadOnlyRecipeBook {
      *   among constructors.
      */
     {
-        recipes = new UniqueRecipeList();
+        recipes = new UniqueDataList<Recipe>();
     }
 
     public RecipeBook() {}
@@ -45,7 +47,13 @@ public class RecipeBook implements ReadOnlyRecipeBook {
      * {@code recipes} must not contain duplicate recipes.
      */
     public void setRecipes(List<Recipe> recipes) {
-        this.recipes.setRecipes(recipes);
+        try {
+            this.recipes.replace(recipes);
+        } catch (DuplicateItemException e) {
+            // throws a more specific exception
+            throw new DuplicateRecipeException();
+        }
+
     }
 
     /**
@@ -83,7 +91,7 @@ public class RecipeBook implements ReadOnlyRecipeBook {
     public void setRecipe(Recipe target, Recipe editedRecipe) {
         requireNonNull(editedRecipe);
 
-        recipes.setRecipe(target, editedRecipe);
+        recipes.set(target, editedRecipe);
     }
 
     /**

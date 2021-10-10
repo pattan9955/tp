@@ -3,8 +3,10 @@ package fridgy.model.base;
 import static fridgy.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import fridgy.model.base.exceptions.DuplicateItemException;
 import fridgy.model.recipe.exceptions.DuplicateRecipeException;
@@ -21,6 +23,15 @@ public class UniqueDataList<T extends Eq> implements Iterable<T> {
     private final ObservableList<T> internalList = FXCollections.observableArrayList();
     private final ObservableList<T> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+
+    private Optional<Comparator<T>> comparator;
+
+    public UniqueDataList(Comparator<T> comparator) {
+        this.comparator = Optional.ofNullable(comparator);
+    }
+    public UniqueDataList() {
+        this.comparator = Optional.empty();
+    };
 
     /**
      * Returns true if the list contains an equivalent item as the given argument.
@@ -40,6 +51,7 @@ public class UniqueDataList<T extends Eq> implements Iterable<T> {
             throw new DuplicateRecipeException();
         }
         internalList.add(toAdd);
+        sort();
     }
 
     /**
@@ -60,6 +72,7 @@ public class UniqueDataList<T extends Eq> implements Iterable<T> {
         }
 
         internalList.set(index, editedItem);
+        sort();
     }
 
     /**
@@ -71,6 +84,7 @@ public class UniqueDataList<T extends Eq> implements Iterable<T> {
         if (!internalList.remove(toRemove)) {
             throw new RecipeNotFoundException();
         }
+        sort();
     }
 
     /**
@@ -79,6 +93,7 @@ public class UniqueDataList<T extends Eq> implements Iterable<T> {
     public void replace(UniqueDataList<T> replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        sort();
     }
 
     /**
@@ -92,6 +107,7 @@ public class UniqueDataList<T extends Eq> implements Iterable<T> {
         }
 
         internalList.setAll(items);
+        sort();
     }
 
     /**
@@ -109,13 +125,28 @@ public class UniqueDataList<T extends Eq> implements Iterable<T> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueDataList // instanceof handles nulls
-                && internalList.equals(((UniqueDataList) other).internalList));
+                || (other instanceof UniqueDataList<?> // instanceof handles nulls
+                && internalList.equals(((UniqueDataList<?>) other).internalList));
     }
 
     @Override
     public int hashCode() {
         return internalList.hashCode();
+    }
+
+    /**
+     * Sorts the list of items using the current comparator.
+     */
+    public void sort() {
+        comparator.ifPresent(internalList::sort);
+    }
+
+    /**
+     * Sorts the list of items using the specified comparator.
+     */
+    public void sort(Comparator<T> comparator) {
+        this.comparator = Optional.ofNullable(comparator);
+        sort();
     }
 
     private boolean itemsAreUnique(List<T> items) {
