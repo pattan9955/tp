@@ -20,12 +20,12 @@ import fridgy.storage.recipe.JsonAdaptedRecipe;
 @JsonRootName(value = "recipebook")
 class JsonSerializableRecipeBook {
 
-    public static final String MESSAGE_DUPLICATE_RECIPE = "Recipes list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_RECIPE = "Recipes list contains duplicate recipe(s).";
 
     private final List<JsonAdaptedRecipe> recipes = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableRecipeBook} with the given persons.
+     * Constructs a {@code JsonSerializableRecipeBook} with the given recipes.
      */
     @JsonCreator
     public JsonSerializableRecipeBook(@JsonProperty("recipes") List<JsonAdaptedRecipe> recipes) {
@@ -49,11 +49,11 @@ class JsonSerializableRecipeBook {
     public RecipeBook toModelType() throws IllegalValueException {
         RecipeBook recipeBook = new RecipeBook();
         for (JsonAdaptedRecipe jsonAdaptedRecipe : recipes) {
-            Recipe person = jsonAdaptedRecipe.toModelType();
-            if (recipeBook.hasRecipe(person)) {
+            Recipe recipe = jsonAdaptedRecipe.toModelType();
+            if (recipeBook.hasRecipe(recipe)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_RECIPE);
             }
-            recipeBook.addRecipe(person);
+            recipeBook.addRecipe(recipe);
         }
         return recipeBook;
     }
