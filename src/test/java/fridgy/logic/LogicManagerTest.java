@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.recipe.Recipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -19,7 +21,6 @@ import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
 import fridgy.model.ReadOnlyInventory;
-import fridgy.model.ReadOnlyRecipeBook;
 import fridgy.model.UserPrefs;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.storage.JsonInventoryStorage;
@@ -175,7 +176,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveRecipeBook(ReadOnlyRecipeBook recipeBook, Path filePath) throws IOException {
+        public void saveRecipeBook(ReadOnlyDatabase<Recipe> recipeBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

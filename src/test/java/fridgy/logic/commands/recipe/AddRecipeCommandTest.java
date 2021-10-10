@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
-import fridgy.model.ReadOnlyRecipeBook;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.RecipeBook;
 import fridgy.model.RecipeModel;
 import fridgy.model.recipe.Recipe;
@@ -100,12 +100,12 @@ public class AddRecipeCommandTest {
         }
 
         @Override
-        public void setRecipeBook(ReadOnlyRecipeBook recipeBook) {
+        public void setRecipeBook(ReadOnlyDatabase<Recipe> recipeBook) {
             throw new AssertionError("Should not be used!");
         }
 
         @Override
-        public ReadOnlyRecipeBook getRecipeBook() {
+        public ReadOnlyDatabase<Recipe> getRecipeBook() {
             throw new AssertionError("Should not be used!");
         }
 

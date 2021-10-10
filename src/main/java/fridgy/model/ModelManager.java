@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.commons.core.LogsCenter;
+import fridgy.model.base.Database;
 import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
@@ -25,7 +26,7 @@ public class ModelManager implements Model {
 
 
     private final Inventory inventory;
-    private final RecipeBook recipeBook;
+    private final Database<Recipe> recipeBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Ingredient> filteredIngredients;
     private final FilteredList<Recipe> filteredRecipes;
@@ -43,7 +44,7 @@ public class ModelManager implements Model {
                 + " and user prefs " + userPrefs);
 
         this.inventory = new Inventory(inventory);
-        this.recipeBook = new RecipeBook(recipeBook);
+        this.recipeBook = new Database<>(recipeBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredIngredients = new FilteredList<>(this.inventory.getIngredientList());
         filteredRecipes = new FilteredList<>(this.recipeBook.getList());
@@ -138,12 +139,12 @@ public class ModelManager implements Model {
     //=========== RecipeBook ================================================================================
 
     @Override
-    public void setRecipeBook(ReadOnlyRecipeBook recipeBook) {
+    public void setRecipeBook(ReadOnlyDatabase<Recipe> recipeBook) {
         this.recipeBook.resetDatabase(recipeBook);
     }
 
     @Override
-    public ReadOnlyRecipeBook getRecipeBook() {
+    public ReadOnlyDatabase<Recipe> getRecipeBook() {
         return recipeBook;
     }
 

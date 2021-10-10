@@ -3,6 +3,7 @@ package fridgy.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.recipe.Recipe;
 import javafx.collections.ObservableList;
 
@@ -23,10 +24,10 @@ public interface RecipeModel {
     /**
      * Replaces recipe book data with the data in {@code recipeBook}.
      */
-    void setRecipeBook(ReadOnlyRecipeBook recipeBook);
+    void setRecipeBook(ReadOnlyDatabase<Recipe> recipeBook);
 
     /** Returns the RecipeBook */
-    ReadOnlyRecipeBook getRecipeBook();
+    ReadOnlyDatabase<Recipe> getRecipeBook();
 
 
     /**

@@ -8,9 +8,10 @@ import java.util.logging.Logger;
 import fridgy.commons.core.LogsCenter;
 import fridgy.commons.exceptions.DataConversionException;
 import fridgy.model.ReadOnlyInventory;
-import fridgy.model.ReadOnlyRecipeBook;
 import fridgy.model.ReadOnlyUserPrefs;
 import fridgy.model.UserPrefs;
+import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.recipe.Recipe;
 
 /**
  * Manages storage of Inventory data in local storage.
@@ -88,23 +89,23 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyRecipeBook> readRecipeBook() throws DataConversionException, IOException {
+    public Optional<ReadOnlyDatabase<Recipe>> readRecipeBook() throws DataConversionException, IOException {
         return readRecipeBook(recipeBookStorage.getRecipeBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyRecipeBook> readRecipeBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyDatabase<Recipe>> readRecipeBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
         return recipeBookStorage.readRecipeBook(filePath);
     }
 
     @Override
-    public void saveRecipeBook(ReadOnlyRecipeBook recipeBook) throws IOException {
+    public void saveRecipeBook(ReadOnlyDatabase<Recipe> recipeBook) throws IOException {
         saveRecipeBook(recipeBook, recipeBookStorage.getRecipeBookFilePath());
     }
 
     @Override
-    public void saveRecipeBook(ReadOnlyRecipeBook recipeBook, Path filePath) throws IOException {
+    public void saveRecipeBook(ReadOnlyDatabase<Recipe> recipeBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         recipeBookStorage.saveRecipeBook(recipeBook, filePath);
     }

@@ -17,10 +17,11 @@ import fridgy.model.Inventory;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
 import fridgy.model.ReadOnlyInventory;
-import fridgy.model.ReadOnlyRecipeBook;
 import fridgy.model.ReadOnlyUserPrefs;
 import fridgy.model.RecipeBook;
 import fridgy.model.UserPrefs;
+import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.recipe.Recipe;
 import fridgy.model.util.SampleDataUtil;
 import fridgy.storage.InventoryStorage;
 import fridgy.storage.JsonInventoryStorage;
@@ -101,8 +102,8 @@ public class MainApp extends Application {
             initialInventory = new Inventory();
         }
 
-        Optional<ReadOnlyRecipeBook> recipeBookOptional;
-        ReadOnlyRecipeBook initialRecipeBook;
+        Optional<ReadOnlyDatabase<Recipe>> recipeBookOptional;
+        ReadOnlyDatabase<Recipe> initialRecipeBook;
         try {
             recipeBookOptional = storage.readRecipeBook();
             if (!recipeBookOptional.isPresent()) {

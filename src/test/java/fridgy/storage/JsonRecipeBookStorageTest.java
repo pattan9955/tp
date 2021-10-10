@@ -12,11 +12,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.recipe.Recipe;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import fridgy.commons.exceptions.DataConversionException;
-import fridgy.model.ReadOnlyRecipeBook;
 import fridgy.model.RecipeBook;
 
 
@@ -32,7 +33,7 @@ public class JsonRecipeBookStorageTest {
         assertThrows(NullPointerException.class, () -> readRecipeBook(null));
     }
 
-    private java.util.Optional<ReadOnlyRecipeBook> readRecipeBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyDatabase<Recipe>> readRecipeBook(String filePath) throws Exception {
         return new JsonRecipeBookStorage(Paths.get(filePath)).readRecipeBook(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -70,7 +71,7 @@ public class JsonRecipeBookStorageTest {
 
         // Save in new file and read back
         jsonRecipeBookStorage.saveRecipeBook(original, filePath);
-        ReadOnlyRecipeBook readBack = jsonRecipeBookStorage.readRecipeBook(filePath).get();
+        ReadOnlyDatabase<Recipe> readBack = jsonRecipeBookStorage.readRecipeBook(filePath).get();
         assertEquals(original, new RecipeBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
@@ -96,7 +97,7 @@ public class JsonRecipeBookStorageTest {
     /**
      * Saves {@code addressBook} at the specified {@code filePath}.
      */
-    private void saveRecipeBook(ReadOnlyRecipeBook addressBook, String filePath) {
+    private void saveRecipeBook(ReadOnlyDatabase<Recipe> addressBook, String filePath) {
         try {
             new JsonRecipeBookStorage(Paths.get(filePath))
                     .saveRecipeBook(addressBook, addToTestDataPathIfNotNull(filePath));

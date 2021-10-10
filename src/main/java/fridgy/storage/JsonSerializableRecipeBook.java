@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import fridgy.commons.exceptions.IllegalValueException;
-import fridgy.model.ReadOnlyRecipeBook;
 import fridgy.model.RecipeBook;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.recipe.Recipe;
 import fridgy.storage.recipe.JsonAdaptedRecipe;
 
@@ -33,11 +33,11 @@ class JsonSerializableRecipeBook {
     }
 
     /**
-     * Converts a given {@code ReadOnlyRecipeBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyDatabase<Recipe>} into this class for Jackson use.
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableRecipeBook}.
      */
-    public JsonSerializableRecipeBook(ReadOnlyRecipeBook source) {
+    public JsonSerializableRecipeBook(ReadOnlyDatabase<Recipe> source) {
         recipes.addAll(source.getList().stream().map(JsonAdaptedRecipe::new).collect(Collectors.toList()));
     }
 
