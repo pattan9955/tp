@@ -9,8 +9,10 @@ import fridgy.commons.core.LogsCenter;
 import fridgy.logic.commands.Command;
 import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
+import fridgy.logic.commands.recipe.RecipeCommand;
 import fridgy.logic.parser.InventoryParser;
 import fridgy.logic.parser.exceptions.ParseException;
+import fridgy.logic.parser.recipe.RecipeParser;
 import fridgy.model.Model;
 import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
@@ -27,6 +29,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final InventoryParser addressBookParser;
+    private final RecipeParser recipeBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -35,6 +38,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new InventoryParser();
+        recipeBookParser = new RecipeParser();
     }
 
     @Override
@@ -42,11 +46,27 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+
+        // This is a hacked together way of supporting both recipe and ingredient from frontend.
+        // Ideally this routing should be done in parser / use generic command classes.
+        if (commandText.split(" ").length > 1) {
+            switch (commandText.split(" ")[1]) {
+            case "recipe":
+                RecipeCommand recipeCommand = recipeBookParser.parseCommand(commandText);
+                commandResult = recipeCommand.execute(model);
+                break;
+            default:
+                Command command = addressBookParser.parseCommand(commandText);
+                commandResult = command.execute(model);
+            }
+        } else {
+            Command command = addressBookParser.parseCommand(commandText);
+            commandResult = command.execute(model);
+        }
 
         try {
             storage.saveInventory(model.getInventory());
+            storage.saveRecipeBook(model.getRecipeBook());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }

@@ -20,7 +20,7 @@ public class DeleteRecipeCommand extends RecipeCommand {
             + ": Deletes the recipe identified by the index number used in the displayed recipe list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
-            + RECIPE_KEYWORD + " "
+            + RECIPE_KEYWORD
             + " 1";
 
     public static final String MESSAGE_SUCCESS = "Recipe deleted: %1$s";
