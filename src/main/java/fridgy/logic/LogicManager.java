@@ -16,6 +16,7 @@ import fridgy.logic.parser.recipe.RecipeParser;
 import fridgy.model.Model;
 import fridgy.model.ReadOnlyInventory;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.recipe.Recipe;
 import fridgy.storage.Storage;
 import javafx.collections.ObservableList;
 
@@ -82,6 +83,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Ingredient> getFilteredIngredientList() {
         return model.getFilteredIngredientList();
+    }
+
+    @Override
+    public ObservableList<Recipe> getFilteredRecipeList() {
+        return model.getFilteredRecipeList();
     }
 
     @Override

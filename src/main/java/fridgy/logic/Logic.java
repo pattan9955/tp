@@ -9,6 +9,7 @@ import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.Model;
 import fridgy.model.ReadOnlyInventory;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.recipe.Recipe;
 import javafx.collections.ObservableList;
 
 /**
@@ -33,6 +34,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of ingredients */
     ObservableList<Ingredient> getFilteredIngredientList();
+
+    /** Returns an unmodifiable view of the filtered list of recipes */
+    ObservableList<Recipe> getFilteredRecipeList();
 
     /**
      * Returns the user prefs' Inventory file path.

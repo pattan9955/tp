@@ -1,0 +1,254 @@
+.main-window {
+    -fx-background-color: #FFFFFF;
+    -fx-font-family: "Montserrat";
+}
+
+.root {
+    -fx-focus-color: transparent;
+    -fx-background-color: #FFFFFF;
+    -fx-faint-focus-color: transparent;
+}
+
+.vbox {
+    -fx-background-color: #FFFFFF;
+}
+
+.hbox {
+    -fx-background-color: #FFFFFF;
+}
+
+/*Menu bar*/
+.menu-bar {
+    -fx-background-color: #0046fe;
+}
+
+.menu-bar .label {
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-text-fill: white;
+    -fx-opacity: 0.9;
+}
+
+.menu-item .label {
+    -fx-font-family: "Montserrat";
+    -fx-text-fill: black;
+    -fx-opacity: 0.9;
+}
+
+/*Status bar*/
+.status-bar {
+    -fx-background-color: #0046fe;
+    -fx-pref-height: 30px;
+}
+
+.status-bar .label {
+    -fx-text-fill: white;
+    -fx-font-weight: normal;
+    -fx-padding: 4px;
+}
+
+/*Text area (result display)*/
+.text-area {
+    -fx-background-color: #EBECF0;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: transparent;
+    -fx-padding: 5px;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+
+/* Make split pane divider transparent*/
+.split-pane:horizontal > .split-pane-divider {
+    -fx-background-color: transparent;
+}
+.split-pane:vertical > .split-pane-divider {
+    -fx-background-color: transparent;
+}
+
+.split-pane {
+    -fx-background-color: #FFFFFF;
+}
+
+/* tab pane*/
+.tab-pane .tab-header-background {
+    -fx-background-color: white;
+}
+
+.tab-pane .tab-header-area .tab-down-button {
+    -fx-background-color: WHITE;
+    -fx-min-width: 0.8em;
+    -fx-max-width: 0.8em;
+    -fx-min-height: 1.3em;
+    -fx-max-height: 1.3em;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-pane
+{
+    -fx-tab-min-width:90px;
+}
+
+.tab{
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+
+.tab-pane .tab
+{
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent transparent transparent;
+}
+
+/*Change tab header color on hover*/
+.tab-pane .tab:hover
+{
+    -fx-background-color: #EBF2FA;
+}
+
+/*Underline and bold tab header when selected*/
+.tab-pane .tab:selected
+{
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #0046fe transparent;
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-border-width: 0 0 2 0;
+}
+
+/*Color tab header label when selected*/
+.tab:selected .tab-label {
+    -fx-text-fill: #0046fe;
+}
+
+/*Text field*/
+.text-field {
+    -fx-focus-color: #4059A9;
+    -fx-padding: 0.333333em 0 0.333333em 0;
+    -fx-background-color: transparent, transparent, transparent;
+    -fx-border-color: transparent transparent #EBF2FA transparent;
+    -fx-prompt-text-fill: #C5C5C5;
+}
+
+.text-field > .input-line {
+    -fx-background-color: -jfx-unfocus-color;
+    -fx-pref-height: 1px;
+    -fx-translate-y: 1px;
+}
+
+.text-field > .input-focused-line {
+    -fx-background-color: -jfx-focus-color;
+    -fx-pref-height: 2px;
+}
+
+.text-field:focused {
+    -fx-background-color: transparent, transparent, transparent;
+    -fx-border-color: transparent transparent #1C5D99 transparent;
+    -fx-prompt-text-fill: #C5C5C5;
+}
+
+/*List view*/
+.list-view {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.list-cell {
+    -fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 0;
+    -fx-padding: 10 10 10 10;
+}
+
+.list-cell:filled:even {
+    -fx-background-color: transparent;
+}
+
+.list-cell:filled:odd {
+    -fx-background-color: #EBF2FA;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: derive(#1C5D99, 100%);
+}
+
+.list-cell .label {
+    -fx-text-fill: black;
+}
+
+.cell_big_label {
+    -fx-font-family: "Montserrat Semibold";
+    -fx-font-size: 16px;
+}
+
+.cell_small_label {
+    -fx-font-family: "Montserrat Regular";
+    -fx-font-size: 13px;
+}
+
+#tags {
+    -fx-hgap: 9;
+    -fx-vgap: 4;
+}
+
+#tags .label {
+    -fx-text-fill: white;
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-background-color:  #0046fe;
+    -fx-padding: 2 4 2 4;
+    -fx-border-radius: 5;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#ingredients {
+    -fx-hgap: 9;
+    -fx-vgap: 4;
+}
+
+#ingredients .label {
+    -fx-text-fill: white;
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-background-color:  #0046fe;
+    -fx-padding: 2 4 2 4;
+    -fx-border-radius: 5;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+/*Scroll Bar*/
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: derive(#d8d8d8, 0%);
+    -fx-background-insets: 3;
+}
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+}
+
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 1 8 1 8;
+}
+
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 8 1 8 1;
+}
+

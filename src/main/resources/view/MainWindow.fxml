@@ -6,56 +6,92 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
 
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Description App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
-  <icons>
-    <Image url="@/images/address_book_32.png" />
-  </icons>
-  <scene>
-    <Scene>
-      <stylesheets>
-        <URL value="@Fonts.css"/>
-        <URL value="@DarkTheme.css" />
-        <URL value="@Extensions.css" />
-      </stylesheets>
-
-      <VBox>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-          </Menu>
-        </MenuBar>
-
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
-
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
-
-        <VBox fx:id="ingredientList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="ingredientListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
-
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
-      </VBox>
-    </Scene>
-  </scene>
+<fx:root minHeight="750" minWidth="850" onCloseRequest="#handleExit" title="Fridgy" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/cute_fridge.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@Fonts.css" />
+                <URL value="@Main.css" />
+                <URL value="@Extensions.css" />
+            </stylesheets>
+            <AnchorPane styleClass="main-window" AnchorPane.bottomAnchor="0.0"
+                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <children>
+                    <MenuBar fx:id="menuBar" prefWidth="449.0" AnchorPane.leftAnchor="0.0"
+                             AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Menu mnemonicParsing="false" text="File">
+                            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Help">
+                            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+                        </Menu>
+                    </MenuBar>
+                    <HBox AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                          AnchorPane.topAnchor="30.0">
+                        <children>
+                            <TabPane minWidth="400.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                    <Tab text="Ingredient">
+                                        <content>
+                                            <VBox fx:id="ingredientList" minWidth="400" prefWidth="400" VBox.vgrow="ALWAYS"
+                                                  styleClass="main-window">
+                                                <padding>
+                                                    <Insets bottom="10" left="10" right="10" top="10" />
+                                                </padding>
+                                                <StackPane  styleClass="main-window" fx:id="ingredientListPanelPlaceholder"
+                                                            VBox.vgrow="ALWAYS" />
+                                            </VBox>
+                                        </content>
+                                    </Tab>
+                                    <Tab text="Recipe">
+                                        <content>
+                                            <VBox fx:id="recipeList" minWidth="400" prefWidth="400" VBox.vgrow="ALWAYS">
+                                                <padding>
+                                                    <Insets bottom="10" left="10" right="10" top="10" />
+                                                </padding>
+                                                <StackPane fx:id="recipeListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                                            </VBox>
+                                        </content>
+                                    </Tab>
+                                </tabs>
+                            </TabPane>
+                            <VBox>
+                                <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                </padding>
+                                <children>
+                                    <StackPane prefHeight="1000" />
+                                    <StackPane fx:id="commandBoxPlaceholder" prefWidth="1500"  prefHeight="48.0">
+                                        <padding>
+                                            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                        </padding>
+                                    </StackPane>
+                                    <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100"
+                                               minHeight="150" prefWidth="1500" prefHeight="150" VBox.vgrow="NEVER">
+                                        <padding>
+                                            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                        </padding>
+                                    </StackPane>
+                                </children>
+                            </VBox>
+                        </children>
+                    </HBox>
+                    <StackPane fx:id="statusbarPlaceholder" prefHeight="20.0" prefWidth="781.0"
+                               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                </children>
+            </AnchorPane>
+        </Scene>
+    </scene>
 </fx:root>
