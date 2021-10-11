@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="500" minWidth="850" onCloseRequest="#handleExit" title="Fridgy" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="750" minWidth="850" onCloseRequest="#handleExit" title="Fridgy" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/cute_fridge.png" />
     </icons>
@@ -26,7 +26,7 @@
                 <URL value="@Main.css" />
                 <URL value="@Extensions.css" />
             </stylesheets>
-            <AnchorPane prefHeight="563.0" prefWidth="966.0" styleClass="main-window" AnchorPane.bottomAnchor="0.0"
+            <AnchorPane styleClass="main-window" AnchorPane.bottomAnchor="0.0"
                         AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <children>
                     <MenuBar fx:id="menuBar" prefWidth="449.0" AnchorPane.leftAnchor="0.0"
