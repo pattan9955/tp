@@ -2,8 +2,6 @@ package fridgy.ui;
 
 import java.util.Comparator;
 
-import javax.print.attribute.standard.MediaSize;
-
 import fridgy.model.ingredient.Ingredient;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
