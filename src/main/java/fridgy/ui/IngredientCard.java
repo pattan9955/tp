@@ -2,6 +2,8 @@ package fridgy.ui;
 
 import java.util.Comparator;
 
+import javax.print.attribute.standard.MediaSize;
+
 import fridgy.model.ingredient.Ingredient;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -15,6 +17,12 @@ import javafx.scene.layout.Region;
 public class IngredientCard extends UiPart<Region> {
 
     private static final String FXML = "IngredientListCard.fxml";
+
+    // Char limits
+    private static final int DESCRIPTION_CHAR_LIMIT = 90;
+    private static final int NAME_CHAR_LIMIT = 25;
+    private static final int QUANTITY_CHAR_LIMIT = 50;
+    private static final int TAG_CHAR_LIMIT = 55;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -47,14 +55,28 @@ public class IngredientCard extends UiPart<Region> {
     public IngredientCard(Ingredient ingredient, int displayedIndex) {
         super(FXML);
         this.ingredient = ingredient;
+
+        String ingredientName = UiUtil.truncateText(ingredient.getName().fullName, NAME_CHAR_LIMIT);
+        String ingredientDescription = UiUtil.truncateText(ingredient.getDescription().value.orElse(""),
+                DESCRIPTION_CHAR_LIMIT);
+        String ingredientQuantity = UiUtil.truncateText(ingredient.getQuantity().value, QUANTITY_CHAR_LIMIT);
+
         id.setText(displayedIndex + ". ");
-        name.setText(ingredient.getName().fullName);
-        quantity.setText(ingredient.getQuantity().value);
-        description.setText(ingredient.getDescription().value.orElse(""));
+        name.setText(ingredientName);
+        quantity.setText(ingredientQuantity);
+        description.setText(ingredientDescription);
         expiryDate.setText("Expiring on: " + ingredient.getExpiryDate().toString());
         ingredient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    String name = tag.tagName;
+                    Label tagLabel = new Label(UiUtil.truncateText(name, TAG_CHAR_LIMIT));
+                    tagLabel.setWrapText(true);
+                    if (name == "expired") {
+                        tagLabel.setStyle("-fx-background-color: #CF1259;");
+                    }
+                    tags.getChildren().add(tagLabel);
+                });
     }
 
     @Override

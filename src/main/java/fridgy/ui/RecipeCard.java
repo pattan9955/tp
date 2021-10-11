@@ -16,6 +16,11 @@ public class RecipeCard extends UiPart<Region> {
 
     private static final String FXML = "RecipeListCard.fxml";
 
+    // Char limits
+    private static final int DESCRIPTION_CHAR_LIMIT = 155;
+    private static final int INGREDIENT_CHAR_LIMIT = 55;
+    private static final int NAME_CHAR_LIMIT = 25;
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -43,12 +48,19 @@ public class RecipeCard extends UiPart<Region> {
     public RecipeCard(Recipe recipe, int displayedIndex) {
         super(FXML);
         this.recipe = recipe;
+
+        String recipeName = UiUtil.truncateText(recipe.getName().fullName, NAME_CHAR_LIMIT);
+        String recipeDescription = UiUtil.truncateText(recipe.getDescription().orElse(""),
+                DESCRIPTION_CHAR_LIMIT);
+
         id.setText(displayedIndex + ". ");
-        name.setText(recipe.getName().fullName);
+        name.setText(recipeName);
         recipe.getIngredients().stream()
                 .sorted(Comparator.comparing(ingredient -> ingredient.getName()))
-                .forEach(ingredient -> ingredients.getChildren().add(new Label(ingredient.getName())));
-        description.setText(recipe.getDescription().orElse(""));
+                .forEach(ingredient -> ingredients.getChildren().add(
+                        new Label(UiUtil.truncateText(ingredient.getName(), INGREDIENT_CHAR_LIMIT)
+                        )));
+        description.setText(recipeDescription);
     }
 
     @Override
