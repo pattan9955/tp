@@ -4,11 +4,15 @@ import java.util.logging.Logger;
 
 import fridgy.commons.core.LogsCenter;
 import fridgy.model.ingredient.Ingredient;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 /**
  * Panel containing the list of ingredients.
@@ -23,10 +27,21 @@ public class IngredientListPanel extends UiPart<Region> {
     /**
      * Creates a {@code IngredientListPanel} with the given {@code ObservableList}.
      */
-    public IngredientListPanel(ObservableList<Ingredient> ingredientList) {
+    public IngredientListPanel(ObservableList<Ingredient> ingredientList, ScrollPane viewDisplay, VBox displayContainer) {
         super(FXML);
         ingredientListView.setItems(ingredientList);
         ingredientListView.setCellFactory(listView -> new IngredientListViewCell());
+        viewDisplay.vvalueProperty().bind(displayContainer.heightProperty());
+        viewDisplay.hvalueProperty().bind(displayContainer.widthProperty());
+        ingredientListView.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<Ingredient>() {
+                    public void changed(ObservableValue<? extends Ingredient> ov,
+                                        Ingredient old_val, Ingredient new_val) {
+                        displayContainer.getChildren().clear();
+                        displayContainer.getChildren().add(new IngredientDisplay(new_val,
+                                ingredientList.indexOf(new_val) + 1).getRoot());
+                    }
+                });
     }
 
     /**

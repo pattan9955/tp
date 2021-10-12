@@ -252,3 +252,9 @@
     -fx-padding: 8 1 8 1;
 }
 
+/*View Display*/
+.view-display {
+    -fx-background-color: white;
+    -fx-background: white;
+}
+

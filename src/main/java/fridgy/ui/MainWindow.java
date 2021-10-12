@@ -11,6 +11,7 @@ import fridgy.logic.parser.exceptions.ParseException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -50,10 +51,13 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane recipeListPanelPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private ScrollPane viewDisplayPlaceholder;
 
     @FXML
-    private VBox displayWindowPlaceholder;
+    private VBox displayContainer;
+
+    @FXML
+    private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -121,11 +125,11 @@ public class MainWindow extends UiPart<Stage> {
         ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
         ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
 
-        recipeListPanel = new RecipeListPanel(logic.getFilteredRecipeList(), false, logic::isEnough);
+        recipeListPanel = new RecipeListPanel(logic.getFilteredRecipeList(), false);
         recipeListPanelPlaceholder.getChildren().add(recipeListPanel.getRoot());
 
-        ActiveItemPanel activeItemPanel = new ActiveItemPanel(logic.getActiveObservable(), logic::isEnough);
-        displayWindowPlaceholder.getChildren().add(activeItemPanel.getRoot());
+        ActiveItemPanel activeItemPanel = new ActiveItemPanel(logic.getActiveObservable());
+        displayContainer.getChildren().add(activeItemPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
