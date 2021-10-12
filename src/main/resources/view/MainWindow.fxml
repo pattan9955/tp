@@ -72,7 +72,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                 </padding>
                                 <children>
-                                    <StackPane prefHeight="1000" />
+                                    <VBox fx:id="displayWindowPlaceholder"  prefHeight="1000" />
                                     <StackPane fx:id="commandBoxPlaceholder" prefWidth="1500"  prefHeight="48.0">
                                         <padding>
                                             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />

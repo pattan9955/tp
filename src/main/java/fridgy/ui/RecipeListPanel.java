@@ -17,14 +17,18 @@ public class RecipeListPanel extends UiPart<Region> {
     private static final String FXML = "RecipeListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(RecipeListPanel.class);
 
+    private final boolean isDetailed;
+
     @FXML
     private ListView<Recipe> recipeListView;
 
     /**
      * Creates a {@code RecipeListPanel} with the given {@code ObservableList}.
+     * isDetailed flag determines if the recipe card will show the steps. This is added to allow component reuse.
      */
-    public RecipeListPanel(ObservableList<Recipe> recipeList) {
+    public RecipeListPanel(ObservableList<Recipe> recipeList, boolean isDetailed) {
         super(FXML);
+        this.isDetailed = isDetailed;
         recipeListView.setItems(recipeList);
         recipeListView.setCellFactory(listView -> new RecipeListViewCell());
     }
@@ -41,7 +45,7 @@ public class RecipeListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new RecipeCard(recipe, getIndex() + 1).getRoot());
+                setGraphic(new RecipeCard(recipe, getIndex() + 1, isDetailed).getRoot());
             }
         }
     }

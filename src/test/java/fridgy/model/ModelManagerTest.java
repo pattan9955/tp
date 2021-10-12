@@ -18,10 +18,12 @@ import org.junit.jupiter.api.Test;
 import fridgy.commons.core.GuiSettings;
 import fridgy.model.ingredient.IngredientDefaultComparator;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;
+import fridgy.model.recipe.Recipe;
 import fridgy.testutil.Assert;
 import fridgy.testutil.InventoryBuilder;
 import fridgy.testutil.RecipeBookBuilder;
 import fridgy.testutil.TypicalIngredients;
+import javafx.collections.ObservableList;
 
 public class ModelManagerTest {
 
@@ -33,6 +35,7 @@ public class ModelManagerTest {
         Assertions.assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new Inventory(), new Inventory(modelManager.getInventory()));
         assertEquals(new RecipeBook(), new RecipeBook(modelManager.getRecipeBook()));
+        assertTrue(modelManager.getActiveRecipe().size() == 0);
     }
 
     @Test
@@ -137,6 +140,30 @@ public class ModelManagerTest {
     @Test
     public void getFilteredRecipeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredRecipeList().remove(0));
+    }
+
+    @Test
+    public void setActiveRecipe_recipeNotInRecipeBook_doNothing() {
+        modelManager.addRecipe(BURGER);
+        modelManager.addRecipe(MAGGIE);
+        modelManager.setActiveRecipe(BURGER);
+        ObservableList<Recipe> expected = modelManager.getActiveRecipe();
+
+        modelManager.deleteRecipe(MAGGIE);
+        modelManager.setActiveRecipe(MAGGIE);
+
+        assertEquals(expected, modelManager.getActiveRecipe());
+    }
+
+    @Test
+    public void setActiveRecipe_recipeInRecipeBook_changeActiveRecipe() {
+        modelManager.addRecipe(BURGER);
+        modelManager.addRecipe(MAGGIE);
+        modelManager.setActiveRecipe(BURGER);
+        assertEquals(BURGER, modelManager.getActiveRecipe().get(0));
+
+        modelManager.setActiveRecipe(MAGGIE);
+        assertEquals(MAGGIE, modelManager.getActiveRecipe().get(0));
     }
 
     @Test

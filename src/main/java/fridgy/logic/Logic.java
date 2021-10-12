@@ -38,6 +38,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of recipes */
     ObservableList<Recipe> getFilteredRecipeList();
 
+    /** Returns an active recipe */
+    ObservableList<Recipe> getActiveRecipe();
+
     /**
      * Returns the user prefs' Inventory file path.
      */
