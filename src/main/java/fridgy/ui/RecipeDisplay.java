@@ -32,15 +32,13 @@ public class RecipeDisplay extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label nameDisplay;
+    private Label name;
     @FXML
-    private Label idDisplay;
+    private Label id;
     @FXML
-    private FlowPane ingredientsDisplay;
+    private FlowPane ingredients;
     @FXML
-    private Label descriptionDisplay;
-    @FXML
-    private Label stepsDisplay;
+    private Label description;
 
     /**
      * Creates a {@code RecipeCode} with the given {@code Recipe} and index to display.
@@ -49,15 +47,14 @@ public class RecipeDisplay extends UiPart<Region> {
         super(FXML);
         this.recipe = recipe;
 
-        idDisplay.setText(displayedIndex + ". ");
-        nameDisplay.setText(recipe.getName().fullName);
+        id.setText(displayedIndex + ". ");
+        name.setText(recipe.getName().fullName);
         recipe.getIngredients().stream()
                 .sorted(Comparator.comparing(ingredient -> ingredient.getName()))
-                .forEach(ingredient -> ingredientsDisplay.getChildren().add(
+                .forEach(ingredient -> ingredients.getChildren().add(
                         new Label(UiUtil.truncateText(ingredient.getName(), INGREDIENT_CHAR_LIMIT)
                         )));
-        descriptionDisplay.setText(recipe.getDescription().orElse(""));
-        // stepsDisplay.setText(recipe.getSteps().toString());
+        description.setText(recipe.getDescription().orElse(""));
     }
 
     @Override
@@ -74,7 +71,7 @@ public class RecipeDisplay extends UiPart<Region> {
 
         // state check
         RecipeDisplay card = (RecipeDisplay) other;
-        return idDisplay.getText().equals(card.idDisplay.getText())
+        return id.getText().equals(card.id.getText())
                 && recipe.equals(card.recipe);
     }
 }
