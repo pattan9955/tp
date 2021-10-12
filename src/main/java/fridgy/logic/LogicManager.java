@@ -91,6 +91,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Recipe> getActiveRecipe() {
+        return model.getActiveRecipe();
+    }
+
+    @Override
     public Path getInventoryFilePath() {
         return model.getInventoryFilePath();
     }

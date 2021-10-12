@@ -28,6 +28,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Ingredient> filteredIngredients;
     private final FilteredList<Recipe> filteredRecipes;
+    private FilteredList<Recipe> activeRecipe;
 
     /**
      * Initializes a ModelManager with the given inventory and userPrefs.
@@ -46,6 +47,11 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredIngredients = new FilteredList<>(this.inventory.getIngredientList());
         filteredRecipes = new FilteredList<>(this.recipeBook.getRecipeList());
+
+        // have to use some type of observable that can change to make UI auto update
+        activeRecipe = new FilteredList<>(this.recipeBook.getRecipeList());
+        // This feels like a hackish way to achieve what we want.
+        activeRecipe.setPredicate(unused -> false);
     }
 
     public ModelManager() {
@@ -168,6 +174,19 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedRecipe);
 
         recipeBook.setRecipe(target, editedRecipe);
+    }
+
+    @Override
+    public ObservableList<Recipe> getActiveRecipe() {
+        return activeRecipe;
+    }
+
+    @Override
+    public void setActiveRecipe(Recipe recipe) {
+        requireNonNull(recipe);
+        if (recipeBook.hasRecipe(recipe)) {
+            activeRecipe.setPredicate(x -> x.equals(recipe));
+        }
     }
 
     //=========== Filtered Ingredient List Accessors =============================================================
