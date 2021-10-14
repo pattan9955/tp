@@ -22,6 +22,10 @@
     -fx-background-color: #0046fe;
 }
 
+.menu:hover {
+    -fx-cursor: hand;
+}
+
 .menu-bar .label {
     -fx-font-family: "Montserrat SemiBold";
     -fx-text-fill: white;
@@ -32,6 +36,10 @@
     -fx-font-family: "Montserrat";
     -fx-text-fill: black;
     -fx-opacity: 0.9;
+}
+
+.menu-item:hover {
+    -fx-cursor: hand;
 }
 
 /*Status bar*/
@@ -48,7 +56,8 @@
 
 /*Text area (result display)*/
 .text-area {
-    -fx-background-color: #EBECF0;
+    /*-fx-background-color: #EBECF0;*/
+    -fx-background-color: #f9f9f9;
     -fx-background-radius: 15;
     -fx-border-radius: 15;
     -fx-border-color: transparent;
@@ -107,6 +116,7 @@
 
 .tab-pane .tab
 {
+    -fx-font-family: "Montserrat SemiBold";
     -fx-background-color: white;
     -fx-border-color: transparent transparent transparent transparent;
 }
@@ -115,6 +125,7 @@
 .tab-pane .tab:hover
 {
     -fx-background-color: #EBF2FA;
+    -fx-cursor: hand;
 }
 
 /*Underline and bold tab header when selected*/
@@ -123,7 +134,7 @@
     -fx-background-color: white;
     -fx-border-color: transparent transparent #0046fe transparent;
     -fx-font-family: "Montserrat SemiBold";
-    -fx-border-width: 0 0 2 0;
+    -fx-border-width: 0 0 3 0;
 }
 
 /*Color tab header label when selected*/
@@ -153,7 +164,8 @@
 
 .text-field:focused {
     -fx-background-color: transparent, transparent, transparent;
-    -fx-border-color: transparent transparent #1C5D99 transparent;
+    /*-fx-border-color: transparent transparent #1C5D99 transparent;*/
+    -fx-border-color: transparent transparent #0046fe transparent;
     -fx-prompt-text-fill: #C5C5C5;
 }
 
@@ -175,11 +187,29 @@
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #EBF2FA;
+    /*-fx-background-color: #EBF2FA;*/
+    -fx-background-color: #f9f9f9;
 }
 
-.list-cell:filled:selected {
-    -fx-background-color: derive(#1C5D99, 100%);
+.list-cell:filled:hover {
+    -fx-background-color: #EBF2FA;
+    -fx-cursor: hand;
+    /*-fx-border-color: transparent transparent #f9f9f9 transparent;*/
+    /*-fx-border-width: 0 0 2 0;*/
+}
+
+.list-cell:filled:odd:selected {
+    /*-fx-background-color: derive(#1C5D99, 100%);*/
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: transparent transparent transparent #0046fe;
+    -fx-border-width: 0 0 0 3;
+}
+
+.list-cell:filled:even:selected {
+    /*-fx-background-color: derive(#1C5D99, 100%);*/
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent transparent #0046fe;
+    -fx-border-width: 0 0 0 3;
 }
 
 .list-cell .label {
@@ -232,7 +262,7 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#d8d8d8, 0%);
+    -fx-background-color: derive(#d8d8d8, 50%);
     -fx-background-insets: 3;
 }
 .scroll-bar .increment-button, .scroll-bar .decrement-button {

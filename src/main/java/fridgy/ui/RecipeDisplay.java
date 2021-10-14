@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 /**
  * An UI component that displays information of a {@code Recipe}.
@@ -39,6 +40,8 @@ public class RecipeDisplay extends UiPart<Region> {
     private FlowPane ingredients;
     @FXML
     private Label description;
+    @FXML
+    private VBox steps;
 
     /**
      * Creates a {@code RecipeCode} with the given {@code Recipe} and index to display.
@@ -55,6 +58,7 @@ public class RecipeDisplay extends UiPart<Region> {
                         new Label(UiUtil.truncateText(ingredient.getName(), INGREDIENT_CHAR_LIMIT)
                         )));
         description.setText(recipe.getDescription().orElse(""));
+        // steps.getChildren().add(new Label("Hello"));
     }
 
     @Override
