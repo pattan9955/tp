@@ -25,7 +25,7 @@ public class UiUtil {
     public static <T> String numberedList(List<T> list) {
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i < list.size() + 1; i++) {
-            sb.append(i + ".")
+            sb.append(i + ". ")
                 .append(list.get(i - 1).toString())
                 .append("\n");
         }
