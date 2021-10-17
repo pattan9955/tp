@@ -89,7 +89,7 @@ public class ModelManagerTest {
 
     @Test
     public void hasIngredient_nullIngredient_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.has((Ingredient)null));
+        Assert.assertThrows(NullPointerException.class, () -> modelManager.has((Ingredient) null));
     }
 
     @Test
@@ -124,7 +124,7 @@ public class ModelManagerTest {
 
     @Test
     public void hasRecipe_nullRecipe_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.has((Recipe)null));
+        assertThrows(NullPointerException.class, () -> modelManager.has((Recipe) null));
     }
 
     @Test
