@@ -135,6 +135,16 @@ public class AddRecipeCommandTest {
         }
 
         @Override
+        public void setActiveRecipe(Recipe recipe) {
+            throw new AssertionError("Should not be used!");
+        }
+
+        @Override
+        public ObservableList<Recipe> getActiveRecipe() {
+            throw new AssertionError("Should not be used!");
+        }
+
+        @Override
         public void updateFilteredRecipeList(Predicate<Recipe> predicate) {
             throw new AssertionError("Should not be used!");
         }

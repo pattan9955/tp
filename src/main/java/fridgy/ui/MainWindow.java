@@ -15,6 +15,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -32,6 +33,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private IngredientListPanel ingredientListPanel;
+    private RecipeListPanel recipeListPanel;
+    private RecipeListPanel activeRecipePanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -45,7 +48,13 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane ingredientListPanelPlaceholder;
 
     @FXML
+    private StackPane recipeListPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private VBox displayWindowPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -112,6 +121,12 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
         ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
+
+        recipeListPanel = new RecipeListPanel(logic.getFilteredRecipeList(), false);
+        recipeListPanelPlaceholder.getChildren().add(recipeListPanel.getRoot());
+
+        activeRecipePanel = new RecipeListPanel(logic.getActiveRecipe(), true);
+        displayWindowPlaceholder.getChildren().add(activeRecipePanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

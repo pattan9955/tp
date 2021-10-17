@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import fridgy.commons.core.index.Index;
 import fridgy.model.Model;
@@ -51,5 +52,14 @@ public class TestUtil {
      */
     public static Ingredient getIngredient(Model model, Index index) {
         return model.getFilteredIngredientList().get(index.getZeroBased());
+    }
+
+    /**
+     * Returns a string of {@code char} of the length specified in the {@code length}.
+     */
+    public static String createString(char ch, int length) {
+        char[] charArray = new char[length];
+        Arrays.fill(charArray, ch);
+        return new String(charArray);
     }
 }

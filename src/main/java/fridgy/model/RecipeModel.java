@@ -57,6 +57,9 @@ public interface RecipeModel {
     /** Returns an unmodifiable view of the filtered recipe list */
     ObservableList<Recipe> getFilteredRecipeList();
 
+    ObservableList<Recipe> getActiveRecipe();
+    void setActiveRecipe(Recipe target);
+
     /**
      * Updates the filter of the filtered recipe list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

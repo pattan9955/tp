@@ -21,66 +21,66 @@ import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.recipe.Recipe;
 import javafx.collections.ObservableList;
 
-public class DeleteRecipeCommandTest {
+public class ViewRecipeCommandTest {
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeleteRecipeCommand(null));
+        assertThrows(NullPointerException.class, () -> new ViewRecipeCommand(null));
     }
 
     @Test
     public void equals_sameObject_returnsTrue() {
-        DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(4));
+        ViewRecipeCommand testCommand = new ViewRecipeCommand(Index.fromZeroBased(4));
         assertTrue(testCommand.equals(testCommand));
     }
 
     @Test
     public void equals_differentCommand_returnsFalse() {
-        DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(3));
-        DeleteRecipeCommand targetCommand = new DeleteRecipeCommand(Index.fromZeroBased(4));
+        ViewRecipeCommand testCommand = new ViewRecipeCommand(Index.fromZeroBased(3));
+        ViewRecipeCommand targetCommand = new ViewRecipeCommand(Index.fromZeroBased(4));
         assertFalse(testCommand.equals(targetCommand));
     }
 
     @Test
     public void equals_equalCommand_returnsTrue() {
-        DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(3));
-        DeleteRecipeCommand targetCommand = new DeleteRecipeCommand(Index.fromZeroBased(3));
-        DeleteRecipeCommand targetCommand2 = new DeleteRecipeCommand(Index.fromOneBased(4));
+        ViewRecipeCommand testCommand = new ViewRecipeCommand(Index.fromZeroBased(3));
+        ViewRecipeCommand targetCommand = new ViewRecipeCommand(Index.fromZeroBased(3));
+        ViewRecipeCommand targetCommand2 = new ViewRecipeCommand(Index.fromOneBased(4));
         assertTrue(testCommand.equals(targetCommand));
         assertTrue(testCommand.equals(targetCommand2));
     }
 
     @Test
     public void equals_differentObject_returnsFalse() {
-        DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(2));
+        ViewRecipeCommand testCommand = new ViewRecipeCommand(Index.fromZeroBased(2));
         Object targetObj = new String("2");
         assertFalse(testCommand.equals(targetObj));
     }
 
     @Test
     public void execute_nullModel_throwsNullPointerException() {
-        DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(1));
+        ViewRecipeCommand testCommand = new ViewRecipeCommand(Index.fromZeroBased(1));
         assertThrows(NullPointerException.class, () -> testCommand.execute(null));
     }
 
     @Test
     public void execute_targetIndexLargerThanList_throwsCommandException() {
-        DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(3));
+        ViewRecipeCommand testCommand = new ViewRecipeCommand(Index.fromZeroBased(3));
         RecipeModelStubWithRecipe testModel = new RecipeModelStubWithRecipe();
         assertThrows(CommandException.class, () -> testCommand.execute(testModel));
     }
 
     @Test
-    public void execute_validTargetIndex_deletesSpecifiedRecipe() {
-        DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(0));
+    public void execute_validTargetIndex_changesSpecifiedActiveRecipe() {
+        ViewRecipeCommand testCommand = new ViewRecipeCommand(Index.fromZeroBased(0));
         RecipeModelStubWithRecipe testModel = new RecipeModelStubWithRecipe();
         testModel.addRecipe(MAGGIE);
         CommandResult expected = new CommandResult(
-                String.format(DeleteRecipeCommand.MESSAGE_SUCCESS, BURGER));
+                String.format(ViewRecipeCommand.MESSAGE_SUCCESS, BURGER));
         try {
             CommandResult result = testCommand.execute(testModel);
             assertTrue(result.equals(expected));
-            assertFalse(testModel.hasRecipe(BURGER));
-            assertTrue(testModel.hasRecipe(MAGGIE));
+            assertTrue(testModel.getActive().equals(BURGER));
+            assertFalse(testModel.getActive().equals(MAGGIE));
         } catch (CommandException e) {
             Assertions.fail("CommandException thrown!");
         }
@@ -151,6 +151,7 @@ public class DeleteRecipeCommandTest {
 
     private class RecipeModelStubNoRecipe extends RecipeModelStub {
         private RecipeBook recipeBook = new RecipeBook();
+        private Recipe active;
 
         @Override
         public ObservableList<Recipe> getFilteredRecipeList() {
@@ -176,6 +177,15 @@ public class DeleteRecipeCommandTest {
         public void setRecipe(Recipe target, Recipe editedRecipe) {
             this.recipeBook.set(target, editedRecipe);
         }
+
+        @Override
+        public void setActiveRecipe(Recipe recipe) {
+            this.active = recipe;
+        }
+
+        public Recipe getActive() {
+            return this.active;
+        }
     }
 
     private class RecipeModelStubWithRecipe extends RecipeModelStubNoRecipe {
@@ -183,4 +193,6 @@ public class DeleteRecipeCommandTest {
             super.recipeBook.add(BURGER);
         }
     }
+
+
 }

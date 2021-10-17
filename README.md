@@ -31,6 +31,6 @@ Fridgy was thus developed to solve the issue of having to manually track ingredi
   * You can also delete, view or edit information related to the ingredient.
 * As a user, you can add a recipe to Fridgy through the Command Line.
   * You can also delete, view or edit the recipe.
-* Easily search for a previously added recipe or ingredient by name. 
+* Easily search for a previously added recipe or ingredient by name.
 ---
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
