@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.GuiSettings;
+import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.IngredientDefaultComparator;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 import fridgy.model.recipe.Recipe;
@@ -88,18 +89,18 @@ public class ModelManagerTest {
 
     @Test
     public void hasIngredient_nullIngredient_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.hasIngredient(null));
+        Assert.assertThrows(NullPointerException.class, () -> modelManager.has((Ingredient)null));
     }
 
     @Test
     public void hasIngredient_ingredientNotInInventory_returnsFalse() {
-        assertFalse(modelManager.hasIngredient(TypicalIngredients.APPLE));
+        assertFalse(modelManager.has(TypicalIngredients.APPLE));
     }
 
     @Test
     public void hasIngredient_ingredientInInventory_returnsTrue() {
-        modelManager.addIngredient(TypicalIngredients.APPLE);
-        assertTrue(modelManager.hasIngredient(TypicalIngredients.APPLE));
+        modelManager.add(TypicalIngredients.APPLE);
+        assertTrue(modelManager.has(TypicalIngredients.APPLE));
     }
 
     @Test
@@ -123,18 +124,18 @@ public class ModelManagerTest {
 
     @Test
     public void hasRecipe_nullRecipe_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasRecipe(null));
+        assertThrows(NullPointerException.class, () -> modelManager.has((Recipe)null));
     }
 
     @Test
     public void hasRecipe_ingredientNotInRecipeBook_returnsFalse() {
-        assertFalse(modelManager.hasRecipe(BURGER));
+        assertFalse(modelManager.has(BURGER));
     }
 
     @Test
     public void hasRecipe_ingredientInRecipeBook_returnsTrue() {
-        modelManager.addRecipe(BURGER);
-        assertTrue(modelManager.hasRecipe(BURGER));
+        modelManager.add(BURGER);
+        assertTrue(modelManager.has(BURGER));
     }
 
     @Test
@@ -144,12 +145,12 @@ public class ModelManagerTest {
 
     @Test
     public void setActiveRecipe_recipeNotInRecipeBook_doNothing() {
-        modelManager.addRecipe(BURGER);
-        modelManager.addRecipe(MAGGIE);
+        modelManager.add(BURGER);
+        modelManager.add(MAGGIE);
         modelManager.setActiveRecipe(BURGER);
         ObservableList<Recipe> expected = modelManager.getActiveRecipe();
 
-        modelManager.deleteRecipe(MAGGIE);
+        modelManager.delete(MAGGIE);
         modelManager.setActiveRecipe(MAGGIE);
 
         assertEquals(expected, modelManager.getActiveRecipe());
@@ -157,8 +158,8 @@ public class ModelManagerTest {
 
     @Test
     public void setActiveRecipe_recipeInRecipeBook_changeActiveRecipe() {
-        modelManager.addRecipe(BURGER);
-        modelManager.addRecipe(MAGGIE);
+        modelManager.add(BURGER);
+        modelManager.add(MAGGIE);
         modelManager.setActiveRecipe(BURGER);
         assertEquals(BURGER, modelManager.getActiveRecipe().get(0));
 

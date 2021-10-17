@@ -34,7 +34,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
 
         Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new RecipeBook(), new UserPrefs());
-        expectedModel.setIngredient(model.getFilteredIngredientList().get(0), editedIngredient);
+        expectedModel.set(model.getFilteredIngredientList().get(0), editedIngredient);
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -59,7 +59,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
 
         Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new RecipeBook(), new UserPrefs());
-        expectedModel.setIngredient(lastIngredient, editedIngredient);
+        expectedModel.set(lastIngredient, editedIngredient);
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -93,7 +93,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
 
         Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new RecipeBook(), new UserPrefs());
-        expectedModel.setIngredient(model.getFilteredIngredientList().get(0), editedIngredient);
+        expectedModel.set(model.getFilteredIngredientList().get(0), editedIngredient);
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

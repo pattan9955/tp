@@ -41,7 +41,7 @@ public class DeleteCommand extends Command {
         }
 
         Ingredient ingredientToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteIngredient(ingredientToDelete);
+        model.delete(ingredientToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_INGREDIENT_SUCCESS, ingredientToDelete));
     }
 

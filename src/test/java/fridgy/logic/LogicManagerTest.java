@@ -89,7 +89,7 @@ public class LogicManagerTest {
                 + CommandTestUtil.EXPIRY_DATE_DESC;
         Ingredient expectedIngredient = new IngredientBuilder(TypicalIngredients.ALMOND).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addIngredient(expectedIngredient);
+        expectedModel.add(expectedIngredient);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }

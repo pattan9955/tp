@@ -73,14 +73,14 @@ public class DeleteRecipeCommandTest {
     public void execute_validTargetIndex_deletesSpecifiedRecipe() {
         DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(0));
         RecipeModelStubWithRecipe testModel = new RecipeModelStubWithRecipe();
-        testModel.addRecipe(MAGGIE);
+        testModel.add(MAGGIE);
         CommandResult expected = new CommandResult(
                 String.format(DeleteRecipeCommand.MESSAGE_SUCCESS, BURGER));
         try {
             CommandResult result = testCommand.execute(testModel);
             assertTrue(result.equals(expected));
-            assertFalse(testModel.hasRecipe(BURGER));
-            assertTrue(testModel.hasRecipe(MAGGIE));
+            assertFalse(testModel.has(BURGER));
+            assertTrue(testModel.has(MAGGIE));
         } catch (CommandException e) {
             Assertions.fail("CommandException thrown!");
         }
@@ -109,22 +109,22 @@ public class DeleteRecipeCommandTest {
         }
 
         @Override
-        public boolean hasRecipe(Recipe recipe) {
+        public boolean has(Recipe recipe) {
             throw new AssertionError("Should not be used!");
         }
 
         @Override
-        public void deleteRecipe(Recipe target) {
+        public void delete(Recipe target) {
             throw new AssertionError("Should not be used!");
         }
 
         @Override
-        public void addRecipe(Recipe recipe) {
+        public void add(Recipe recipe) {
             throw new AssertionError("Should not be used!");
         }
 
         @Override
-        public void setRecipe(Recipe target, Recipe editedRecipe) {
+        public void set(Recipe target, Recipe editedRecipe) {
             throw new AssertionError("Should not be used!");
         }
 
@@ -158,22 +158,22 @@ public class DeleteRecipeCommandTest {
         }
 
         @Override
-        public boolean hasRecipe(Recipe recipe) {
+        public boolean has(Recipe recipe) {
             return recipeBook.has(recipe);
         }
 
         @Override
-        public void deleteRecipe(Recipe target) {
+        public void delete(Recipe target) {
             this.recipeBook.remove(target);
         }
 
         @Override
-        public void addRecipe(Recipe recipe) {
+        public void add(Recipe recipe) {
             this.recipeBook.add(recipe);
         }
 
         @Override
-        public void setRecipe(Recipe target, Recipe editedRecipe) {
+        public void set(Recipe target, Recipe editedRecipe) {
             this.recipeBook.set(target, editedRecipe);
         }
     }

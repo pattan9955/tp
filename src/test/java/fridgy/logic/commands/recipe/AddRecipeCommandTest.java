@@ -110,22 +110,22 @@ public class AddRecipeCommandTest {
         }
 
         @Override
-        public boolean hasRecipe(Recipe recipe) {
+        public boolean has(Recipe recipe) {
             throw new AssertionError("Should not be used!");
         }
 
         @Override
-        public void deleteRecipe(Recipe target) {
+        public void delete(Recipe target) {
             throw new AssertionError("Should not be used!");
         }
 
         @Override
-        public void addRecipe(Recipe recipe) {
+        public void add(Recipe recipe) {
             throw new AssertionError("Should not be used!");
         }
 
         @Override
-        public void setRecipe(Recipe target, Recipe editedRecipe) {
+        public void set(Recipe target, Recipe editedRecipe) {
             throw new AssertionError("Should not be used!");
         }
 
@@ -154,22 +154,22 @@ public class AddRecipeCommandTest {
         private RecipeBook recipeBook = new RecipeBook();
 
         @Override
-        public boolean hasRecipe(Recipe recipe) {
+        public boolean has(Recipe recipe) {
             return recipeBook.has(recipe);
         }
 
         @Override
-        public void deleteRecipe(Recipe target) {
+        public void delete(Recipe target) {
             this.recipeBook.remove(target);
         }
 
         @Override
-        public void addRecipe(Recipe recipe) {
+        public void add(Recipe recipe) {
             this.recipeBook.add(recipe);
         }
 
         @Override
-        public void setRecipe(Recipe target, Recipe editedRecipe) {
+        public void set(Recipe target, Recipe editedRecipe) {
             this.recipeBook.set(target, editedRecipe);
         }
     }

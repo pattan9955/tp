@@ -33,26 +33,26 @@ public interface RecipeModel {
     /**
      * Returns true if a recipe with the same identity as {@code recipe} exists in the address book.
      */
-    boolean hasRecipe(Recipe recipe);
+    boolean has(Recipe recipe);
 
     /**
      * Deletes the given recipe.
      * The recipe must exist in the address book.
      */
-    void deleteRecipe(Recipe target);
+    void delete(Recipe target);
 
     /**
      * Adds the given recipe.
      * {@code recipe} must not already exist in the address book.
      */
-    void addRecipe(Recipe recipe);
+    void add(Recipe recipe);
 
     /**
      * Replaces the given recipe {@code target} with {@code editedRecipe}.
      * {@code target} must exist in the address book.
      * The recipe identity of {@code editedRecipe} must not be the same as another existing recipe in the address book.
      */
-    void setRecipe(Recipe target, Recipe editedRecipe);
+    void set(Recipe target, Recipe editedRecipe);
 
     /** Returns an unmodifiable view of the filtered recipe list */
     ObservableList<Recipe> getFilteredRecipeList();

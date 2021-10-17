@@ -113,7 +113,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addIngredient(Ingredient ingredient) {
+        public void add(Ingredient ingredient) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -133,17 +133,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasIngredient(Ingredient ingredient) {
+        public boolean has(Ingredient ingredient) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteIngredient(Ingredient target) {
+        public void delete(Ingredient target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setIngredient(Ingredient target, Ingredient editedIngredient) {
+        public void set(Ingredient target, Ingredient editedIngredient) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -171,7 +171,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasIngredient(Ingredient ingredient) {
+        public boolean has(Ingredient ingredient) {
             requireNonNull(ingredient);
             return this.ingredient.isSameIngredient(ingredient);
         }
@@ -184,13 +184,13 @@ public class AddCommandTest {
         final ArrayList<Ingredient> ingredientsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasIngredient(Ingredient ingredient) {
+        public boolean has(Ingredient ingredient) {
             requireNonNull(ingredient);
             return ingredientsAdded.stream().anyMatch(ingredient::isSameIngredient);
         }
 
         @Override
-        public void addIngredient(Ingredient ingredient) {
+        public void add(Ingredient ingredient) {
             requireNonNull(ingredient);
             ingredientsAdded.add(ingredient);
         }

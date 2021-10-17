@@ -108,6 +108,56 @@ public class ModelManager implements Model {
         userPrefs.setRecipeBookFilePath(recipeBookFilePath);
     }
 
+    //=========== Common CRUD ==============================================================================
+
+    @Override
+    public boolean has(Ingredient ingredient) {
+        requireNonNull(ingredient);
+        return inventory.has(ingredient);
+    }
+
+    @Override
+    public boolean has(Recipe recipe) {
+        requireNonNull(recipe);
+        return recipeBook.has(recipe);
+    }
+
+    @Override
+    public void delete(Ingredient target) {
+        inventory.remove(target);
+    }
+
+    @Override
+    public void delete(Recipe target) {
+        recipeBook.remove(target);
+    }
+
+    @Override
+    public void add(Ingredient ingredient) {
+        inventory.add(ingredient);
+        updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
+    }
+
+    @Override
+    public void add(Recipe recipe) {
+        recipeBook.add(recipe);
+        updateFilteredRecipeList(PREDICATE_SHOW_ALL_RECIPES);
+    }
+
+    @Override
+    public void set(Ingredient target, Ingredient editedIngredient) {
+        requireAllNonNull(target, editedIngredient);
+
+        inventory.set(target, editedIngredient);
+    }
+
+    @Override
+    public void set(Recipe target, Recipe editedRecipe) {
+        requireAllNonNull(target, editedRecipe);
+
+        recipeBook.set(target, editedRecipe);
+    }
+
     //=========== Inventory ================================================================================
 
     @Override
@@ -120,30 +170,6 @@ public class ModelManager implements Model {
         return inventory;
     }
 
-    @Override
-    public boolean hasIngredient(Ingredient ingredient) {
-        requireNonNull(ingredient);
-        return inventory.has(ingredient);
-    }
-
-    @Override
-    public void deleteIngredient(Ingredient target) {
-        inventory.remove(target);
-    }
-
-    @Override
-    public void addIngredient(Ingredient ingredient) {
-        inventory.add(ingredient);
-        updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
-    }
-
-    @Override
-    public void setIngredient(Ingredient target, Ingredient editedIngredient) {
-        requireAllNonNull(target, editedIngredient);
-
-        inventory.set(target, editedIngredient);
-    }
-
     //=========== RecipeBook ================================================================================
 
     @Override
@@ -154,30 +180,6 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyDatabase<Recipe> getRecipeBook() {
         return recipeBook;
-    }
-
-    @Override
-    public boolean hasRecipe(Recipe recipe) {
-        requireNonNull(recipe);
-        return recipeBook.has(recipe);
-    }
-
-    @Override
-    public void deleteRecipe(Recipe target) {
-        recipeBook.remove(target);
-    }
-
-    @Override
-    public void addRecipe(Recipe recipe) {
-        recipeBook.add(recipe);
-        updateFilteredRecipeList(PREDICATE_SHOW_ALL_RECIPES);
-    }
-
-    @Override
-    public void setRecipe(Recipe target, Recipe editedRecipe) {
-        requireAllNonNull(target, editedRecipe);
-
-        recipeBook.set(target, editedRecipe);
     }
 
     @Override

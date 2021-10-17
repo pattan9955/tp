@@ -28,7 +28,7 @@ public class AddCommandIntegrationTest {
         Ingredient validIngredient = new IngredientBuilder().build();
 
         Model expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
-        expectedModel.addIngredient(validIngredient);
+        expectedModel.add(validIngredient);
 
         CommandTestUtil.assertCommandSuccess(new AddCommand(validIngredient), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, validIngredient), expectedModel);

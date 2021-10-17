@@ -52,11 +52,11 @@ public class AddRecipeCommand extends RecipeCommand {
     public CommandResult execute(RecipeModel model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasRecipe(toAdd)) {
+        if (model.has(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_RECIPE);
         }
 
-        model.addRecipe(toAdd);
+        model.add(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

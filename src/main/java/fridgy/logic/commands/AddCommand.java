@@ -56,11 +56,11 @@ public class AddCommand extends Command {
     public CommandResult execute(IngredientModel model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasIngredient(toAdd)) {
+        if (model.has(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_INGREDIENT);
         }
 
-        model.addIngredient(toAdd);
+        model.add(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

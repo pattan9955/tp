@@ -54,19 +54,19 @@ public interface IngredientModel {
     /**
      * Returns true if n ingredient with the same identity as {@code ingredient} exists in the address book.
      */
-    boolean hasIngredient(Ingredient ingredient);
+    boolean has(Ingredient ingredient);
 
     /**
      * Deletes the given ingredient.
      * The ingredient must exist in the address book.
      */
-    void deleteIngredient(Ingredient target);
+    void delete(Ingredient target);
 
     /**
      * Adds the given ingredient.
      * {@code ingredient} must not already exist in the address book.
      */
-    void addIngredient(Ingredient ingredient);
+    void add(Ingredient ingredient);
 
     /**
      * Sorts the inventory of ingredients using the specified comparator.
@@ -79,7 +79,7 @@ public interface IngredientModel {
      * The ingredient identity of {@code editedIngredient} must not be the same as another existing ingredient in the
      * address book.
      */
-    void setIngredient(Ingredient target, Ingredient editedIngredient);
+    void set(Ingredient target, Ingredient editedIngredient);
 
     /** Returns an unmodifiable view of the filtered ingredient list */
     ObservableList<Ingredient> getFilteredIngredientList();
