@@ -16,7 +16,7 @@ public class RecipeDefaultComparator implements Comparator<Recipe>{
     private RecipeModel model;
 
     /**
-     * @param model to get the all the ingredient list to check for missing ingredient
+     * @param model to get all the ingredient list to check for missing ingredient
      */
     public RecipeDefaultComparator(RecipeModel model) {
         this.model = model;
