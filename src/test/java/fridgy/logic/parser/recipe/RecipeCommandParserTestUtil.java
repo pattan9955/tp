@@ -50,6 +50,9 @@ public class RecipeCommandParserTestUtil {
     public static final String INVALID_DEL_COMMAND_MESSAGE = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             DeleteRecipeCommand.MESSAGE_USAGE);
 
+    //------------------------------------VALID VIEW RECIPE COMMANDS-------------------------------------------------
+    public static final String VALID_VIEW_COMMAND = "view recipe 1";
+
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created
      * equals to {@code expectedCommand}.
