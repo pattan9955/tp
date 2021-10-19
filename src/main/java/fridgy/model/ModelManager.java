@@ -256,6 +256,11 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
 
+        boolean one = inventory.equals(other.inventory);
+        boolean two = recipeBook.equals(other.recipeBook);
+        boolean three = userPrefs.equals(other.userPrefs);
+        boolean four = filteredIngredients.equals(other.filteredIngredients);
+        boolean five = filteredRecipes.equals(other.filteredRecipes);
         return inventory.equals(other.inventory)
                 && recipeBook.equals(other.recipeBook)
                 && userPrefs.equals(other.userPrefs)

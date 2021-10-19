@@ -125,9 +125,10 @@ public class CommandTestUtil {
         assertEquals(expectedInventory, actualModel.getInventory());
         assertEquals(expectedFilteredList, actualModel.getFilteredIngredientList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the ingredient at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s inventory.
      */
     public static void showIngredientAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredIngredientList().size());
@@ -138,5 +139,4 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredIngredientList().size());
     }
-
 }

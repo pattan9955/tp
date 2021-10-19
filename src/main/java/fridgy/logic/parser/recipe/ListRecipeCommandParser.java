@@ -11,7 +11,7 @@ import fridgy.logic.parser.exceptions.ParseException;
 /**
  * Parses input argument and creates a new ListRecipeCommand object
  */
-public class ListRecipeCommandParser {
+public class ListRecipeCommandParser implements RecipeCommandParser<ListRecipeCommand> {
     private static final Pattern RECIPE_LIST_COMMAND_ARGUMENT_FORMAT = Pattern
             .compile(ListRecipeCommand.RECIPE_KEYWORD);
 
