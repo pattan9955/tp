@@ -11,7 +11,7 @@ import fridgy.model.RecipeModel;
  * The default comparator for {@code Recipe},
  * which compares recipes by their ingredient availability.
  */
-public class RecipeDefaultComparator implements Comparator<Recipe>{
+public class RecipeDefaultComparator implements Comparator<Recipe> {
 
     private RecipeModel model;
 
