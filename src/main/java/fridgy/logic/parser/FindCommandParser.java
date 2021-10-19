@@ -5,7 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fridgy.commons.core.Messages;
-import fridgy.logic.commands.DeleteCommand;
 import fridgy.logic.commands.FindCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;

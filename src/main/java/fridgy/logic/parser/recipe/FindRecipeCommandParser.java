@@ -5,7 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fridgy.commons.core.Messages;
-import fridgy.logic.commands.FindCommand;
 import fridgy.logic.commands.recipe.FindRecipeCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.recipe.NameContainsKeywordsPredicate;
@@ -25,8 +24,7 @@ public class FindRecipeCommandParser implements RecipeCommandParser<FindRecipeCo
      */
     public FindRecipeCommand parse(String userInput) throws ParseException {
 
-        final Matcher matcher ;
-        matcher = FIND_RECIPE_COMMAND_ARGUMENT_FORMAT.matcher(userInput.trim());
+        final Matcher matcher = FIND_RECIPE_COMMAND_ARGUMENT_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FindRecipeCommand.MESSAGE_USAGE));

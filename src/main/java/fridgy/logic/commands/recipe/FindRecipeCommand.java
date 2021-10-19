@@ -7,11 +7,12 @@ import fridgy.logic.commands.CommandResult;
 import fridgy.model.RecipeModel;
 import fridgy.model.recipe.NameContainsKeywordsPredicate;
 
-public class FindRecipeCommand extends RecipeCommand{
+public class FindRecipeCommand extends RecipeCommand {
     public static final String COMMAND_WORD = "find";
     public static final String RECIPE_KEYWORD = "recipe";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + RECIPE_KEYWORD +  ": Finds all recipes whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + RECIPE_KEYWORD
+            + ": Finds all recipes whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " " + RECIPE_KEYWORD + " " + " burger salad tempura";
