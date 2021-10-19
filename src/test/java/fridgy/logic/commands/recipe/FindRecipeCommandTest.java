@@ -2,8 +2,11 @@ package fridgy.logic.commands.recipe;
 
 import static fridgy.commons.core.Messages.MESSAGE_RECIPES_LISTED_OVERVIEW;
 import static fridgy.testutil.Assert.assertThrows;
-import static fridgy.testutil.TypicalRecipes.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static fridgy.testutil.TypicalRecipes.BURGER;
+import static fridgy.testutil.TypicalRecipes.MAGGIE;
+import static fridgy.testutil.TypicalRecipes.FRIES;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
@@ -21,9 +24,6 @@ import fridgy.model.recipe.NameContainsKeywordsPredicate;
 import fridgy.testutil.TypicalRecipes;
 
 public class FindRecipeCommandTest {
-    private Model model = new ModelManager(new Inventory(), TypicalRecipes.getTypicalRecipeBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(new Inventory(), TypicalRecipes.getTypicalRecipeBook(),
-            new UserPrefs());
 
     public static final String VALID_FIND_COMMAND_THREE_PLURAL_MESSAGE = String.format(MESSAGE_RECIPES_LISTED_OVERVIEW,
             3, "s");
@@ -31,6 +31,10 @@ public class FindRecipeCommandTest {
             1, "");
     public static final String VALID_FIND_COMMAND_ZERO_MESSAGE = String.format(MESSAGE_RECIPES_LISTED_OVERVIEW,
             0, "");
+
+    private Model model = new ModelManager(new Inventory(), TypicalRecipes.getTypicalRecipeBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(new Inventory(), TypicalRecipes.getTypicalRecipeBook(),
+            new UserPrefs());
 
     @Test
     public void execute_nullModel_throwsNullPointerException() {

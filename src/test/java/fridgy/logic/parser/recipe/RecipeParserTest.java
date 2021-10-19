@@ -1,6 +1,22 @@
 package fridgy.logic.parser.recipe;
 
-import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.*;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_ADD_COMMAND_NO_KEYWORD;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_ADD_COMMAND_WRONG_FORMAT;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_DEL_COMMAND_NO_KEYWORD;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_DEL_COMMAND_WRONG_FORMAT;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_DEL_COMMAND_WRONG_KEYWORD;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_FIND_COMMAND_EMPTY_KEYWORD;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_FIND_COMMAND_WHITESPACE_KEYWORD;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_FIND_COMMAND_WRONG_FORMAT;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_ALL_PREFIX_PRESENT;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_MISSING_DESCRIPTION;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_MULTIPLE_INGREDIENTS;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_MULTIPLE_STEPS;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_REPEATED_INGREDIENTS;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_DEL_COMMAND;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_FIND_COMMAND;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_FIND_COMMAND_WHITESPACES;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;

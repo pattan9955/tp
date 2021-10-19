@@ -1,7 +1,6 @@
 package fridgy.logic.parser.recipe;
 
 import static fridgy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static fridgy.commons.core.Messages.MESSAGE_RECIPES_LISTED_OVERVIEW;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import fridgy.logic.commands.recipe.AddRecipeCommand;
