@@ -20,6 +20,7 @@ public class FindRecipeCommand extends RecipeCommand {
     private final NameContainsKeywordsPredicate predicate;
 
     public FindRecipeCommand(NameContainsKeywordsPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 

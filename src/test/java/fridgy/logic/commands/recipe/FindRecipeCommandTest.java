@@ -37,6 +37,11 @@ public class FindRecipeCommandTest {
             new UserPrefs());
 
     @Test
+    public void constructor_nullPredicate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new FindRecipeCommand(null));
+    }
+
+    @Test
     public void execute_nullModel_throwsNullPointerException() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("first"));
         RecipeModel nullModel = null;
