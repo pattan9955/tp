@@ -207,11 +207,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortIngredient(Comparator<Ingredient> comparator) {
-        this.inventory.sort(comparator);
-    }
-
-    @Override
     public void updateFilteredIngredientList(Predicate<Ingredient> predicate) {
         requireNonNull(predicate);
         filteredIngredients.setPredicate(predicate);
@@ -232,6 +227,13 @@ public class ModelManager implements Model {
     public void updateFilteredRecipeList(Predicate<Recipe> predicate) {
         requireNonNull(predicate);
         filteredRecipes.setPredicate(predicate);
+    }
+
+    //=========== Sorting =============================================================
+
+    @Override
+    public void sortIngredient(Comparator<Ingredient> comparator) {
+        this.inventory.sort(comparator);
     }
 
     @Override
