@@ -13,7 +13,6 @@ By: `Team Fridgy`      Licence: `MIT`
 
 --------------------------------------------------------------------------------------------------------------------
 
-<a name="overview"></a>
 # 1. **Overview**
 Welcome to Fridgy's Developer Guide. 
 
@@ -22,14 +21,12 @@ It is intended to be read by contributors, users, and future maintainers.
 
 For more information on the Fridgy application, refer to the [_User Guide_](UserGuide.md) instead.
 
-<a name="setting-up"></a>
 ## 1.1 **Setting up, Getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-<a name="design"></a>
 ## 2. **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -37,7 +34,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-<a name="architecture"></a>
 ### 2.1 Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
@@ -79,7 +75,6 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-<a name="ui-component"></a>
 ### 2.2 UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -126,7 +121,6 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-<a name="model-component"></a>
 ### 2.4 Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -146,7 +140,6 @@ The `Model` component,
 
 </div>
 
-<a name="storage-component"></a>
 ### 2.5 Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -158,7 +151,6 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-<a name="common-classes"></a>
 ### 2.6 Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
@@ -256,7 +248,6 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-<a name="documentation"></a>
 ## 4. **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -267,10 +258,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-<a name="appendix-requirements"></a>
 ## 5. **Appendix A: Requirements**
 
-<a name="product-scope"></a>
 ### 5.1 Product scope
 
 **Target user profile**:
@@ -285,7 +274,6 @@ _{Explain here how the data archiving feature will be implemented}_
 
 <br>
 
-<a name="user-stories"></a>
 ### 5.2 User stories
 
 Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikely to have) - `*`
@@ -316,7 +304,6 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 <br>
 
-<a name="use-cases"></a>
 ### 5.3 Use cases
 
 (For all use cases below, the **System** is `Fridgy` and the **Actor** is the `user`, unless specified otherwise)
@@ -336,7 +323,6 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 | [UC11](#UC11)   | Execute recipe                   |
 
 
-<a name="ingredient-use-cases"></a>
 ### 5.3.1 Ingredient
 
 <a name="UC01"></a>
@@ -461,7 +447,6 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 <br>
 
-<a name="recipe-use-cases"></a>
 ### 5.3.2 Recipe
 
 <a name="UC06"></a>
@@ -605,8 +590,6 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 <br>
 
-
-<a name="nft"></a>
 ### 5.4 Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -619,7 +602,6 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 <br>
 
-<a name="glossary"></a>
 ### 5.5 Glossary
 
 |   Term   |    Explanation  |
@@ -633,7 +615,6 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 --------------------------------------------------------------------------------------------------------------------
 
-<a name="appendix-manual"></a>
 ## 6. **Appendix B: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -645,7 +626,6 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
-<a name="launch-and-shutdown"></a>
 ### 6.1 Launch and shutdown
 
 1. Initial launch
@@ -665,7 +645,6 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
-<a name="deleting-an-ingredient"></a>
 ### 6.2 Deleting an ingredient
 
 1. Deleting an ingredient while all ingredients are being shown
@@ -684,7 +663,6 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
-<a name="saving-data"></a>
 ### 6.3 Saving data
 
 1. Dealing with missing/corrupted data files
