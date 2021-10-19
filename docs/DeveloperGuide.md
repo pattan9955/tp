@@ -5,7 +5,7 @@ title: Developer Guide
 
 # Fridgy – Developer Guide
 
-By: `Team Fridgy`      Licence: `MIT`
+By: `Team Fridgy`
 
 
 * Table of Contents
@@ -14,7 +14,6 @@ By: `Team Fridgy`      Licence: `MIT`
 --------------------------------------------------------------------------------------------------------------------
 
 # 1. **Overview**
-Welcome to Fridgy's Developer Guide. 
 
 This developer guide contains documentation on design architecture and details software design decisions in the implementation of Fridgy. 
 It is intended to be read by contributors, users, and future maintainers.
