@@ -2,31 +2,65 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+
+# Fridgy – Developer Guide
+
+By: `Team Fridgy`      Licence: `MIT`
+
+
+## Table of Contents
+1. [Overview](#overview)
+    - [1.1 Setting Up, Getting Started](#setting-up)
+2. [Design](#design)
+    - [2.1. Architecture](#architecture)
+    - [2.2. UI Component](#ui-component)
+    - [2.3. Logic Component](#logic-component)
+    - [2.4. Model Component](#model-component)
+    - [2.5. Storage Component](#storage-component)
+    - [2.6. Common classes](#common-classes)
+3. [Implementation](#implementation)
+4. [Documentation, Logging, Testing, Configuration, Dev-ops](#documentation)
+5. [Appendix A: Requirements](#appendix-requirements)
+    - [5.1 Product Scope](#product-scope)
+    - [5.2 User Stories](#user-stories)
+    - [5.3 Use Cases](#use-cases)
+        * [5.3.1 Ingredient Use Cases](#ingredient-use-cases)
+        * [5.3.2 Recipe Use Cases](#recipe-use-cases)
+    - [5.4 Non-Functional Requirements](#nft)
+    - [5.5 Glossary](#glossary)
+6. [Appendix B: Instructions for Manual Testing](#appendix-manual)
+    - [6.1 Launch and Shutdown](#launch-and-shutdown)
+    - [6.2 Deleting an Ingredient](#deleting-an-ingredient)
+    - [6.3 Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+<a name="overview"></a>
+# 1. **Overview**
+Welcome to Fridgy's Developer Guide. 
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This developer guide contains documentation on design architecture and details software design decisions in the implementation of Fridgy. 
+It is intended to be read by contributors, users, and future maintainers.
 
---------------------------------------------------------------------------------------------------------------------
+For more information on the Fridgy application, refer to the [_User Guide_](UserGuide.md) instead.
 
-## **Setting up, getting started**
+<a name="setting-up"></a>
+## 1.1 **Setting up, Getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+<a name="design"></a>
+## 2. **Design**
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-### Architecture
+<a name="architecture"></a>
+### 2.1 Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
@@ -67,7 +101,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+<a name="ui-component"></a>
+### 2.2 UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -84,7 +119,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### 2.3 Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -113,7 +148,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+<a name="model-component"></a>
+### 2.4 Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -132,8 +168,8 @@ The `Model` component,
 
 </div>
 
-
-### Storage component
+<a name="storage-component"></a>
+### 2.5 Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -144,13 +180,14 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+<a name="common-classes"></a>
+### 2.6 Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## 3. **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -241,7 +278,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+<a name="documentation"></a>
+## 4. **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -251,9 +289,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+<a name="appendix-requirements"></a>
+## 5. **Appendix A: Requirements**
 
-### Product scope
+<a name="product-scope"></a>
+### 5.1 Product scope
 
 **Target user profile**:
 
@@ -265,75 +305,331 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: manage ingredients and recipes faster than a typical mouse/GUI driven app
 
+<br>
 
-### User stories
+<a name="user-stories"></a>
+### 5.2 User stories
 
-Priorities: High (must have) - `H`, Medium (nice to have) - `M`, Low (unlikely to have) - `L`
+Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `H`  | new user                                   | see the help menu                  | refer to instructions when I forget how to use the App
-| `M`  | new user exploring the app                 | see my inventory populated with some sample ingredients and recipes        | test out the features              |
-| `M`  | new user ready to start using the app      | purge all current data             | get rid of sample/experimental data I used for exploring the app           |
-| `H`  | user                                       | add ingredients to my inventory    | keep track of the quantity and expiry date                                 |
-| `H`  | user                                       | add recipes                        | keep track of quantity of ingredients needed for a recipe                  |
-| `H`  | user                                       | delete an ingredient               | stop keeping track of the ingredient                                       |
-| `H`  | user                                       | delete a recipe                    | stop keeping track of the recipe                                           |
-| `H`  | user                                       | find an ingredient by name         | locate details of ingredients without having to go through the entire list |
-| `H`  | user                                       | find a recipe by name              | locate details of recipes without having to go through the entire list     |
-| `H`  | user                                       | list all ingredients               | easily see all ingredients                                                 |
-| `H`  | user                                       | list all recipes                   | easily see all recipes                                                     |
-| `H`  | user                                       | sort ingredients by expiry date    | locate ingredients that are expired or expiring soon                       |
-| `H`  | user                                       | automatically update the inventory list after executing a recipe | update the ingredients I have used           |
-| `H`  | user                                       | view ingredient tags               | view details about the ingredient (ie. its expiry status)                  |
-| `H`  | user                                       | update ingredients                 | update the quantity of ingredients as needed                               |
-| `H`  | user                                       | update recipes                     | update the recipe as needed                                                |
-| `M`  | user                                       | import my saved database           | start using it again quickly                                               |
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                    |
+| -------- | ------------------------------------------ | ------------------------------ | ----------------------------------------------------------------------------- |
+| `***`  | new user                                    | see the help menu                  | refer to instructions when I forget how to use the App                     |
+| `**`   | new user exploring the app                  | see my inventory populated with some sample ingredients and recipes        | test out the features              |
+| `**`   | new user ready to start using the app       | purge all current data             | get rid of sample/experimental data I used for exploring the app           |
+| `***`  | user who stocks up on ingredients           | add an ingredient                  | keep track of its quantity and expiry date                                 |
+| `***`  | user who wants to tidy my inventory         | delete an ingredient               | remove expired ingredients                                                 |
+| `***`  | user who wants to update my stock           | edit an ingredient                 | update ingredient details to have an accurate list that reflects my fridge |
+| `***`  | user who has a large inventory of ingredients  | find an ingredient                 | locate details of ingredients without having to go through the entire list |
+| `***`  | user who wants a complete view of my inventory | list all ingredients            | easily view all ingredients                                                |
+| `***`  | user who can be forgetful                   | sort ingredients by expiry date    | locate ingredients that are expired or expiring soon                       |
+| `***`  | user who is organised                       | tag ingredients                    | categorise my ingredients easily                                           |
+| `***`  | user who has new recipes                    | add a recipe                       | keep track of quantity of ingredients needed for a recipe                  |
+| `***`  | user who changes my meal options            | delete a recipe                    | stop keeping track of the recipe I no longer want                          |
+| `***`  | user who is flexible with my meals          | edit recipes                       | update and personalise recipe details                                      |
+| `***`  | user who has a large collection of recipes  | find a recipe by name              | locate details of recipes without having to go through the entire list     |
+| `***`  | user who wants a complete view of all my recipes | list all recipes              | easily view all recipes                                                    |
+| `***`  | user who is organised                       | tag recipes                        | categorise my recipes easily                                               |
+| `***`  | user who cooks meals                        | execute a recipe                   | update the quantity of ingredients I have used                             |
+| `***`  | user who likes convenience                  | import my saved database           | start using it again quickly                                               |
 
 
 *{More to be added}*
 
-### Use cases
+<br>
+
+<a name="use-cases"></a>
+### 5.3 Use cases
 
 (For all use cases below, the **System** is `Fridgy` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Delete ingredient**
+| Use Case       | Description                      |
+| -------------- | -------------------------------- |
+| [UC01](#UC01)   | Add ingredient                   |
+| [UC02](#UC02)   | Delete ingredient                |
+| [UC03](#UC03)   | Edit ingredient                  |
+| [UC04](#UC04)   | Find ingredients                 |
+| [UC05](#UC05)   | List ingredients                 |
+| [UC06](#UC06)   | Add recipe                       |
+| [UC07](#UC07)   | Delete recipe                    |
+| [UC08](#UC08)   | Edit recipe                      |
+| [UC09](#UC09)   | Find recipes                     |
+| [UC10](#UC10)   | List recipes                     |
+| [UC11](#UC11)   | Execute recipe                   |
+
+
+<a name="ingredient-use-cases"></a>
+### 5.3.1 Ingredient
+
+<a name="UC01"></a>
+**Use case: UC01 - Add ingredient**
 
 **MSS**
 
-1.  `User` requests to delete a specific ingredient by specifying its index.
-2.  `Fridgy` removes the full quantity of the ingredient.
+1. User chooses to add an ingredient.
+2. User provides its name, quantity, expiry date and an optional description.
+3. Fridgy tags the ingredient with its expiry status, i.e. `expired` or `expiring soon`.
+4. Fridgy adds the ingredient.
+5. Fridgy displays a confirmation message and the newly added ingredient.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The index is invalid.
-    * `Fridgy` throws an error message.
+* 1a. The user enters an invalid input format.
+    * 1a1. Fridgy displays an error message.
+        
+        Use case ends.
+* 2a. The user enters an invalid parameter.
+    * 2a1. Fridgy displays an error message.
 
-    Use case ends.
+      Use case ends.
+* 2b. Fridgy detects a duplicate ingredient.
+    * 2b1. Fridgy displays an error message.
 
-**Use case: UC02 - Add Recipe**
+      Use case ends.
+    
+<br>
+
+<a name="UC02"></a>
+**Use case: UC02 - Delete ingredient**
 
 **MSS**
 
-1.  `User` requests to add a specific recipe by specifying its name, ingredients and quantity, steps, and an optional description.
-2.  `Fridgy` creates the recipe.
+1. User chooses to delete an ingredient by specifying its index.
+2. Fridgy removes the full quantity of the ingredient.
+3. Fridgy displays a confirmation message for the ingredient deleted.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The ingredient name is invalid.
-    * `Fridgy` throws an error message.
-* 1b. The quantity of ingredients is invalid.
-    * `Fridgy` throws an error message and informs the user of quantity of missing ingredients.
+* 1a. The user enters an invalid input format or index.
+    * 1a1. Fridgy displays an error message.
 
-  Use case ends.
+      Use case ends.
 
-*{More to be added}*
+<br>
 
-### Non-Functional Requirements
+<a name="UC03"></a>
+**Use case: UC03 - Edit ingredient**
+
+**MSS**
+
+1. User chooses to edit a specific ingredient by specifying its index.
+2. User provides the parameter(s) to be edited.
+3. Fridgy edits the ingredient.
+4. Fridgy displays a confirmation message and the edited ingredient.
+    
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format or index.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+* 2a. The user enters an invalid parameter.
+    * 2a1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+<a name="UC04"></a>
+**Use case: UC04 - Find ingredients**
+
+**MSS**
+
+1. User chooses to find a specific ingredient.
+2. User provides the filter condition, i.e. name of ingredient.
+3. Fridgy displays a filtered list of ingredients.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+* 2a. The user enters an invalid input parameter.
+    * 2a1. Fridgy displays an error message.
+
+      Use case ends.
+* 2b. There are no ingredients that match the user's filter conditions.
+    * 2b1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+<a name="UC05"></a>
+**Use case: UC05 - List ingredients**
+
+**MSS**
+
+1. User requests to list all ingredients.
+2. Fridgy displays a list of all ingredients.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+<a name="recipe-use-cases"></a>
+### 5.3.2 Recipe
+
+<a name="UC06"></a>
+**Use case: UC06 - Add Recipe**
+
+**MSS**
+
+1. User chooses to add a recipe.
+2. User provides its name, ingredients and their respective quantities, recipe steps, and an optional description.
+3. Fridgy creates the recipe.
+4. Fridgy displays a confirmation message and the newly created recipe.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+* 2a. The user enters an invalid parameter.
+    * 2a1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+<a name="UC07"></a>
+**Use case: UC07 - Delete Recipe**
+
+**MSS**
+
+1. User requests to delete a recipe by specifying its index.
+2. Fridgy removes the recipe.
+3. Fridgy displays a confirmation message for the recipe deleted.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format or index.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+<a name="UC08"></a>
+**Use case: UC08 - Edit Recipe**
+
+**MSS**
+
+1. User requests to edit a specific recipe by specifying its index.
+2. User provides the parameter(s) to be edited.
+3. Fridgy edits the recipe.
+4. Fridgy displays a confirmation message and the edited recipe.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format or index.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+* 2a. The user enters an invalid parameter.
+    * 2a1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+<a name="UC09"></a>
+**Use case: UC09 - Find Recipes**
+
+**MSS**
+
+1. User chooses to find a specific recipe.
+2. User provides the filter condition, i.e. name of recipe.
+3. Fridgy displays a filtered list of recipes.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+* 2a. The user enters an invalid input parameter.
+    * 2a1. Fridgy displays an error message.
+
+      Use case ends.
+* 2b. There are no recipes that match the user's filter conditions.
+    * 2b1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+<a name="UC10"></a>
+**Use case: UC10 - List recipes**
+
+**MSS**
+
+1. User requests to list all recipes.
+2. Fridgy displays a list of all recipes.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+<a name="UC11"></a>
+**Use case: UC11 - Execute Recipe**
+
+**MSS**
+
+1. User requests to execute a recipe by specifying its name.
+2. Fridgy executes the recipe and deducts the respective quantities of ingredients.
+3. Fridgy displays a confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format or name.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+* 2a. There are insufficient ingredients in the inventory to be deducted.
+    * 2a1. Fridgy displays an error message, with the missing ingredients and their respective quantities.
+
+      Use case ends.
+
+<br>
+
+
+<a name="nft"></a>
+### 5.4 Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 ingredients / recipes without a noticeable sluggishness in performance for typical usage.
@@ -343,13 +639,24 @@ Priorities: High (must have) - `H`, Medium (nice to have) - `M`, Low (unlikely t
 
 *{More to be added}*
 
-### Glossary
+<br>
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+<a name="glossary"></a>
+### 5.5 Glossary
+
+|   Term   |    Explanation  |
+| -------- |------------------|
+|**Fridge**            | A personalised storage for ingredients. |
+|**Ingredient**        | A food item kept in a Fridge, that can be combined to make a meal. |
+|**Recipe**            | A set of steps that details how to prepare a meal, and the ingredients with their respective quantities required. |
+|**GUI**               | A graphical user interface, i.e. the visual display of Fridgy
+|**Mainstream OS**     | Windows, Linux, Unix, OS-X. |
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+<a name="appendix-manual"></a>
+## 6. **Appendix B: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -358,7 +665,10 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+<br>
+
+<a name="launch-and-shutdown"></a>
+### 6.1 Launch and shutdown
 
 1. Initial launch
 
@@ -375,7 +685,10 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting an ingredient
+<br>
+
+<a name="deleting-an-ingredient"></a>
+### 6.2 Deleting an ingredient
 
 1. Deleting an ingredient while all ingredients are being shown
 
@@ -389,10 +702,12 @@ testers are expected to do more *exploratory* testing.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+   
 
-2. _{ more test cases …​ }_
+<br>
 
-### Saving data
+<a name="saving-data"></a>
+### 6.3 Saving data
 
 1. Dealing with missing/corrupted data files
 
@@ -400,4 +715,3 @@ testers are expected to do more *exploratory* testing.
 
    1b. To simulate a corrupted file, replace content in file with wrong or unexpected content. Program should throw an error.
 
-1. _{ more test cases …​ }_
