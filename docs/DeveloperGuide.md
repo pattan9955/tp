@@ -8,30 +8,8 @@ title: Developer Guide
 By: `Team Fridgy`      Licence: `MIT`
 
 
-## Table of Contents
-1. [Overview](#overview)
-    - [1.1 Setting Up, Getting Started](#setting-up)
-2. [Design](#design)
-    - [2.1. Architecture](#architecture)
-    - [2.2. UI Component](#ui-component)
-    - [2.3. Logic Component](#logic-component)
-    - [2.4. Model Component](#model-component)
-    - [2.5. Storage Component](#storage-component)
-    - [2.6. Common classes](#common-classes)
-3. [Implementation](#implementation)
-4. [Documentation, Logging, Testing, Configuration, Dev-ops](#documentation)
-5. [Appendix A: Requirements](#appendix-requirements)
-    - [5.1 Product Scope](#product-scope)
-    - [5.2 User Stories](#user-stories)
-    - [5.3 Use Cases](#use-cases)
-        * [5.3.1 Ingredient Use Cases](#ingredient-use-cases)
-        * [5.3.2 Recipe Use Cases](#recipe-use-cases)
-    - [5.4 Non-Functional Requirements](#nft)
-    - [5.5 Glossary](#glossary)
-6. [Appendix B: Instructions for Manual Testing](#appendix-manual)
-    - [6.1 Launch and Shutdown](#launch-and-shutdown)
-    - [6.2 Deleting an Ingredient](#deleting-an-ingredient)
-    - [6.3 Saving data](#saving-data)
+* Table of Contents
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
