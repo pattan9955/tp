@@ -32,7 +32,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, ingredientToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
-        expectedModel.deleteIngredient(ingredientToDelete);
+        expectedModel.delete(ingredientToDelete);
 
         CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -56,7 +56,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, ingredientToDelete);
 
         Model expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
-        expectedModel.deleteIngredient(ingredientToDelete);
+        expectedModel.delete(ingredientToDelete);
         showNoIngredient(expectedModel);
 
         CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -68,7 +68,7 @@ public class DeleteCommandTest {
 
         Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_INGREDIENT;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getInventory().getIngredientList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getInventory().getList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 

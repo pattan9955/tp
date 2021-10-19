@@ -15,9 +15,9 @@ import org.junit.jupiter.api.Test;
 import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
-import fridgy.model.ReadOnlyRecipeBook;
 import fridgy.model.RecipeBook;
 import fridgy.model.RecipeModel;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.recipe.Recipe;
 import javafx.collections.ObservableList;
 
@@ -73,7 +73,7 @@ public class ViewRecipeCommandTest {
     public void execute_validTargetIndex_changesSpecifiedActiveRecipe() {
         ViewRecipeCommand testCommand = new ViewRecipeCommand(Index.fromZeroBased(0));
         RecipeModelStubWithRecipe testModel = new RecipeModelStubWithRecipe();
-        testModel.addRecipe(MAGGIE);
+        testModel.add(MAGGIE);
         CommandResult expected = new CommandResult(
                 String.format(ViewRecipeCommand.MESSAGE_SUCCESS, BURGER));
         try {
@@ -99,32 +99,32 @@ public class ViewRecipeCommandTest {
         }
 
         @Override
-        public void setRecipeBook(ReadOnlyRecipeBook recipeBook) {
+        public void setRecipeBook(ReadOnlyDatabase<Recipe> recipeBook) {
             throw new AssertionError("Should not be used!");
         }
 
         @Override
-        public ReadOnlyRecipeBook getRecipeBook() {
+        public ReadOnlyDatabase<Recipe> getRecipeBook() {
             throw new AssertionError("Should not be used!");
         }
 
         @Override
-        public boolean hasRecipe(Recipe recipe) {
+        public boolean has(Recipe recipe) {
             throw new AssertionError("Should not be used!");
         }
 
         @Override
-        public void deleteRecipe(Recipe target) {
+        public void delete(Recipe target) {
             throw new AssertionError("Should not be used!");
         }
 
         @Override
-        public void addRecipe(Recipe recipe) {
+        public void add(Recipe recipe) {
             throw new AssertionError("Should not be used!");
         }
 
         @Override
-        public void setRecipe(Recipe target, Recipe editedRecipe) {
+        public void set(Recipe target, Recipe editedRecipe) {
             throw new AssertionError("Should not be used!");
         }
 
@@ -155,27 +155,27 @@ public class ViewRecipeCommandTest {
 
         @Override
         public ObservableList<Recipe> getFilteredRecipeList() {
-            return recipeBook.getRecipeList();
+            return recipeBook.getList();
         }
 
         @Override
-        public boolean hasRecipe(Recipe recipe) {
-            return recipeBook.hasRecipe(recipe);
+        public boolean has(Recipe recipe) {
+            return recipeBook.has(recipe);
         }
 
         @Override
-        public void deleteRecipe(Recipe target) {
-            this.recipeBook.removeRecipe(target);
+        public void delete(Recipe target) {
+            this.recipeBook.remove(target);
         }
 
         @Override
-        public void addRecipe(Recipe recipe) {
-            this.recipeBook.addRecipe(recipe);
+        public void add(Recipe recipe) {
+            this.recipeBook.add(recipe);
         }
 
         @Override
-        public void setRecipe(Recipe target, Recipe editedRecipe) {
-            this.recipeBook.setRecipe(target, editedRecipe);
+        public void set(Recipe target, Recipe editedRecipe) {
+            this.recipeBook.set(target, editedRecipe);
         }
 
         @Override
@@ -190,7 +190,7 @@ public class ViewRecipeCommandTest {
 
     private class RecipeModelStubWithRecipe extends RecipeModelStubNoRecipe {
         public RecipeModelStubWithRecipe() {
-            super.recipeBook.addRecipe(BURGER);
+            super.recipeBook.add(BURGER);
         }
     }
 

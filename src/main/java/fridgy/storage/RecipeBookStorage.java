@@ -5,7 +5,9 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import fridgy.commons.exceptions.DataConversionException;
-import fridgy.model.ReadOnlyRecipeBook;
+import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.recipe.Recipe;
+
 
 /**
  * Represents a storage for {@link fridgy.model.RecipeBook}.
@@ -18,28 +20,28 @@ public interface RecipeBookStorage {
     Path getRecipeBookFilePath();
 
     /**
-     * Returns RecipeBook data as a {@link ReadOnlyRecipeBook}.
+     * Returns RecipeBook data as a {@link ReadOnlyDatabase}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyRecipeBook> readRecipeBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyDatabase<Recipe>> readRecipeBook() throws DataConversionException, IOException;
 
     /**
      * @see #getRecipeBookFilePath()
      */
-    Optional<ReadOnlyRecipeBook> readRecipeBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyDatabase<Recipe>> readRecipeBook(Path filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyRecipeBook} to the storage.
+     * Saves the given {@link ReadOnlyDatabase} to the storage.
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveRecipeBook(ReadOnlyRecipeBook addressBook) throws IOException;
+    void saveRecipeBook(ReadOnlyDatabase<Recipe> addressBook) throws IOException;
 
     /**
-     * @see #saveRecipeBook(ReadOnlyRecipeBook)
+     * @see #saveRecipeBook(ReadOnlyDatabase)
      */
-    void saveRecipeBook(ReadOnlyRecipeBook addressBook, Path filePath) throws IOException;
+    void saveRecipeBook(ReadOnlyDatabase<Recipe> addressBook, Path filePath) throws IOException;
 
 }
