@@ -3,11 +3,11 @@ package fridgy.logic.commands.recipe;
 import static fridgy.commons.core.Messages.MESSAGE_RECIPES_LISTED_OVERVIEW;
 import static fridgy.testutil.Assert.assertThrows;
 import static fridgy.testutil.TypicalRecipes.BURGER;
-import static fridgy.testutil.TypicalRecipes.MAGGIE;
 import static fridgy.testutil.TypicalRecipes.FRIES;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static fridgy.testutil.TypicalRecipes.MAGGIE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
