@@ -7,24 +7,34 @@ skinparam classBackgroundColor LOGIC_COLOR
 Class "{abstract}\nCommand" as Command
 Class XYZCommand
 
-package "Parser classes"{
-Interface Parser <<Interface>>
-Class AddressBookParser
-Class XYZCommandParser
+package "FridgyParser" {
+Class FridgyParser
 Class CliSyntax
 Class ParserUtil
 Class ArgumentMultimap
 Class ArgumentTokenizer
 Class Prefix
+Interface Parser <<Interface>>
+
+Class InventoryParser
+Class XYZCommandParser
+
+Class RecipeParser
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> AddressBookParser
 
-AddressBookParser .down.> XYZCommandParser: creates >
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> FridgyParser
+
+FridgyParser ..> InventoryParser
+FridgyParser ..> RecipeParser
+
+InventoryParser .down.> XYZCommandParser: creates >
+RecipeParser .down.> XYZCommandParser: creates >
 
 XYZCommandParser ..> XYZCommand : creates >
-AddressBookParser ..> Command : returns >
+InventoryParser ..> Command : returns >
+RecipeParser ..> Command : returns >
 XYZCommandParser .up.|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer
@@ -35,4 +45,5 @@ XYZCommandParser ..> ParserUtil
 ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
+
 @enduml

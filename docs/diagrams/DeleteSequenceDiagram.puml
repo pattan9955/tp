@@ -3,7 +3,9 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FridgyParser" as FridgyParser LOGIC_COLOR
+participant "c:CommandExecutor" as CommandExecutor LOGIC_COLOR
+participant ":InventoryParser" as InventoryParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -13,20 +15,23 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete ingredient 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> FridgyParser : parseCommand("delete ingredient 1")
+activate FridgyParser
+
+FridgyParser -> InventoryParser : parseCommand("delete ingredient 1")
+activate InventoryParser
 
 create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
+InventoryParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> AddressBookParser
+DeleteCommandParser --> InventoryParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+InventoryParser -> DeleteCommandParser : parse("1")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -36,16 +41,29 @@ activate DeleteCommand
 DeleteCommand --> DeleteCommandParser : d
 deactivate DeleteCommand
 
-DeleteCommandParser --> AddressBookParser : d
+DeleteCommandParser --> InventoryParser : d
 deactivate DeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
+DeleteCommandParser -[hidden]-> InventoryParser
 destroy DeleteCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+InventoryParser --> FridgyParser : d
+deactivate InventoryParser
+destroy InventoryParser
 
-LogicManager -> DeleteCommand : execute()
+create CommandExecutor
+FridgyParser -> CommandExecutor
+activate CommandExecutor
+CommandExecutor --> FridgyParser : c
+deactivate CommandExecutor
+
+FridgyParser --> LogicManager : c
+deactivate FridgyParser
+deactivate InventoryParser
+
+activate CommandExecutor
+LogicManager -> CommandExecutor : apply()
+CommandExecutor -> DeleteCommand : execute()
 activate DeleteCommand
 
 DeleteCommand -> Model : deletePerson(1)
@@ -61,8 +79,12 @@ activate CommandResult
 CommandResult --> DeleteCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
+DeleteCommand --> CommandExecutor : result
+CommandExecutor --> LogicManager : result
 deactivate DeleteCommand
+deactivate CommandExecutor
+destroy DeleteCommand
+destroy CommandExecutor
 
 [<--LogicManager
 deactivate LogicManager
