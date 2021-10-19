@@ -1,21 +1,12 @@
 package fridgy.logic.parser.recipe;
 
-import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_ADD_COMMAND_NO_KEYWORD;
-import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_ADD_COMMAND_WRONG_FORMAT;
-import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_DEL_COMMAND_NO_KEYWORD;
-import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_DEL_COMMAND_WRONG_FORMAT;
-import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_DEL_COMMAND_WRONG_KEYWORD;
-import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_ALL_PREFIX_PRESENT;
-import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_MISSING_DESCRIPTION;
-import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_MULTIPLE_INGREDIENTS;
-import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_MULTIPLE_STEPS;
-import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_REPEATED_INGREDIENTS;
-import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_DEL_COMMAND;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,8 +14,10 @@ import org.junit.jupiter.api.Test;
 import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.recipe.AddRecipeCommand;
 import fridgy.logic.commands.recipe.DeleteRecipeCommand;
+import fridgy.logic.commands.recipe.FindRecipeCommand;
 import fridgy.logic.commands.recipe.RecipeCommand;
 import fridgy.logic.parser.exceptions.ParseException;
+import fridgy.model.recipe.NameContainsKeywordsPredicate;
 import fridgy.model.recipe.Recipe;
 import fridgy.testutil.RecipeBuilder;
 
@@ -104,6 +97,29 @@ public class RecipeParserTest {
         try {
             RecipeCommand result = testParser.parseCommand(VALID_DEL_COMMAND);
             assertTrue(result.equals(expected));
+        } catch (ParseException e) {
+            Assertions.fail("ParseException thrown!");
+        }
+    }
+
+    @Test
+    public void parse_findRecipeEmptyKeyword_throwsParseException() {
+        assertThrows(ParseException.class, () -> testParser.parseCommand(INVALID_FIND_COMMAND_EMPTY_KEYWORD));
+        assertThrows(ParseException.class, () -> testParser.parseCommand(INVALID_FIND_COMMAND_WHITESPACE_KEYWORD));
+    }
+
+    @Test
+    public void parse_findRecipeInvalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> testParser.parseCommand(INVALID_FIND_COMMAND_WRONG_FORMAT));
+    }
+
+    @Test
+    public void parse_findRecipeValidCommand_returnsRecipeCommand() {
+        List<String> keywords = Arrays.asList("chicken", "burger");
+        FindRecipeCommand expectedCommand = new FindRecipeCommand(new NameContainsKeywordsPredicate(keywords));
+        try {
+            assertEquals(expectedCommand, testParser.parseCommand(VALID_FIND_COMMAND));
+            assertEquals(expectedCommand, testParser.parseCommand(VALID_FIND_COMMAND_WHITESPACES));
         } catch (ParseException e) {
             Assertions.fail("ParseException thrown!");
         }

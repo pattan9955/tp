@@ -1,10 +1,12 @@
 package fridgy.logic.parser.recipe;
 
 import static fridgy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static fridgy.commons.core.Messages.MESSAGE_RECIPES_LISTED_OVERVIEW;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import fridgy.logic.commands.recipe.AddRecipeCommand;
 import fridgy.logic.commands.recipe.DeleteRecipeCommand;
+import fridgy.logic.commands.recipe.FindRecipeCommand;
 import fridgy.logic.commands.recipe.RecipeCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 
@@ -52,6 +54,18 @@ public class RecipeCommandParserTestUtil {
 
     //------------------------------------VALID VIEW RECIPE COMMANDS-------------------------------------------------
     public static final String VALID_VIEW_COMMAND = "view recipe 1";
+
+    //---------------------------------VALID FIND RECIPE COMMANDS---------------------------------------------------
+    public static final String VALID_FIND_COMMAND = "find recipe chicken burger";
+    public static final String VALID_FIND_COMMAND_WHITESPACES = "find recipe    chicken       \t burger";
+
+    public static final String INVALID_FIND_COMMAND_MESSAGE = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            FindRecipeCommand.MESSAGE_USAGE);
+
+    //--------------------------------INVALID FIND RECIPE COMMANDS-------------------------------------------------
+    public static final String INVALID_FIND_COMMAND_EMPTY_KEYWORD = "find recipe";
+    public static final String INVALID_FIND_COMMAND_WHITESPACE_KEYWORD = "find recipe   \t";
+    public static final String INVALID_FIND_COMMAND_WRONG_FORMAT = "find chicken burger";
 
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created
