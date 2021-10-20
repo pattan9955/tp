@@ -165,7 +165,7 @@ Classes used by multiple components are in the `fridgy.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Model Generic abstraction
+### 3.1 Model Generic abstraction
 
 At the fundamental level, both `Recipe` and `Ingredient` are using the same CRUD operations. To reduce code duplication, a generic class of `Database<T extends Eq>` is implemented. 
 
@@ -177,7 +177,7 @@ This implementation allow more flexibility in extending the application in the f
 However, do note that this implementation is purely contained within Model component. The `ModelManager` is still a monolithic class that handles all operations from other components. That means all CRUD operations to new types of objects will need to be implemented and exposed through `ModelManager`.
 
 
-### Automatic Quantity Conversion
+### 3.2 Automatic Quantity Conversion
 
 TBD
 
