@@ -255,7 +255,6 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        
         return inventory.equals(other.inventory)
                 && recipeBook.equals(other.recipeBook)
                 && userPrefs.equals(other.userPrefs)
