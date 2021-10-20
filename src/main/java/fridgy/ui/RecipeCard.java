@@ -62,9 +62,9 @@ public class RecipeCard extends UiPart<Region> {
                 .forEach(ingredient -> ingredients.getChildren().add(
                         new Label(UiUtil.truncateText(ingredient.getName(), INGREDIENT_CHAR_LIMIT)
                         )));
-        description.setText(recipeDescription);
+        description.setText("Description: " + recipeDescription);
         // This will automatically show / hide steps label
-        steps.setText(UiUtil.numberedList(recipe.getSteps()));
+        steps.setText("Steps:\n" + UiUtil.numberedList(recipe.getSteps()));
         steps.setVisible(isStepsVisible);
         steps.managedProperty().bind(steps.visibleProperty());
     }

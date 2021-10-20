@@ -21,13 +21,17 @@ Fridgy is a **desktop app for managing an inventory of food as well as a list of
 
 - Words between `<` and`>` are parameters to be supplied by the user.
 
-  e.g. in `add ingredient -n <name>`, `<name>` is a parameter which can be used as `add ingredient -n tomato`.
+  e.g. in `add ingredient -n <name>`, `<name>` is a parameter which can be used as:<br />`add ingredient -n tomato`.
 
 - Items in square brackets are optional.
 
   e.g. `add ingredient -n <name> [-d <description>]` can be used as
      1. `add ingredient -n tomato -d from Africa` or as
      2. `add ingredient -n tomato`
+     
+  e.g. `add ingredient -n <name> -q <quantity>[<units>]` can be used as 
+     1. `add ingredient -n chicken -q 2` or as
+     2. `add ingredient -n chicken -q 2kg`
 
 - Items with `…` after them can be used multiple times.
 
@@ -41,7 +45,7 @@ Pops out a window that leads the user to [User Guide](https://ay2122s1-cs2103t-w
 ### Exit:
 `exit`
 
-Closes the program.
+Exits the program.
 
 ## Ingredients
 
@@ -51,72 +55,93 @@ Closes the program.
 Add an ingredient to the inventory of ingredients. 
 - Any expired ingredients will be automatically tagged as `expired`.
 - Any expiring (within 7 days from current date) will be automatically tagged as `expiring`.
-- Acceptable ingredient units are:
-  1. grams: `g`
-  2. litres: `l`
-- Acceptable prefixes for units are:
-  1. milli- : `m` (i.e. `ml` for millilitres)
-  2. kilo- : `k` (i.e. `kg` for kilograms)
-- All units will be converted to grams and litres, to 3 decimal places.
+- For Quantity, units of measurement are not necessary, but the following are accepted: 
+  - Acceptable ingredient units are:
+    1. grams: `g`
+    2. litres: `l`
+  - Acceptable prefixes for units are:
+    1. milli- : `m` (i.e. `ml` for millilitres)
+    2. kilo- : `k` (i.e. `kg` for kilograms)
+  - All units will be converted to grams or litres, to 3 decimal places.
 
 Format: `add ingredient -n <name> -q <quantity>[<units>] [-d <description>] -e <expiry date> [t <tags>]`
 
-Examples:
+Example(s):
 1. `add ingredient -n tomato -d from africa -q 500 -e 27-09-2021 -t sweet`
-    <br />Expected Output:<br />`New ingredient added: tomato; Quantity: 500; Expiry Date: 27-09-2021; Description: from africa; Tags: [sweet][expired]`
+    <br />Expected Output:<br />
+    ```
+    New ingredient added: 
+    tomato; Quantity: 500; Expiry Date: 27-09-2021; Description: from africa; Tags: [expired][sweet]
+    ```
 
 
-2. `add ingredient -n milk -d fresh -q 500ml -e 27-09-2021`
-    <br />Expected Output:<br />`New ingredient added: milk; Quantity: 0.500 l; Expiry Date: 27-09-2021; Description: fresh; Tags: [expired]`
+2. `add ingredient -n milk -q 500ml -e 27-09-2021`
+    <br />Expected Output:<br />
+    ```
+    New ingredient added:
+    milk; Quantity: 0.500 l; Expiry Date: 27-09-2021; Tags: [expired]
+    ```
 
 
-3. `add ingredient -n flour -d fresh -q 500g -e 27/09/2021`
-    <br />Expected Output:<br />`New ingredient added: flour; Quantity: 500.000 g; Expiry Date: 27-09-2021; Description: fresh; Tags: [expired]`
+3. `add ingredient -n flour -d fresh -q 500g -e 27-09-2021`
+    <br />Expected Output:<br />
+    ```
+    New ingredient added:
+    flour; Quantity: 500.000 g; Expiry Date: 27-09-2021; Description: fresh; Tags: [expired]
+    ```
 
 
 ### Delete Ingredients:
 `delete ingredient`
 
-Delete an ingredient from the inventory of ingredients
+Delete an ingredient from the inventory of ingredients.
 
 Format: `delete ingredient <index>`
 
-Example:
+Example(s):
 1. `delete ingredient 1`
-    <br />Expected Output:<br />`Deleted Ingredient: flour; Quantity: 500.000 g; Expiry Date: 27-09-2021; Description: fresh; Tags: [expired]`
+    <br />Expected Output:<br />
+    ```
+    Deleted Ingredient:
+    tomato; Quantity: 500; Expiry Date: 27-09-2021; Description: from africa; Tags: [expired][sweet]
+    ```
 
 ### Edit Ingredients:
 `edit ingredient`
 
-Edit an ingredient from the inventory of ingredients
+Edit an ingredient from the inventory of ingredients.
 
 Format: `edit ingredient <index> -<field flag> <new data>`
 
-Example: 
+Example(s): 
 1. `edit ingredient 1 -d juicy`
-<br />Expected Output:<br />`Edited Ingredient: Watermelon; Quantity: 1; Expiry Date: 20-10-2021; Description: juicy; Tags: [expiring][melon][water]`
+<br />Expected Output:<br />
+    ```
+    Edited Ingredient: 
+    Watermelon; Quantity: 1; Expiry Date: 20-10-2021; Description: juicy; Tags: [expiring][melon][water]
+    ```
 
 ### Clear Ingredients:
-`clear`
+`clear ingredient`
 
-Clear all the ingredients from the inventory of ingredients
+Clear all the ingredients from the inventory of ingredients.
 
-Format: `clear`
+Format: `clear ingredient`
 
-Example:
-1. `clear`
-<br />Expected Output:<br />`Description book has been cleared!`
+Example(s):
+1. `clear ingredient`
+<br />Expected Output:<br />`Inventory has been cleared!`
 
 ### Find Ingredients:
 `find ingredient`
 
-Find an ingredient in the inventory based on keyword(s) from the name of the item
+Find an ingredient in the inventory based on a user-inputted keyword(s) from the name of the item.
 
 Format: `find ingredient <keyword>`
 
-Examples:
+Example(s):
 1. `find ingredient potato`
-Expected Output:
+<br />Expected Output:<br />
 ![img.png](images/findIngredient1.png)
 
 ### List Ingredients:
@@ -126,33 +151,82 @@ List all the ingredients again after `Find` Operation.
 
 Format: `list ingredient`
 
+Example(s):
+1. `list ingredient`
+<br />Expected Output:<br />
+![img.png](images/listIngredient1.png)
+
 ## Recipes
 
 ### Add Recipes:
 `add recipe`
 
-Add a recipe to the library of recipes
+Add a recipe to the library of recipes.
 
 Format: `add recipe -n <name> -i <ingredient> <quantity> [-d <optional description>] -s <steps>...`
 
-Examples:
-1. `add recipe -n pasta -i tomato 1 -i milk 100ml -i chicken breast 200g -s 1. Chicken chicken -s 2. Chicken chicken`
-    <br />Expected Output: `New recipe added: pasta; recipe ingredients: [tomato 1, chicken breast 200g, milk 100ml]; step: [1. Chicken chicken, 2. Chicken chicken]`
+Example(s):
+1. 
+    ```
+    add recipe -n pasta -i tomato 1 -i milk 100ml -i chicken breast 200g -s Chicken thicc -s Thicc chicken
+    ```
+    Expected Output:
+    ```
+    New recipe added:
+    pasta; Ingredients used: [tomato 1, chicken breast 200g, milk 100ml]; Steps: 1. Chicken thicc 2. Thicc chicken
+    ```
 
-
-2. `add recipe -n aglio olio -i pasta 200g -d grandmother aglio olio recipe -s 1. aglioli olioli 2. aglioli olioli`
-    <br />Expected Output: `New recipe added: aglio olio; recipe ingredients: [pasta 200g]; step: [1. aglioli olioli 2. aglioli olioli]; description: grandmother aglio olio recipe`
+2. 
+    ```
+    add recipe -n aglio olio -i pasta 200g -d grandmother aglio olio recipe -s aglioli olioli -s aglioli olioli
+    ```
+    Expected Output:
+    ```
+    New recipe added:
+    aglio olio; Description: grandmother aglio olio recipe; Ingredients used: [pasta 200g]; Steps: 1. aglioli olioli 2. aglioli olioli
+    ```
 
 ### Delete Recipes:
 `delete recipe`
 
-Delete a recipe from the library of recipes
+Delete a recipe from the library of recipes.
 
 Format: `delete recipe <index>`
 
-Examples:
+Example(s):
 1. `delete recipe 1`
-    <br />Expected Output:<br />`Your recipe for 'mom's spaghetti' has been deleted.`
+<br />Expected Output:
+     ```
+    Recipe deleted:
+    pasta; Ingredients used: [tomato 1, chicken breast 200g, milk 100ml]; Steps: 1. Chicken thicc 2. Thicc chicken
+     ```
+2. `delete recipe 2`
+   <br />Expected Output:
+    ```
+    Recipe deleted:
+    aglio olio; Description: grandmother aglio olio recipe; Ingredients used: [pasta 200g]; Steps: 1. aglioli olioli 2. aglioli olioli
+    ```
+
+### Find Recipes:
+`find recipe`
+
+Search for a recipe from the library of recipes based on a user-inputted keyword(s) from the name of the item.
+
+Format: `find recipe <keyword>...`
+
+Example(s): 
+1. `find recipe aglio`
+
+
+### List Recipes: 
+`list recipe`
+
+Lists out all the recipes again after `Find` operation
+
+Format: `list recipe`
+
+Example(s):
+1. `list recipe`
 
 ### View Recipes:
 `view recipe`
@@ -161,9 +235,10 @@ Expand the recipe and view the detailed steps in a bigger window.
 
 Format: `view recipe <index>`
 
-Examples: 
-1. `view recipe 2`<br />Expected Output:<br />
+Example(s):
+1. `view recipe 4`<br />Expected Output:<br />
 ![viewRecipe](images/viewRecipe1.png)
+
 -----
 # Command Summary
 
@@ -171,10 +246,12 @@ Action | Format
 --------|------------------
 **Add Ingredient** | `add ingredient -n <name> -q <quantity>[<units>] [-d <description>] -e <expiry date>`
 **Delete Ingredient** | `delete ingredient <index>`
-**Edit Ingredient** | `edit ingredient <index> -<field flag> <new data>`
+**Edit Ingredient** | `edit ingredient <index> (-<field flag> <new data>)...`
 **Clear Ingredient** | `clear`
-**Find Ingredient** | `find ingredient <keyword>`
+**Find Ingredient** | `find ingredient <keyword>...`
 **List Ingredient** | `list ingredient`
 **Add Recipe** | `add recipe -n <name> -i <ingredient> <quantity> [-d <optional description>] -s <steps>...`
 **Delete Recipe** | `delete recipe <index>`
+**Find Recipe** | `find recipe <keyword>...`
+**List Recipe** | `list recipe`
 **View Recipe** | `view recipe <index>`

@@ -27,9 +27,9 @@
                 </Label>
                 <Label fx:id="name" wrapText="true" text="\$first" styleClass="cell_big_label" />
             </HBox>
+            <Label fx:id="description" wrapText="true" styleClass="cell_small_label" text="\$description" />
             <FlowPane fx:id="ingredients" />
             <Label fx:id="steps" wrapText="true" styleClass="cell_small_label" text="\$steps" />
-            <Label fx:id="description" wrapText="true" styleClass="cell_small_label" text="\$description" />
         </VBox>
     </GridPane>
 </HBox>

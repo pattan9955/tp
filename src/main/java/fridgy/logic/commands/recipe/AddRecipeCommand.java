@@ -35,7 +35,7 @@ public class AddRecipeCommand extends RecipeCommand {
             + PREFIX_STEP + " Put the patty between the buns. "
             + PREFIX_DESCRIPTION + " Great burger! ";
 
-    public static final String MESSAGE_SUCCESS = "New recipe added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New recipe added:\n%1$s";
     public static final String MESSAGE_DUPLICATE_RECIPE = "This recipe already exists in the Inventory";
 
     private final Recipe toAdd;

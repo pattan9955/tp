@@ -39,7 +39,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + " fruit "
             + PREFIX_TAG + " sweet";
 
-    public static final String MESSAGE_SUCCESS = "New ingredient added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New ingredient added:\n%1$s";
     public static final String MESSAGE_DUPLICATE_INGREDIENT = "This ingredient already exists in the Inventory";
 
     private final Ingredient toAdd;

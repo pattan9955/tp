@@ -102,13 +102,20 @@ public class Recipe implements Eq {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; recipeIngredients: ")
+        builder.append(getName());
+        Optional<String> description = getDescription();
+        if (description.isPresent()) {
+            builder.append("; Description: ")
+                    .append(getDescription().orElse(""));
+        }
+        builder.append("; Ingredients used: ")
                 .append(getIngredients())
-                .append("; step: ")
-                .append(getSteps())
-                .append("; description: ")
-                .append(getDescription().orElse(""));
+                .append("; Steps:");
+
+        int count = 1;
+        for (Step step : getSteps()) {
+            builder.append(" ").append(count++).append(". ").append(step);
+        }
 
         return builder.toString();
     }
