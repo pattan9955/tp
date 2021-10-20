@@ -7,13 +7,14 @@ import java.util.Optional;
 import java.util.Set;
 
 import fridgy.commons.util.CollectionUtil;
+import fridgy.model.base.Eq;
 import fridgy.model.tag.Tag;
 
 /**
  * Represents an ingredient in the Inventory.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Ingredient {
+public class Ingredient implements Eq {
 
     // Identity fields
     private final Name name;
@@ -84,6 +85,17 @@ public class Ingredient {
 
         return otherIngredient != null
                 && otherIngredient.getName().equals(getName());
+    }
+
+    @Override
+    public boolean isSame(Eq other) {
+        if (other == this) {
+            return true;
+        }
+        if (other instanceof Ingredient) {
+            return isSameIngredient((Ingredient) other);
+        }
+        return false;
     }
 
     /**

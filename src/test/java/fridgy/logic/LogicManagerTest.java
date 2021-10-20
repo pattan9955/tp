@@ -18,10 +18,10 @@ import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
-import fridgy.model.ReadOnlyInventory;
-import fridgy.model.ReadOnlyRecipeBook;
 import fridgy.model.UserPrefs;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.recipe.Recipe;
 import fridgy.storage.JsonInventoryStorage;
 import fridgy.storage.JsonRecipeBookStorage;
 import fridgy.storage.JsonUserPrefsStorage;
@@ -89,7 +89,7 @@ public class LogicManagerTest {
                 + CommandTestUtil.EXPIRY_DATE_DESC;
         Ingredient expectedIngredient = new IngredientBuilder(TypicalIngredients.ALMOND).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addIngredient(expectedIngredient);
+        expectedModel.add(expectedIngredient);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
@@ -166,7 +166,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveInventory(ReadOnlyInventory addressBook, Path filePath) throws IOException {
+        public void saveInventory(ReadOnlyDatabase<Ingredient> addressBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }
@@ -180,7 +180,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveRecipeBook(ReadOnlyRecipeBook recipeBook, Path filePath) throws IOException {
+        public void saveRecipeBook(ReadOnlyDatabase<Recipe> recipeBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

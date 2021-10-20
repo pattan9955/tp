@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.function.Predicate;
 
 import fridgy.commons.core.GuiSettings;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 import javafx.collections.ObservableList;
 
@@ -45,27 +46,27 @@ public interface IngredientModel {
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setInventory(ReadOnlyInventory addressBook);
+    void setInventory(ReadOnlyDatabase<Ingredient> addressBook);
 
     /** Returns the Inventory */
-    ReadOnlyInventory getInventory();
+    ReadOnlyDatabase<Ingredient> getInventory();
 
     /**
      * Returns true if n ingredient with the same identity as {@code ingredient} exists in the address book.
      */
-    boolean hasIngredient(Ingredient ingredient);
+    boolean has(Ingredient ingredient);
 
     /**
      * Deletes the given ingredient.
      * The ingredient must exist in the address book.
      */
-    void deleteIngredient(Ingredient target);
+    void delete(Ingredient target);
 
     /**
      * Adds the given ingredient.
      * {@code ingredient} must not already exist in the address book.
      */
-    void addIngredient(Ingredient ingredient);
+    void add(Ingredient ingredient);
 
     /**
      * Sorts the inventory of ingredients using the specified comparator.
@@ -78,7 +79,7 @@ public interface IngredientModel {
      * The ingredient identity of {@code editedIngredient} must not be the same as another existing ingredient in the
      * address book.
      */
-    void setIngredient(Ingredient target, Ingredient editedIngredient);
+    void set(Ingredient target, Ingredient editedIngredient);
 
     /** Returns an unmodifiable view of the filtered ingredient list */
     ObservableList<Ingredient> getFilteredIngredientList();

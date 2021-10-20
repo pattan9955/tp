@@ -12,8 +12,8 @@ import fridgy.commons.exceptions.DataConversionException;
 import fridgy.commons.exceptions.IllegalValueException;
 import fridgy.commons.util.FileUtil;
 import fridgy.commons.util.JsonUtil;
-import fridgy.model.ReadOnlyRecipeBook;
-
+import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.recipe.Recipe;
 
 /**
  * A class to access RecipeBook data stored as a json file on the hard disk.
@@ -33,7 +33,7 @@ public class JsonRecipeBookStorage implements RecipeBookStorage {
     }
 
     @Override
-    public Optional<ReadOnlyRecipeBook> readRecipeBook() throws DataConversionException {
+    public Optional<ReadOnlyDatabase<Recipe>> readRecipeBook() throws DataConversionException {
         return readRecipeBook(filePath);
     }
 
@@ -43,7 +43,7 @@ public class JsonRecipeBookStorage implements RecipeBookStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyRecipeBook> readRecipeBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyDatabase<Recipe>> readRecipeBook(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableRecipeBook> jsonRecipeBook = JsonUtil.readJsonFile(
@@ -61,16 +61,16 @@ public class JsonRecipeBookStorage implements RecipeBookStorage {
     }
 
     @Override
-    public void saveRecipeBook(ReadOnlyRecipeBook addressBook) throws IOException {
+    public void saveRecipeBook(ReadOnlyDatabase<Recipe> addressBook) throws IOException {
         saveRecipeBook(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveRecipeBook(ReadOnlyRecipeBook)}.
+     * Similar to {@link #saveRecipeBook(ReadOnlyDatabase)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveRecipeBook(ReadOnlyRecipeBook addressBook, Path filePath) throws IOException {
+    public void saveRecipeBook(ReadOnlyDatabase<Recipe> addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 

@@ -74,11 +74,11 @@ public class EditCommand extends Command {
         Ingredient ingredientToEdit = lastShownList.get(index.getZeroBased());
         Ingredient editedIngredient = createEditedIngredient(ingredientToEdit, editIngredientDescriptor);
 
-        if (!ingredientToEdit.isSameIngredient(editedIngredient) && model.hasIngredient(editedIngredient)) {
+        if (!ingredientToEdit.isSameIngredient(editedIngredient) && model.has(editedIngredient)) {
             throw new CommandException(MESSAGE_DUPLICATE_INGREDIENT);
         }
 
-        model.setIngredient(ingredientToEdit, editedIngredient);
+        model.set(ingredientToEdit, editedIngredient);
         model.updateFilteredIngredientList(IngredientModel.PREDICATE_SHOW_ALL_INGREDIENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient));
     }

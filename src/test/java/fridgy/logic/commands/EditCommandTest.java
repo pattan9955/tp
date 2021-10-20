@@ -34,7 +34,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
 
         Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new RecipeBook(), new UserPrefs());
-        expectedModel.setIngredient(model.getFilteredIngredientList().get(0), editedIngredient);
+        expectedModel.set(model.getFilteredIngredientList().get(0), editedIngredient);
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -59,7 +59,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
 
         Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new RecipeBook(), new UserPrefs());
-        expectedModel.setIngredient(lastIngredient, editedIngredient);
+        expectedModel.set(lastIngredient, editedIngredient);
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -93,7 +93,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
 
         Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new RecipeBook(), new UserPrefs());
-        expectedModel.setIngredient(model.getFilteredIngredientList().get(0), editedIngredient);
+        expectedModel.set(model.getFilteredIngredientList().get(0), editedIngredient);
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -113,7 +113,7 @@ public class EditCommandTest {
         CommandTestUtil.showIngredientAtIndex(model, TypicalIndexes.INDEX_FIRST_INGREDIENT);
 
         // edit Ingredient in filtered list into a duplicate in address book
-        Ingredient ingredientInList = model.getInventory().getIngredientList()
+        Ingredient ingredientInList = model.getInventory().getList()
                 .get(TypicalIndexes.INDEX_SECOND_INGREDIENT.getZeroBased());
         EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT,
                 new EditIngredientDescriptorBuilder(ingredientInList).build());
@@ -140,7 +140,7 @@ public class EditCommandTest {
         CommandTestUtil.showIngredientAtIndex(model, TypicalIndexes.INDEX_FIRST_INGREDIENT);
         Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_INGREDIENT;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getInventory().getIngredientList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getInventory().getList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditIngredientDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BASIL).build());

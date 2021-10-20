@@ -53,7 +53,7 @@ public class TypicalRecipes {
     public static RecipeBook getTypicalRecipeBook() {
         RecipeBook rb = new RecipeBook();
         for (Recipe recipe : getTypicalRecipes()) {
-            rb.addRecipe(recipe);
+            rb.add(recipe);
         }
         return rb;
     }

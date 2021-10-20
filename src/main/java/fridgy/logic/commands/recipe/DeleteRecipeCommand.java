@@ -46,7 +46,7 @@ public class DeleteRecipeCommand extends RecipeCommand {
         }
 
         Recipe targetRecipe = recipeList.get(target.getZeroBased());
-        model.deleteRecipe(targetRecipe);
+        model.delete(targetRecipe);
         return new CommandResult(String.format(MESSAGE_SUCCESS, targetRecipe));
     }
 

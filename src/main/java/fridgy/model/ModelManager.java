@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.commons.core.LogsCenter;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import javafx.collections.ObservableList;
@@ -34,7 +35,9 @@ public class ModelManager implements Model {
      * Initializes a ModelManager with the given inventory and userPrefs.
      */
 
-    public ModelManager(ReadOnlyInventory inventory, ReadOnlyRecipeBook recipeBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyDatabase<Ingredient> inventory,
+                        ReadOnlyDatabase<Recipe> recipeBook,
+                        ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(inventory, userPrefs);
 
@@ -45,11 +48,12 @@ public class ModelManager implements Model {
         this.inventory = new Inventory(inventory);
         this.recipeBook = new RecipeBook(recipeBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredIngredients = new FilteredList<>(this.inventory.getIngredientList());
-        filteredRecipes = new FilteredList<>(this.recipeBook.getRecipeList());
+
+        filteredIngredients = new FilteredList<>(this.inventory.getList());
+        filteredRecipes = new FilteredList<>(this.recipeBook.getList());
 
         // have to use some type of observable that can change to make UI auto update
-        activeRecipe = new FilteredList<>(this.recipeBook.getRecipeList());
+        activeRecipe = new FilteredList<>(this.recipeBook.getList());
         // This feels like a hackish way to achieve what we want.
         activeRecipe.setPredicate(unused -> false);
     }
@@ -104,76 +108,78 @@ public class ModelManager implements Model {
         userPrefs.setRecipeBookFilePath(recipeBookFilePath);
     }
 
-    //=========== Inventory ================================================================================
+    //=========== Common CRUD ==============================================================================
 
     @Override
-    public void setInventory(ReadOnlyInventory inventory) {
-        this.inventory.resetData(inventory);
-    }
-
-    @Override
-    public ReadOnlyInventory getInventory() {
-        return inventory;
-    }
-
-    @Override
-    public boolean hasIngredient(Ingredient ingredient) {
+    public boolean has(Ingredient ingredient) {
         requireNonNull(ingredient);
-        return inventory.hasIngredient(ingredient);
+        return inventory.has(ingredient);
     }
 
     @Override
-    public void deleteIngredient(Ingredient target) {
-        inventory.removeIngredient(target);
+    public boolean has(Recipe recipe) {
+        requireNonNull(recipe);
+        return recipeBook.has(recipe);
     }
 
     @Override
-    public void addIngredient(Ingredient ingredient) {
-        inventory.addIngredient(ingredient);
+    public void delete(Ingredient target) {
+        inventory.remove(target);
+    }
+
+    @Override
+    public void delete(Recipe target) {
+        recipeBook.remove(target);
+    }
+
+    @Override
+    public void add(Ingredient ingredient) {
+        inventory.add(ingredient);
         updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
     }
 
     @Override
-    public void setIngredient(Ingredient target, Ingredient editedIngredient) {
+    public void add(Recipe recipe) {
+        recipeBook.add(recipe);
+        updateFilteredRecipeList(PREDICATE_SHOW_ALL_RECIPES);
+    }
+
+    @Override
+    public void set(Ingredient target, Ingredient editedIngredient) {
         requireAllNonNull(target, editedIngredient);
 
-        inventory.setIngredient(target, editedIngredient);
+        inventory.set(target, editedIngredient);
+    }
+
+    @Override
+    public void set(Recipe target, Recipe editedRecipe) {
+        requireAllNonNull(target, editedRecipe);
+
+        recipeBook.set(target, editedRecipe);
+    }
+
+    //=========== Inventory ================================================================================
+
+    @Override
+    public void setInventory(ReadOnlyDatabase<Ingredient> inventory) {
+        this.inventory.resetDatabase(inventory);
+    }
+
+    @Override
+    public ReadOnlyDatabase<Ingredient> getInventory() {
+        return inventory;
     }
 
     //=========== RecipeBook ================================================================================
 
     @Override
-    public void setRecipeBook(ReadOnlyRecipeBook recipeBook) {
-        this.recipeBook.resetData(recipeBook);
+    public void setRecipeBook(ReadOnlyDatabase<Recipe> recipeBook) {
+        this.recipeBook.resetDatabase(recipeBook);
     }
 
     @Override
-    public ReadOnlyRecipeBook getRecipeBook() {
+    public ReadOnlyDatabase<Recipe> getRecipeBook() {
         return recipeBook;
-    }
-
-    @Override
-    public boolean hasRecipe(Recipe recipe) {
-        requireNonNull(recipe);
-        return recipeBook.hasRecipe(recipe);
-    }
-
-    @Override
-    public void deleteRecipe(Recipe target) {
-        recipeBook.removeRecipe(target);
-    }
-
-    @Override
-    public void addRecipe(Recipe recipe) {
-        recipeBook.addRecipe(recipe);
-        updateFilteredRecipeList(PREDICATE_SHOW_ALL_RECIPES);
-    }
-
-    @Override
-    public void setRecipe(Recipe target, Recipe editedRecipe) {
-        requireAllNonNull(target, editedRecipe);
-
-        recipeBook.setRecipe(target, editedRecipe);
     }
 
     @Override
@@ -184,7 +190,7 @@ public class ModelManager implements Model {
     @Override
     public void setActiveRecipe(Recipe recipe) {
         requireNonNull(recipe);
-        if (recipeBook.hasRecipe(recipe)) {
+        if (recipeBook.has(recipe)) {
             activeRecipe.setPredicate(x -> x.equals(recipe));
         }
     }

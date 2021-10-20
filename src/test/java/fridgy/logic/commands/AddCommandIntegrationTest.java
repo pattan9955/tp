@@ -28,7 +28,7 @@ public class AddCommandIntegrationTest {
         Ingredient validIngredient = new IngredientBuilder().build();
 
         Model expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
-        expectedModel.addIngredient(validIngredient);
+        expectedModel.add(validIngredient);
 
         CommandTestUtil.assertCommandSuccess(new AddCommand(validIngredient), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, validIngredient), expectedModel);
@@ -36,7 +36,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateIngredient_throwsCommandException() {
-        Ingredient ingredientInList = model.getInventory().getIngredientList().get(0);
+        Ingredient ingredientInList = model.getInventory().getList().get(0);
         CommandTestUtil.assertCommandFailure(new AddCommand(ingredientInList), model,
                 AddCommand.MESSAGE_DUPLICATE_INGREDIENT);
     }

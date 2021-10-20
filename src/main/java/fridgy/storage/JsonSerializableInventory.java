@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import fridgy.commons.exceptions.IllegalValueException;
 import fridgy.model.Inventory;
-import fridgy.model.ReadOnlyInventory;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 
 /**
@@ -32,12 +32,12 @@ class JsonSerializableInventory {
     }
 
     /**
-     * Converts a given {@code ReadOnlyInventory} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyDatabase<Ingredient>} into this class for Jackson use.
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableInventory}.
      */
-    public JsonSerializableInventory(ReadOnlyInventory source) {
-        ingredients.addAll(source.getIngredientList().stream()
+    public JsonSerializableInventory(ReadOnlyDatabase<Ingredient> source) {
+        ingredients.addAll(source.getList().stream()
                 .map(JsonAdaptedIngredient::new).collect(Collectors.toList()));
     }
 
@@ -50,10 +50,10 @@ class JsonSerializableInventory {
         Inventory addressBook = new Inventory();
         for (JsonAdaptedIngredient jsonAdaptedIngredient : ingredients) {
             Ingredient ingredient = jsonAdaptedIngredient.toModelType();
-            if (addressBook.hasIngredient(ingredient)) {
+            if (addressBook.has(ingredient)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_INGREDIENT);
             }
-            addressBook.addIngredient(ingredient);
+            addressBook.add(ingredient);
         }
         return addressBook;
     }
