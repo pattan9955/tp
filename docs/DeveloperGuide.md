@@ -93,7 +93,7 @@ The `UI` component,
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
+Here is a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
@@ -115,7 +115,11 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="800"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `FridgyParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `FridgyParser` returns back as a higher order function that exposes `Command` object's execute interface.
+* When called upon to parse a user command, the `FridgyParser` class checks if the command is a 'Typed' command (i.e. a command that pertains to Inventory or Recipes) or a 'General' command (such as "help" or "exit").
+* "Typed" commands are sent to either `RecipeParser` or `InventoryParser` depending on the command type, while "General" commands are handled in `FridgyParser` directly.
+* Inside `RecipeParser`/`InventoryParser`, commands that utilize arguments and require additional parsing will cause an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g. `AddCommandParser`) to be created.
+* This `XYZCommandParser` is used to parse additional arguments and creates the `XYZCommand` object.
+* The `FridgyParser` class then returns the `XYZCommand` object wrapped in an executable `CommandExecutor` that can be applied on a provided `Model` and return a `CommandResult.`
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### 2.4 Model component
@@ -128,7 +132,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the fridgy data i.e., all `Ingredient` and `Recipe` objects (which are contained in a `Database<Ingredient>` / `Database<Recipe` object).
+* stores the Fridgy data i.e., all `Ingredient` and `Recipe` objects (which are contained in a `Database<Ingredient>` / `Database<Recipe` object).
 * stores the currently 'selected' `Ingredient` and `Recipe` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Ingredient>` and `Recipe` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores the 'active' `Ingredient` or `Recipe` object that is displayed in detail in the UI component
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
@@ -151,7 +155,7 @@ The CRUD behavior of `Ingredient` and `Recipe` are similar as they are implement
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* can save `RecipeBook` and `Inventory` data as well as user preference data in json format, and read them back into corresponding objects.
 * inherits from both `InventoryStorage`, `RecipeBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
