@@ -1,12 +1,13 @@
 package fridgy.model.ingredient;
 
+import static fridgy.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import fridgy.commons.util.CollectionUtil;
 import fridgy.model.base.Eq;
 import fridgy.model.tag.Tag;
 
@@ -28,7 +29,7 @@ public class Ingredient extends BaseIngredient {
      */
     public Ingredient(Name name, Quantity quantity, Set<Tag> tags, ExpiryDate expiryDate) {
         super(name, quantity);
-        CollectionUtil.requireAllNonNull(name, quantity, expiryDate, tags);
+        requireAllNonNull(name, quantity, expiryDate, tags);
         this.description = new Description(Optional.empty());
         this.expiryDate = expiryDate;
         this.tags.addAll(tags);
@@ -40,7 +41,7 @@ public class Ingredient extends BaseIngredient {
     public Ingredient(Name name, Quantity quantity, Description description,
                       Set<Tag> tags, ExpiryDate expiryDate) {
         super(name, quantity);
-        CollectionUtil.requireAllNonNull(name, quantity, expiryDate, tags);
+        requireAllNonNull(name, quantity, expiryDate, tags);
         this.description = description;
         this.expiryDate = expiryDate;
         this.tags.addAll(tags);

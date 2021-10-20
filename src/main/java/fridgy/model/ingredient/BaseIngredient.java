@@ -1,12 +1,13 @@
 package fridgy.model.ingredient;
 
+import static fridgy.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Objects;
 
-import fridgy.commons.util.CollectionUtil;
 import fridgy.model.base.Eq;
 
 /**
- * Represents a Base ingredient in the Inventory, to be used by Recipe.
+ * Represents a Base ingredient to be used by Recipe.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class BaseIngredient implements Eq {
@@ -19,7 +20,7 @@ public class BaseIngredient implements Eq {
      * Constructs a base ingredient reference with the given name and quantity.
      */
     public BaseIngredient(Name name, Quantity quantity) {
-        CollectionUtil.requireAllNonNull(name, quantity);
+        requireAllNonNull(name, quantity);
         this.name = name;
         this.quantity = quantity;
     }

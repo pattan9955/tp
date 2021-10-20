@@ -15,6 +15,7 @@ public class BaseIngredientTest {
     public void isSameIngredient() {
         // same object -> returns true
         Assertions.assertTrue(TypicalBaseIngredients.APPLE.isSameIngredient(TypicalBaseIngredients.APPLE));
+        Assertions.assertTrue(TypicalBaseIngredients.APPLE.isSame(TypicalBaseIngredients.APPLE));
 
         // null -> returns false
         Assertions.assertFalse(TypicalBaseIngredients.APPLE.isSameIngredient(null));
@@ -46,6 +47,7 @@ public class BaseIngredientTest {
         // same values -> returns true
         BaseIngredient almondCopy = new IngredientBuilder(TypicalBaseIngredients.APPLE).buildBaseIngredient();
         Assertions.assertTrue(TypicalBaseIngredients.APPLE.equals(almondCopy));
+        Assertions.assertTrue(TypicalBaseIngredients.APPLE.toString().equals(almondCopy.toString()));
 
         // same object -> returns true
         Assertions.assertTrue(TypicalBaseIngredients.APPLE.equals(TypicalBaseIngredients.APPLE));
