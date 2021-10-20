@@ -111,7 +111,7 @@ public class FindRecipeCommandTest {
         expectedModel.updateFilteredRecipeList(predicate);
         command.execute(model);
         assertTrue(command.execute(model).equals(expected));
-        assertEquals(Arrays.asList(BURGER, MAGGIE, FRIES),
+        assertEquals(Arrays.asList(BURGER, FRIES, MAGGIE),
                 model.getFilteredRecipeList());
     }
 

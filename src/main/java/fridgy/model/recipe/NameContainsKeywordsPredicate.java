@@ -12,6 +12,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Recipe> {
     private final List<String> keywords;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
+        System.out.println(keywords.toString());
         this.keywords = keywords;
     }
 
