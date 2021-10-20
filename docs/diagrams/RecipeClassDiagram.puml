@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Recipe <<Rectangle>> #F4F6F6 {
+Class RecipeName
+Class Recipe
+Class BaseIngredient
+Class Step
+Class RecipeDescription
+}
+
+Recipe *--> RecipeName
+Recipe *--> "*" BaseIngredient
+Recipe *--> "*" Step
+Recipe *--> "0..1" RecipeDescription
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Recipe
+
+@enduml
