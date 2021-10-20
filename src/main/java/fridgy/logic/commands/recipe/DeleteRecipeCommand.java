@@ -23,7 +23,7 @@ public class DeleteRecipeCommand extends RecipeCommand {
             + RECIPE_KEYWORD
             + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Recipe deleted: %1$s";
+    public static final String MESSAGE_SUCCESS = "Recipe deleted:\n%1$s";
 
     private final Index target;
 
