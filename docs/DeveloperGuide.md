@@ -115,6 +115,9 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/IngredientClassDiagram.png" width="450" />
+<img src="images/RecipeClassDiagram.png" width="450" />
+
 
 The `Model` component,
 
