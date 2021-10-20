@@ -1,9 +1,11 @@
 package fridgy.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import javafx.collections.ObservableList;
 
@@ -48,6 +50,11 @@ public interface RecipeModel {
     void add(Recipe recipe);
 
     /**
+     * Sorts the recipes in the recipe book using the specified comparator.
+     */
+    void sortRecipe(Comparator<Recipe> comparator);
+
+    /**
      * Replaces the given recipe {@code target} with {@code editedRecipe}.
      * {@code target} must exist in the address book.
      * The recipe identity of {@code editedRecipe} must not be the same as another existing recipe in the address book.
@@ -56,6 +63,9 @@ public interface RecipeModel {
 
     /** Returns an unmodifiable view of the filtered recipe list */
     ObservableList<Recipe> getFilteredRecipeList();
+
+    /** Returns an unmodifiable view of the filtered ingredient list */
+    ObservableList<Ingredient> getFilteredIngredientList();
 
     ObservableList<Recipe> getActiveRecipe();
     void setActiveRecipe(Recipe target);

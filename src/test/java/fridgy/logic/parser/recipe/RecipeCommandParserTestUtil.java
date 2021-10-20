@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import fridgy.logic.commands.recipe.AddRecipeCommand;
 import fridgy.logic.commands.recipe.DeleteRecipeCommand;
 import fridgy.logic.commands.recipe.FindRecipeCommand;
+import fridgy.logic.commands.recipe.ListRecipeCommand;
 import fridgy.logic.commands.recipe.RecipeCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 
@@ -65,6 +66,15 @@ public class RecipeCommandParserTestUtil {
     public static final String INVALID_FIND_COMMAND_EMPTY_KEYWORD = "find recipe";
     public static final String INVALID_FIND_COMMAND_WHITESPACE_KEYWORD = "find recipe   \t";
     public static final String INVALID_FIND_COMMAND_WRONG_FORMAT = "find chicken burger";
+
+    //---------------------------------VALID LIST RECIPE COMMANDS---------------------------------------------------
+    public static final String VALID_LIST_COMMAND = "list recipe";
+    public static final String INVALID_LIST_COMMAND_MESSAGE = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            ListRecipeCommand.MESSAGE_USAGE);
+
+    //---------------------------------INVALID LIST RECIPE COMMANDS---------------------------------------------------
+    public static final String INVALID_LIST_COMMAND = "list";
+    public static final String INVALID_LIST_TYPE_COMMAND = "list ingredient";
 
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created

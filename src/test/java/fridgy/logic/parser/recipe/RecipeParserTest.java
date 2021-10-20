@@ -8,6 +8,8 @@ import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_DEL
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_FIND_COMMAND_EMPTY_KEYWORD;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_FIND_COMMAND_WHITESPACE_KEYWORD;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_FIND_COMMAND_WRONG_FORMAT;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_LIST_COMMAND;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_LIST_TYPE_COMMAND;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_ALL_PREFIX_PRESENT;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_MISSING_DESCRIPTION;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_MULTIPLE_INGREDIENTS;
@@ -16,6 +18,7 @@ import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_C
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_DEL_COMMAND;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_FIND_COMMAND;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_FIND_COMMAND_WHITESPACES;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_LIST_COMMAND;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -30,6 +33,7 @@ import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.recipe.AddRecipeCommand;
 import fridgy.logic.commands.recipe.DeleteRecipeCommand;
 import fridgy.logic.commands.recipe.FindRecipeCommand;
+import fridgy.logic.commands.recipe.ListRecipeCommand;
 import fridgy.logic.commands.recipe.RecipeCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.recipe.NameContainsKeywordsPredicate;
@@ -135,6 +139,23 @@ public class RecipeParserTest {
         try {
             assertEquals(expectedCommand, testParser.parseCommand(VALID_FIND_COMMAND));
             assertEquals(expectedCommand, testParser.parseCommand(VALID_FIND_COMMAND_WHITESPACES));
+        } catch (ParseException e) {
+            Assertions.fail("ParseException thrown!");
+        }
+    }
+
+    @Test
+    public void parse_listRecipeInvalidCommand_throwsParseException() {
+        assertThrows(ParseException.class, () -> testParser.parseCommand(INVALID_LIST_COMMAND));
+        assertThrows(ParseException.class, () -> testParser.parseCommand(INVALID_LIST_TYPE_COMMAND));
+    }
+
+    @Test
+    public void parse_listRecipeValidCommand_returnsRecipeCommand() {
+        ListRecipeCommand expectedCommand = new ListRecipeCommand();
+        try {
+            RecipeCommand result = testParser.parseCommand(VALID_LIST_COMMAND);
+            assertEquals(expectedCommand, result);
         } catch (ParseException e) {
             Assertions.fail("ParseException thrown!");
         }

@@ -229,9 +229,16 @@ public class ModelManager implements Model {
         filteredRecipes.setPredicate(predicate);
     }
 
+    //=========== Sorting =============================================================
+
     @Override
     public void sortIngredient(Comparator<Ingredient> comparator) {
         this.inventory.sort(comparator);
+    }
+
+    @Override
+    public void sortRecipe(Comparator<Recipe> comparator) {
+        this.recipeBook.sort(comparator);
     }
 
     @Override
@@ -248,7 +255,6 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-
         return inventory.equals(other.inventory)
                 && recipeBook.equals(other.recipeBook)
                 && userPrefs.equals(other.userPrefs)

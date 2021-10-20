@@ -15,7 +15,7 @@ By: `Team Fridgy`
 
 # 1. **Overview**
 
-This developer guide contains documentation on design architecture and details software design decisions in the implementation of Fridgy. 
+This developer guide contains documentation on design architecture and details software design decisions in the implementation of Fridgy.
 It is intended to be read by contributors, users, and future maintainers.
 
 For more information on the Fridgy application, refer to the [_User Guide_](UserGuide.md) instead.
@@ -78,13 +78,17 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ActiveDisplay`, `ingredientListPanel`, `recipeListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of:
+1. `UIManager` which implements the `UI` interface, and hence is responsible for handling the initial setup when Fridgy is started e.g. initializing `MainWindow` and its parts. 
+2. `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ActiveDisplay`, `ingredientListPanel`, `recipeListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI such as the handling of the interaction between these classes and their corresponding FXML files.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. As such, it follows closely to the typical JavaFX application structure. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
+* displays the result of the command execution to the UI part `ResultDisplay`
+* logs the result of the command execution.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Ingredient` and `Recipe` object residing in the `Model`.
@@ -93,7 +97,7 @@ The `UI` component,
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
+Here is a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
@@ -115,7 +119,11 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="800"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `FridgyParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `FridgyParser` returns back as a higher order function that exposes `Command` object's execute interface.
+* When called upon to parse a user command, the `FridgyParser` class checks if the command is a 'Typed' command (i.e. a command that pertains to Inventory or Recipes) or a 'General' command (such as "help" or "exit").
+* "Typed" commands are sent to either `RecipeParser` or `InventoryParser` depending on the command type, while "General" commands are handled in `FridgyParser` directly.
+* Inside `RecipeParser`/`InventoryParser`, commands that utilize arguments and require additional parsing will cause an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g. `AddCommandParser`) to be created.
+* This `XYZCommandParser` is used to parse additional arguments and creates the `XYZCommand` object.
+* The `FridgyParser` class then returns the `XYZCommand` object wrapped in an executable `CommandExecutor` that can be applied on a provided `Model` and return a `CommandResult.`
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### 2.4 Model component
@@ -128,7 +136,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the fridgy data i.e., all `Ingredient` and `Recipe` objects (which are contained in a `Database<Ingredient>` / `Database<Recipe` object).
+* stores the Fridgy data i.e., all `Ingredient` and `Recipe` objects (which are contained in a `Database<Ingredient>` / `Database<Recipe` object).
 * stores the currently 'selected' `Ingredient` and `Recipe` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Ingredient>` and `Recipe` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores the 'active' `Ingredient` or `Recipe` object that is displayed in detail in the UI component
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
@@ -151,7 +159,7 @@ The CRUD behavior of `Ingredient` and `Recipe` are similar as they are implement
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* can save `RecipeBook` and `Inventory` data as well as user preference data in json format, and read them back into corresponding objects.
 * inherits from both `InventoryStorage`, `RecipeBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -167,7 +175,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### 3.1 Model Generic abstraction
 
-At the fundamental level, both `Recipe` and `Ingredient` are using the same CRUD operations. To reduce code duplication, a generic class of `Database<T extends Eq>` is implemented. 
+At the fundamental level, both `Recipe` and `Ingredient` are using the same CRUD operations. To reduce code duplication, a generic class of `Database<T extends Eq>` is implemented.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** `Eq` is an interface that ensures all objects entered into the Database has a weaker notion of equality defined by the developer. <br>
 </div>
@@ -276,8 +284,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 **Extensions**
 
 * 1a. The user enters an invalid input format.
-    * 1a1. Fridgy displays an error message.
-        
+    * 1a1. Fridgy displays an error message.     
+
         Use case ends.
 * 2a. The user enters an invalid parameter.
     * 2a1. Fridgy displays an error message.
@@ -287,7 +295,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
     * 2b1. Fridgy displays an error message.
 
       Use case ends.
-    
+
 <br>
 
 <a name="UC02"></a>
@@ -319,7 +327,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 2. User provides the parameter(s) to be edited.
 3. Fridgy edits the ingredient.
 4. Fridgy displays a confirmation message and the edited ingredient.
-    
+
     Use case ends.
 
 **Extensions**
@@ -594,7 +602,7 @@ testers are expected to do more *exploratory* testing.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-   
+
 
 <br>
 

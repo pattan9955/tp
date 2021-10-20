@@ -11,6 +11,9 @@ import fridgy.commons.util.StringUtil;
 public class NameContainsKeywordsPredicate implements Predicate<Recipe> {
     private final List<String> keywords;
 
+    /**
+     * Constructs a NameContainsKeywordsPredicate with the {@code keywords} given
+     */
     public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
