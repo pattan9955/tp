@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Assertions;
@@ -18,6 +19,7 @@ import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.RecipeBook;
 import fridgy.model.RecipeModel;
 import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import javafx.collections.ObservableList;
 
@@ -124,12 +126,22 @@ public class DeleteRecipeCommandTest {
         }
 
         @Override
+        public void sortRecipe(Comparator<Recipe> comparator) {
+            throw new AssertionError("Should not be used!");
+        }
+
+        @Override
         public void set(Recipe target, Recipe editedRecipe) {
             throw new AssertionError("Should not be used!");
         }
 
         @Override
         public ObservableList<Recipe> getFilteredRecipeList() {
+            throw new AssertionError("Should not be used!");
+        }
+
+        @Override
+        public ObservableList<Ingredient> getFilteredIngredientList() {
             throw new AssertionError("Should not be used!");
         }
 

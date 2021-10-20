@@ -15,7 +15,7 @@ By: `Team Fridgy`
 
 # 1. **Overview**
 
-This developer guide contains documentation on design architecture and details software design decisions in the implementation of Fridgy. 
+This developer guide contains documentation on design architecture and details software design decisions in the implementation of Fridgy.
 It is intended to be read by contributors, users, and future maintainers.
 
 For more information on the Fridgy application, refer to the [_User Guide_](UserGuide.md) instead.
@@ -167,7 +167,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### 3.1 Model Generic abstraction
 
-At the fundamental level, both `Recipe` and `Ingredient` are using the same CRUD operations. To reduce code duplication, a generic class of `Database<T extends Eq>` is implemented. 
+At the fundamental level, both `Recipe` and `Ingredient` are using the same CRUD operations. To reduce code duplication, a generic class of `Database<T extends Eq>` is implemented.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** `Eq` is an interface that ensures all objects entered into the Database has a weaker notion of equality defined by the developer. <br>
 </div>
@@ -276,8 +276,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 **Extensions**
 
 * 1a. The user enters an invalid input format.
-    * 1a1. Fridgy displays an error message.
-        
+    * 1a1. Fridgy displays an error message.     
+
         Use case ends.
 * 2a. The user enters an invalid parameter.
     * 2a1. Fridgy displays an error message.
@@ -287,7 +287,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
     * 2b1. Fridgy displays an error message.
 
       Use case ends.
-    
+
 <br>
 
 <a name="UC02"></a>
@@ -319,7 +319,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 2. User provides the parameter(s) to be edited.
 3. Fridgy edits the ingredient.
 4. Fridgy displays a confirmation message and the edited ingredient.
-    
+
     Use case ends.
 
 **Extensions**
@@ -594,7 +594,7 @@ testers are expected to do more *exploratory* testing.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-   
+
 
 <br>
 
