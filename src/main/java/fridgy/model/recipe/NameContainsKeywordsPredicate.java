@@ -15,7 +15,6 @@ public class NameContainsKeywordsPredicate implements Predicate<Recipe> {
      * Constructs a NameContainsKeywordsPredicate with the {@code keywords} given
      */
     public NameContainsKeywordsPredicate(List<String> keywords) {
-        System.out.println(keywords.toString());
         this.keywords = keywords;
     }
 
