@@ -13,11 +13,13 @@ import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
+    public static final String INGREDIENT_KEYWORD = "ingredient";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all ingredients whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + INGREDIENT_KEYWORD
+            + ": Finds all ingredients whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " almond basil chocolate";
+            + "Example: " + COMMAND_WORD + " " + INGREDIENT_KEYWORD + " " + " almond basil chocolate";
 
     private final NameContainsKeywordsPredicate predicate;
 
@@ -29,8 +31,11 @@ public class FindCommand extends Command {
     public CommandResult execute(IngredientModel model) {
         requireNonNull(model);
         model.updateFilteredIngredientList(predicate);
+
+        int size = model.getFilteredIngredientList().size();
+        String plural = size == 0 || size == 1 ? "" : "s";
         return new CommandResult(
-                String.format(Messages.MESSAGE_INGREDIENTS_LISTED_OVERVIEW, model.getFilteredIngredientList().size()));
+                String.format(Messages.MESSAGE_INGREDIENTS_LISTED_OVERVIEW, size, plural));
     }
 
     @Override
