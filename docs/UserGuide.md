@@ -4,7 +4,7 @@ title: User Guide
 ---
 # Introduction
 
-Fridgy is a **desktop app for managing an inventory of food as well as a list of recipes, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Fridgy can get your fridge inventory and recipe sorted out faster than traditional GUI apps.
+Fridgy is a **desktop app for managing an Inventory of food as well as a list of recipes, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Fridgy can get your fridge Inventory and recipe sorted out faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 * Table of Contents
@@ -52,7 +52,7 @@ Exits the program.
 ### Add Ingredients:
 `add ingredient`
 
-Add an ingredient to the inventory of ingredients. 
+Add an ingredient to the Inventory. 
 - Any expired ingredients will be automatically tagged as `expired`.
 - Any expiring (within 7 days from current date) will be automatically tagged as `expiring`.
 - For Quantity, units of measurement are not necessary, but the following are accepted: 
@@ -94,7 +94,7 @@ Example(s):
 ### Delete Ingredients:
 `delete ingredient`
 
-Delete an ingredient from the inventory of ingredients.
+Delete an ingredient from the Inventory.
 
 Format: `delete ingredient <index>`
 
@@ -109,7 +109,7 @@ Example(s):
 ### Edit Ingredients:
 `edit ingredient`
 
-Edit an ingredient from the inventory of ingredients.
+Edit an ingredient from the Inventory.
 
 Format: `edit ingredient <index> -<field flag> <new data>`
 
@@ -124,20 +124,27 @@ Example(s):
 ### Clear Ingredients:
 `clear ingredient`
 
-Clear all the ingredients from the inventory of ingredients.
+Clear all the ingredients from the Inventory.
 
 Format: `clear ingredient`
 
 Example(s):
 1. `clear ingredient`
-<br />Expected Output:<br />`Inventory has been cleared!`
+<br />Expected Output:<br />```Inventory has been cleared!```
 
 ### Find Ingredients:
 `find ingredient`
 
-Find an ingredient in the inventory based on a user-inputted keyword(s) from the name of the item.
+- Search for an ingredient from the Inventory based on a user-inputted keyword(s) that match the name of an ingredient(s).
+- Current requirements for a keyword:
+    1. Keyword is case-insensitive.
+       i. e.g. Finding with keyword: "corn" will match with "COrN"
+    2. Any keyword must match a full word in the name of the recipe.
+       i. e.g. Finding with keyword: "corn" will match with "CoRN flour", "coRn FlakeS", etc. but not "popcorn"
+       ii. e.g. Finding with keywords: "corn Chicken beef" will match "beef Chicken", "beef corn", etc. but not "beefcorn"
+- After `find ingredient` command, to see the full list of ingredients again, please use `list ingredient` command.
 
-Format: `find ingredient <keyword>`
+Format: `find ingredient <keyword>...`
 
 Example(s):
 1. `find ingredient potato`
@@ -147,7 +154,7 @@ Example(s):
 ### List Ingredients:
 `list ingredient`
 
-List all the ingredients again after `Find` Operation.
+List all the ingredients again after `find ingredient` Operation.
 
 Format: `list ingredient`
 
@@ -161,26 +168,20 @@ Example(s):
 ### Add Recipes:
 `add recipe`
 
-Add a recipe to the library of recipes.
+Add a recipe to the Recipe Book.
 
 Format: `add recipe -n <name> -i <ingredient> <quantity> [-d <optional description>] -s <steps>...`
 
 Example(s):
-1. 
-    ```
-    add recipe -n pasta -i tomato 1 -i milk 100ml -i chicken breast 200g -s Chicken thicc -s Thicc chicken
-    ```
-    Expected Output:
+1. `add recipe -n pasta -i tomato 1 -i milk 100ml -i chicken breast 200g -s Chicken thicc -s Thicc chicken`
+    <br />Expected Output:
     ```
     New recipe added:
     pasta; Ingredients used: [tomato 1, chicken breast 200g, milk 100ml]; Steps: 1. Chicken thicc 2. Thicc chicken
     ```
 
-2. 
-    ```
-    add recipe -n aglio olio -i pasta 200g -d grandmother aglio olio recipe -s aglioli olioli -s aglioli olioli
-    ```
-    Expected Output:
+2. `add recipe -n aglio olio -i pasta 200g -d grandmother aglio olio recipe -s aglioli olioli -s aglioli olioli`
+    <br />Expected Output:
     ```
     New recipe added:
     aglio olio; Description: grandmother aglio olio recipe; Ingredients used: [pasta 200g]; Steps: 1. aglioli olioli 2. aglioli olioli
@@ -189,7 +190,7 @@ Example(s):
 ### Delete Recipes:
 `delete recipe`
 
-Delete a recipe from the library of recipes.
+Delete a recipe from the Recipe Book.
 
 Format: `delete recipe <index>`
 
@@ -210,23 +211,34 @@ Example(s):
 ### Find Recipes:
 `find recipe`
 
-Search for a recipe from the library of recipes based on a user-inputted keyword(s) from the name of the item.
+- Search for a recipe from the Recipe Book based on a user-inputted keyword(s) that match the name of a recipe(s).
+- Current requirements for a keyword:
+  1. Keyword is case-insensitive.
+     i. e.g. Finding with keyword: "mee" will match with "Maggie Mee"
+  2. Any keyword must match a full word in the name of the recipe.
+     i. e.g. Finding with keyword: "mee" will match with "Maggie Mee", "mee Goreng", etc. but not "meek"
+     ii. e.g. Finding with keywords: "salad Chicken burger" will match "Fried Chicken", "Burger Chicken", "Salad", "Chicken Salad", etc. but not "chickenburger"
+- After `find recipe` command, to see the full list of recipes again, please use `list recipe` command.
+
 
 Format: `find recipe <keyword>...`
 
 Example(s): 
 1. `find recipe aglio`
-
+<br />Expected output:
+![findRecipe1.png](images/findRecipe1.png)
 
 ### List Recipes: 
 `list recipe`
 
-Lists out all the recipes again after `Find` operation
+Lists out all the recipes again after `find recipe` operation. 
 
 Format: `list recipe`
 
 Example(s):
 1. `list recipe`
+<br /> Expected output:
+![listRecipe1.png](images/listRecipe1.png)
 
 ### View Recipes:
 `view recipe`
@@ -247,7 +259,7 @@ Action | Format
 **Add Ingredient** | `add ingredient -n <name> -q <quantity>[<units>] [-d <description>] -e <expiry date>`
 **Delete Ingredient** | `delete ingredient <index>`
 **Edit Ingredient** | `edit ingredient <index> (-<field flag> <new data>)...`
-**Clear Ingredient** | `clear`
+**Clear Ingredient** | `clear ingredient`
 **Find Ingredient** | `find ingredient <keyword>...`
 **List Ingredient** | `list ingredient`
 **Add Recipe** | `add recipe -n <name> -i <ingredient> <quantity> [-d <optional description>] -s <steps>...`
