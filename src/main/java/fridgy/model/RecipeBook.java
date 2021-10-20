@@ -4,7 +4,6 @@ import fridgy.model.base.Database;
 import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.base.UniqueDataList;
 import fridgy.model.recipe.Recipe;
-import fridgy.model.recipe.RecipeDefaultComparator;
 
 
 /**
@@ -14,7 +13,7 @@ import fridgy.model.recipe.RecipeDefaultComparator;
 public class RecipeBook extends Database<Recipe> {
     // Implement any operations on recipe beyond CRUD here.
     public RecipeBook() {
-        super(new UniqueDataList<>(new RecipeDefaultComparator()));
+        super(new UniqueDataList<>());
     }
     public RecipeBook(ReadOnlyDatabase<Recipe> roBook) {
         super(roBook);
