@@ -5,11 +5,11 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":FridgyParser" as FridgyParser LOGIC_COLOR
 participant "c:CommandExecutor" as CommandExecutor LOGIC_COLOR
-participant ":InventoryParser" as InventoryParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
+
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
@@ -21,17 +21,15 @@ activate LogicManager
 LogicManager -> FridgyParser : parseCommand("delete ingredient 1")
 activate FridgyParser
 
-FridgyParser -> InventoryParser : parseCommand("delete ingredient 1")
-activate InventoryParser
 
 create DeleteCommandParser
-InventoryParser -> DeleteCommandParser
+FridgyParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> InventoryParser
+DeleteCommandParser --> FridgyParser
 deactivate DeleteCommandParser
 
-InventoryParser -> DeleteCommandParser : parse("1")
+FridgyParser -> DeleteCommandParser : parse("1")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -41,15 +39,12 @@ activate DeleteCommand
 DeleteCommand --> DeleteCommandParser : d
 deactivate DeleteCommand
 
-DeleteCommandParser --> InventoryParser : d
+DeleteCommandParser --> FridgyParser : d
 deactivate DeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> InventoryParser
+DeleteCommandParser -[hidden]-> FridgyParser
 destroy DeleteCommandParser
 
-InventoryParser --> FridgyParser : d
-deactivate InventoryParser
-destroy InventoryParser
 
 create CommandExecutor
 FridgyParser -> CommandExecutor
@@ -59,14 +54,13 @@ deactivate CommandExecutor
 
 FridgyParser --> LogicManager : c
 deactivate FridgyParser
-deactivate InventoryParser
 
 activate CommandExecutor
 LogicManager -> CommandExecutor : apply()
 CommandExecutor -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCommand -> Model : deleteIngredient(1)
 activate Model
 
 Model --> DeleteCommand
