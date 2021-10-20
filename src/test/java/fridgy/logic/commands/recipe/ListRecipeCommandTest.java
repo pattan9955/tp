@@ -1,9 +1,7 @@
 package fridgy.logic.commands.recipe;
 
 import static fridgy.logic.commands.recipe.ListRecipeCommand.MESSAGE_SUCCESS;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -61,7 +59,7 @@ public class ListRecipeCommandTest {
         CommandResult expected = new CommandResult(MESSAGE_SUCCESS);
 
         assertTrue(testCommand.execute(model).equals(expected));
-        // assertEquals(expectedModel, model);
+        assertEquals(expectedModel, model);
     }
 
     @Test
@@ -71,6 +69,6 @@ public class ListRecipeCommandTest {
 
         RecipeCommandTestUtil.showRecipeAtIndex(model, TypicalIndexes.INDEX_FIRST_INGREDIENT);
         assertTrue(testCommand.execute(model).equals(expected));
-        // assertEquals(expectedModel, model);
+        assertEquals(expectedModel, model);
     }
 }

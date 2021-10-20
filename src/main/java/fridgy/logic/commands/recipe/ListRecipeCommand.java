@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import fridgy.logic.commands.CommandResult;
 import fridgy.model.Model;
 import fridgy.model.RecipeModel;
-import fridgy.model.recipe.RecipeDefaultComparator;
+import fridgy.model.recipe.IngredientAvailabilityRecipeComparator;
 
 
 /**
@@ -25,7 +25,7 @@ public class ListRecipeCommand extends RecipeCommand {
     @Override
     public CommandResult execute(RecipeModel model) {
         requireNonNull(model);
-        model.sortRecipe(new RecipeDefaultComparator(model));
+        model.sortRecipe(new IngredientAvailabilityRecipeComparator(model));
         model.updateFilteredRecipeList(Model.PREDICATE_SHOW_ALL_RECIPES);
         return new CommandResult(MESSAGE_SUCCESS);
     }
