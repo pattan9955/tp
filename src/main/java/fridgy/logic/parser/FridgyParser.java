@@ -18,7 +18,7 @@ public class FridgyParser {
     private static final Pattern TYPED_COMMAND_FORMAT = Pattern
             .compile("(?<commandWord>\\S+)\\s?(?<taskType>\\S*)?\\s?(?<arguments>.*)?");
     private static final Pattern GENERAL_COMMAND_FORMAT = Pattern
-            .compile("(?<commandWord>\\S+)(?<arguments>.*)");
+            .compile("(?<commandWord>^\\S*$)");
 
     private RecipeParser recipeParser;
     private InventoryParser inventoryParser;
