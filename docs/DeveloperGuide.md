@@ -2,31 +2,37 @@
 layout: page
 title: Developer Guide
 ---
+
+# Fridgy – Developer Guide
+
+By: `Team Fridgy`
+
+
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+# 1. **Overview**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This developer guide contains documentation on design architecture and details software design decisions in the implementation of Fridgy. 
+It is intended to be read by contributors, users, and future maintainers.
 
---------------------------------------------------------------------------------------------------------------------
+For more information on the Fridgy application, refer to the [_User Guide_](UserGuide.md) instead.
 
-## **Setting up, getting started**
+## 1.1 **Setting up, Getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## 2. **Design**
 
 <div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-### Architecture
+### 2.1 Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
@@ -36,7 +42,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -49,10 +55,9 @@ The rest of the App consists of four components.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete ingredient 1`. It is similar for operations on `Recipe`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -67,38 +72,38 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### 2.2 UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ActiveDisplay`, `ingredientListPanel`, `recipeListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Ingredient` and `Recipe` object residing in the `Model`.
 
-### Logic component
+### 2.3 Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute a command, it uses the `FridgyParser` class to parse the user command.
+1. `FridgyParser` parses the command string and returns a higher order function that exposes the execute interface of the resulting `Command` object which can communicate with a given `Model` when it is executed (e.g to add a recipe).
+1. `Logic` applies the returned higher order function on the model it was constructed with.
+1. The result of the execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete recipe 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -107,141 +112,78 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<img src="images/ParserClasses.png" width="800"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `FridgyParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `FridgyParser` returns back as a higher order function that exposes `Command` object's execute interface.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+### 2.4 Model component
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/IngredientClassDiagram.png" width="450" />
+<img src="images/RecipeClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the fridgy data i.e., all `Ingredient` and `Recipe` objects (which are contained in a `Database<Ingredient>` / `Database<Recipe` object).
+* stores the currently 'selected' `Ingredient` and `Recipe` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Ingredient>` and `Recipe` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the 'active' `Ingredient` or `Recipe` object that is displayed in detail in the UI component
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+The container for `Ingredient` is called `Inventory` and container for `Recipe` is called `RecipeBook`
+
+The CRUD behavior of `Ingredient` and `Recipe` are similar as they are implemented using a generic base model `Database<T>` internally.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Inventory`, which `Ingredient` references. This allows `Inventory` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
 
+### 2.5 Storage component
 
-### Storage component
-
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from both `InventoryStorage`, `RecipeBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+### 2.6 Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `fridgy.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## 3. **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### 3.1 Model Generic abstraction
 
-#### Proposed Implementation
+At the fundamental level, both `Recipe` and `Ingredient` are using the same CRUD operations. To reduce code duplication, a generic class of `Database<T extends Eq>` is implemented. 
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
+<div markdown="span" class="alert alert-info">:information_source: **Note:** `Eq` is an interface that ensures all objects entered into the Database has a weaker notion of equality defined by the developer. <br>
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+This implementation allow more flexibility in extending the application in the future. One can easily duplicate a database model by extending from the Database generic.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+However, do note that this implementation is purely contained within Model component. The `ModelManager` is still a monolithic class that handles all operations from other components. That means all CRUD operations to new types of objects will need to be implemented and exposed through `ModelManager`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
 
-</div>
+### 3.2 Automatic Quantity Conversion
 
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+TBD
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## 4. **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -251,9 +193,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## 5. **Appendix A: Requirements**
 
-### Product scope
+### 5.1 Product scope
 
 **Target user profile**:
 
@@ -265,75 +207,325 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: manage ingredients and recipes faster than a typical mouse/GUI driven app
 
+<br>
 
-### User stories
+### 5.2 User stories
 
-Priorities: High (must have) - `H`, Medium (nice to have) - `M`, Low (unlikely to have) - `L`
+Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `H`  | new user                                   | see the help menu                  | refer to instructions when I forget how to use the App
-| `M`  | new user exploring the app                 | see my inventory populated with some sample ingredients and recipes        | test out the features              |
-| `M`  | new user ready to start using the app      | purge all current data             | get rid of sample/experimental data I used for exploring the app           |
-| `H`  | user                                       | add ingredients to my inventory    | keep track of the quantity and expiry date                                 |
-| `H`  | user                                       | add recipes                        | keep track of quantity of ingredients needed for a recipe                  |
-| `H`  | user                                       | delete an ingredient               | stop keeping track of the ingredient                                       |
-| `H`  | user                                       | delete a recipe                    | stop keeping track of the recipe                                           |
-| `H`  | user                                       | find an ingredient by name         | locate details of ingredients without having to go through the entire list |
-| `H`  | user                                       | find a recipe by name              | locate details of recipes without having to go through the entire list     |
-| `H`  | user                                       | list all ingredients               | easily see all ingredients                                                 |
-| `H`  | user                                       | list all recipes                   | easily see all recipes                                                     |
-| `H`  | user                                       | sort ingredients by expiry date    | locate ingredients that are expired or expiring soon                       |
-| `H`  | user                                       | automatically update the inventory list after executing a recipe | update the ingredients I have used           |
-| `H`  | user                                       | view ingredient tags               | view details about the ingredient (ie. its expiry status)                  |
-| `H`  | user                                       | update ingredients                 | update the quantity of ingredients as needed                               |
-| `H`  | user                                       | update recipes                     | update the recipe as needed                                                |
-| `M`  | user                                       | import my saved database           | start using it again quickly                                               |
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                    |
+| -------- | ------------------------------------------ | ------------------------------ | ----------------------------------------------------------------------------- |
+| `***`  | new user                                    | see the help menu                  | refer to instructions when I forget how to use the App                     |
+| `**`   | new user exploring the app                  | see my inventory populated with some sample ingredients and recipes        | test out the features              |
+| `**`   | new user ready to start using the app       | purge all current data             | get rid of sample/experimental data I used for exploring the app           |
+| `***`  | user who stocks up on ingredients           | add an ingredient                  | keep track of its quantity and expiry date                                 |
+| `***`  | user who wants to tidy my inventory         | delete an ingredient               | remove expired ingredients                                                 |
+| `***`  | user who wants to update my stock           | edit an ingredient                 | update ingredient details to have an accurate list that reflects my fridge |
+| `***`  | user who has a large inventory of ingredients  | find an ingredient                 | locate details of ingredients without having to go through the entire list |
+| `***`  | user who wants a complete view of my inventory | list all ingredients            | easily view all ingredients                                                |
+| `***`  | user who can be forgetful                   | sort ingredients by expiry date    | locate ingredients that are expired or expiring soon                       |
+| `***`  | user who is organised                       | tag ingredients                    | categorise my ingredients easily                                           |
+| `***`  | user who has new recipes                    | add a recipe                       | keep track of quantity of ingredients needed for a recipe                  |
+| `***`  | user who changes my meal options            | delete a recipe                    | stop keeping track of the recipe I no longer want                          |
+| `***`  | user who is flexible with my meals          | edit recipes                       | update and personalise recipe details                                      |
+| `***`  | user who has a large collection of recipes  | find a recipe by name              | locate details of recipes without having to go through the entire list     |
+| `***`  | user who wants a complete view of all my recipes | list all recipes              | easily view all recipes                                                    |
+| `***`  | user who is organised                       | tag recipes                        | categorise my recipes easily                                               |
+| `***`  | user who cooks meals                        | execute a recipe                   | update the quantity of ingredients I have used                             |
+| `***`  | user who likes convenience                  | import my saved database           | start using it again quickly                                               |
 
 
 *{More to be added}*
 
-### Use cases
+<br>
+
+### 5.3 Use cases
 
 (For all use cases below, the **System** is `Fridgy` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Delete ingredient**
+| Use Case       | Description                      |
+| -------------- | -------------------------------- |
+| [UC01](#UC01)   | Add ingredient                   |
+| [UC02](#UC02)   | Delete ingredient                |
+| [UC03](#UC03)   | Edit ingredient                  |
+| [UC04](#UC04)   | Find ingredients                 |
+| [UC05](#UC05)   | List ingredients                 |
+| [UC06](#UC06)   | Add recipe                       |
+| [UC07](#UC07)   | Delete recipe                    |
+| [UC08](#UC08)   | Edit recipe                      |
+| [UC09](#UC09)   | Find recipes                     |
+| [UC10](#UC10)   | List recipes                     |
+| [UC11](#UC11)   | Execute recipe                   |
+
+
+### 5.3.1 Ingredient
+
+<a name="UC01"></a>
+**Use case: UC01 - Add ingredient**
 
 **MSS**
 
-1.  `User` requests to delete a specific ingredient by specifying its index.
-2.  `Fridgy` removes the full quantity of the ingredient.
+1. User chooses to add an ingredient.
+2. User provides its name, quantity, expiry date and an optional description.
+3. Fridgy tags the ingredient with its expiry status, i.e. `expired` or `expiring soon`.
+4. Fridgy adds the ingredient.
+5. Fridgy displays a confirmation message and the newly added ingredient.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The index is invalid.
-    * `Fridgy` throws an error message.
+* 1a. The user enters an invalid input format.
+    * 1a1. Fridgy displays an error message.
+        
+        Use case ends.
+* 2a. The user enters an invalid parameter.
+    * 2a1. Fridgy displays an error message.
 
-    Use case ends.
+      Use case ends.
+* 2b. Fridgy detects a duplicate ingredient.
+    * 2b1. Fridgy displays an error message.
 
-**Use case: UC02 - Add Recipe**
+      Use case ends.
+    
+<br>
+
+<a name="UC02"></a>
+**Use case: UC02 - Delete ingredient**
 
 **MSS**
 
-1.  `User` requests to add a specific recipe by specifying its name, ingredients and quantity, steps, and an optional description.
-2.  `Fridgy` creates the recipe.
+1. User chooses to delete an ingredient by specifying its index.
+2. Fridgy removes the full quantity of the ingredient.
+3. Fridgy displays a confirmation message for the ingredient deleted.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The ingredient name is invalid.
-    * `Fridgy` throws an error message.
-* 1b. The quantity of ingredients is invalid.
-    * `Fridgy` throws an error message and informs the user of quantity of missing ingredients.
+* 1a. The user enters an invalid input format or index.
+    * 1a1. Fridgy displays an error message.
 
-  Use case ends.
+      Use case ends.
 
-*{More to be added}*
+<br>
 
-### Non-Functional Requirements
+<a name="UC03"></a>
+**Use case: UC03 - Edit ingredient**
+
+**MSS**
+
+1. User chooses to edit a specific ingredient by specifying its index.
+2. User provides the parameter(s) to be edited.
+3. Fridgy edits the ingredient.
+4. Fridgy displays a confirmation message and the edited ingredient.
+    
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format or index.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+* 2a. The user enters an invalid parameter.
+    * 2a1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+<a name="UC04"></a>
+**Use case: UC04 - Find ingredients**
+
+**MSS**
+
+1. User chooses to find a specific ingredient.
+2. User provides the filter condition, i.e. name of ingredient.
+3. Fridgy displays a filtered list of ingredients.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+* 2a. The user enters an invalid input parameter.
+    * 2a1. Fridgy displays an error message.
+
+      Use case ends.
+* 2b. There are no ingredients that match the user's filter conditions.
+    * 2b1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+<a name="UC05"></a>
+**Use case: UC05 - List ingredients**
+
+**MSS**
+
+1. User requests to list all ingredients.
+2. Fridgy displays a list of all ingredients.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+### 5.3.2 Recipe
+
+<a name="UC06"></a>
+**Use case: UC06 - Add Recipe**
+
+**MSS**
+
+1. User chooses to add a recipe.
+2. User provides its name, ingredients and their respective quantities, recipe steps, and an optional description.
+3. Fridgy creates the recipe.
+4. Fridgy displays a confirmation message and the newly created recipe.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+* 2a. The user enters an invalid parameter.
+    * 2a1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+<a name="UC07"></a>
+**Use case: UC07 - Delete Recipe**
+
+**MSS**
+
+1. User requests to delete a recipe by specifying its index.
+2. Fridgy removes the recipe.
+3. Fridgy displays a confirmation message for the recipe deleted.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format or index.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+<a name="UC08"></a>
+**Use case: UC08 - Edit Recipe**
+
+**MSS**
+
+1. User requests to edit a specific recipe by specifying its index.
+2. User provides the parameter(s) to be edited.
+3. Fridgy edits the recipe.
+4. Fridgy displays a confirmation message and the edited recipe.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format or index.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+* 2a. The user enters an invalid parameter.
+    * 2a1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+<a name="UC09"></a>
+**Use case: UC09 - Find Recipes**
+
+**MSS**
+
+1. User chooses to find a specific recipe.
+2. User provides the filter condition, i.e. name of recipe.
+3. Fridgy displays a filtered list of recipes.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+* 2a. The user enters an invalid input parameter.
+    * 2a1. Fridgy displays an error message.
+
+      Use case ends.
+* 2b. There are no recipes that match the user's filter conditions.
+    * 2b1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+<a name="UC10"></a>
+**Use case: UC10 - List recipes**
+
+**MSS**
+
+1. User requests to list all recipes.
+2. Fridgy displays a list of all recipes.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+<a name="UC11"></a>
+**Use case: UC11 - Execute Recipe**
+
+**MSS**
+
+1. User requests to execute a recipe by specifying its name.
+2. Fridgy executes the recipe and deducts the respective quantities of ingredients.
+3. Fridgy displays a confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format or name.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+* 2a. There are insufficient ingredients in the inventory to be deducted.
+    * 2a1. Fridgy displays an error message, with the missing ingredients and their respective quantities.
+
+      Use case ends.
+
+<br>
+
+### 5.4 Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 ingredients / recipes without a noticeable sluggishness in performance for typical usage.
@@ -343,13 +535,22 @@ Priorities: High (must have) - `H`, Medium (nice to have) - `M`, Low (unlikely t
 
 *{More to be added}*
 
-### Glossary
+<br>
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+### 5.5 Glossary
+
+|   Term   |    Explanation  |
+| -------- |------------------|
+|**Fridge**            | A personalised storage for ingredients. |
+|**Ingredient**        | A food item kept in a Fridge, that can be combined to make a meal. |
+|**Recipe**            | A set of steps that details how to prepare a meal, and the ingredients with their respective quantities required. |
+|**GUI**               | A graphical user interface, i.e. the visual display of Fridgy
+|**Mainstream OS**     | Windows, Linux, Unix, OS-X. |
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## 6. **Appendix B: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -358,7 +559,9 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+<br>
+
+### 6.1 Launch and shutdown
 
 1. Initial launch
 
@@ -375,7 +578,9 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting an ingredient
+<br>
+
+### 6.2 Deleting an ingredient
 
 1. Deleting an ingredient while all ingredients are being shown
 
@@ -389,10 +594,11 @@ testers are expected to do more *exploratory* testing.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+   
 
-2. _{ more test cases …​ }_
+<br>
 
-### Saving data
+### 6.3 Saving data
 
 1. Dealing with missing/corrupted data files
 
@@ -400,4 +606,3 @@ testers are expected to do more *exploratory* testing.
 
    1b. To simulate a corrupted file, replace content in file with wrong or unexpected content. Program should throw an error.
 
-1. _{ more test cases …​ }_

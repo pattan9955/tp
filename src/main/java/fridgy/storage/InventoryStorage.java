@@ -6,7 +6,9 @@ import java.util.Optional;
 
 import fridgy.commons.exceptions.DataConversionException;
 import fridgy.model.Inventory;
-import fridgy.model.ReadOnlyInventory;
+import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.Ingredient;
+
 
 /**
  * Represents a storage for {@link Inventory}.
@@ -19,28 +21,28 @@ public interface InventoryStorage {
     Path getInventoryFilePath();
 
     /**
-     * Returns Inventory data as a {@link ReadOnlyInventory}.
-     *   Returns {@code Optional.empty()} if storage file is not found.
+     * Returns Inventory data as a {@link ReadOnlyDatabase}.
+     * Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyInventory> readInventory() throws DataConversionException, IOException;
+    Optional<ReadOnlyDatabase<Ingredient>> readInventory() throws DataConversionException, IOException;
 
     /**
      * @see #getInventoryFilePath()
      */
-    Optional<ReadOnlyInventory> readInventory(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyDatabase<Ingredient>> readInventory(Path filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyInventory} to the storage.
+     * Saves the given {@link ReadOnlyDatabase} to the storage.
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveInventory(ReadOnlyInventory addressBook) throws IOException;
+    void saveInventory(ReadOnlyDatabase<Ingredient> addressBook) throws IOException;
 
     /**
-     * @see #saveInventory(ReadOnlyInventory)
+     * @see #saveInventory(ReadOnlyDatabase)
      */
-    void saveInventory(ReadOnlyInventory addressBook, Path filePath) throws IOException;
+    void saveInventory(ReadOnlyDatabase<Ingredient> addressBook, Path filePath) throws IOException;
 
 }

@@ -6,8 +6,9 @@ skinparam classBackgroundColor LOGIC_COLOR
 
 package Logic {
 
-Class AddressBookParser
+Class FridgyParser
 Class XYZCommand
+Class "<<interface>>\nCommandExecutor" as CommandExecutor
 Class CommandResult
 Class "{abstract}\nCommand" as Command
 
@@ -27,11 +28,14 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic
-LogicManager -right->"1" AddressBookParser
-AddressBookParser ..> XYZCommand : creates >
+LogicManager -right->"1" FridgyParser
+FridgyParser ..> CommandExecutor : creates >
 
 XYZCommand -up-|> Command
-LogicManager .left.> Command : executes >
+LogicManager .left.> CommandExecutor : apply >
+
+CommandExecutor .left.> Command : execute >
+note right of CommandExecutor : A functional interface \n that exposes Command's \n execute function.
 
 LogicManager --> Model
 LogicManager --> Storage

@@ -24,7 +24,7 @@ public class RecipeBookBuilder {
      * Adds a new {@code Recipe} to the {@code RecipeBook} that we are building.
      */
     public RecipeBookBuilder withRecipe(Recipe recipe) {
-        recipeBook.addRecipe(recipe);
+        recipeBook.add(recipe);
         return this;
     }
 

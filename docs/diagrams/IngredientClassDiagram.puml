@@ -1,0 +1,25 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Ingredient <<Rectangle>> #F4F6F6 {
+Class Ingredient
+Class Description
+Class ExpiryDate
+Class Name
+Class Quantity
+Class Tag
+}
+
+Ingredient *--> Name
+Ingredient *--> Quantity
+Ingredient *--> ExpiryDate
+Ingredient *--> Description
+Ingredient *--> "*" Tag
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Ingredient
+
+@enduml

@@ -12,8 +12,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.model.Inventory;
-import fridgy.model.ReadOnlyInventory;
 import fridgy.model.UserPrefs;
+import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.Ingredient;
 
 public class StorageManagerTest {
 
@@ -57,7 +58,7 @@ public class StorageManagerTest {
          */
         Inventory original = getTypicalInventory();
         storageManager.saveInventory(original);
-        ReadOnlyInventory retrieved = storageManager.readInventory().get();
+        ReadOnlyDatabase<Ingredient> retrieved = storageManager.readInventory().get();
         assertEquals(original, new Inventory(retrieved));
     }
 

@@ -17,7 +17,6 @@ import fridgy.logic.commands.CommandTestUtil;
 import fridgy.logic.commands.DeleteCommand;
 import fridgy.logic.commands.EditCommand;
 import fridgy.logic.commands.EditCommand.EditIngredientDescriptor;
-import fridgy.logic.commands.ExitCommand;
 import fridgy.logic.commands.FindCommand;
 import fridgy.logic.commands.HelpCommand;
 import fridgy.logic.commands.ListCommand;
@@ -90,23 +89,12 @@ public class InventoryParserTest {
     }
 
     @Test
-    public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
-    }
-
-    @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " " + FindCommand.INGREDIENT_KEYWORD + " "
+                        + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
-    }
-
-    @Test
-    public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
     @Test

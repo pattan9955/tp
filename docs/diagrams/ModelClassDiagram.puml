@@ -4,51 +4,52 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Package Model <<Rectangle>> {
+Interface ReadOnlyInventory <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class Inventory
+Class RecipeBook
+Class ReadOnlyInventory
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+Package Ingredient <<Rectangle>> #F4F6F6 {
+Class UniqueIngredientList
+Class Ingredient
+}
+
+Package Recipe <<Rectangle>> #F4F6F6 {
+Class UniqueRecipeList
+Class Recipe
+}
 
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+Inventory .up.|> ReadOnlyInventory
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyInventory
+ModelManager -left-> "1" Inventory
+ModelManager -right-> "1" RecipeBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Inventory *--> "1" UniqueIngredientList
+UniqueIngredientList --> "~* all" Ingredient
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
-ModelManager -->"~* filtered" Person
+RecipeBook *--> "1" UniqueRecipeList
+UniqueRecipeList --> "~* all" Recipe
+
+
+ModelManager -->"~* filtered" Ingredient
+ModelManager -->"~* filtered" Recipe
 @enduml

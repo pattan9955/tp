@@ -54,7 +54,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noIngredientFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_INGREDIENTS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(Messages.MESSAGE_INGREDIENTS_LISTED_OVERVIEW, 0, "");
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredIngredientList(predicate);
@@ -63,8 +63,18 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_multipleKeywords_oneIngredientFound() {
+        String expectedMessage = String.format(Messages.MESSAGE_INGREDIENTS_LISTED_OVERVIEW, 1, "");
+        NameContainsKeywordsPredicate predicate = preparePredicate("Carrot Strawberry Dragon Fruit");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredIngredientList(predicate);
+        CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(TypicalIngredients.CARROT), model.getFilteredIngredientList());
+    }
+
+    @Test
     public void execute_multipleKeywords_multipleIngredientsFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_INGREDIENTS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(Messages.MESSAGE_INGREDIENTS_LISTED_OVERVIEW, 3, "s");
         NameContainsKeywordsPredicate predicate = preparePredicate("Carrot Slices Egg mayo Fig jam");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredIngredientList(predicate);

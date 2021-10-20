@@ -14,12 +14,21 @@ Class JsonUserPrefsStorage
 Interface Storage <<Interface>>
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
+package "Inventory Storage" #F4F6F6{
+Interface InventoryStorage <<Interface>>
+Class JsonInventoryStorage
+Class JsonSerializableInventory
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
+}
+
+package "RecipeBook Storage" #F4F6F6{
+Interface RecipeBookStorage <<Interface>>
+Class JsonRecipeBookStorage
+Class JsonSerializableRecipeBook
+Class JsonAdaptedRecipe
+Class JsonAdaptedIngredient
+Class JsonAdaptedStep
 }
 
 }
@@ -29,15 +38,27 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" InventoryStorage
+StorageManager -up-> "1" RecipeBookStorage
+
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> InventoryStorage
+Storage -down-|> RecipeBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
+
+' inventory stuff
+JsonInventoryStorage .up.|> InventoryStorage
+JsonInventoryStorage ..> JsonSerializableInventory
+JsonSerializableInventory --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+' recipebook stuff
+JsonRecipeBookStorage .up.|> RecipeBookStorage
+JsonRecipeBookStorage ..> JsonSerializableRecipeBook
+JsonSerializableRecipeBook --> "*" JsonAdaptedRecipe
+JsonAdaptedRecipe --> "*" JsonAdaptedIngredient
+JsonAdaptedRecipe --> "*" JsonAdaptedStep
 
 @enduml

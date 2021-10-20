@@ -6,15 +6,15 @@ import java.util.logging.Logger;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.commons.core.LogsCenter;
-import fridgy.logic.commands.Command;
 import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
-import fridgy.logic.commands.recipe.RecipeCommand;
+import fridgy.logic.parser.CommandExecutor;
+import fridgy.logic.parser.FridgyParser;
 import fridgy.logic.parser.InventoryParser;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.logic.parser.recipe.RecipeParser;
 import fridgy.model.Model;
-import fridgy.model.ReadOnlyInventory;
+import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import fridgy.storage.Storage;
@@ -29,7 +29,8 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final InventoryParser addressBookParser;
+    private final FridgyParser fridgyParser;
+    private final InventoryParser inventoryParser;
     private final RecipeParser recipeBookParser;
 
     /**
@@ -38,7 +39,8 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new InventoryParser();
+        fridgyParser = new FridgyParser();
+        inventoryParser = new InventoryParser();
         recipeBookParser = new RecipeParser();
     }
 
@@ -46,24 +48,8 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
-        CommandResult commandResult;
-
-        // This is a hacked together way of supporting both recipe and ingredient from frontend.
-        // Ideally this routing should be done in parser / use generic command classes.
-        if (commandText.split(" ").length > 1) {
-            switch (commandText.split(" ")[1]) {
-            case "recipe":
-                RecipeCommand recipeCommand = recipeBookParser.parseCommand(commandText);
-                commandResult = recipeCommand.execute(model);
-                break;
-            default:
-                Command command = addressBookParser.parseCommand(commandText);
-                commandResult = command.execute(model);
-            }
-        } else {
-            Command command = addressBookParser.parseCommand(commandText);
-            commandResult = command.execute(model);
-        }
+        CommandExecutor commandExecutor = fridgyParser.parseCommand(commandText);
+        CommandResult commandResult = commandExecutor.apply(model);
 
         try {
             storage.saveInventory(model.getInventory());
@@ -76,7 +62,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyInventory getInventory() {
+    public ReadOnlyDatabase<Ingredient> getInventory() {
         return model.getInventory();
     }
 

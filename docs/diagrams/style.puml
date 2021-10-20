@@ -42,13 +42,13 @@ skinparam Class {
     BorderThickness 1
     BorderColor #FFFFFF
     StereotypeFontColor #FFFFFF
-    FontName Arial
+    FontName Verdana
 }
 
 skinparam Actor {
     BorderColor USER_COLOR
     Color USER_COLOR
-    FontName Arial
+    FontName Verdana
 }
 
 skinparam Sequence {
@@ -56,7 +56,7 @@ skinparam Sequence {
     BoxFontSize 15
     BoxPadding 0
     BoxFontColor #FFFFFF
-    FontName Arial
+    FontName Verdana
 }
 
 skinparam Participant {
