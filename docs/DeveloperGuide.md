@@ -20,7 +20,13 @@ It is intended to be read by contributors, users, and future maintainers.
 
 For more information on the Fridgy application, refer to the [_User Guide_](UserGuide.md) instead.
 
-## 1.1 **Setting up, Getting started**
+## 1.1 **About Fridgy**
+
+Fridgy is a **desktop app for managing an Inventory of food as well as a list of recipes, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Fridgy can get your fridge Inventory and recipe sorted out faster than traditional GUI apps.
+
+Fridgy helps to manage and track your ingredients in the fridge. It can warn you about expiring ingredients and track your recipes in the Recipe Book. There will be more functionalities in the future, such as automatic deduction of ingredients after executing a recipe.  
+
+## 1.2 **Setting up, Getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -187,7 +193,20 @@ However, do note that this implementation is purely contained within Model compo
 
 ### 3.2 Automatic Quantity Conversion
 
-TBD
+Currently, 
+1. Accepted SI prefixes are:
+   - `k`: for kilo-
+   - `m`: for milli-
+2. Accepted base units are:
+   - `g`: for grams
+   - `l`: for litres
+
+Do note that the user can choose not to include any units. It will be processed as a unit-less quantity.  
+
+The initial step is to use Regex to split the quantity into a `Double`, the SI prefix, and the base unit. The computation is done based on the prefix detected, and a relevant multiplier is used to convert the quantity into the base unit. 
+
+This is done for any incoming ingredient before the quantity is stored, and there are future plans to utilise this for other computations, such as deducting a quantity of ingredients in the inventory when a recipe is executed.
+This also requires consistency in units for each ingredient.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -552,8 +571,9 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 |**Fridge**            | A personalised storage for ingredients. |
 |**Ingredient**        | A food item kept in a Fridge, that can be combined to make a meal. |
 |**Recipe**            | A set of steps that details how to prepare a meal, and the ingredients with their respective quantities required. |
-|**GUI**               | A graphical user interface, i.e. the visual display of Fridgy
+|**GUI**               | A graphical user interface, i.e. the visual display of Fridgy |
 |**Mainstream OS**     | Windows, Linux, Unix, OS-X. |
+|**SI prefix**         | SI prefixes are a standard defined by the International System of Units such as kilo-, milli-, centi- and so on. |
 
 
 --------------------------------------------------------------------------------------------------------------------
