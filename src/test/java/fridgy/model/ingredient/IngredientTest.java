@@ -75,7 +75,7 @@ public class IngredientTest {
         editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withQuantity(VALID_QUANTITY_BASIL).build();
         Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlmond));
 
-        // different address -> returns false
+        // different description -> returns false
         editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withDescription(VALID_DESCRIPTION_BASIL).build();
         Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlmond));
 

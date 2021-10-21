@@ -1,12 +1,13 @@
 package fridgy.model.ingredient;
 
+import static fridgy.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import fridgy.commons.util.CollectionUtil;
 import fridgy.model.base.Eq;
 import fridgy.model.tag.Tag;
 
@@ -14,11 +15,9 @@ import fridgy.model.tag.Tag;
  * Represents an ingredient in the Inventory.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Ingredient implements Eq {
+public class Ingredient extends BaseIngredient {
 
     // Identity fields
-    private final Name name;
-    private final Quantity quantity;
     private final ExpiryDate expiryDate;
 
     // Data fields
@@ -29,9 +28,8 @@ public class Ingredient implements Eq {
      * Constructs an ingredient reference with an empty description.
      */
     public Ingredient(Name name, Quantity quantity, Set<Tag> tags, ExpiryDate expiryDate) {
-        CollectionUtil.requireAllNonNull(name, quantity, expiryDate, tags);
-        this.name = name;
-        this.quantity = quantity;
+        super(name, quantity);
+        requireAllNonNull(name, quantity, expiryDate, tags);
         this.description = new Description(Optional.empty());
         this.expiryDate = expiryDate;
         this.tags.addAll(tags);
@@ -42,20 +40,11 @@ public class Ingredient implements Eq {
      */
     public Ingredient(Name name, Quantity quantity, Description description,
                       Set<Tag> tags, ExpiryDate expiryDate) {
-        CollectionUtil.requireAllNonNull(name, quantity, expiryDate, tags);
-        this.name = name;
-        this.quantity = quantity;
+        super(name, quantity);
+        requireAllNonNull(name, quantity, expiryDate, tags);
         this.description = description;
         this.expiryDate = expiryDate;
         this.tags.addAll(tags);
-    }
-
-    public Name getName() {
-        return name;
-    }
-
-    public Quantity getQuantity() {
-        return quantity;
     }
 
     public Description getDescription() {
@@ -123,7 +112,7 @@ public class Ingredient implements Eq {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, quantity, description, tags, expiryDate);
+        return Objects.hash(getName(), getQuantity(), description, tags, expiryDate);
     }
 
     @Override
