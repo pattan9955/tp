@@ -1,5 +1,6 @@
 package fridgy.logic.parser;
 
+import static fridgy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import fridgy.commons.core.index.Index;
 import fridgy.commons.util.StringUtil;
@@ -138,11 +140,17 @@ public class ParserUtil {
     /**
      * Parses {@code List<String> ingredients} into a {@code Set<RecipeIngredient>}.
      */
-    public static Set<RecipeIngredient> parseIngredients(List<String> ingredients) {
+    public static Set<RecipeIngredient> parseIngredients(List<String> ingredients) throws ParseException {
         requireNonNull(ingredients);
-        final Set<RecipeIngredient> ingredientSet = new HashSet<>();
-        for (String ingredient : ingredients) {
-            ingredientSet.add(parseIngredient(ingredient));
+
+        final Set<RecipeIngredient> ingredientSet = ingredients
+                .stream()
+                .filter(x -> !x.trim().equals(""))
+                .map(ParserUtil::parseIngredient)
+                .collect(Collectors.toSet());
+        if (ingredientSet.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    RecipeIngredient.RECIPE_INGREDIENT_CONSTRAINTS));
         }
         return ingredientSet;
     }

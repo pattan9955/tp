@@ -10,6 +10,8 @@ import java.util.Objects;
  * Guarantees: immutable;
  */
 public class RecipeIngredient {
+    public static final String RECIPE_INGREDIENT_CONSTRAINTS = "The ingredient field cannot be left blank.";
+
     private final String name;
 
     /**
