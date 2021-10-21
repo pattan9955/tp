@@ -37,19 +37,19 @@ Fridgy is a **desktop app for managing an Inventory of food as well as a list of
 
 ## General Commands
 
-### Help:
+### Help
 `help`
 
 Pops out a window that leads the user to [User Guide](https://ay2122s1-cs2103t-w11-1.github.io/tp/UserGuide.html).
 
-### Exit:
+### Exit
 `exit`
 
 Exits the program.
 
 ## Ingredients
 
-### Add Ingredients:
+### Add Ingredients
 `add ingredient`
 
 Add an ingredient to the Inventory. 
@@ -90,8 +90,7 @@ Example(s):
     flour; Quantity: 500.000 g; Expiry Date: 27-09-2021; Description: fresh; Tags: [expired]
     ```
 
-
-### Delete Ingredients:
+### Delete Ingredients
 `delete ingredient`
 
 Delete an ingredient from the Inventory.
@@ -106,7 +105,7 @@ Example(s):
     tomato; Quantity: 500; Expiry Date: 27-09-2021; Description: from africa; Tags: [expired][sweet]
     ```
 
-### Edit Ingredients:
+### Edit Ingredients
 `edit ingredient`
 
 Edit an ingredient from the Inventory.
@@ -121,7 +120,7 @@ Example(s):
     Watermelon; Quantity: 1; Expiry Date: 20-10-2021; Description: juicy; Tags: [expiring][melon][water]
     ```
 
-### Clear Ingredients:
+### Clear Ingredients
 `clear ingredient`
 
 Clear all the ingredients from the Inventory.
@@ -132,16 +131,16 @@ Example(s):
 1. `clear ingredient`
 <br />Expected Output:<br />```Inventory has been cleared!```
 
-### Find Ingredients:
+### Find Ingredients
 `find ingredient`
 
 - Search for an ingredient from the Inventory based on a user-inputted keyword(s) that match the name of an ingredient(s).
 - Current requirements for a keyword:
-    1. Keyword is case-insensitive.
-       i. e.g. Finding with keyword: "corn" will match with "COrN"
-    2. Any keyword must match a full word in the name of the recipe.
-       i. e.g. Finding with keyword: "corn" will match with "CoRN flour", "coRn FlakeS", etc. but not "popcorn"
-       ii. e.g. Finding with keywords: "corn Chicken beef" will match "beef Chicken", "beef corn", etc. but not "beefcorn"
+    1. Keyword is case-insensitive.<br />
+       e.g. Finding with keyword: "corn" will match with "COrN"
+    2. Any keyword must match a full word in the name of the recipe.<br />
+       e.g. Finding with keyword: "corn" will match with "CoRN flour", "coRn FlakeS", etc. but not "popcorn" <br />
+       e.g. Finding with keywords: "corn Chicken beef" will match "beef Chicken", "beef corn", etc. but not "beefcorn"
 - After `find ingredient` command, to see the full list of ingredients again, please use `list ingredient` command.
 
 Format: `find ingredient <keyword>...`
@@ -151,7 +150,7 @@ Example(s):
 <br />Expected Output:<br />
 ![img.png](images/findIngredient1.png)
 
-### List Ingredients:
+### List Ingredients
 `list ingredient`
 
 List all the ingredients again after `find ingredient` Operation.
@@ -165,7 +164,7 @@ Example(s):
 
 ## Recipes
 
-### Add Recipes:
+### Add Recipes
 `add recipe`
 
 Add a recipe to the Recipe Book.
@@ -187,7 +186,7 @@ Example(s):
     aglio olio; Description: grandmother aglio olio recipe; Ingredients used: [pasta 200g]; Steps: 1. aglioli olioli 2. aglioli olioli
     ```
 
-### Delete Recipes:
+### Delete Recipes
 `delete recipe`
 
 Delete a recipe from the Recipe Book.
@@ -208,7 +207,7 @@ Example(s):
     aglio olio; Description: grandmother aglio olio recipe; Ingredients used: [pasta 200g]; Steps: 1. aglioli olioli 2. aglioli olioli
     ```
 
-### Find Recipes:
+### Find Recipes
 `find recipe`
 
 - Search for a recipe from the Recipe Book based on a user-inputted keyword(s) that match the name of a recipe(s).
@@ -224,11 +223,11 @@ Example(s):
 Format: `find recipe <keyword>...`
 
 Example(s): 
-1. `find recipe aglio`
+1. `find recipe maggie`
 <br />Expected output:
 ![findRecipe1.png](images/findRecipe1.png)
 
-### List Recipes: 
+### List Recipes
 `list recipe`
 
 Lists out all the recipes again after `find recipe` operation. 
@@ -240,7 +239,7 @@ Example(s):
 <br /> Expected output:
 ![listRecipe1.png](images/listRecipe1.png)
 
-### View Recipes:
+### View Recipes
 `view recipe`
 
 Expand the recipe and view the detailed steps in a bigger window.
