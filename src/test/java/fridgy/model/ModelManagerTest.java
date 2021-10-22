@@ -36,7 +36,6 @@ public class ModelManagerTest {
         Assertions.assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new Inventory(), new Inventory(modelManager.getInventory()));
         assertEquals(new RecipeBook(), new RecipeBook(modelManager.getRecipeBook()));
-        assertTrue(modelManager.getActiveRecipe().size() == 0);
     }
 
     @Test
@@ -141,30 +140,6 @@ public class ModelManagerTest {
     @Test
     public void getFilteredRecipeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredRecipeList().remove(0));
-    }
-
-    @Test
-    public void setActiveRecipe_recipeNotInRecipeBook_doNothing() {
-        modelManager.add(BURGER);
-        modelManager.add(MAGGIE);
-        modelManager.setActiveRecipe(BURGER);
-        ObservableList<Recipe> expected = modelManager.getActiveRecipe();
-
-        modelManager.delete(MAGGIE);
-        modelManager.setActiveRecipe(MAGGIE);
-
-        assertEquals(expected, modelManager.getActiveRecipe());
-    }
-
-    @Test
-    public void setActiveRecipe_recipeInRecipeBook_changeActiveRecipe() {
-        modelManager.add(BURGER);
-        modelManager.add(MAGGIE);
-        modelManager.setActiveRecipe(BURGER);
-        assertEquals(BURGER, modelManager.getActiveRecipe().get(0));
-
-        modelManager.setActiveRecipe(MAGGIE);
-        assertEquals(MAGGIE, modelManager.getActiveRecipe().get(0));
     }
 
     @Test

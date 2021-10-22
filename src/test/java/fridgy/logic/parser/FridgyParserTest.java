@@ -3,6 +3,7 @@ package fridgy.logic.parser;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_ALL_PREFIX_PRESENT;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_DEL_COMMAND;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_VIEW_COMMAND;
+import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -10,6 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.Set;
 
+import fridgy.ui.Observable;
+import fridgy.ui.Observer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -119,6 +122,9 @@ public class FridgyParserTest {
                 .withSteps(Arrays.asList("why tho"))
                 .withDescription("optional")
                 .build();
+        ObserverStub observerStub = new ObserverStub();
+        testModel.getActiveObservable().setObserver(observerStub);
+        testModel.setActiveRecipe(testRecipe);
         try {
             CommandResult expectedAdd = new AddRecipeCommand(testRecipe).execute(testModel);
             CommandResult expectedView = new ViewRecipeCommand(Index.fromZeroBased(0)).execute(testModel);
@@ -165,6 +171,19 @@ public class FridgyParserTest {
             Assertions.fail("CommandException thrown!");
         } catch (ParseException pe) {
             Assertions.fail("ParseException thrown!");
+        }
+    }
+
+    private class ObserverStub implements Observer {
+
+        @Override
+        public void update(Ingredient newItem) {
+            requireNonNull(newItem);
+        }
+
+        @Override
+        public void update(Recipe newItem) {
+            requireNonNull(newItem);
         }
     }
 }
