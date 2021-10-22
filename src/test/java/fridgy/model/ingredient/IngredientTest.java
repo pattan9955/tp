@@ -3,7 +3,9 @@ package fridgy.model.ingredient;
 import static fridgy.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_NAME_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_QUANTITY_BASIL;
-import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_VEGETABLE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,7 +33,7 @@ public class IngredientTest {
         // same name, all other attributes different -> returns true
         Ingredient editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE)
                 .withQuantity(VALID_QUANTITY_BASIL)
-                .withDescription(VALID_DESCRIPTION_BASIL).withTags(VALID_TAG_HUSBAND).build();
+                .withDescription(VALID_DESCRIPTION_BASIL).withTags(VALID_TAG_VEGETABLE).build();
         Assertions.assertTrue(TypicalIngredients.APPLE.isSameIngredient(editedAlmond));
 
         // different name, all other attributes same -> returns false
@@ -75,12 +77,23 @@ public class IngredientTest {
         editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withQuantity(VALID_QUANTITY_BASIL).build();
         Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlmond));
 
-        // different address -> returns false
+        // different description -> returns false
         editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withDescription(VALID_DESCRIPTION_BASIL).build();
         Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlmond));
 
         // different tags -> returns false
-        editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withTags(VALID_TAG_VEGETABLE).build();
         Assertions.assertFalse(TypicalIngredients.APPLE.equals(editedAlmond));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        Ingredient ingredient = TypicalIngredients.APPLE;
+        Ingredient ingredientSame = TypicalIngredients.APPLE;
+        Ingredient ingredientDiff = TypicalIngredients.BASIL;
+
+        assertEquals(ingredient.hashCode(), ingredient.hashCode());
+        assertEquals(ingredient.hashCode(), ingredientSame.hashCode());
+        assertNotEquals(ingredient.hashCode(), ingredientDiff.hashCode());
     }
 }

@@ -34,7 +34,7 @@ public class RecipeListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code RecipeIngredient} using a {@code RecipeCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code BaseIngredient} using a {@code RecipeCard}.
      */
     class RecipeListViewCell extends ListCell<Recipe> {
         @Override
