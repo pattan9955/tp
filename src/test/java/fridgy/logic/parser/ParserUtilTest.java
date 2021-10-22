@@ -25,12 +25,12 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_QUANTITY = "+651234";
     private static final String INVALID_DESCRIPTION = " ";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "#snack";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_QUANTITY = "123456";
     private static final String VALID_DESCRIPTION = "123 Main Street #0505";
-    private static final String VALID_TAG_1 = "friend";
+    private static final String VALID_TAG_1 = "snack";
     private static final String VALID_TAG_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";

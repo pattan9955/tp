@@ -2,6 +2,8 @@ package fridgy.model.ingredient;
 
 import static fridgy.logic.commands.CommandTestUtil.VALID_NAME_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_QUANTITY_BASIL;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -70,5 +72,16 @@ public class BaseIngredientTest {
         editedAlmond = new IngredientBuilder(TypicalBaseIngredients.APPLE)
                 .withQuantity(VALID_QUANTITY_BASIL).buildBaseIngredient();
         Assertions.assertFalse(TypicalBaseIngredients.APPLE.equals(editedAlmond));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        BaseIngredient ingredient = new BaseIngredient(new Name("A"), new Quantity("90"));
+        BaseIngredient ingredientSame = new BaseIngredient(new Name("A"), new Quantity("90"));
+        BaseIngredient ingredientDiff = new BaseIngredient(new Name("B"), new Quantity("45"));
+
+        assertEquals(ingredient.hashCode(), ingredient.hashCode());
+        assertEquals(ingredient.hashCode(), ingredientSame.hashCode());
+        assertNotEquals(ingredient.hashCode(), ingredientDiff.hashCode());
     }
 }
