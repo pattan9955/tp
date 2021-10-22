@@ -2,17 +2,35 @@
   "_comment": "RecipeBook save file which contains the same Recipe values as in TypicalRecipes#getTypicalRecipeBook()",
   "recipes" : [ {
     "name" : "Burger",
-    "ingredients" : [ "Burger Ingredient 1", "Burger Ingredient 2" ],
+    "ingredients" : [ {
+      "name" : "ingr1",
+      "quantity" : "1000.000 g"
+    }, {
+      "name" : "ingr2",
+      "quantity" : "0.001 l"
+    } ],
     "steps" : [ "Burger STEP 1", "Burger STEP 2" ],
     "description" : "Very Nice"
   }, {
     "name" : "Maggie",
-    "ingredients" : [ "Maggie Ingredient 1", "Maggie Ingredient 2" ],
+    "ingredients" : [ {
+      "name" : "Apple",
+      "quantity" : "94351253"
+    }, {
+      "name" : "Grape",
+      "quantity" : "9482442"
+    } ],
     "steps" : [ "Maggie STEP 1", "Maggie STEP 2" ],
     "description" : "Easy to make"
   }, {
     "name" : "Fries",
-    "ingredients" : [ "Fries Ingredient 1", "Fries Ingredient 2" ],
+    "ingredients" : [ {
+      "name" : "Carrot Slices",
+      "quantity" : "95352563"
+    }, {
+      "name" : "Banana",
+      "quantity" : "98765432"
+    } ],
     "steps" : [ "Fries STEP 1", "Fries STEP 2" ],
     "description" : "More SALT!"
   } ]

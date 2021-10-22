@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import fridgy.commons.exceptions.IllegalValueException;
-import fridgy.model.recipe.BaseIngredient;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.recipe.Name;
 
 class JsonAdaptedRecipeTest {

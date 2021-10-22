@@ -32,6 +32,10 @@ public class TypicalBaseIngredients {
             .withQuantity("9482427").buildBaseIngredient();
     public static final BaseIngredient GRAPES = new IngredientBuilder().withName("Grape")
             .withQuantity("9482442").buildBaseIngredient();
+    public static final BaseIngredient INGR1 = new IngredientBuilder().withName("ingr1")
+            .withQuantity("1kg").buildBaseIngredient();
+    public static final BaseIngredient INGR2 = new IngredientBuilder().withName("ingr2")
+        .withQuantity("1ml").buildBaseIngredient();
 
 
     // Manually added - Base Ingredient's details found in {@code CommandTestUtil}
