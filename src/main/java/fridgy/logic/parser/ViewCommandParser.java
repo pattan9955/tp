@@ -1,15 +1,15 @@
 package fridgy.logic.parser;
 
-import fridgy.commons.core.index.Index;
-import fridgy.logic.commands.ViewCommand;
-import fridgy.logic.parser.exceptions.ParseException;
+import static fridgy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static fridgy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import fridgy.commons.core.index.Index;
+import fridgy.logic.commands.ViewCommand;
+import fridgy.logic.parser.exceptions.ParseException;
 
-public class ViewCommandParser implements Parser<ViewCommand>{
+public class ViewCommandParser implements Parser<ViewCommand> {
 
     private static final Pattern INGREDIENT_VIEW_COMMAND_ARGUMENT_FORMAT = Pattern
             .compile(ViewCommand.INGREDIENT_KEYWORD + "(?<arguments>.*)");

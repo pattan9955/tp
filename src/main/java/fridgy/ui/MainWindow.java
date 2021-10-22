@@ -124,8 +124,8 @@ public class MainWindow extends UiPart<Stage> {
         recipeListPanel = new RecipeListPanel(logic.getFilteredRecipeList(), false);
         recipeListPanelPlaceholder.getChildren().add(recipeListPanel.getRoot());
 
-        ActiveListPanel activeListPanel = new ActiveListPanel(logic.getActiveObservable());
-        displayWindowPlaceholder.getChildren().add(activeListPanel.getRoot());
+        ActiveItemPanel activeItemPanel = new ActiveItemPanel(logic.getActiveObservable());
+        displayWindowPlaceholder.getChildren().add(activeItemPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

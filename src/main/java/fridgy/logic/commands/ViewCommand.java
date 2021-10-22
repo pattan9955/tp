@@ -10,7 +10,7 @@ import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.IngredientModel;
 import fridgy.model.ingredient.Ingredient;
 
-public class ViewCommand extends Command{
+public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
     public static final String INGREDIENT_KEYWORD = "ingredient";
@@ -24,6 +24,11 @@ public class ViewCommand extends Command{
 
     private final Index target;
 
+    /**
+     * Instantiates a new View command.
+     *
+     * @param target the target index of the ingredient to view
+     */
     public ViewCommand(Index target) {
         requireNonNull(target);
         this.target = target;

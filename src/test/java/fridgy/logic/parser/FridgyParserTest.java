@@ -11,8 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.Set;
 
-import fridgy.ui.Observable;
-import fridgy.ui.Observer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -39,6 +37,7 @@ import fridgy.model.ingredient.Quantity;
 import fridgy.model.recipe.Recipe;
 import fridgy.model.tag.Tag;
 import fridgy.testutil.RecipeBuilder;
+import fridgy.ui.Observer;
 
 public class FridgyParserTest {
     private static final String EMPTY_COMMAND = "";

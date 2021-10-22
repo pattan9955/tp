@@ -6,14 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import fridgy.model.recipe.Recipe;
-import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.commons.core.index.Index;
@@ -23,6 +21,7 @@ import fridgy.model.Inventory;
 import fridgy.model.ReadOnlyUserPrefs;
 import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
+import javafx.collections.ObservableList;
 
 public class ViewCommandTest {
     @Test
@@ -121,7 +120,7 @@ public class ViewCommandTest {
         }
 
         @Override
-        public void setInventoryFilePath(Path InventoryFilePath) {
+        public void setInventoryFilePath(Path inventoryFilePath) {
             throw new AssertionError("Should not be used!");
         }
 
@@ -136,7 +135,7 @@ public class ViewCommandTest {
         }
 
         @Override
-        public boolean has(Ingredient Ingredient) {
+        public boolean has(Ingredient ingredient) {
             throw new AssertionError("Should not be used!");
         }
 
@@ -146,7 +145,7 @@ public class ViewCommandTest {
         }
 
         @Override
-        public void add(Ingredient Ingredient) {
+        public void add(Ingredient ingredient) {
             throw new AssertionError("Should not be used!");
         }
 

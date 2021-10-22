@@ -9,14 +9,19 @@ import javafx.scene.layout.VBox;
 /**
  * Panel containing an active {@code Ingredient} or {@code Recipe} for display in the main window.
  */
-public class ActiveListPanel extends UiPart<Region> implements Observer {
+public class ActiveItemPanel extends UiPart<Region> implements Observer {
 
-    private static final String FXML = "ActiveListPanel.fxml";
+    private static final String FXML = "ActiveItemPanel.fxml";
 
     @FXML
     private VBox activeBox;
 
-    public ActiveListPanel(Observable activeObservable) {
+    /**
+     * Instantiates a new Active  Panel.
+     *
+     * @param activeObservable the active observable that notifies the observer of changes
+     */
+    public ActiveItemPanel(Observable activeObservable) {
         super(FXML);
         activeObservable.setObserver(this);
     }

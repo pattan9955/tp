@@ -24,7 +24,6 @@ import fridgy.testutil.Assert;
 import fridgy.testutil.InventoryBuilder;
 import fridgy.testutil.RecipeBookBuilder;
 import fridgy.testutil.TypicalIngredients;
-import javafx.collections.ObservableList;
 
 public class ModelManagerTest {
 
