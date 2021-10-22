@@ -20,9 +20,9 @@ import fridgy.logic.parser.ArgumentTokenizer;
 import fridgy.logic.parser.ParserUtil;
 import fridgy.logic.parser.Prefix;
 import fridgy.logic.parser.exceptions.ParseException;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.recipe.Name;
 import fridgy.model.recipe.Recipe;
-import fridgy.model.recipe.RecipeIngredient;
 import fridgy.model.recipe.Step;
 
 public class AddRecipeCommandParser implements RecipeCommandParser<AddRecipeCommand> {
@@ -51,7 +51,7 @@ public class AddRecipeCommandParser implements RecipeCommandParser<AddRecipeComm
 
         Name name = ParserUtil.parseRecipeName(argMultimap.getValue(PREFIX_NAME).get());
 
-        Set<RecipeIngredient> ingredientSet = ParserUtil.parseIngredients(argMultimap.getAllValues(PREFIX_INGREDIENT));
+        Set<BaseIngredient> ingredientSet = ParserUtil.parseIngredients(argMultimap.getAllValues(PREFIX_INGREDIENT));
 
         List<Step> stepList = ParserUtil.parseSteps(argMultimap.getAllValues(PREFIX_STEP));
 

@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import fridgy.commons.exceptions.IllegalValueException;
+import fridgy.model.recipe.BaseIngredient;
 import fridgy.model.recipe.Name;
-import fridgy.model.recipe.RecipeIngredient;
 
 class JsonAdaptedRecipeTest {
     private static final String INVALID_NAME = "B@rg@r";
@@ -53,7 +53,7 @@ class JsonAdaptedRecipeTest {
         JsonAdaptedRecipe recipe =
                 new JsonAdaptedRecipe(VALID_NAME, null, VALID_STEP, VALID_DESCRIPTION);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                RecipeIngredient.class.getSimpleName());
+                BaseIngredient.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, recipe::toModelType);
     }
     @Test

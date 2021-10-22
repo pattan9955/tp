@@ -10,17 +10,17 @@ import org.junit.jupiter.api.Test;
 class RecipeIngredientTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new RecipeIngredient(null));
+        assertThrows(NullPointerException.class, () -> new BaseIngredient(null));
     }
 
     @Test
     public void hashCodeTest() {
-        RecipeIngredient recipeIngredient = new RecipeIngredient("A");
-        RecipeIngredient recipeIngredientSame = new RecipeIngredient("A");
-        RecipeIngredient recipeIngredientDiff = new RecipeIngredient("B");
+        BaseIngredient baseIngredient = new BaseIngredient("A");
+        BaseIngredient baseIngredientSame = new BaseIngredient("A");
+        BaseIngredient baseIngredientDiff = new BaseIngredient("B");
 
-        assertEquals(recipeIngredient.hashCode(), recipeIngredient.hashCode());
-        assertEquals(recipeIngredient.hashCode(), recipeIngredientSame.hashCode());
-        assertNotEquals(recipeIngredient.hashCode(), recipeIngredientDiff.hashCode());
+        assertEquals(baseIngredient.hashCode(), baseIngredient.hashCode());
+        assertEquals(baseIngredient.hashCode(), baseIngredientSame.hashCode());
+        assertNotEquals(baseIngredient.hashCode(), baseIngredientDiff.hashCode());
     }
 }

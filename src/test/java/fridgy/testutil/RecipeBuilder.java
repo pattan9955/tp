@@ -6,9 +6,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import fridgy.model.recipe.BaseIngredient;
 import fridgy.model.recipe.Name;
 import fridgy.model.recipe.Recipe;
-import fridgy.model.recipe.RecipeIngredient;
 import fridgy.model.recipe.Step;
 
 /**
@@ -22,7 +22,7 @@ public class RecipeBuilder {
     public static final String DEFAULT_DESCRIPTION = "Very Nice";
 
     private Name name;
-    private Set<RecipeIngredient> recipeIngredients;
+    private Set<BaseIngredient> baseIngredients;
     private List<Step> steps;
     private Optional<String> description;
 
@@ -41,7 +41,7 @@ public class RecipeBuilder {
      */
     public RecipeBuilder(Recipe recipeToCopy) {
         name = recipeToCopy.getName();
-        recipeIngredients = recipeToCopy.getIngredients();
+        baseIngredients = recipeToCopy.getIngredients();
         steps = recipeToCopy.getSteps();
         description = recipeToCopy.getDescription();
     }
@@ -55,10 +55,10 @@ public class RecipeBuilder {
     }
 
     /**
-     * Sets the {@code RecipeIngredient} of the {@code Recipe} that we are building.
+     * Sets the {@code BaseIngredient} of the {@code Recipe} that we are building.
      */
     public RecipeBuilder withIngredients(List<String> ingredients) {
-        this.recipeIngredients = ingredients.stream().map(x -> new RecipeIngredient(x)).collect(Collectors.toSet());
+        this.baseIngredients = ingredients.stream().map(x -> new BaseIngredient(x)).collect(Collectors.toSet());
         return this;
     }
 
@@ -79,7 +79,7 @@ public class RecipeBuilder {
     }
 
     public Recipe build() {
-        return new Recipe(name, recipeIngredients, steps, description);
+        return new Recipe(name, baseIngredients, steps, description);
     }
 
 }

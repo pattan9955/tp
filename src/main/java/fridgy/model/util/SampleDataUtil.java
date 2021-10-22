@@ -8,13 +8,13 @@ import java.util.stream.Collectors;
 import fridgy.model.Inventory;
 import fridgy.model.RecipeBook;
 import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
 import fridgy.model.recipe.Recipe;
-import fridgy.model.recipe.RecipeIngredient;
 import fridgy.model.recipe.Step;
 import fridgy.model.tag.Tag;
 
@@ -49,20 +49,23 @@ public class SampleDataUtil {
         return new Recipe[] {
             new Recipe(
                 new fridgy.model.recipe.Name("Burger"),
-                Set.of(new RecipeIngredient("Bread"), new RecipeIngredient("patty")),
+                Set.of(new BaseIngredient(new Name("Bread"), new Quantity("2")),
+                    new BaseIngredient(new Name("Patty"), new Quantity("100g"))
+                ),
                 Arrays.asList(new Step("B1"), new Step("B2")),
                 Optional.of("Desc B")
             ),
             new Recipe(
                     new fridgy.model.recipe.Name("Maggie"),
-                    Set.of(new RecipeIngredient("Maggie")),
+                    Set.of(new BaseIngredient(new Name("Maggie"), new Quantity("1"))),
                     Arrays.asList(new Step("M1"), new Step("M2")),
                     Optional.of("Desc M")
             ),
             new Recipe(
                     new fridgy.model.recipe.Name("Recipe"),
-                    Set.of(new RecipeIngredient("RecipeIngredient 1"),
-                            new RecipeIngredient("RecipeIngredient 2")),
+                    Set.of(new BaseIngredient(new Name("BaseIngredient 1"), new Quantity("1kg")),
+                        new BaseIngredient(new Name("BaseIngredient 2"), new Quantity("100ml"))
+                    ),
                     Arrays.asList(new Step("Step 1"), new Step("Step 2")),
                     Optional.empty()
             ),
