@@ -17,9 +17,9 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + INGREDIENT_KEYWORD
             + ": Finds all ingredients whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "the specified keywords.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " " + INGREDIENT_KEYWORD + " " + " almond basil chocolate";
+            + "Example: " + COMMAND_WORD + " " + INGREDIENT_KEYWORD + " almond basil chocolate";
 
     private final NameContainsKeywordsPredicate predicate;
 

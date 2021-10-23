@@ -17,13 +17,13 @@ public class ViewRecipeCommand extends RecipeCommand {
     public static final String RECIPE_KEYWORD = "recipe";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + RECIPE_KEYWORD
-        + ": view the recipe identified by the index number used in the displayed recipe list.\n"
-        + "Parameters: INDEX (must be a positive integer)\n"
+        + ": Views a recipe by index.\n"
+        + "Parameters: INDEX\n"
         + "Example: " + COMMAND_WORD + " "
         + RECIPE_KEYWORD
         + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Recipe viewing: %1$s";
+    public static final String MESSAGE_SUCCESS = "Recipe in view: %1$s";
 
     private final Index target;
 

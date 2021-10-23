@@ -11,6 +11,7 @@ import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.IngredientModel;
 import fridgy.model.ingredient.ExpiryStatusUpdater;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.ingredient.IngredientDefaultComparator;
 
 
 /**
@@ -26,15 +27,15 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + " NAME "
             + PREFIX_QUANTITY + " QUANTITY "
-            + PREFIX_DESCRIPTION + " DESCRIPTION "
             + PREFIX_EXPIRY + " EXPIRY DATE "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_DESCRIPTION + " DESCRIPTION] "
+            + "[" + PREFIX_TAG + " TAG]...\n"
             + "Example: "
             + COMMAND_WORD + " "
-            + INGREDIENT_KEYWORD
+            + INGREDIENT_KEYWORD + " "
             + PREFIX_NAME + " Grapes "
             + PREFIX_QUANTITY + " 4 "
-            + PREFIX_DESCRIPTION + " Got any grapes? "
+            + PREFIX_DESCRIPTION + " Black seedless grapes "
             + PREFIX_EXPIRY + " 20-08-2010 "
             + PREFIX_TAG + " fruit "
             + PREFIX_TAG + " sweet";
@@ -55,6 +56,7 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(IngredientModel model) throws CommandException {
         requireNonNull(model);
+        model.sortIngredient(new IngredientDefaultComparator());
 
         if (model.has(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_INGREDIENT);

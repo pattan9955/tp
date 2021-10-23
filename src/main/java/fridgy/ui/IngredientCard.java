@@ -63,7 +63,7 @@ public class IngredientCard extends UiPart<Region> {
         name.setText(ingredientName);
         quantity.setText(ingredientQuantity);
         description.setText(ingredientDescription);
-        expiryDate.setText("Expiring on: " + ingredient.getExpiryDate().toString());
+        expiryDate.setText("Expiry Date: " + ingredient.getExpiryDate().toString());
         ingredient.getTags().stream()
                 .sorted(Comparator.comparing(tag ->
                         tag.tagName.equals("expired") || tag.tagName.equals("expiring")
@@ -77,7 +77,7 @@ public class IngredientCard extends UiPart<Region> {
                     if (name == "expired") {
                         tagLabel.setStyle("-fx-background-color: #CF1259;");
                     } else if (name == "expiring") {
-                        tagLabel.setStyle("-fx-background-color: #878787;");
+                        tagLabel.setStyle("-fx-background-color: #767676;");
                     }
                     tags.getChildren().add(tagLabel);
                 });

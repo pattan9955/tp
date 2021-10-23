@@ -19,9 +19,9 @@ public class DeleteCommand extends Command {
     public static final String INGREDIENT_KEYWORD = "ingredient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + INGREDIENT_KEYWORD
-            + ": Deletes the ingredient identified by the index number used in the displayed ingredient list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the ingredient by index.\n"
+            + "Parameters: INDEX\n"
+            + "Example: " + COMMAND_WORD + " " + INGREDIENT_KEYWORD + " 1";
 
     public static final String MESSAGE_DELETE_INGREDIENT_SUCCESS = "Deleted Ingredient:\n%1$s";
 

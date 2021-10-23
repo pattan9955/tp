@@ -11,7 +11,7 @@ import fridgy.model.Inventory;
  */
 public class ClearCommand extends Command {
 
-    public static final String COMMAND_WORD = "clear";
+    public static final String COMMAND_WORD = "clear ingredient";
     public static final String MESSAGE_SUCCESS = "Inventory has been cleared!";
 
 
