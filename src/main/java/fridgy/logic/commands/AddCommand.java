@@ -11,7 +11,6 @@ import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.IngredientModel;
 import fridgy.model.ingredient.ExpiryStatusUpdater;
 import fridgy.model.ingredient.Ingredient;
-import fridgy.model.ingredient.IngredientDefaultComparator;
 
 
 /**
@@ -56,7 +55,7 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(IngredientModel model) throws CommandException {
         requireNonNull(model);
-        model.sortIngredient(new IngredientDefaultComparator());
+        // model.sortIngredient(new IngredientDefaultComparator());
 
         if (model.has(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_INGREDIENT);
