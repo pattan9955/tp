@@ -23,7 +23,7 @@ public class ViewRecipeCommand extends RecipeCommand {
         + RECIPE_KEYWORD
         + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Recipe viewing: %1$s";
+    public static final String MESSAGE_SUCCESS = "Viewing recipe:\n%1$s";
 
     private final Index target;
 

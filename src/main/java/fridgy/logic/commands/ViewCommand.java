@@ -20,7 +20,7 @@ public class ViewCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " " + INGREDIENT_KEYWORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Ingredient viewing: %1$s";
+    public static final String MESSAGE_SUCCESS = "Viewing ingredient:\n%1$s";
 
     private final Index target;
 
