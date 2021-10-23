@@ -5,12 +5,14 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.commons.core.LogsCenter;
 import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import javafx.collections.ObservableList;
@@ -193,6 +195,11 @@ public class ModelManager implements Model {
         if (recipeBook.has(recipe)) {
             activeRecipe.setPredicate(x -> x.equals(recipe));
         }
+    }
+
+    @Override
+    public boolean deductIngredients(Set<BaseIngredient> ingrToDeduct) {
+        return inventory.deductIngredients(ingrToDeduct);
     }
 
     //=========== Filtered Ingredient List Accessors =============================================================

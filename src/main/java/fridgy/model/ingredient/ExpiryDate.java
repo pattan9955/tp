@@ -30,6 +30,10 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
         expiryDate = LocalDate.parse(date, DATE_FORMATTER);
     }
 
+    public boolean isExpired() {
+        return expiryDate.isBefore(LocalDate.now());
+    }
+
     /**
      * Returns true if a given string is a valid date.
      */

@@ -2,9 +2,11 @@ package fridgy.model;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import javafx.collections.ObservableList;
@@ -75,4 +77,6 @@ public interface RecipeModel {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredRecipeList(Predicate<Recipe> predicate);
+
+    boolean deductIngredients(Set<BaseIngredient> ingrToDeduct);
 }
