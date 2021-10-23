@@ -5,6 +5,8 @@ import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_ADD
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_DEL_COMMAND_NO_KEYWORD;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_DEL_COMMAND_WRONG_FORMAT;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_DEL_COMMAND_WRONG_KEYWORD;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_EDIT_COMMAND;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_EDIT_TYPE_COMMAND;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_FIND_COMMAND_EMPTY_KEYWORD;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_FIND_COMMAND_WHITESPACE_KEYWORD;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_FIND_COMMAND_WRONG_FORMAT;
@@ -16,6 +18,7 @@ import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_C
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_MULTIPLE_STEPS;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_REPEATED_INGREDIENTS;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_DEL_COMMAND;
+import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_EDIT_COMMAND_ALL_FIELDS_PRESENT;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_FIND_COMMAND;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_FIND_COMMAND_WHITESPACES;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_LIST_COMMAND;
@@ -32,12 +35,15 @@ import org.junit.jupiter.api.Test;
 import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.recipe.AddRecipeCommand;
 import fridgy.logic.commands.recipe.DeleteRecipeCommand;
+import fridgy.logic.commands.recipe.EditRecipeCommand;
+import fridgy.logic.commands.recipe.EditRecipeCommand.EditRecipeDescriptor;
 import fridgy.logic.commands.recipe.FindRecipeCommand;
 import fridgy.logic.commands.recipe.ListRecipeCommand;
 import fridgy.logic.commands.recipe.RecipeCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.recipe.NameContainsKeywordsPredicate;
 import fridgy.model.recipe.Recipe;
+import fridgy.testutil.EditRecipeDescriptorBuilder;
 import fridgy.testutil.RecipeBuilder;
 
 public class RecipeParserTest {
@@ -157,6 +163,29 @@ public class RecipeParserTest {
             RecipeCommand result = testParser.parseCommand(VALID_LIST_COMMAND);
             assertEquals(expectedCommand, result);
         } catch (ParseException e) {
+            Assertions.fail("ParseException thrown!");
+        }
+    }
+
+    @Test
+    public void parse_editRecipeInvalidCommand_throwsParseException() {
+        assertThrows(ParseException.class, () -> testParser.parseCommand(INVALID_EDIT_COMMAND));
+        assertThrows(ParseException.class, () -> testParser.parseCommand(INVALID_EDIT_TYPE_COMMAND));
+    }
+
+    @Test
+    public void parse_editRecipeValidCommand_returnsRecipeCommand() {
+        EditRecipeDescriptor expectedDescriptor = new EditRecipeDescriptorBuilder()
+                .withName("new Test")
+                .withDescription("new optional description")
+                .withIngredients("new ingr1", "new ingr2")
+                .withSteps("new step 1", "new step 2")
+                .build();
+        EditRecipeCommand expectedCommand = new EditRecipeCommand(Index.fromOneBased(1), expectedDescriptor);
+        try {
+            RecipeCommand result = testParser.parseCommand(VALID_EDIT_COMMAND_ALL_FIELDS_PRESENT);
+            assertEquals(result, expectedCommand);
+        } catch (ParseException pe) {
             Assertions.fail("ParseException thrown!");
         }
     }

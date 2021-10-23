@@ -44,6 +44,9 @@ public class EditRecipeCommand extends RecipeCommand {
     private final Index index;
     private final EditRecipeDescriptor descriptor;
 
+    /**
+     * Creates an EditRecipeCommand to edit the specified Recipe at {@code Index} using {@code EditRecipeDescriptor}.
+     */
     public EditRecipeCommand(Index index, EditRecipeDescriptor descriptor) {
         requireNonNull(index);
         requireNonNull(descriptor);
@@ -95,6 +98,19 @@ public class EditRecipeCommand extends RecipeCommand {
         return editedRecipe;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof EditRecipeCommand)) {
+            return false;
+        }
+        EditRecipeCommand otherCommand = (EditRecipeCommand) other;
+        return this.index.equals(otherCommand.index)
+                && this.descriptor.equals(otherCommand.descriptor);
+    }
+
     public static class EditRecipeDescriptor {
         private Name name;
         private Set<RecipeIngredient> ingredients;
@@ -103,6 +119,7 @@ public class EditRecipeCommand extends RecipeCommand {
 
         public EditRecipeDescriptor() {}
 
+        /** Copies an {@code EditRecipeDescriptor} for use in describing fields to edit. */
         public EditRecipeDescriptor(EditRecipeDescriptor toCopy) {
             setName(toCopy.name);
             setIngredients(toCopy.ingredients);

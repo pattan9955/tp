@@ -7,6 +7,9 @@ import static fridgy.logic.parser.CliSyntax.PREFIX_NAME;
 import static fridgy.logic.parser.CliSyntax.PREFIX_STEP;
 import static java.util.Objects.requireNonNull;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.recipe.EditRecipeCommand;
 import fridgy.logic.commands.recipe.EditRecipeCommand.EditRecipeDescriptor;
@@ -14,9 +17,6 @@ import fridgy.logic.parser.ArgumentMultimap;
 import fridgy.logic.parser.ArgumentTokenizer;
 import fridgy.logic.parser.ParserUtil;
 import fridgy.logic.parser.exceptions.ParseException;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class EditRecipeCommandParser implements RecipeCommandParser<EditRecipeCommand> {
 
