@@ -55,7 +55,6 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(IngredientModel model) throws CommandException {
         requireNonNull(model);
-        // model.sortIngredient(new IngredientDefaultComparator());
 
         if (model.has(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_INGREDIENT);
