@@ -19,7 +19,7 @@ public class JsonAdaptedIngredientTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_QUANTITY = "+651234";
     private static final String INVALID_DESCRIPTION = "˚¬˙µ";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "#snack";
 
     private static final String VALID_NAME = BANANA.getName().toString();
     private static final String VALID_QUANTITY = BANANA.getQuantity().toString();

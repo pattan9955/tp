@@ -33,8 +33,8 @@ public class CommandTestUtil {
     public static final String VALID_DESCRIPTION_ALMOND = "Block 312, Almond Street 1";
     public static final String VALID_DESCRIPTION_BASIL = "Block 123, Basilby Street 3";
     public static final String VALID_DESCRIPTION_FISH = " ";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_VEGETABLE = "vegetable";
+    public static final String VALID_TAG_SNACK = "snack";
     public static final String VALID_EXPIRY_DATE = "20-08-2010";
 
     public static final String NAME_DESC_ALMOND = " " + CliSyntax.PREFIX_NAME + VALID_NAME_ALMOND;
@@ -47,8 +47,8 @@ public class CommandTestUtil {
     public static final String DESCRIPTION_DESC_BASIL = " " + CliSyntax.PREFIX_DESCRIPTION + VALID_DESCRIPTION_BASIL;
     public static final String DESCRIPTION_DESC_FISH = " " + CliSyntax.PREFIX_DESCRIPTION + VALID_DESCRIPTION_FISH;
     public static final String EXPIRY_DATE_DESC = " " + CliSyntax.PREFIX_EXPIRY + VALID_EXPIRY_DATE;
-    public static final String TAG_DESC_FRIEND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_SNACK = " " + CliSyntax.PREFIX_TAG + VALID_TAG_SNACK;
+    public static final String TAG_DESC_VEGETABLE = " " + CliSyntax.PREFIX_TAG + VALID_TAG_VEGETABLE;
 
     public static final String INVALID_INGREDIENT_ARGUMENT_FORMAT = "monkegredient";
     public static final String INVALID_NAME_DESC = " " + CliSyntax.PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -70,13 +70,13 @@ public class CommandTestUtil {
     static {
         DESC_ALMOND = new EditIngredientDescriptorBuilder().withName(VALID_NAME_ALMOND)
                 .withQuantity(VALID_QUANTITY_ALMOND)
-                .withDescription(VALID_DESCRIPTION_ALMOND).withTags(VALID_TAG_FRIEND)
+                .withDescription(VALID_DESCRIPTION_ALMOND).withTags(VALID_TAG_SNACK)
                 .withExpiry(VALID_EXPIRY_DATE).build();
         DESC_BASIL = new EditIngredientDescriptorBuilder().withName(VALID_NAME_BASIL)
                 .withQuantity(VALID_QUANTITY_BASIL)
                 .withDescription(VALID_DESCRIPTION_BASIL)
                 .withExpiry(VALID_EXPIRY_DATE)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_VEGETABLE, VALID_TAG_SNACK).build();
         DESC_FISH = new EditIngredientDescriptorBuilder().withName(VALID_NAME_FISH)
                 .withQuantity(VALID_QUANTITY_FISH)
                 .withDescription(VALID_DESCRIPTION_FISH)

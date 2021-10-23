@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import fridgy.testutil.IngredientBuilder;
 import fridgy.testutil.RecipeBuilder;
 
 public class NameContainsKeywordsPredicateTest {
@@ -72,7 +73,11 @@ public class NameContainsKeywordsPredicateTest {
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Mushroom", "Chicken", "Cheese", "Toast", "the",
                 "bun", "Cook", "Good", "Stuff"));
         assertFalse(predicate.test(new RecipeBuilder().withName("Burger")
-                .withIngredients(Arrays.asList("Mushroom", "Chicken", "Cheese"))
+                .withIngredients(Arrays.asList(
+                    new IngredientBuilder().withName("Mushroom").withQuantity("15").buildBaseIngredient(),
+                    new IngredientBuilder().withName("Chicken").withQuantity("300g").buildBaseIngredient(),
+                    new IngredientBuilder().withName("Cheese").withQuantity("50g").buildBaseIngredient()
+                ))
                 .withSteps(Arrays.asList("Toast the bun", "Cook the chicken"))
                 .withDescription("Good stuff").build()));
     }

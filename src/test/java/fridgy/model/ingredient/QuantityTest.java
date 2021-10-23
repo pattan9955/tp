@@ -1,6 +1,8 @@
 package fridgy.model.ingredient;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -41,5 +43,16 @@ public class QuantityTest {
         assertTrue(Quantity.isValidQuantity("0009312")); // leading zeros
         assertTrue(Quantity.isValidQuantity("124293899")); // 9 quantity numbers
         assertTrue(Quantity.isValidQuantity("1.2979")); // fractions
+    }
+
+    @Test
+    public void hashCodeTest() {
+        Quantity qty = new Quantity("90kg");
+        Quantity qtySame = new Quantity("90kg");
+        Quantity qtyDiff = new Quantity("0.2g");
+
+        assertEquals(qty.hashCode(), qty.hashCode());
+        assertEquals(qty.hashCode(), qtySame.hashCode());
+        assertNotEquals(qty.hashCode(), qtyDiff.hashCode());
     }
 }

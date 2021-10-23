@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import fridgy.logic.commands.recipe.AddRecipeCommand;
 import fridgy.model.recipe.Recipe;
 import fridgy.testutil.RecipeBuilder;
+import fridgy.testutil.TypicalBaseIngredients;
 
 public class AddRecipeCommandParserTest {
 
@@ -51,7 +52,7 @@ public class AddRecipeCommandParserTest {
 
         Recipe noDescRecipe = new RecipeBuilder()
                 .withName("monke")
-                .withIngredients(Arrays.asList("ingr1"))
+                .withIngredients(Arrays.asList(TypicalBaseIngredients.INGR1))
                 .withSteps(Arrays.asList("why tho"))
                 .withDescription(null)
                 .build();
@@ -74,7 +75,7 @@ public class AddRecipeCommandParserTest {
         Recipe multipleStepsRecipe = new RecipeBuilder()
                 .withName("monke")
                 .withSteps(Arrays.asList("why tho", "but why tho"))
-                .withIngredients(Arrays.asList("ingr1"))
+                .withIngredients(Arrays.asList(TypicalBaseIngredients.INGR1))
                 .withDescription("optional")
                 .build();
         AddRecipeCommand expected = new AddRecipeCommand(multipleStepsRecipe);
@@ -90,7 +91,10 @@ public class AddRecipeCommandParserTest {
         Recipe multipleIngrRecipe = new RecipeBuilder()
                 .withName("monke")
                 .withSteps(Arrays.asList("why tho"))
-                .withIngredients(Arrays.asList("ingr1", "ingr2"))
+                .withIngredients(Arrays.asList(
+                    TypicalBaseIngredients.INGR1,
+                    TypicalBaseIngredients.INGR2
+                ))
                 .withDescription("optional")
                 .build();
         AddRecipeCommand expected = new AddRecipeCommand(multipleIngrRecipe);
@@ -106,7 +110,7 @@ public class AddRecipeCommandParserTest {
         Recipe repeatedIngrRecipe = new RecipeBuilder()
                 .withName("monke")
                 .withSteps(Arrays.asList("why tho"))
-                .withIngredients(Arrays.asList("ingr1"))
+                .withIngredients(Arrays.asList(TypicalBaseIngredients.INGR1, TypicalBaseIngredients.INGR1))
                 .withDescription("optional")
                 .build();
         AddRecipeCommand expected = new AddRecipeCommand(repeatedIngrRecipe);
