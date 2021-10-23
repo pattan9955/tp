@@ -16,9 +16,9 @@ import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.CliSyntax;
 import fridgy.model.RecipeModel;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.recipe.Name;
 import fridgy.model.recipe.Recipe;
-import fridgy.model.recipe.RecipeIngredient;
 import fridgy.model.recipe.Step;
 
 public class EditRecipeCommand extends RecipeCommand {
@@ -89,7 +89,7 @@ public class EditRecipeCommand extends RecipeCommand {
         Name updatedName = descriptor.getName().orElse(toEdit.getName());
         Optional<String> updatedDescription = Optional.of(descriptor.getDescription()
                 .orElse(toEdit.getDescription().orElse("")));
-        Set<RecipeIngredient> updatedIngredients = descriptor.getIngredients()
+        Set<BaseIngredient> updatedIngredients = descriptor.getIngredients()
                 .orElse(toEdit.getIngredients());
         List<Step> updatedSteps = descriptor.getSteps()
                 .orElse(toEdit.getSteps());
@@ -113,7 +113,7 @@ public class EditRecipeCommand extends RecipeCommand {
 
     public static class EditRecipeDescriptor {
         private Name name;
-        private Set<RecipeIngredient> ingredients;
+        private Set<BaseIngredient> ingredients;
         private List<Step> steps;
         private String description;
 
@@ -139,7 +139,7 @@ public class EditRecipeCommand extends RecipeCommand {
             this.description = description;
         }
 
-        public void setIngredients(Set<RecipeIngredient> ingredients) {
+        public void setIngredients(Set<BaseIngredient> ingredients) {
             this.ingredients = (ingredients != null) ? new HashSet<>(ingredients) : null;
         }
 
@@ -155,7 +155,7 @@ public class EditRecipeCommand extends RecipeCommand {
             return Optional.ofNullable(description);
         }
 
-        public Optional<Set<RecipeIngredient>> getIngredients() {
+        public Optional<Set<BaseIngredient>> getIngredients() {
             return (ingredients != null)
                     ? Optional.of(Collections.unmodifiableSet(ingredients))
                     : Optional.empty();

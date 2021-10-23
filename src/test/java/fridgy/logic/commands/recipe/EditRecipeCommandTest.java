@@ -16,6 +16,8 @@ import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
+import fridgy.model.ingredient.BaseIngredient;
+import fridgy.model.ingredient.Quantity;
 import fridgy.model.recipe.Name;
 import fridgy.model.recipe.Recipe;
 import fridgy.model.recipe.Step;
@@ -23,6 +25,11 @@ import fridgy.testutil.EditRecipeDescriptorBuilder;
 import fridgy.testutil.RecipeBuilder;
 
 public class EditRecipeCommandTest {
+
+    private final BaseIngredient ingr1 = new BaseIngredient(new fridgy.model.ingredient.Name("ingr1"),
+            new Quantity("100mg"));
+    private final BaseIngredient ingr2 = new BaseIngredient(new fridgy.model.ingredient.Name("ingr2"),
+            new Quantity("200mg"));
 
     @Test
     public void constructor_nullIndexOrDescriptor_throwsNullPointerException() {
@@ -59,13 +66,13 @@ public class EditRecipeCommandTest {
         Recipe testRecipe1 = new RecipeBuilder()
                 .withName("Test Name 1")
                 .withDescription("Test Description")
-                .withIngredients(Arrays.asList("Ingr1", "Ingr2"))
+                .withIngredients(Arrays.asList(ingr1, ingr2))
                 .withSteps(Arrays.asList("Step 1", "Step 2"))
                 .build();
         Recipe testRecipe2 = new RecipeBuilder()
                 .withName("Test Name 2")
                 .withDescription("Test Description")
-                .withIngredients(Arrays.asList("Ingr1, Ingr2"))
+                .withIngredients(Arrays.asList(ingr1, ingr2))
                 .withSteps(Arrays.asList("Step 1", "Step 2"))
                 .build();
 
@@ -85,13 +92,13 @@ public class EditRecipeCommandTest {
         Recipe testRecipe1 = new RecipeBuilder()
                 .withName("Test Name 1")
                 .withDescription("Test Description")
-                .withIngredients(Arrays.asList("Ingr1", "Ingr2"))
+                .withIngredients(Arrays.asList(ingr1, ingr2))
                 .withSteps(Arrays.asList("Step 1", "Step 2"))
                 .build();
         Recipe testRecipe2 = new RecipeBuilder()
                 .withName("Test Name 2")
                 .withDescription("Test Description")
-                .withIngredients(Arrays.asList("Ingr1, Ingr2"))
+                .withIngredients(Arrays.asList(ingr1, ingr2))
                 .withSteps(Arrays.asList("Step 1", "Step 2"))
                 .build();
         testModel.add(testRecipe1);
@@ -110,7 +117,7 @@ public class EditRecipeCommandTest {
         Recipe targetRecipe = new RecipeBuilder()
                 .withName("Test Name 3")
                 .withDescription("Test Description")
-                .withIngredients(Arrays.asList("Ingr1", "Ingr2"))
+                .withIngredients(Arrays.asList(ingr1, ingr2))
                 .withSteps(Arrays.asList("Step 1", "Step 2", "Step 3"))
                 .build();
         expectedModel.add(targetRecipe);
@@ -144,7 +151,7 @@ public class EditRecipeCommandTest {
                 .withName("Test 1")
                 .withSteps("Step 1", "Step 2", "Step 3")
                 .withDescription("Optional description")
-                .withIngredients("ingr1", "ingr2")
+                .withIngredients("ingr1 100mg", "ingr2 200mg")
                 .build();
         EditRecipeCommand testCommand = new EditRecipeCommand(Index.fromOneBased(1), testDescriptor);
 
@@ -152,7 +159,7 @@ public class EditRecipeCommandTest {
                 .withName("Test 1")
                 .withSteps("Step 1", "Step 2", "Step 3")
                 .withDescription("Optional description")
-                .withIngredients("ingr1", "ingr2")
+                .withIngredients("ingr1 100mg", "ingr2 200mg")
                 .build();
         EditRecipeCommand targetCommand = new EditRecipeCommand(Index.fromOneBased(1), targetDescriptor);
 

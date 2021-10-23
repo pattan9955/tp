@@ -1,6 +1,5 @@
 package fridgy.logic.parser;
 
-import static fridgy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
@@ -9,16 +8,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import fridgy.commons.core.index.Index;
 import fridgy.commons.util.StringUtil;
 import fridgy.logic.parser.exceptions.ParseException;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
-import fridgy.model.recipe.RecipeIngredient;
 import fridgy.model.recipe.Step;
 import fridgy.model.tag.Tag;
 
@@ -138,30 +138,37 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code List<String> ingredients} into a {@code Set<RecipeIngredient>}.
+     * Parses {@code List<String> ingredients} into a {@code Set<BaseIngredient>}.
      */
-    public static Set<RecipeIngredient> parseIngredients(List<String> ingredients) throws ParseException {
+    public static Set<BaseIngredient> parseIngredients(List<String> ingredients) throws ParseException {
         requireNonNull(ingredients);
-
-        final Set<RecipeIngredient> ingredientSet = ingredients
-                .stream()
-                .filter(x -> !x.trim().equals(""))
-                .map(ParserUtil::parseIngredient)
-                .collect(Collectors.toSet());
+        final Set<BaseIngredient> ingredientSet = new HashSet<>();
+        for (String ingredient : ingredients) {
+            if (!ingredient.equals("")) {
+                ingredientSet.add(parseBaseIngredient(ingredient));
+            }
+        }
         if (ingredientSet.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    RecipeIngredient.RECIPE_INGREDIENT_CONSTRAINTS));
+            throw new ParseException(BaseIngredient.BASE_INGREDIENT_CONSTRAINTS);
         }
         return ingredientSet;
     }
 
     /**
-     * Parses {@code String ingredient} into a {@code RecipeIngredient}.
+     * Parses {@code String ingredient} into a {@code BaseIngredient}.
      */
-    public static RecipeIngredient parseIngredient(String ingredient) {
+    public static BaseIngredient parseBaseIngredient(String ingredient) throws ParseException {
         requireNonNull(ingredient);
         String trimmedIngredient = ingredient.trim();
-        return new RecipeIngredient(trimmedIngredient);
+        // this regex matches for <ingredient name> <quantity> string
+        String validBaseIngredient = "(?<name>\\w.*)\\s(?<quantity>(?=.*[1-9])\\d+(\\.\\d+)?\\h*((m|k)?(g|l)){0,1})";
+        Matcher matcher = Pattern.compile(validBaseIngredient).matcher(trimmedIngredient);
+
+        matcher.find(); // sheesh
+        Name name = parseName(matcher.group("name"));
+        Quantity quantity = parseQuantity(matcher.group("quantity"));
+
+        return new BaseIngredient(name, quantity);
     }
 
     /**

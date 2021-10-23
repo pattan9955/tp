@@ -28,14 +28,14 @@ public class RecipeCommandParserTestUtil {
     public static final String INVALID_ADD_COMMAND_NO_KEYWORD = "add -n monke -i ingr1 -s why tho -d optional";
 
     //-----------------------------------VALID ADD RECIPE COMMANDS----------------------------------------------------
-    public static final String VALID_ADD_COMMAND_MISSING_DESCRIPTION = "add recipe -n monke -i ingr1 -s why tho";
-    public static final String VALID_ADD_COMMAND_ALL_PREFIX_PRESENT = "add recipe -n monke -i ingr1 "
+    public static final String VALID_ADD_COMMAND_MISSING_DESCRIPTION = "add recipe -n monke -i ingr1 1kg -s why tho";
+    public static final String VALID_ADD_COMMAND_ALL_PREFIX_PRESENT = "add recipe -n monke -i ingr1 1kg "
             + "-s why tho -d optional";
-    public static final String VALID_ADD_COMMAND_MULTIPLE_STEPS = "add recipe -n monke -i ingr1 -s why tho "
+    public static final String VALID_ADD_COMMAND_MULTIPLE_STEPS = "add recipe -n monke -i ingr1 1kg -s why tho "
             + "-s but why tho -d optional";
-    public static final String VALID_ADD_COMMAND_MULTIPLE_INGREDIENTS = "add recipe -n monke -i ingr1 -i ingr2 "
+    public static final String VALID_ADD_COMMAND_MULTIPLE_INGREDIENTS = "add recipe -n monke -i ingr1 1kg -i ingr2 1ml "
             + "-s why tho -d optional";
-    public static final String VALID_ADD_COMMAND_REPEATED_INGREDIENTS = "add recipe -n monke -i ingr1 -i ingr1 "
+    public static final String VALID_ADD_COMMAND_REPEATED_INGREDIENTS = "add recipe -n monke -i ingr1 1kg -i ingr1 1kg "
             + "-s why tho -d optional";
 
     //--------------------------------INVALID DELETE RECIPE COMMANDS-------------------------------------------------
@@ -83,16 +83,16 @@ public class RecipeCommandParserTestUtil {
     public static final String INVALID_INDEX_EDIT_COMMAND = "edit recipe -1 -i ingr1 -n test name";
 
     //-----------------------------------VALID EDIT RECIPE COMMAND----------------------------------------------------
-    public static final String VALID_EDIT_COMMAND_ALL_FIELDS_PRESENT = "edit recipe 1 -n new Test -i new ingr1 -i "
-            + "new ingr2 -s new step 1 -s new step 2 -d new optional description";
+    public static final String VALID_EDIT_COMMAND_ALL_FIELDS_PRESENT = "edit recipe 1 -n new Test -i new ingr1 100mg "
+            + "-i new ingr2 200mg -s new step 1 -s new step 2 -d new optional description";
     public static final String VALID_EDIT_COMMAND_NAME_PRESENT = "edit recipe 1 -n new Test";
-    public static final String VALID_EDIT_COMMAND_INGR_PRESENT = "edit recipe 1 -i new ingr1 -i new ingr2";
+    public static final String VALID_EDIT_COMMAND_INGR_PRESENT = "edit recipe 1 -i new ingr1 100mg -i new ingr2 200mg";
     public static final String VALID_EDIT_COMMAND_DESC_PRESENT = "edit recipe 1 -d new optional description";
     public static final String VALID_EDIT_COMMAND_STEPS_PRESENT = "edit recipe 1 -s new step 1 -s new step 2";
     public static final String VALID_EDIT_COMMAND_DESC_STEPS_PRESENT = "edit recipe 1 -d new optional description "
             + "-s new step 1 -s new step 2";
-    public static final String VALID_EDIT_COMMAND_INGR_NAME_PRESENT = "edit recipe 1 -n new Test -i new ingr1 "
-            + "-i new ingr2";
+    public static final String VALID_EDIT_COMMAND_INGR_NAME_PRESENT = "edit recipe 1 -n new Test -i new ingr1 100mg"
+            + " -i new ingr2 200mg";
 
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created

@@ -48,12 +48,12 @@ public class EditCommandTest {
         Ingredient editedIngredient = ingredientInList
                 .withName(CommandTestUtil.VALID_NAME_BASIL)
                 .withQuantity(CommandTestUtil.VALID_QUANTITY_BASIL)
-                .withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
+                .withTags(CommandTestUtil.VALID_TAG_VEGETABLE).build();
 
         EditCommand.EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder()
                 .withName(CommandTestUtil.VALID_NAME_BASIL)
                 .withQuantity(CommandTestUtil.VALID_QUANTITY_BASIL)
-                .withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
+                .withTags(CommandTestUtil.VALID_TAG_VEGETABLE).build();
         EditCommand editCommand = new EditCommand(indexLastIngredient, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);

@@ -15,10 +15,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import fridgy.logic.parser.exceptions.ParseException;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
-import fridgy.model.recipe.RecipeIngredient;
 import fridgy.model.tag.Tag;
 import fridgy.testutil.Assert;
 import fridgy.testutil.TypicalIndexes;
@@ -28,12 +28,12 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_QUANTITY = "+651234";
     private static final String INVALID_DESCRIPTION = " ";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "#snack";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_QUANTITY = "123456";
     private static final String VALID_DESCRIPTION = "123 Main Street #0505";
-    private static final String VALID_TAG_1 = "friend";
+    private static final String VALID_TAG_1 = "snack";
     private static final String VALID_TAG_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -182,14 +182,15 @@ public class ParserUtilTest {
     @Test
     public void parseIngredients_listOfEmptyStrings_throwsParseException() {
         assertThrows(ParseException.class, ()
-            -> ParserUtil.parseIngredients(Arrays.asList("", "", "")));
+            -> ParserUtil.parseIngredients(Arrays.asList("")));
     }
 
     @Test
     public void parseIngredients_listOfValidIngredients_returnsCorrectIngredientSet() {
-        List<String> inputIngredients = Arrays.asList("ingr1", "ingr1", "ingr2", "");
-        Set<RecipeIngredient> expectedIngr = Set.of(new RecipeIngredient("ingr1"),
-                new RecipeIngredient("ingr2"));
+        List<String> inputIngredients = Arrays.asList("ingr1 100mg", "ingr1 100mg", "ingr2 200mg", "");
+        Set<BaseIngredient> expectedIngr = Set.of(
+                new BaseIngredient(new Name("ingr1"), new Quantity("100mg")),
+                new BaseIngredient(new Name("ingr2"), new Quantity("200mg")));
         try {
             assertEquals(ParserUtil.parseIngredients(inputIngredients), expectedIngr);
         } catch (ParseException pe) {

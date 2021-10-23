@@ -11,17 +11,23 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.testutil.RecipeBuilder;
+import fridgy.testutil.TypicalBaseIngredients;
 
 class RecipeTest {
 
     private static Recipe burger;
     private static Recipe maggie;
-    private static final List<String> BURGER_INGREDIENTS = Arrays.asList("Bread", "Patty", "Sauce");
+    private static final List<BaseIngredient> BURGER_INGREDIENTS = Arrays.asList(
+        TypicalBaseIngredients.APPLE,
+        TypicalBaseIngredients.BANANA,
+        TypicalBaseIngredients.ALMOND
+    );
     private static final List<String> BURGER_STEPS = Arrays.asList("Put patty in bread", "Add sauce");
     private static final String BURGER_NAME = "Burger";
     private static final String BURGER_DESCRIPTION = "Healthier choice";
-    private static final List<String> MAGGIE_INGREDIENTS = Arrays.asList("Maggie mee");
+    private static final List<BaseIngredient> MAGGIE_INGREDIENTS = Arrays.asList(TypicalBaseIngredients.INGR1);
     private static final List<String> MAGGIE_STEPS = Arrays.asList("Boil water", "add maggie");
     private static final String MAGGIE_NAME = "Maggie";
     private static final String MAGGIE_DESCRIPTION = "Easy";

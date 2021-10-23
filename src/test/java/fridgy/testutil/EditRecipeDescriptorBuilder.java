@@ -1,15 +1,18 @@
 package fridgy.testutil;
 
 import static fridgy.logic.commands.recipe.EditRecipeCommand.EditRecipeDescriptor;
+import static fridgy.logic.parser.ParserUtil.parseBaseIngredient;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import fridgy.logic.parser.exceptions.ParseException;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.recipe.Name;
 import fridgy.model.recipe.Recipe;
-import fridgy.model.recipe.RecipeIngredient;
 import fridgy.model.recipe.Step;
 
 public class EditRecipeDescriptorBuilder {
@@ -62,9 +65,16 @@ public class EditRecipeDescriptorBuilder {
      * Sets the ingredients of the {@code EditRecipeDescriptor} that we are building to {@code String[]}.
      */
     public EditRecipeDescriptorBuilder withIngredients(String... ingredients) {
-        Set<RecipeIngredient> ingredientSet = Stream
+        Set<BaseIngredient> ingredientSet = Stream
                 .of(ingredients)
-                .map(RecipeIngredient::new)
+                .map(x -> {
+                    try {
+                        return !x.equals("") ? parseBaseIngredient(x) : null;
+                    } catch (ParseException pe) {
+                        return null;
+                    }
+                })
+                .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
         descriptor.setIngredients(ingredientSet);
         return this;

@@ -45,6 +45,7 @@ import fridgy.model.recipe.NameContainsKeywordsPredicate;
 import fridgy.model.recipe.Recipe;
 import fridgy.testutil.EditRecipeDescriptorBuilder;
 import fridgy.testutil.RecipeBuilder;
+import fridgy.testutil.TypicalBaseIngredients;
 
 public class RecipeParserTest {
     private RecipeParser testParser = new RecipeParser();
@@ -68,7 +69,7 @@ public class RecipeParserTest {
     public void parse_addRecipeCommandValid_returnsRecipeCommand() {
         Recipe base = new RecipeBuilder()
                 .withName("monke")
-                .withIngredients(Arrays.asList("ingr1"))
+                .withIngredients(Arrays.asList(TypicalBaseIngredients.INGR1))
                 .withSteps(Arrays.asList("why tho"))
                 .withDescription("optional")
                 .build();
@@ -78,10 +79,10 @@ public class RecipeParserTest {
                 .withSteps(Arrays.asList("why tho", "but why tho"))
                 .build();
         Recipe repeatedIngr = new RecipeBuilder(base)
-                .withIngredients(Arrays.asList("ingr1", "ingr1"))
+                .withIngredients(Arrays.asList(TypicalBaseIngredients.INGR1, TypicalBaseIngredients.INGR1))
                 .build();
         Recipe multipleIngr = new RecipeBuilder(base)
-                .withIngredients(Arrays.asList("ingr1", "ingr2"))
+                .withIngredients(Arrays.asList(TypicalBaseIngredients.INGR1, TypicalBaseIngredients.INGR2))
                 .build();
 
         AddRecipeCommand allPrefPresentCommand = new AddRecipeCommand(allPrefPresent);
@@ -178,7 +179,7 @@ public class RecipeParserTest {
         EditRecipeDescriptor expectedDescriptor = new EditRecipeDescriptorBuilder()
                 .withName("new Test")
                 .withDescription("new optional description")
-                .withIngredients("new ingr1", "new ingr2")
+                .withIngredients("new ingr1 100mg", "new ingr2 200mg")
                 .withSteps("new step 1", "new step 2")
                 .build();
         EditRecipeCommand expectedCommand = new EditRecipeCommand(Index.fromOneBased(1), expectedDescriptor);

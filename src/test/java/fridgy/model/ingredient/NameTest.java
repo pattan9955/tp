@@ -1,6 +1,8 @@
 package fridgy.model.ingredient;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -29,13 +31,24 @@ public class NameTest {
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("pear*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(Name.isValidName("peter jack")); // alphabets only
+        assertTrue(Name.isValidName("pear compote")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("pear the 2nd")); // alphanumeric characters
+        assertTrue(Name.isValidName("Chocolate Bar")); // with capital letters
+        assertTrue(Name.isValidName("Nestle dark choco bar with 90 percent chocolate")); // long names
+    }
+
+    @Test
+    public void hashCodeTest() {
+        Name name = new Name("A");
+        Name nameSame = new Name("A");
+        Name nameDiff = new Name("B");
+
+        assertEquals(name.hashCode(), name.hashCode());
+        assertEquals(name.hashCode(), nameSame.hashCode());
+        assertNotEquals(name.hashCode(), nameDiff.hashCode());
     }
 }

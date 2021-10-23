@@ -11,12 +11,15 @@ import org.junit.jupiter.api.Test;
 import fridgy.testutil.EditRecipeDescriptorBuilder;
 
 public class EditRecipeDescriptorTest {
+    private final String ingr1 = "ingr1 100mg";
+    private final String ingr2 = "ingr2 200mg";
+
     @Test
     public void equals_sameObject_returnsTrue() {
         EditRecipeDescriptor testDescriptor = new EditRecipeDescriptorBuilder()
                 .withName("Test Name")
                 .withDescription("Test Description")
-                .withIngredients("ingr1", "ingr2")
+                .withIngredients(ingr1, ingr2)
                 .withSteps("Step 1", "Step 2")
                 .build();
         assertEquals(testDescriptor, testDescriptor);
@@ -27,13 +30,13 @@ public class EditRecipeDescriptorTest {
         EditRecipeDescriptor testDescriptor = new EditRecipeDescriptorBuilder()
                 .withName("Test Name")
                 .withDescription("Test Description")
-                .withIngredients("ingr1", "ingr2")
+                .withIngredients(ingr1, ingr2)
                 .withSteps("Step 1", "Step 2")
                 .build();
         EditRecipeDescriptor targetDescriptor = new EditRecipeDescriptorBuilder()
                 .withName("Test Name")
                 .withDescription("Test Description")
-                .withIngredients("ingr1", "ingr2")
+                .withIngredients(ingr1, ingr2)
                 .withSteps("Step 1", "Step 2")
                 .build();
 
@@ -45,7 +48,7 @@ public class EditRecipeDescriptorTest {
         EditRecipeDescriptor testDescriptor = new EditRecipeDescriptorBuilder()
                 .withName("Test Name")
                 .withDescription("Test Description")
-                .withIngredients("ingr1", "ingr2")
+                .withIngredients(ingr1, ingr2)
                 .withSteps("Step 1", "Step 2")
                 .build();
 
@@ -57,7 +60,7 @@ public class EditRecipeDescriptorTest {
         EditRecipeDescriptor testDescriptor = new EditRecipeDescriptorBuilder()
                 .withName("Test Name")
                 .withDescription("Test Description")
-                .withIngredients("ingr1", "ingr2")
+                .withIngredients(ingr1, ingr2)
                 .withSteps("Step 1", "Step 2")
                 .build();
 
@@ -69,7 +72,7 @@ public class EditRecipeDescriptorTest {
         EditRecipeDescriptor testDescriptor = new EditRecipeDescriptorBuilder()
                 .withName("Test Name")
                 .withDescription("Test Description")
-                .withIngredients("ingr1", "ingr2")
+                .withIngredients(ingr1, ingr2)
                 .withSteps("Step 1", "Step 2")
                 .build();
         EditRecipeDescriptor targetDescriptor = new EditRecipeDescriptorBuilder(testDescriptor)
@@ -84,7 +87,7 @@ public class EditRecipeDescriptorTest {
         EditRecipeDescriptor testDescriptor = new EditRecipeDescriptorBuilder()
                 .withName("Test Name")
                 .withDescription("Test Description")
-                .withIngredients("ingr1", "ingr2")
+                .withIngredients(ingr1, ingr2)
                 .withSteps("Step 1", "Step 2")
                 .build();
         EditRecipeDescriptor targetDescriptor = new EditRecipeDescriptorBuilder(testDescriptor)
@@ -99,11 +102,11 @@ public class EditRecipeDescriptorTest {
         EditRecipeDescriptor testDescriptor = new EditRecipeDescriptorBuilder()
                 .withName("Test Name")
                 .withDescription("Test Description")
-                .withIngredients("ingr1", "ingr2")
+                .withIngredients(ingr1, ingr2)
                 .withSteps("Step 1", "Step 2")
                 .build();
         EditRecipeDescriptor targetDescriptor = new EditRecipeDescriptorBuilder(testDescriptor)
-                .withIngredients("New ingr1", "New ingr2")
+                .withIngredients("New ingr1 100mg", "New ingr2 200mg")
                 .build();
 
         assertNotEquals(testDescriptor, targetDescriptor);
@@ -114,7 +117,7 @@ public class EditRecipeDescriptorTest {
         EditRecipeDescriptor testDescriptor = new EditRecipeDescriptorBuilder()
                 .withName("Test Name")
                 .withDescription("Test Description")
-                .withIngredients("ingr1", "ingr2")
+                .withIngredients(ingr1, ingr2)
                 .withSteps("Step 1", "Step 2")
                 .build();
         EditRecipeDescriptor targetDescriptor = new EditRecipeDescriptorBuilder(testDescriptor)

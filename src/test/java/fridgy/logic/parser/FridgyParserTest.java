@@ -36,6 +36,7 @@ import fridgy.model.ingredient.Quantity;
 import fridgy.model.recipe.Recipe;
 import fridgy.model.tag.Tag;
 import fridgy.testutil.RecipeBuilder;
+import fridgy.testutil.TypicalBaseIngredients;
 
 public class FridgyParserTest {
     private static final String EMPTY_COMMAND = "";
@@ -115,7 +116,7 @@ public class FridgyParserTest {
         Model testModel = new ModelManager();
         Recipe testRecipe = new RecipeBuilder()
                 .withName("monke")
-                .withIngredients(Arrays.asList("ingr1"))
+                .withIngredients(Arrays.asList(TypicalBaseIngredients.INGR1))
                 .withSteps(Arrays.asList("why tho"))
                 .withDescription("optional")
                 .build();
@@ -130,7 +131,6 @@ public class FridgyParserTest {
             CommandResult resultAdd = testParser.parseCommand(VALID_ADD_COMMAND_ALL_PREFIX_PRESENT).apply(testModel);
             CommandResult resultView = testParser.parseCommand(VALID_VIEW_COMMAND).apply(testModel);
             CommandResult resultDelete = testParser.parseCommand(VALID_DEL_COMMAND).apply(testModel);
-
             assertTrue(resultAdd.equals(expectedAdd)
                     && resultDelete.equals(expectedDelete)
                     && resultView.equals(expectedView));

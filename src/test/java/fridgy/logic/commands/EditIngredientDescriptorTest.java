@@ -5,7 +5,7 @@ import static fridgy.logic.commands.CommandTestUtil.DESC_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_NAME_BASIL;
 import static fridgy.logic.commands.CommandTestUtil.VALID_QUANTITY_BASIL;
-import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static fridgy.logic.commands.CommandTestUtil.VALID_TAG_VEGETABLE;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -50,7 +50,7 @@ public class EditIngredientDescriptorTest {
         assertFalse(DESC_ALMOND.equals(editedAlmond));
 
         // different tags -> returns false
-        editedAlmond = new EditIngredientDescriptorBuilder(DESC_ALMOND).withTags(VALID_TAG_HUSBAND).build();
+        editedAlmond = new EditIngredientDescriptorBuilder(DESC_ALMOND).withTags(VALID_TAG_VEGETABLE).build();
         assertFalse(DESC_ALMOND.equals(editedAlmond));
     }
 }

@@ -11,9 +11,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fridgy.commons.exceptions.IllegalValueException;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.recipe.Name;
 import fridgy.model.recipe.Recipe;
-import fridgy.model.recipe.RecipeIngredient;
 import fridgy.model.recipe.Step;
 
 
@@ -67,9 +67,9 @@ public class JsonAdaptedRecipe {
      * @throws IllegalValueException if there were any data constraints violated in the adapted Recipe.
      */
     public Recipe toModelType() throws IllegalValueException {
-        final Set<RecipeIngredient> modelRecipeIngredients = new HashSet<>();
+        final Set<BaseIngredient> modelBaseIngredients = new HashSet<>();
         for (JsonAdaptedIngredient ingredient : ingredients) {
-            modelRecipeIngredients.add(ingredient.toModelType());
+            modelBaseIngredients.add(ingredient.toModelType());
         }
 
         final List<Step> modelSteps = new ArrayList<>();
@@ -86,9 +86,9 @@ public class JsonAdaptedRecipe {
         }
         final Name modelName = new Name(name);
 
-        if (modelRecipeIngredients.isEmpty()) {
+        if (modelBaseIngredients.isEmpty()) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, RecipeIngredient.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, BaseIngredient.class.getSimpleName()));
         }
 
         if (modelSteps.isEmpty()) {
@@ -96,6 +96,6 @@ public class JsonAdaptedRecipe {
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Step.class.getSimpleName()));
         }
         final Optional<String> modelDescription = Optional.ofNullable(description);
-        return new Recipe(modelName, modelRecipeIngredients, modelSteps, modelDescription);
+        return new Recipe(modelName, modelBaseIngredients, modelSteps, modelDescription);
     }
 }

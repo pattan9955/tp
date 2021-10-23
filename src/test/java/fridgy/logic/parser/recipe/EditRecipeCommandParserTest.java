@@ -68,7 +68,7 @@ public class EditRecipeCommandParserTest {
                 .withName("new Test")
                 .withDescription("new optional description")
                 .withSteps("new step 1", "new step 2")
-                .withIngredients("new ingr1", "new ingr2")
+                .withIngredients("new ingr1 100mg", "new ingr2 200mg")
                 .build();
         EditRecipeCommand expectedCommand = new EditRecipeCommand(Index.fromOneBased(1), expectedDescriptor);
 
@@ -90,7 +90,7 @@ public class EditRecipeCommandParserTest {
 
         // Ingredient present
         EditRecipeDescriptor ingrDescriptor = new EditRecipeDescriptorBuilder(baseDescriptor)
-                .withIngredients("new ingr1", "new ingr2")
+                .withIngredients("new ingr1 100mg", "new ingr2 200mg")
                 .build();
         EditRecipeCommand ingrCommand = new EditRecipeCommand(Index.fromOneBased(1), ingrDescriptor);
         assertParseSuccess(testParser, removeEditCommandWord(VALID_EDIT_COMMAND_INGR_PRESENT), ingrCommand);
@@ -125,7 +125,7 @@ public class EditRecipeCommandParserTest {
 
         // Ingredients + Name present
         EditRecipeDescriptor ingrNameDescriptor = new EditRecipeDescriptorBuilder()
-                .withIngredients("new ingr1", "new ingr2")
+                .withIngredients("new ingr1 100mg", "new ingr2 200mg")
                 .withName("new Test")
                 .build();
         EditRecipeCommand ingrNameCommand = new EditRecipeCommand(Index.fromOneBased(1), ingrNameDescriptor);

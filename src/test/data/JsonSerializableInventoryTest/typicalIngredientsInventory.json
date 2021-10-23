@@ -4,13 +4,13 @@
     "name" : "Apple",
     "quantity" : "94351253",
     "description" : "123, Jurong West Ave 6, #08-111",
-    "tagged" : [ "friends" ],
+    "tagged" : [ "snacks" ],
     "expiryDate" : "20-08-2010"
   }, {
     "name" : "Banana",
     "quantity" : "98765432",
     "description" : "311, Clementi Ave 2, #02-25",
-    "tagged" : [ "owesMoney", "friends" ],
+    "tagged" : [ "fruit", "snacks" ],
     "expiryDate" : "20-08-2010"
   }, {
     "name" : "Carrot Slices",
@@ -22,7 +22,7 @@
     "name" : "Duck breast",
     "quantity" : "87652533",
     "description" : "10th street",
-    "tagged" : [ "friends" ],
+    "tagged" : [ "snacks" ],
     "expiryDate" : "20-08-2010"
   }, {
     "name" : "Egg mayo",
