@@ -2,15 +2,24 @@
 layout: page
 title: User Guide
 ---
-# Introduction
-
-Fridgy is a **desktop app for managing an Inventory of food as well as a list of recipes, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Fridgy can get your fridge Inventory and recipe sorted out faster than traditional GUI apps.
-
---------------------------------------------------------------------------------------------------------------------
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+# Introduction
+
+Fridgy is a **desktop app for managing an Inventory of food as well as a list of recipes**, optimized for use via a 
+Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, 
+Fridgy can get your fridge Inventory and recipe sorted out faster than traditional GUI apps.
+
+Fridgy was made to help people living in shared spaces manage their fridges better, since it can get very messy and 
+difficult to take note of several items from different people. It has the functionality to track your ingredients in the
+fridge, as well as your recipes. It can help to flag out expiring and expired ingredients in your fridge. Moreover, it 
+is equipped with features to go beyond and convenience the users, such as automatic deduction of ingredients after 
+cooking a recipe.
+
+--------------------------------------------------------------------------------------------------------------------
+
 # UI
 
 ![Ui](images/Ui.png)
