@@ -8,13 +8,13 @@ import java.util.stream.Collectors;
 import fridgy.model.Inventory;
 import fridgy.model.RecipeBook;
 import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
 import fridgy.model.recipe.Recipe;
-import fridgy.model.recipe.RecipeIngredient;
 import fridgy.model.recipe.Step;
 import fridgy.model.tag.Tag;
 
@@ -24,24 +24,24 @@ import fridgy.model.tag.Tag;
 public class SampleDataUtil {
     public static Ingredient[] getSampleIngredients() {
         return new Ingredient[] {
-            new Ingredient(new Name("Alex Yeoh"), new Quantity("87438807"),
-                new Description(Optional.of("Blk 30 Geylang Street 29, #06-40")),
+            new Ingredient(new Name("Almond jelly"), new Quantity("87438807"),
+                new Description(Optional.of("Very nice")),
                 getTagSet("fruit"), new ExpiryDate("20-08-2010")),
-            new Ingredient(new Name("Bernice Yu"), new Quantity("99272758"),
-                new Description(Optional.of("Blk 30 Lorong 3 Serangoon Gardens, #07-18")),
+            new Ingredient(new Name("Banana leaf"), new Quantity("99272758"),
+                new Description(Optional.of("leafy")),
                 getTagSet("colleagues", "fruit"), new ExpiryDate("20-08-2010")),
-            new Ingredient(new Name("Charlotte Oliveiro"), new Quantity("93210283"),
-                new Description(Optional.of("Blk 11 Ang Mo Kio Street 74, #11-04")),
-                getTagSet("neighbours"), new ExpiryDate("20-08-2010")),
-            new Ingredient(new Name("David Li"), new Quantity("91031282"),
-                new Description(Optional.of("Blk 436 Serangoon Gardens Street 26, #16-43")),
-                getTagSet("family"), new ExpiryDate("20-08-2010")),
-            new Ingredient(new Name("Irfan Ibrahim"), new Quantity("92492021"),
-                new Description(Optional.of("Blk 47 Tampines Street 20, #17-35")),
+            new Ingredient(new Name("Cabbage"), new Quantity("93210283"),
+                new Description(Optional.of("From cold storage")),
+                getTagSet("leafy"), new ExpiryDate("20-08-2010")),
+            new Ingredient(new Name("Dark chocolate"), new Quantity("91031282"),
+                new Description(Optional.of("Very bitter")),
+                getTagSet("sweet"), new ExpiryDate("20-08-2010")),
+            new Ingredient(new Name("Ice cream"), new Quantity("92492021"),
+                new Description(Optional.of("Very nice")),
                 getTagSet("classmates"), new ExpiryDate("20-08-2010")),
-            new Ingredient(new Name("Roy Balakrishnan"), new Quantity("92624417"),
-                new Description(Optional.of("Blk 45 Aljunied Street 85, #11-31")),
-                getTagSet("colleagues"), new ExpiryDate("20-08-2010"))
+            new Ingredient(new Name("Red beans"), new Quantity("92624417"),
+                new Description(Optional.of("From NTUC")),
+                getTagSet("bean"), new ExpiryDate("20-08-2010"))
         };
     }
 
@@ -49,20 +49,23 @@ public class SampleDataUtil {
         return new Recipe[] {
             new Recipe(
                 new fridgy.model.recipe.Name("Burger"),
-                Set.of(new RecipeIngredient("Bread"), new RecipeIngredient("patty")),
+                Set.of(new BaseIngredient(new Name("Bread"), new Quantity("2")),
+                    new BaseIngredient(new Name("Patty"), new Quantity("100g"))
+                ),
                 Arrays.asList(new Step("B1"), new Step("B2")),
                 Optional.of("Desc B")
             ),
             new Recipe(
                     new fridgy.model.recipe.Name("Maggie"),
-                    Set.of(new RecipeIngredient("Maggie")),
+                    Set.of(new BaseIngredient(new Name("Maggie"), new Quantity("1"))),
                     Arrays.asList(new Step("M1"), new Step("M2")),
                     Optional.of("Desc M")
             ),
             new Recipe(
                     new fridgy.model.recipe.Name("Recipe"),
-                    Set.of(new RecipeIngredient("RecipeIngredient 1"),
-                            new RecipeIngredient("RecipeIngredient 2")),
+                    Set.of(new BaseIngredient(new Name("BaseIngredient 1"), new Quantity("1kg")),
+                        new BaseIngredient(new Name("BaseIngredient 2"), new Quantity("100ml"))
+                    ),
                     Arrays.asList(new Step("Step 1"), new Step("Step 2")),
                     Optional.empty()
             ),

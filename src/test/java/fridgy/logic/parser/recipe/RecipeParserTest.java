@@ -39,6 +39,7 @@ import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.recipe.NameContainsKeywordsPredicate;
 import fridgy.model.recipe.Recipe;
 import fridgy.testutil.RecipeBuilder;
+import fridgy.testutil.TypicalBaseIngredients;
 
 public class RecipeParserTest {
     private RecipeParser testParser = new RecipeParser();
@@ -62,7 +63,7 @@ public class RecipeParserTest {
     public void parse_addRecipeCommandValid_returnsRecipeCommand() {
         Recipe base = new RecipeBuilder()
                 .withName("monke")
-                .withIngredients(Arrays.asList("ingr1"))
+                .withIngredients(Arrays.asList(TypicalBaseIngredients.INGR1))
                 .withSteps(Arrays.asList("why tho"))
                 .withDescription("optional")
                 .build();
@@ -72,10 +73,10 @@ public class RecipeParserTest {
                 .withSteps(Arrays.asList("why tho", "but why tho"))
                 .build();
         Recipe repeatedIngr = new RecipeBuilder(base)
-                .withIngredients(Arrays.asList("ingr1", "ingr1"))
+                .withIngredients(Arrays.asList(TypicalBaseIngredients.INGR1, TypicalBaseIngredients.INGR1))
                 .build();
         Recipe multipleIngr = new RecipeBuilder(base)
-                .withIngredients(Arrays.asList("ingr1", "ingr2"))
+                .withIngredients(Arrays.asList(TypicalBaseIngredients.INGR1, TypicalBaseIngredients.INGR2))
                 .build();
 
         AddRecipeCommand allPrefPresentCommand = new AddRecipeCommand(allPrefPresent);

@@ -1,7 +1,13 @@
 {
   "recipes": [ {
     "name": "Recipe with invalid name field: Ha!ns Mu@ster",
-    "ingredients": ["A", "B"],
+    "ingredients" : [ {
+      "name" : "Patty",
+      "quantity" : "100.000 g"
+    }, {
+      "name" : "Bread",
+      "quantity" : "2"
+    } ],
     "steps": ["C", "D"],
     "description": "desc"
   } ]

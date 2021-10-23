@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import fridgy.model.base.Eq;
+import fridgy.model.ingredient.BaseIngredient;
 
 /**
  * Represents a recipe in the recipe book.
@@ -19,17 +20,17 @@ public class Recipe implements Eq {
     private final Name name;
 
     // Data Fields
-    private final Set<RecipeIngredient> recipeIngredients;
+    private final Set<BaseIngredient> baseIngredients;
     private final List<Step> steps;
     private final Optional<String> description;
 
     /**
      * Every field must be present and not null.
      */
-    public Recipe(Name name, Set<RecipeIngredient> recipeIngredients, List<Step> steps, Optional<String> description) {
-        requireAllNonNull(name, recipeIngredients, steps, description);
+    public Recipe(Name name, Set<BaseIngredient> baseIngredients, List<Step> steps, Optional<String> description) {
+        requireAllNonNull(name, baseIngredients, steps, description);
         this.name = name;
-        this.recipeIngredients = recipeIngredients;
+        this.baseIngredients = baseIngredients;
         this.steps = steps;
         this.description = description;
     }
@@ -38,8 +39,8 @@ public class Recipe implements Eq {
         return name;
     }
 
-    public Set<RecipeIngredient> getIngredients() {
-        return recipeIngredients;
+    public Set<BaseIngredient> getIngredients() {
+        return baseIngredients;
     }
 
     public List<Step> getSteps() {
@@ -89,14 +90,14 @@ public class Recipe implements Eq {
         }
         Recipe recipe = (Recipe) o;
         return name.equals(recipe.name)
-                && recipeIngredients.equals(recipe.recipeIngredients)
+                && baseIngredients.equals(recipe.baseIngredients)
                 && steps.equals(recipe.steps)
                 && description.equals(recipe.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, recipeIngredients, steps, description);
+        return Objects.hash(name, baseIngredients, steps, description);
     }
 
     @Override

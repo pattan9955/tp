@@ -34,7 +34,6 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private IngredientListPanel ingredientListPanel;
     private RecipeListPanel recipeListPanel;
-    private RecipeListPanel activeRecipePanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -125,8 +124,8 @@ public class MainWindow extends UiPart<Stage> {
         recipeListPanel = new RecipeListPanel(logic.getFilteredRecipeList(), false);
         recipeListPanelPlaceholder.getChildren().add(recipeListPanel.getRoot());
 
-        activeRecipePanel = new RecipeListPanel(logic.getActiveRecipe(), true);
-        displayWindowPlaceholder.getChildren().add(activeRecipePanel.getRoot());
+        ActiveItemPanel activeItemPanel = new ActiveItemPanel(logic.getActiveObservable());
+        displayWindowPlaceholder.getChildren().add(activeItemPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

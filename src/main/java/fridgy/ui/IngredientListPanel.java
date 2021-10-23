@@ -30,7 +30,7 @@ public class IngredientListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code RecipeIngredient} using a {@code IngredientCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code BaseIngredient} using a {@code IngredientCard}.
      */
     class IngredientListViewCell extends ListCell<Ingredient> {
         @Override

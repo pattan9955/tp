@@ -81,13 +81,13 @@ public class EditCommandParserTest {
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Ingredient} being edited,
         // parsing it together with a valid tag results in error
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
-                + "1" + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.TAG_DESC_HUSBAND + TAG_EMPTY,
+                + "1" + CommandTestUtil.TAG_DESC_SNACK + CommandTestUtil.TAG_DESC_VEGETABLE + TAG_EMPTY,
                 Tag.MESSAGE_CONSTRAINTS);
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
-                + "1" + CommandTestUtil.TAG_DESC_FRIEND + TAG_EMPTY + CommandTestUtil.TAG_DESC_HUSBAND,
+                + "1" + CommandTestUtil.TAG_DESC_SNACK + TAG_EMPTY + CommandTestUtil.TAG_DESC_VEGETABLE,
                 Tag.MESSAGE_CONSTRAINTS);
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
-                + "1" + TAG_EMPTY + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.TAG_DESC_HUSBAND,
+                + "1" + TAG_EMPTY + CommandTestUtil.TAG_DESC_SNACK + CommandTestUtil.TAG_DESC_VEGETABLE,
                 Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
@@ -101,15 +101,15 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = TypicalIndexes.INDEX_SECOND_INGREDIENT;
         String userInput = CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT + targetIndex.getOneBased()
-                + CommandTestUtil.QUANTITY_DESC_BASIL + CommandTestUtil.TAG_DESC_HUSBAND
+                + CommandTestUtil.QUANTITY_DESC_BASIL + CommandTestUtil.TAG_DESC_VEGETABLE
                 + CommandTestUtil.DESCRIPTION_DESC_ALMOND
-                + CommandTestUtil.NAME_DESC_ALMOND + CommandTestUtil.TAG_DESC_FRIEND;
+                + CommandTestUtil.NAME_DESC_ALMOND + CommandTestUtil.TAG_DESC_SNACK;
 
         EditCommand.EditIngredientDescriptor descriptor =
                 new EditIngredientDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_ALMOND)
                         .withQuantity(CommandTestUtil.VALID_QUANTITY_BASIL)
                         .withDescription(CommandTestUtil.VALID_DESCRIPTION_ALMOND)
-                        .withTags(CommandTestUtil.VALID_TAG_HUSBAND, CommandTestUtil.VALID_TAG_FRIEND).build();
+                        .withTags(CommandTestUtil.VALID_TAG_VEGETABLE, CommandTestUtil.VALID_TAG_SNACK).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
@@ -158,8 +158,8 @@ public class EditCommandParserTest {
 
         // tags
         userInput = CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT + targetIndex.getOneBased()
-                + CommandTestUtil.TAG_DESC_FRIEND;
-        descriptor = new EditIngredientDescriptorBuilder().withTags(CommandTestUtil.VALID_TAG_FRIEND).build();
+                + CommandTestUtil.TAG_DESC_SNACK;
+        descriptor = new EditIngredientDescriptorBuilder().withTags(CommandTestUtil.VALID_TAG_SNACK).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -169,18 +169,18 @@ public class EditCommandParserTest {
         Index targetIndex = TypicalIndexes.INDEX_FIRST_INGREDIENT;
         String userInput = CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT + targetIndex.getOneBased()
                 + CommandTestUtil.QUANTITY_DESC_ALMOND + CommandTestUtil.DESCRIPTION_DESC_ALMOND
-                + CommandTestUtil.TAG_DESC_FRIEND
+                + CommandTestUtil.TAG_DESC_SNACK
                 + CommandTestUtil.QUANTITY_DESC_ALMOND + CommandTestUtil.DESCRIPTION_DESC_ALMOND
-                + CommandTestUtil.TAG_DESC_FRIEND
+                + CommandTestUtil.TAG_DESC_SNACK
                 + CommandTestUtil.QUANTITY_DESC_BASIL + CommandTestUtil.DESCRIPTION_DESC_BASIL
-                + CommandTestUtil.TAG_DESC_HUSBAND;
+                + CommandTestUtil.TAG_DESC_VEGETABLE;
 
         EditCommand.EditIngredientDescriptor descriptor =
                 new EditIngredientDescriptorBuilder()
                         .withQuantity(CommandTestUtil.VALID_QUANTITY_BASIL)
                         .withDescription(CommandTestUtil.VALID_DESCRIPTION_BASIL)
-                        .withTags(CommandTestUtil.VALID_TAG_FRIEND,
-                                CommandTestUtil.VALID_TAG_HUSBAND).build();
+                        .withTags(CommandTestUtil.VALID_TAG_SNACK,
+                                CommandTestUtil.VALID_TAG_VEGETABLE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);

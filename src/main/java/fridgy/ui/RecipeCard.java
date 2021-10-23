@@ -57,10 +57,16 @@ public class RecipeCard extends UiPart<Region> {
 
         id.setText(displayedIndex + ". ");
         name.setText(recipeName);
+
+        // sort and iterate through the ingredients in recipe and add it to ingredients FlowPane as tags.
         recipe.getIngredients().stream()
-                .sorted(Comparator.comparing(ingredient -> ingredient.getName()))
+                .sorted(Comparator.comparing(ingredient -> ingredient.getName().toString()))
                 .forEach(ingredient -> ingredients.getChildren().add(
-                        new Label(UiUtil.truncateText(ingredient.getName(), INGREDIENT_CHAR_LIMIT)
+                        new Label(UiUtil.truncateText(
+                            ingredient.getName().toString()
+                            + " "
+                            + ingredient.getQuantity().toString(),
+                            INGREDIENT_CHAR_LIMIT)
                         )));
         description.setText("Description: " + recipeDescription);
         // This will automatically show / hide steps label

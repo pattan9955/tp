@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.ExpiryStatusUpdater;
@@ -51,6 +52,15 @@ public class IngredientBuilder {
         description = ingredientToCopy.getDescription();
         tags = new HashSet<>(ingredientToCopy.getTags());
         expiryDate = ingredientToCopy.getExpiryDate();
+    }
+
+    /**
+     * Initializes the IngredientBuilder for BaseIngredient
+     * with the data of {@code ingredientToCopy}.
+     */
+    public IngredientBuilder(BaseIngredient ingredientToCopy) {
+        name = ingredientToCopy.getName();
+        quantity = ingredientToCopy.getQuantity();
     }
 
     /**
@@ -102,6 +112,15 @@ public class IngredientBuilder {
     public Ingredient build() {
         return ExpiryStatusUpdater.updateExpiryTags(
                 new Ingredient(name, quantity, description, tags, expiryDate));
+    }
+
+    /**
+     * Build {@code BaseIngredient} with the specified parameters.
+     *
+     * @return the base ingredient built
+     */
+    public BaseIngredient buildBaseIngredient() {
+        return new BaseIngredient(name, quantity);
     }
 
 }
