@@ -10,6 +10,7 @@ import fridgy.model.Model;
 import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
+import fridgy.ui.Observable;
 import javafx.collections.ObservableList;
 
 /**
@@ -39,7 +40,7 @@ public interface Logic {
     ObservableList<Recipe> getFilteredRecipeList();
 
     /** Returns an active recipe */
-    ObservableList<Recipe> getActiveRecipe();
+    Observable getActiveObservable();
 
     /**
      * Returns the user prefs' Inventory file path.

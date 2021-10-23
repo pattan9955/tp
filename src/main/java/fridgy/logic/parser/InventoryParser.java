@@ -12,6 +12,7 @@ import fridgy.logic.commands.EditCommand;
 import fridgy.logic.commands.FindCommand;
 import fridgy.logic.commands.HelpCommand;
 import fridgy.logic.commands.ListCommand;
+import fridgy.logic.commands.ViewCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 
 /**
@@ -58,6 +59,9 @@ public class InventoryParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
 
         default:
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);

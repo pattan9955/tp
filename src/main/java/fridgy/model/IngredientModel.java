@@ -89,4 +89,10 @@ public interface IngredientModel {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredIngredientList(Predicate<Ingredient> predicate);
+
+    /**
+     * Puts a new Ingredient under an {@code Observable}.
+     * @param activeIngredient to be placed under an Observable
+     */
+    void setActiveIngredient(Ingredient activeIngredient);
 }
