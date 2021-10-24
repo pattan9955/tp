@@ -4,6 +4,8 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
+class "UniqueDataList <<Ingredient>>" as UniqueIngredientList
+
 Inventory *-right-> "1" UniqueIngredientList
 Inventory *-right-> "1" UniqueTagList
 UniqueTagList -[hidden]down- UniqueIngredientList
