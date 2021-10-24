@@ -11,6 +11,9 @@ import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.RecipeModel;
 import fridgy.model.recipe.Recipe;
 
+/**
+ * Views a specific Recipe in the RecipeBook in greater detail.
+ */
 public class ViewRecipeCommand extends RecipeCommand {
 
     public static final String COMMAND_WORD = "view";

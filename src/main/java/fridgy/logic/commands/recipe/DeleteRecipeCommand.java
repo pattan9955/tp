@@ -11,6 +11,9 @@ import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.RecipeModel;
 import fridgy.model.recipe.Recipe;
 
+/**
+ * Deletes a Recipe from the RecipeBook.
+ */
 public class DeleteRecipeCommand extends RecipeCommand {
 
     public static final String COMMAND_WORD = "delete";

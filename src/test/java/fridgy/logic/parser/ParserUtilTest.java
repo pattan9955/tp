@@ -1,11 +1,13 @@
 package fridgy.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -13,6 +15,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import fridgy.logic.parser.exceptions.ParseException;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
@@ -169,5 +172,29 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseIngredients_nullInput_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseIngredients(null));
+    }
+
+    @Test
+    public void parseIngredients_listOfEmptyStrings_throwsParseException() {
+        assertThrows(ParseException.class, ()
+            -> ParserUtil.parseIngredients(Arrays.asList("")));
+    }
+
+    @Test
+    public void parseIngredients_listOfValidIngredients_returnsCorrectIngredientSet() {
+        List<String> inputIngredients = Arrays.asList("ingr1 100mg", "ingr1 100mg", "ingr2 200mg", "");
+        Set<BaseIngredient> expectedIngr = Set.of(
+                new BaseIngredient(new Name("ingr1"), new Quantity("100mg")),
+                new BaseIngredient(new Name("ingr2"), new Quantity("200mg")));
+        try {
+            assertEquals(ParserUtil.parseIngredients(inputIngredients), expectedIngr);
+        } catch (ParseException pe) {
+            Assertions.fail("ParseException thrown!");
+        }
     }
 }
