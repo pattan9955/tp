@@ -22,9 +22,12 @@ For more information on the Fridgy application, refer to the [_User Guide_](User
 
 ## 1.1 **About Fridgy**
 
-Fridgy is a **desktop app for managing an Inventory of food as well as a list of recipes, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Fridgy can get your fridge Inventory and recipe sorted out faster than traditional GUI apps.
+Fridgy is a **food and recipe management system**, which aims to help users manage their ingredients and recipes easily.
+It warns you about expiring ingredients, and automatically deducts your ingredients when you execute recipes.
 
-Fridgy helps to manage and track your ingredients in the fridge. It can warn you about expiring ingredients and track your recipes in the Recipe Book. There will be more functionalities in the future, such as automatic deduction of ingredients after executing a recipe.  
+Fridgy is a _desktop app_, optimized for use via a Command Line Interface (CLI), while having an interactive Graphical User Interface (GUI) to display ingredients and recipes. 
+If you can type fast, Fridgy can get your fridge Inventory and recipe sorted out faster than traditional GUI apps.
+ 
 
 ## 1.2 **Setting up, Getting started**
 
@@ -277,15 +280,17 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 | [UC03](#UC03)   | Edit ingredient                  |
 | [UC04](#UC04)   | Find ingredients                 |
 | [UC05](#UC05)   | List ingredients                 |
-| [UC06](#UC06)   | Add recipe                       |
-| [UC07](#UC07)   | Delete recipe                    |
-| [UC08](#UC08)   | Edit recipe                      |
-| [UC09](#UC09)   | Find recipes                     |
-| [UC10](#UC10)   | List recipes                     |
-| [UC11](#UC11)   | Execute recipe                   |
+| [UC06](#UC06)   | View ingredient                  |
+| [UC07](#UC07)   | Add recipe                       |
+| [UC08](#UC08)   | Delete recipe                    |
+| [UC09](#UC09)   | Edit recipe                      |
+| [UC10](#UC010)  | Find recipes                     |
+| [UC11](#UC11)   | List recipes                     |
+| [UC12](#UC12)   | View recipe                      |
+| [UC13](#UC13)   | Execute recipe                   |
 
 
-### 5.3.1 Ingredient
+### 5.3.1 Ingredient Use Cases
 
 <a name="UC01"></a>
 **Use case: UC01 - Add ingredient**
@@ -409,10 +414,30 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 <br>
 
-### 5.3.2 Recipe
-
 <a name="UC06"></a>
-**Use case: UC06 - Add Recipe**
+**Use case: UC06 - View ingredient**
+
+**MSS**
+
+1. User requests to view an ingredient by specifying its index.
+2. Fridgy displays detailed information of the ingredient.
+3. Fridgy displays a confirmation message for the ingredient in view.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format or index.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+
+<br>
+
+### 5.3.2 Recipe Use Cases
+
+<a name="UC07"></a>
+**Use case: UC07 - Add Recipe**
 
 **MSS**
 
@@ -436,8 +461,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 <br>
 
-<a name="UC07"></a>
-**Use case: UC07 - Delete Recipe**
+<a name="UC08"></a>
+**Use case: UC08 - Delete Recipe**
 
 **MSS**
 
@@ -456,8 +481,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 <br>
 
-<a name="UC08"></a>
-**Use case: UC08 - Edit Recipe**
+<a name="UC09"></a>
+**Use case: UC09 - Edit Recipe**
 
 **MSS**
 
@@ -481,8 +506,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 <br>
 
-<a name="UC09"></a>
-**Use case: UC09 - Find Recipes**
+<a name="UC010"></a>
+**Use case: UC10 - Find Recipes**
 
 **MSS**
 
@@ -509,8 +534,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 <br>
 
-<a name="UC10"></a>
-**Use case: UC10 - List recipes**
+<a name="UC11"></a>
+**Use case: UC11 - List recipes**
 
 **MSS**
 
@@ -528,8 +553,26 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 <br>
 
-<a name="UC11"></a>
-**Use case: UC11 - Execute Recipe**
+<a name="UC12"></a>
+**Use case: UC12 - View ingredient**
+
+**MSS**
+
+1. User requests to view a recipe by specifying its index.
+2. Fridgy displays detailed information of the recipe.
+3. Fridgy displays a confirmation message for the recipe in view.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid input format or index.
+    * 1a1. Fridgy displays an error message.
+
+      Use case ends.
+
+<a name="UC13"></a>
+**Use case: UC13 - Execute Recipe**
 
 **MSS**
 
@@ -559,8 +602,6 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be able to function without internet access.
 5. Should be able to perform all actions from the command line.
-
-*{More to be added}*
 
 <br>
 
