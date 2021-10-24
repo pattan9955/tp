@@ -21,6 +21,9 @@ import fridgy.model.recipe.Name;
 import fridgy.model.recipe.Recipe;
 import fridgy.model.recipe.Step;
 
+/**
+ * Edits a Recipe in the RecipeBook.
+ */
 public class EditRecipeCommand extends RecipeCommand {
 
     public static final String COMMAND_WORD = "edit";

@@ -18,6 +18,9 @@ import fridgy.logic.parser.ArgumentTokenizer;
 import fridgy.logic.parser.ParserUtil;
 import fridgy.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new EditRecipeCommand object.
+ */
 public class EditRecipeCommandParser implements RecipeCommandParser<EditRecipeCommand> {
 
     private static final Pattern RECIPE_EDIT_COMMAND_ARGUMENT_FORMAT = Pattern

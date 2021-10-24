@@ -7,6 +7,9 @@ import fridgy.logic.commands.CommandResult;
 import fridgy.model.RecipeModel;
 import fridgy.model.recipe.NameContainsKeywordsPredicate;
 
+/**
+ * Finds a Recipe by name in the RecipeBook.
+ */
 public class FindRecipeCommand extends RecipeCommand {
     public static final String COMMAND_WORD = "find";
     public static final String RECIPE_KEYWORD = "recipe";

@@ -25,6 +25,9 @@ import fridgy.model.recipe.Name;
 import fridgy.model.recipe.Recipe;
 import fridgy.model.recipe.Step;
 
+/**
+ * Parses input arguments and creates a new AddRecipeCommand object.
+ */
 public class AddRecipeCommandParser implements RecipeCommandParser<AddRecipeCommand> {
 
     private static final Pattern ADD_RECIPE_COMMAND_ARGUMENT_FORMAT = Pattern
