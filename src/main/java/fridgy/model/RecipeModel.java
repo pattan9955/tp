@@ -69,8 +69,10 @@ public interface RecipeModel {
     /** Returns an unmodifiable view of the filtered ingredient list */
     ObservableList<Ingredient> getFilteredIngredientList();
 
-    ObservableList<Recipe> getActiveRecipe();
-    void setActiveRecipe(Recipe target);
+    /** Sets a new recipe as active under an {@code Observable}.
+     * @param activeRecipe to be placed under an Observable
+     */
+    void setActiveRecipe(Recipe activeRecipe);
 
     /**
      * Updates the filter of the filtered recipe list to filter by the given {@code predicate}.

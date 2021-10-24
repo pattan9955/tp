@@ -8,6 +8,7 @@ import fridgy.logic.commands.HelpCommand;
 import fridgy.logic.commands.recipe.AddRecipeCommand;
 import fridgy.logic.commands.recipe.CookRecipeCommand;
 import fridgy.logic.commands.recipe.DeleteRecipeCommand;
+import fridgy.logic.commands.recipe.EditRecipeCommand;
 import fridgy.logic.commands.recipe.FindRecipeCommand;
 import fridgy.logic.commands.recipe.ListRecipeCommand;
 import fridgy.logic.commands.recipe.RecipeCommand;
@@ -53,6 +54,8 @@ public class RecipeParser {
             return new ViewRecipeCommandParser().parse(arguments);
         case CookRecipeCommand.COMMAND_WORD:
             return new CookRecipeCommandParser().parse(arguments);
+        case EditRecipeCommand.COMMAND_WORD:
+            return new EditRecipeCommandParser().parse(arguments);
         default:
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);
         }

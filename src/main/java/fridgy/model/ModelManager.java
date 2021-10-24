@@ -15,6 +15,7 @@ import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
+import fridgy.ui.Observable;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
@@ -31,7 +32,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Ingredient> filteredIngredients;
     private final FilteredList<Recipe> filteredRecipes;
-    private FilteredList<Recipe> activeRecipe;
+    private final Observable activeObservable;
 
     /**
      * Initializes a ModelManager with the given inventory and userPrefs.
@@ -54,10 +55,8 @@ public class ModelManager implements Model {
         filteredIngredients = new FilteredList<>(this.inventory.getList());
         filteredRecipes = new FilteredList<>(this.recipeBook.getList());
 
-        // have to use some type of observable that can change to make UI auto update
-        activeRecipe = new FilteredList<>(this.recipeBook.getList());
-        // This feels like a hackish way to achieve what we want.
-        activeRecipe.setPredicate(unused -> false);
+        // observable that can change to make UI auto update
+        activeObservable = new Observable();
     }
 
     public ModelManager() {
@@ -172,6 +171,15 @@ public class ModelManager implements Model {
         return inventory;
     }
 
+    /** Changes the active {@code Ingredient} under the {@code Observable}. */
+    @Override
+    public void setActiveIngredient(Ingredient ingredient) {
+        requireNonNull(ingredient);
+        if (inventory.has(ingredient)) {
+            activeObservable.change(ingredient);
+        }
+    }
+
     //=========== RecipeBook ================================================================================
 
     @Override
@@ -184,16 +192,12 @@ public class ModelManager implements Model {
         return recipeBook;
     }
 
-    @Override
-    public ObservableList<Recipe> getActiveRecipe() {
-        return activeRecipe;
-    }
-
+    /** Changes the active {@code Recipe} under the {@code Observable}. */
     @Override
     public void setActiveRecipe(Recipe recipe) {
         requireNonNull(recipe);
         if (recipeBook.has(recipe)) {
-            activeRecipe.setPredicate(x -> x.equals(recipe));
+            activeObservable.change(recipe);
         }
     }
 
@@ -267,6 +271,13 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredIngredients.equals(other.filteredIngredients)
                 && filteredRecipes.equals(other.filteredRecipes);
+    }
+
+    //=========== Observable =============================================================
+
+    @Override
+    public Observable getActiveObservable() {
+        return activeObservable;
     }
 
 }

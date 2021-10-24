@@ -10,14 +10,13 @@ import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.CommandExecutor;
 import fridgy.logic.parser.FridgyParser;
-import fridgy.logic.parser.InventoryParser;
 import fridgy.logic.parser.exceptions.ParseException;
-import fridgy.logic.parser.recipe.RecipeParser;
 import fridgy.model.Model;
 import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import fridgy.storage.Storage;
+import fridgy.ui.Observable;
 import javafx.collections.ObservableList;
 
 /**
@@ -30,8 +29,6 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final FridgyParser fridgyParser;
-    private final InventoryParser inventoryParser;
-    private final RecipeParser recipeBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -40,8 +37,6 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         fridgyParser = new FridgyParser();
-        inventoryParser = new InventoryParser();
-        recipeBookParser = new RecipeParser();
     }
 
     @Override
@@ -77,8 +72,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Recipe> getActiveRecipe() {
-        return model.getActiveRecipe();
+    public Observable getActiveObservable() {
+        return model.getActiveObservable();
     }
 
     @Override

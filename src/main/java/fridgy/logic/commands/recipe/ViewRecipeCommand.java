@@ -11,6 +11,9 @@ import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.RecipeModel;
 import fridgy.model.recipe.Recipe;
 
+/**
+ * Views a specific Recipe in the RecipeBook in greater detail.
+ */
 public class ViewRecipeCommand extends RecipeCommand {
 
     public static final String COMMAND_WORD = "view";
@@ -23,7 +26,7 @@ public class ViewRecipeCommand extends RecipeCommand {
         + RECIPE_KEYWORD
         + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Recipe viewing: %1$s";
+    public static final String MESSAGE_SUCCESS = "Viewing recipe:\n%1$s";
 
     private final Index target;
 
