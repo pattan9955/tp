@@ -144,7 +144,12 @@ public class ParserUtil {
         requireNonNull(ingredients);
         final Set<BaseIngredient> ingredientSet = new HashSet<>();
         for (String ingredient : ingredients) {
-            ingredientSet.add(parseBaseIngredient(ingredient));
+            if (!ingredient.equals("")) {
+                ingredientSet.add(parseBaseIngredient(ingredient));
+            }
+        }
+        if (ingredientSet.isEmpty()) {
+            throw new ParseException(BaseIngredient.BASE_INGREDIENT_CONSTRAINTS);
         }
         return ingredientSet;
     }

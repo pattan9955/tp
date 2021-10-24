@@ -40,7 +40,7 @@ public class EditCommand extends Command {
             + "[" + CliSyntax.PREFIX_EXPIRY + "EXPIRY DATE] "
             + "[" + CliSyntax.PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + CliSyntax.PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " " + INGREDIENT_KEYWORD + " 1 "
             + CliSyntax.PREFIX_QUANTITY + "91234567 ";
 
     public static final String MESSAGE_EDIT_INGREDIENT_SUCCESS = "Edited Ingredient:\n%1$s";
