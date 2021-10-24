@@ -198,8 +198,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean deductIngredients(Set<BaseIngredient> ingrToDeduct) {
-        return inventory.deductIngredients(ingrToDeduct);
+    public boolean deductIngredients(Set<BaseIngredient> ingredients) {
+        return inventory.deductIngredients(ingredients);
     }
 
     //=========== Filtered Ingredient List Accessors =============================================================

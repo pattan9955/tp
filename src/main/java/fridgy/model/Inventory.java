@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import fridgy.model.base.Database;
 import fridgy.model.base.ReadOnlyDatabase;
@@ -21,6 +22,7 @@ import javafx.collections.ObservableList;
  * Duplicates are not allowed (by .isSameIngredient comparison)
  */
 public class Inventory extends Database<Ingredient> {
+
     /**
      * Creates a default Inventory with default comparator.
      */
@@ -56,6 +58,7 @@ public class Inventory extends Database<Ingredient> {
      * @return the boolean that indicates the deduction is successful
      */
     public boolean deductIngredients(Set<BaseIngredient> baseIngredients) {
+        requireNonNull(baseIngredients);
         for (BaseIngredient ingr : baseIngredients) {
             if (!isDeductible(ingr)) {
                 return false;
@@ -67,11 +70,11 @@ public class Inventory extends Database<Ingredient> {
                 if (currIngr.getExpiryDate().isExpired()) {
                     continue;
                 }
-                if (!matchBaseIngredients(currIngr, ingrToDeduct)) {
+                if (!currIngr.isComparable(ingrToDeduct)) {
                     continue;
                 }
-                String units = getUnitsFromIngr(currIngr);
-                Double remainingQty = compareIngrQuantitiesOfSameUnit(currIngr, ingrToDeduct);
+                String units = currIngr.getQuantity().getUnits();
+                Double remainingQty = currIngr.getQuantityDiff(ingrToDeduct);
                 if (remainingQty > 0) {
                     Quantity newQty = new Quantity(remainingQty + units);
                     Ingredient ingrWithNewQty = new Ingredient(currIngr.getName(), newQty, currIngr.getDescription(),
@@ -99,83 +102,21 @@ public class Inventory extends Database<Ingredient> {
      * @return boolean that indicates if the full quantity of baseIngredient is deductible from the inventory
      */
     private boolean isDeductible(BaseIngredient baseIngredient) {
+        requireNonNull(baseIngredient);
         ObservableList<Ingredient> inventory = getList();
-        for (Ingredient currIngr : inventory) {
-            String units = getUnitsFromIngr(currIngr);
-            if (currIngr.getExpiryDate().isExpired()) {
-                continue;
-            }
-            if (!matchBaseIngredients(currIngr, baseIngredient)) {
-                continue;
-            }
-            double comparedResult = compareIngrQuantitiesOfSameUnit(currIngr, baseIngredient);
-            if (comparedResult >= 0) {
+        List<Ingredient> deductibleIngredients = inventory.stream()
+                .filter(x -> !x.getExpiryDate().isExpired() && baseIngredient.isComparable(x))
+                .collect(Collectors.toList());
+
+        double sum = 0;
+        double minQty = baseIngredient.getQuantity().getValue();
+        for (Ingredient currIngr : deductibleIngredients) {
+            sum += currIngr.getQuantity().getValue();
+            if (sum >= minQty) {
                 return true;
-            } else {
-                Quantity newQty = new Quantity(Math.abs(comparedResult) + units);
-                baseIngredient = new BaseIngredient(currIngr.getName(), newQty);
             }
         }
         return false;
     }
 
-    /**
-     * Matches 2 {@code BaseIngredient} to see if they match in {@code Name} and {@code Quantity} units.
-     * {@code Name} is matched ignoring case.
-     * Returns true if they are matched, false if they do not match.
-     *
-     * @param ingredient1 to be compared
-     * @param ingredient2 to be compared
-     * @return boolean that indicates if the two ingredients have the same name and quantity units
-     */
-    private boolean matchBaseIngredients(BaseIngredient ingredient1, BaseIngredient ingredient2) {
-        requireNonNull(ingredient1);
-        requireNonNull(ingredient2);
-        // check name of ingredients ignoring case
-        if (!ingredient1.getName().toString().equalsIgnoreCase(ingredient2.getName().toString())) {
-            return false;
-        }
-        // check units of quantity
-        String ingr1Units = getUnitsFromIngr(ingredient1);
-        String ingr2Units = getUnitsFromIngr(ingredient2);
-        return ingr1Units.equals(ingr2Units);
-    }
-
-    /**
-     * Deducts quantity of ingredient2 from ingredient1.
-     * Returns a {@code double}, regardless of units of {@code Quantity}.
-     *
-     * @param ingredient1
-     * @param ingredient2
-     * @return double (quantity of ingredient1 - quantity of ingredient2)
-     */
-    private double compareIngrQuantitiesOfSameUnit(BaseIngredient ingredient1, BaseIngredient ingredient2) {
-        requireNonNull(ingredient1);
-        requireNonNull(ingredient2);
-        Double qty1 = getQtyValueFromIngr(ingredient1);
-        Double qty2 = getQtyValueFromIngr(ingredient2);
-        return qty1 - qty2;
-
-    }
-
-    /**
-     * Gets units of the quantity of a {@code BaseIngredient}
-     * @param ingr ingredient to be checked
-     * @return String representation of the units
-     */
-    private String getUnitsFromIngr(BaseIngredient ingr) {
-        requireNonNull(ingr);
-        String[] valueAndUnit = ingr.getQuantity().toString().split("\\h");
-        return valueAndUnit.length <= 1 ? "" : valueAndUnit[1];
-    }
-
-    /**
-     * Gets units of the quantity of a {@code BaseIngredient}
-     * @param ingr ingredient to be checked
-     * @return String representation of the units
-     */
-    private Double getQtyValueFromIngr(BaseIngredient ingr) {
-        requireNonNull(ingr);
-        return Double.parseDouble(ingr.getQuantity().toString().split("\\h")[0]);
-    }
 }

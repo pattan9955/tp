@@ -19,6 +19,7 @@ import fridgy.model.ModelManager;
 import fridgy.model.RecipeBook;
 import fridgy.model.RecipeModel;
 import fridgy.model.UserPrefs;
+import fridgy.model.ingredient.Quantity;
 import fridgy.testutil.IngredientBuilder;
 
 public class CookRecipeCommandTest {
@@ -81,6 +82,8 @@ public class CookRecipeCommandTest {
         CookRecipeCommand cookRecipeCommand = new CookRecipeCommand(Index.fromOneBased(1));
         CommandException e = assertThrows(CommandException.class, () -> cookRecipeCommand.execute(modelManager));
         assertEquals(String.format(NOT_ENOUGH_INGR, modelManager.getRecipeBook().getList().get(0)), e.getMessage());
+        assertEquals(CHICKEN.getQuantity(), modelManager.getInventory().getList().get(0).getQuantity());
+        assertEquals(FLOUR.getQuantity(), modelManager.getInventory().getList().get(1).getQuantity());
     }
 
     @Test
@@ -97,11 +100,14 @@ public class CookRecipeCommandTest {
         CookRecipeCommand cookRecipeCommand = new CookRecipeCommand((Index.fromOneBased(1)));
         CommandException e = assertThrows(CommandException.class, () -> cookRecipeCommand.execute(modelManager));
         assertEquals(String.format(NOT_ENOUGH_INGR, modelManager.getRecipeBook().getList().get(0)), e.getMessage());
+        assertEquals(CHICKEN.getQuantity(), modelManager.getInventory().getList().get(0).getQuantity());
+        assertEquals(FLOUR.getQuantity(), modelManager.getInventory().getList().get(1).getQuantity());
+        assertEquals(new Quantity("200g"), modelManager.getInventory().getList().get(2).getQuantity());
     }
 
 
     @Test
-    public void execute_expiredRequiredIngredient_commandExcpetionThrown() {
+    public void execute_expiredRequiredIngredient_commandExceptionThrown() {
         // Adding an expired ingredient with appropriate quantity and name, but expired
         modelManager.add(new IngredientBuilder().withName("rice").withQuantity("500g").build());
         // Others ingredients
@@ -112,6 +118,10 @@ public class CookRecipeCommandTest {
         CookRecipeCommand cookRecipeCommand = new CookRecipeCommand((Index.fromOneBased(1)));
         CommandException e = assertThrows(CommandException.class, () -> cookRecipeCommand.execute(modelManager));
         assertEquals(String.format(NOT_ENOUGH_INGR, modelManager.getRecipeBook().getList().get(0)), e.getMessage());
+        // expired ingredient should be first
+        assertEquals(new Quantity("500g"), modelManager.getInventory().getList().get(0).getQuantity());
+        assertEquals(CHICKEN.getQuantity(), modelManager.getInventory().getList().get(1).getQuantity());
+        assertEquals(FLOUR.getQuantity(), modelManager.getInventory().getList().get(2).getQuantity());
     }
 
     @Test
@@ -124,7 +134,7 @@ public class CookRecipeCommandTest {
 
     @Test
     public void execute_successfulDeduction_success() {
-        modelManager.add(new IngredientBuilder().withName("rice")
+        modelManager.add(new IngredientBuilder().withName("Rice")
                 .withQuantity("500g").withExpiryDate("24-10-2090").build());
         modelManager.add(CHICKEN);
         modelManager.add(FLOUR);
@@ -138,5 +148,8 @@ public class CookRecipeCommandTest {
         }
         // Rice should be completely used up and removed
         assertEquals(2, modelManager.getInventory().getList().size());
+        // Chicken and Flour should remain unused
+        assertEquals(CHICKEN.getQuantity(), modelManager.getInventory().getList().get(0).getQuantity());
+        assertEquals(FLOUR.getQuantity(), modelManager.getInventory().getList().get(1).getQuantity());
     }
 }

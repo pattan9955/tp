@@ -32,6 +32,9 @@ public class ExpiryDateTest {
         assertFalse(ExpiryDate.isValidExpiry(" ")); // spaces only
         assertFalse(ExpiryDate.isValidExpiry("^.][")); // only non-alphanumeric characters
         assertFalse(ExpiryDate.isValidExpiry("24/10/2021")); // Wrong format, using "/" instead of "-"
+        assertFalse(ExpiryDate.isValidExpiry("99-05-2021")); // excessive number of days
+        assertFalse(ExpiryDate.isValidExpiry("05-99-2021")); // excessive number of months
+
 
         // valid expiry date
         assertTrue(ExpiryDate.isValidExpiry("24-10-2021")); // correct date format

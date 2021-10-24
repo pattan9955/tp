@@ -10,6 +10,9 @@ import fridgy.logic.commands.recipe.CookRecipeCommand;
 import fridgy.logic.parser.ParserUtil;
 import fridgy.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new CookRecipeCommand object
+ */
 public class CookRecipeCommandParser implements RecipeCommandParser<CookRecipeCommand> {
 
     private static final Pattern COOK_RECIPE_COMMAND_ARGUMENT_FORMAT = Pattern

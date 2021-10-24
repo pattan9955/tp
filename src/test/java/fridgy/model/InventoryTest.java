@@ -119,15 +119,24 @@ public class InventoryTest {
         friedChickenIngr.add(new BaseIngredient(new Name("chicken"), CHICKEN.getQuantity()));
         friedChickenIngr.add(new BaseIngredient(new Name("flour"), FLOUR.getQuantity()));
         assertTrue(ingrInventory.deductIngredients(friedChickenIngr));
+        // chicken and flour should be used up and removed, only apple and almond will be left
+        assertEquals(ALMOND.getQuantity(), ingrInventory.getList().get(0).getQuantity());
+        assertEquals(APPLE.getQuantity(), ingrInventory.getList().get(1).getQuantity());
     }
 
     @Test
-    public void deductIngredients_differentCaseNameofIngr_returnsTrue() {
+    public void deductIngredients_differentCaseNameofIngr_returnsFalse() {
         ingrInventory.setItems(inventoryIngrList);
         Set<BaseIngredient> friedChickenIngr = new HashSet<>();
+        // names are case-sensitive
         friedChickenIngr.add(new BaseIngredient(new Name("cHiCKen"), new Quantity("500g")));
         friedChickenIngr.add(new BaseIngredient(new Name("FlOuR"), new Quantity("500g")));
-        assertTrue(ingrInventory.deductIngredients(friedChickenIngr));
+        assertFalse(ingrInventory.deductIngredients(friedChickenIngr));
+        // chicken and flour should be used up and removed, only apple and almond will be left
+        assertEquals(ALMOND.getQuantity(), ingrInventory.getList().get(0).getQuantity());
+        assertEquals(APPLE.getQuantity(), ingrInventory.getList().get(1).getQuantity());
+        assertEquals(CHICKEN.getQuantity(), ingrInventory.getList().get(2).getQuantity());
+        assertEquals(FLOUR.getQuantity(), ingrInventory.getList().get(3).getQuantity());
     }
 
     @Test
@@ -137,6 +146,13 @@ public class InventoryTest {
         friedChickenIngr.add(new BaseIngredient(new Name("chicken"), new Quantity("20g")));
         friedChickenIngr.add(new BaseIngredient(new Name("flour"), new Quantity("20g")));
         assertTrue(ingrInventory.deductIngredients(friedChickenIngr));
+        // almond, apple, chicken and flour should be left
+        assertEquals(ALMOND.getQuantity(), ingrInventory.getList().get(0).getQuantity());
+        assertEquals(APPLE.getQuantity(), ingrInventory.getList().get(1).getQuantity());
+        // chicken should be left with 2kg - 20g = 1980g
+        // flour should be left with 500g - 20g = 480g
+        assertEquals(new Quantity("1980 g"), ingrInventory.getList().get(2).getQuantity());
+        assertEquals(new Quantity("480 g"), ingrInventory.getList().get(3).getQuantity());
     }
 
     @Test
@@ -146,6 +162,11 @@ public class InventoryTest {
         friedChickenIngr.add(new BaseIngredient(new Name("chicken"), new Quantity("300kg")));
         friedChickenIngr.add(new BaseIngredient(new Name("flour"), new Quantity("300kg")));
         assertFalse(ingrInventory.deductIngredients(friedChickenIngr));
+        // nothing should be deducted, since there is insufficient quantities in inventory
+        assertEquals(ALMOND.getQuantity(), ingrInventory.getList().get(0).getQuantity());
+        assertEquals(APPLE.getQuantity(), ingrInventory.getList().get(1).getQuantity());
+        assertEquals(CHICKEN.getQuantity(), ingrInventory.getList().get(2).getQuantity());
+        assertEquals(FLOUR.getQuantity(), ingrInventory.getList().get(3).getQuantity());
     }
 
     @Test
@@ -155,5 +176,10 @@ public class InventoryTest {
         fruitAndNutsIngr.add(new BaseIngredient(new Name("apple"), new Quantity("1")));
         fruitAndNutsIngr.add(new BaseIngredient(new Name("almond"), new Quantity("1")));
         assertFalse(ingrInventory.deductIngredients(fruitAndNutsIngr));
+        // deductIngredients does not allow deduction of expired ingredients, so nothing should be deducted
+        assertEquals(ALMOND.getQuantity(), ingrInventory.getList().get(0).getQuantity());
+        assertEquals(APPLE.getQuantity(), ingrInventory.getList().get(1).getQuantity());
+        assertEquals(CHICKEN.getQuantity(), ingrInventory.getList().get(2).getQuantity());
+        assertEquals(FLOUR.getQuantity(), ingrInventory.getList().get(3).getQuantity());
     }
 }

@@ -13,6 +13,10 @@ import fridgy.model.RecipeModel;
 import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.recipe.Recipe;
 
+
+/**
+ * Cooks a recipe and deducts the required quantity from the fridge inventory
+ */
 public class CookRecipeCommand extends RecipeCommand {
 
     public static final String COMMAND_WORD = "cook";
