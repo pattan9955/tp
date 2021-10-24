@@ -10,6 +10,9 @@ import fridgy.logic.commands.recipe.DeleteRecipeCommand;
 import fridgy.logic.parser.ParserUtil;
 import fridgy.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new DeleteRecipeCommand object.
+ */
 public class DeleteRecipeCommandParser implements RecipeCommandParser<DeleteRecipeCommand> {
 
     private static final Pattern DELETE_RECIPE_COMMAND_ARGUMENT_FORMAT = Pattern

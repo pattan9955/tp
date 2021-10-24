@@ -11,6 +11,8 @@ import fridgy.model.base.Eq;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class BaseIngredient implements Eq {
+    public static final String BASE_INGREDIENT_CONSTRAINTS = "Ingredient field cannot be empty.";
+
     // Identity fields
     private final Name name;
     private final Quantity quantity;
