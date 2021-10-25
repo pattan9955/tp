@@ -105,9 +105,10 @@ public class Recipe implements Eq {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName());
         Optional<String> description = getDescription();
-        if (description.isPresent()) {
+
+        if (!description.equals(Optional.of(""))) {
             builder.append("; Description: ")
-                    .append(getDescription().orElse(""));
+                    .append(description.orElse(""));
         }
         builder.append("; Ingredients used: ")
                 .append(getIngredients())

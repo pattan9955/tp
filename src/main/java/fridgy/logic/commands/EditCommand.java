@@ -31,17 +31,16 @@ public class EditCommand extends Command {
     public static final String INGREDIENT_KEYWORD = "ingredient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " "
-            + INGREDIENT_KEYWORD + ": Edits the details of the ingredient identified "
-            + "by the index number used in the displayed ingredient list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + CliSyntax.PREFIX_NAME + "NAME] "
-            + "[" + CliSyntax.PREFIX_QUANTITY + "QUANTITY] "
-            + "[" + CliSyntax.PREFIX_EXPIRY + "EXPIRY DATE] "
-            + "[" + CliSyntax.PREFIX_DESCRIPTION + "DESCRIPTION] "
-            + "[" + CliSyntax.PREFIX_TAG + "TAG]...\n"
+            + INGREDIENT_KEYWORD + ": Edits details of the ingredient. "
+            + "Existing values are replaced with input values.\n"
+            + "Parameters: INDEX "
+            + "[" + CliSyntax.PREFIX_NAME + " NAME] "
+            + "[" + CliSyntax.PREFIX_QUANTITY + " QUANTITY] "
+            + "[" + CliSyntax.PREFIX_EXPIRY + " EXPIRY DATE] "
+            + "[" + CliSyntax.PREFIX_DESCRIPTION + " DESCRIPTION] "
+            + "[" + CliSyntax.PREFIX_TAG + " TAG]...\n"
             + "Example: " + COMMAND_WORD + " " + INGREDIENT_KEYWORD + " 1 "
-            + CliSyntax.PREFIX_QUANTITY + "91234567 ";
+            + CliSyntax.PREFIX_QUANTITY + " 69";
 
     public static final String MESSAGE_EDIT_INGREDIENT_SUCCESS = "Edited Ingredient:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
