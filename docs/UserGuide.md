@@ -6,7 +6,7 @@ title: Fridgy – User Guide
 By: `Team Fridgy`
 
 <div id="cover-image">
-  <img width=60% id="logo" src="images/fridge.png"/>
+  <img width=40% id="logo" src="images/fridge.png"/>
 </div>
 
 * Table of Contents
