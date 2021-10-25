@@ -1,44 +1,74 @@
 ---
 layout: page
-title: User Guide
+title: Fridgy – User Guide
 ---
+
+By: `Team Fridgy`
+
+<div id="cover-image">
+  <img width=60% id="logo" src="images/fridge.png"/>
+</div>
+
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-# Introduction
+# 1. Introduction
 
-Fridgy is a **desktop app for managing an Inventory of food as well as a RecipeBook of recipes**, optimized for use via 
-a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type 
-fast, Fridgy can get your fridge Inventory and recipe sorted out faster than traditional GUI apps.
+Fridgy is a **food and recipe management system**, for users to manage their ingredients and recipes easily.
 
-Fridgy was made to help people living in shared spaces manage their fridges better, since it can get very messy and 
-difficult to keep track of several items from different people. It has the ability to track your ingredients in the
-fridge as well as your recipes. It can help to flag out expiring and expired ingredients in your fridge. Moreover, it 
-is equipped with features to improve users' convenience, such as automatic deduction of ingredients after cooking a 
-recipe.
+Fridgy helps you track your ingredients and recipes. It also warns you about expiring and expired ingredients, and automatically deducts your ingredients when you execute recipes.
+
+Fridgy is made for people living in shared spaces, since fridges can get *very messy* and difficult to keep track of!
+
+Fridgy is a *_desktop app_*, optimized for use via a Command Line Interface (CLI), while having an interactive Graphical User Interface (GUI) to display ingredients and recipes! If you can type fast, Fridgy can get your fridge Inventory and recipe sorted out faster than traditional GUI apps.
+
+Want to know more? Jump to [Section 2, Quick Start](#QuickStart) to get started.
+
+## 1.1 Navigating the User Guide
+
+This user guide provides a comprehensive guide on how to use Fridgy. 
+In addition, the quick start guide provides an end-to-end process to help you get started with installing Fridgy.
+
+This User Guide covers:
+
+1. Components of the user interface
+2. Syntax and behaviour of Fridgy's commands
+3. Usage examples, with step-by-step instructions
+4. Other features
 
 --------------------------------------------------------------------------------------------------------------------
 
-# UI
+<a name="QuickStart"></a>
+
+# 2. Quick Start
+
+1. Ensure you have Java 11 or above installed in your Computer.
+2. Download the latest `fridgy.jar` [here](https://github.com/AY2122S1-CS2103T-W11-1/tp/releases).
+3. Copy the file to the folder you want to use as the home folder for Fridgy.
+4. Double-click the file to start the app. The GUI should appear in a few seconds. We've populated it with some sample data for you to experiment with.
+
+--------------------------------------------------------------------------------------------------------------------
+
+# 3. UI
 
 ![Ui](images/Ui.png)
-### Tabs
+### 3.1 Tabs
 Click the `Ingredient` or `Recipe` tab each to show the contents of the Inventory or the RecipeBook respectively.
-### Side Bar
+### 3.2 Side Bar
 A scrollable window that displays all the contents of the Inventory or the RecipeBook depending on the Tab selected 
 by the user.
-### Cards
+### 3.3 Cards
 A card displays the details of each item inside the Inventory or the RecipeBook depending on the tab selected. Each card 
 represents **one** item.
-### CommandLine
+### 3.4 CommandLine
 Command Line for users to key their commands into.
-### CommandOutput
+### 3.5 CommandOutput
 Output of the commands keyed in by users are displayed here.
-### MainWindow
+### 3.6 MainWindow
 Displays the output of `View` command, which expands each ingredient or recipe card for better visibility. 
 
-# Features
+# 4. Features
 
 **Notes about the Command Format:**
 
@@ -51,29 +81,29 @@ Displays the output of `View` command, which expands each ingredient or recipe c
   e.g. `add ingredient -n <name> [-d <description>]` can be used as
      1. `add ingredient -n tomato -d from Africa` or as
      2. `add ingredient -n tomato`
-     
+  
   e.g. `add ingredient -n <name> -q <quantity>[<units>]` can be used as 
      1. `add ingredient -n chicken -q 2` or as
      2. `add ingredient -n chicken -q 2kg`
 
 - Items with `…` after them can be used multiple times.
 
-## General Commands
+## 4.1 General Commands
 
-### Help
+### 4.1.1 Help
 `help`
 
 Pops out a window that leads the user to [User Guide](https://ay2122s1-cs2103t-w11-1.github.io/tp/UserGuide.html) 
 (You are here).
 
-### Exit
+### 4.1.2 Exit
 `exit`
 
 Exits the program.
 
-## Ingredients
+## 4.2 Ingredients
 
-### Add Ingredients
+### 4.2.1 Add Ingredients
 `add ingredient`
 
 Add an ingredient to the Inventory. 
@@ -95,17 +125,17 @@ Format: `add ingredient -n <name> -q <quantity>[<units>] [-d <description>] -e <
 Example(s):
 1. `add ingredient -n tomato -d from africa -q 500 -e 27-09-2021 -t sweet`
     <br />Expected Output:<br />
-![addCommand1.png](images/ingredientCommands/addCommand1.png)
+    ![addCommand1.png](images/ingredientCommands/addCommand1.png)
 
 2. `add ingredient -n milk -q 500ml -e 27-09-2021`
     <br />Expected Output:<br />
-![addCommand2.png](images/ingredientCommands/addCommand2.png)
+    ![addCommand2.png](images/ingredientCommands/addCommand2.png)
 
 3. `add ingredient -n flour -d fresh -q 500g -e 27-09-2021`
     <br />Expected Output:<br />
-![addCommand3.png](images/ingredientCommands/addCommand3.png)
+    ![addCommand3.png](images/ingredientCommands/addCommand3.png)
 
-### Delete Ingredients
+### 4.2.2 Delete Ingredients
 `delete ingredient`
 
 Delete an ingredient from the Inventory.
@@ -113,12 +143,12 @@ Delete an ingredient from the Inventory.
 Format: `delete ingredient <index>`
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#cards) in the
   [Side Bar](#side-bar).
-Example(s):
+  Example(s):
 1. `delete ingredient 1`
     <br />Expected Output:<br />
-![deleteCommand1.png](images/ingredientCommands/deleteCommand1.png)
+    ![deleteCommand1.png](images/ingredientCommands/deleteCommand1.png)
 
-### Edit Ingredients
+### 4.2.3 Edit Ingredients
 `edit ingredient`
 
 Edit an ingredient from the Inventory.
@@ -128,7 +158,7 @@ Format: `edit ingredient <index> -<field flag> <new data>...`
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#cards) in the
   [Side Bar](#side-bar).
 - A `field flag` is also required for each input field you wish to edit. You can refer to 
-[Add Command](#add-ingredients) for more examples on usage of each `field flag`. It can be any of the following:
+  [Add Command](#add-ingredients) for more examples on usage of each `field flag`. It can be any of the following:
     - `-n`: name of the ingredient
     - `-q`: quantity of the ingredient
     - `-d`: description of the ingredient
@@ -140,7 +170,7 @@ Example(s):
 <br />Expected Output:<br />
 ![editCommand1.png](images/ingredientCommands/editCommand1.png)
 
-### Clear Ingredients
+### 4.2.4 Clear Ingredients
 `clear ingredient`
 
 Clear all the ingredients from the Inventory.
@@ -152,7 +182,7 @@ Example(s):
 <br />Expected Output:<br />
 ![clearCommand.png](images/ingredientCommands/clearCommand.png)
 
-### Find Ingredients
+### 4.2.5 Find Ingredients
 `find ingredient`
 
 - Search for an ingredient from the Inventory based on a user-inputted keyword(s) that match the name of an ingredient(s).
@@ -172,7 +202,7 @@ Example(s):
 <br />Expected Output:<br />
 ![findIngredient1.png](images/ingredientCommands/findIngredient1.png)
 
-### List Ingredients
+### 4.2.6 List Ingredients
 `list ingredient`
 
 List all the ingredients again after `find ingredient` Operation.
@@ -184,7 +214,7 @@ Example(s):
 <br />Expected Output:<br />
 ![listIngredient1.png](images/ingredientCommands/listIngredient1.png)
 
-### View Ingredients
+### 4.2.7 View Ingredients
 `view ingredient`
 
 View an ingredient in the [Main Window](#mainwindow).
@@ -199,9 +229,9 @@ Example(s):
 ![viewCommand1.png](images/ingredientCommands/viewCommand1.png)
 
 
-## Recipes
+## 4.3 Recipes
 
-### Add Recipes
+### 4.3.1 Add Recipes
 `add recipe`
 
 Add a recipe to the RecipeBook.
@@ -211,11 +241,11 @@ Format: `add recipe -n <name> -i <ingredient> <quantity> [-d <optional descripti
 Example(s):
 1. `add recipe -n pasta -i tomato 1 -i milk 100ml -i chicken breast 200g -s Chicken thicc -s Thicc chicken`
     <br />Expected Output:<br />
-![addRecipe1.png](images/recipeCommands/addRecipe1.png)
+    ![addRecipe1.png](images/recipeCommands/addRecipe1.png)
 
 2. `add recipe -n aglio olio -i pasta 200g -d grandmother aglio olio recipe -s aglioli olioli -s aglioli olioli`
     <br />Expected Output:<br />
-![addRecipe2.png](images/recipeCommands/addRecipe2.png)
+    ![addRecipe2.png](images/recipeCommands/addRecipe2.png)
 
 3. `add recipe -n Grilled Lamb Chop with Mint Puree -i Mint 5g -i Lamb Chops 1kg -i Butter 20g -i Garlic 20g -s Season 
 the lamb chops with salt and pepper. -s Grill the lamb chops over medium high heat until cooked with butter. 
@@ -223,7 +253,7 @@ the lamb chops with salt and pepper. -s Grill the lamb chops over medium high he
 -d Juicy lamb chops served medium rare with a refreshing mint puree.`
 ![addRecipe3.png](images/recipeCommands/addRecipe3.png)
 
-### Delete Recipes
+### 4.3.2 Delete Recipes
 `delete recipe`
 
 Delete a recipe from the RecipeBook.
@@ -238,9 +268,9 @@ Example(s):
  ![deleteRecipe1.png](images/recipeCommands/deleteRecipe1.png)
 2. `delete recipe 2`
    <br />Expected Output:<br />
-![deleteRecipe2.png](images/recipeCommands/deleteRecipe2.png)
+   ![deleteRecipe2.png](images/recipeCommands/deleteRecipe2.png)
 
-### Edit Recipes
+### 4.3.3 Edit Recipes
 `edit recipe`
 
 Edit a recipe from the Inventory.
@@ -262,7 +292,7 @@ Example(s):
 ![editRecipe1.png](images/recipeCommands/editRecipe1.png)
 
 
-### Find Recipes
+### 4.3.4 Find Recipes
 `find recipe`
 
 - Search for a recipe from the RecipeBook based on a user-inputted keyword(s) that match the name of a recipe(s).
@@ -283,7 +313,7 @@ Example(s):
 <br />Expected Output:<br />
 ![findRecipe1.png](images/recipeCommands/findRecipe1.png)
 
-### List Recipes
+### 4.3.5 List Recipes
 `list recipe`
 
 Lists out all the recipes again after `find recipe` operation. 
@@ -295,7 +325,7 @@ Example(s):
 <br /> Expected Output:<br />
 ![listRecipe1.png](images/recipeCommands/listRecipe1.png)
 
-### View Recipes
+### 4.3.6 View Recipes
 `view recipe`
 
 Expand the recipe and view the detailed steps in a bigger window.
@@ -309,7 +339,7 @@ Example(s):
 <br />Expected Output:<br />
 ![viewRecipe1.png](images/recipeCommands/viewRecipe1.png)
 
-### Cook Recipe
+### 4.3.7 Cook Recipe
 `cook recipe`
 
 Cooks a recipe and deducts the ingredients required by the chosen recipe from the Inventory.
@@ -327,7 +357,7 @@ Example(s):
 <br />Ingredients After Cooking:<br />
 ![cookRecipe3.png](images/recipeCommands/cookRecipe3.png)
 -----
-# Command Summary
+# 5. Command Summary
 
 Action | Format
 --------|------------------
