@@ -1,7 +1,6 @@
 package fridgy.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -35,6 +34,11 @@ public class ParserUtilTest {
     private static final String VALID_DESCRIPTION = "123 Main Street #0505";
     private static final String VALID_TAG_1 = "snack";
     private static final String VALID_TAG_2 = "neighbour";
+
+    private static final String VALID_INGREDIENT = "ingredient 1";
+    private static final String VALID_INGREDIENT_UNIT = "ingredient2 1kg";
+    private static final String INVALID_INGREDIENT = "ingredient";
+
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -175,26 +179,44 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseIngredients_nullInput_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseIngredients(null));
+    public void parseBaseIngredient_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseBaseIngredient(null));
     }
 
     @Test
-    public void parseIngredients_listOfEmptyStrings_throwsParseException() {
-        assertThrows(ParseException.class, ()
-            -> ParserUtil.parseIngredients(Arrays.asList("")));
+    public void parseBaseIngredient_missingQuantity_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseBaseIngredient(INVALID_INGREDIENT));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseBaseIngredient(INVALID_INGREDIENT + " "));
     }
 
     @Test
-    public void parseIngredients_listOfValidIngredients_returnsCorrectIngredientSet() {
-        List<String> inputIngredients = Arrays.asList("ingr1 100mg", "ingr1 100mg", "ingr2 200mg", "");
-        Set<BaseIngredient> expectedIngr = Set.of(
-                new BaseIngredient(new Name("ingr1"), new Quantity("100mg")),
-                new BaseIngredient(new Name("ingr2"), new Quantity("200mg")));
-        try {
-            assertEquals(ParserUtil.parseIngredients(inputIngredients), expectedIngr);
-        } catch (ParseException pe) {
-            Assertions.fail("ParseException thrown!");
-        }
+    public void parseBaseIngredient_validIngredient_success() throws Exception {
+        BaseIngredient expected = new BaseIngredient(new Name("ingredient"), new Quantity("1"));
+        assertEquals(expected, ParserUtil.parseBaseIngredient(VALID_INGREDIENT));
+
+        expected = new BaseIngredient(new Name("ingredient2"), new Quantity("1kg"));
+        assertEquals(expected, ParserUtil.parseBaseIngredient(VALID_INGREDIENT_UNIT));
+    }
+
+    @Test
+    public void parseIngredients_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseIngredients(null));
+    }
+
+    @Test
+    public void parseIngredients_invalidIngredient_throwsParseException() {
+        List<String> toParse = Arrays.asList(VALID_INGREDIENT, INVALID_INGREDIENT);
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIngredients(toParse));
+    }
+
+    @Test
+    public void parseIngredients_validIngredients_success() throws Exception {
+        List<String> toParse = Arrays.asList(VALID_INGREDIENT, VALID_INGREDIENT_UNIT);
+        Set<BaseIngredient> expected = new HashSet<>(Arrays.asList(
+            new BaseIngredient(new Name("ingredient"), new Quantity("1")),
+            new BaseIngredient(new Name("ingredient2"), new Quantity("1kg"))
+            ));
+
+        assertEquals(expected, ParserUtil.parseIngredients(toParse));
     }
 }

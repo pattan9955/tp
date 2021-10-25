@@ -164,7 +164,9 @@ public class ParserUtil {
         String validBaseIngredient = "(?<name>\\w.*)\\s(?<quantity>(?=.*[1-9])\\d+(\\.\\d+)?\\h*((m|k)?(g|l)){0,1})";
         Matcher matcher = Pattern.compile(validBaseIngredient).matcher(trimmedIngredient);
 
-        matcher.find(); // sheesh
+        if (!matcher.matches()) {
+            throw new ParseException(BaseIngredient.MESSAGE_CONSTRAINTS);
+        }
         Name name = parseName(matcher.group("name"));
         Quantity quantity = parseQuantity(matcher.group("quantity"));
 
