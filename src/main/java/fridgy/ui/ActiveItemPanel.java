@@ -1,5 +1,8 @@
 package fridgy.ui;
 
+import java.util.function.Function;
+
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import javafx.fxml.FXML;
@@ -12,6 +15,7 @@ import javafx.scene.layout.VBox;
 public class ActiveItemPanel extends UiPart<Region> implements Observer {
 
     private static final String FXML = "ActiveItemPanel.fxml";
+    private final Function<BaseIngredient, Boolean> isEnough;
 
     @FXML
     private VBox activeBox;
@@ -21,9 +25,10 @@ public class ActiveItemPanel extends UiPart<Region> implements Observer {
      *
      * @param activeObservable the active observable that notifies the observer of changes
      */
-    public ActiveItemPanel(Observable activeObservable) {
+    public ActiveItemPanel(Observable activeObservable, Function<BaseIngredient, Boolean> isEnough) {
         super(FXML);
         activeObservable.setObserver(this);
+        this.isEnough = isEnough;
     }
 
     @Override
@@ -36,7 +41,7 @@ public class ActiveItemPanel extends UiPart<Region> implements Observer {
     @Override
     public void update(Recipe newItem) {
         activeBox.getChildren().clear();
-        RecipeCard recipeCard = new RecipeCard(newItem, 1, true);
+        RecipeCard recipeCard = new RecipeCard(newItem, 1, true, isEnough);
         activeBox.getChildren().add(recipeCard.getRoot());
     }
 }

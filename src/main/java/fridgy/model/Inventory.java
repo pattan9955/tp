@@ -101,7 +101,7 @@ public class Inventory extends Database<Ingredient> {
      * @param baseIngredient to deduct from the inventory
      * @return boolean that indicates if the full quantity of baseIngredient is deductible from the inventory
      */
-    private boolean isDeductible(BaseIngredient baseIngredient) {
+    protected boolean isDeductible(BaseIngredient baseIngredient) {
         requireNonNull(baseIngredient);
         ObservableList<Ingredient> inventory = getList();
         List<Ingredient> deductibleIngredients = inventory.stream()
