@@ -8,6 +8,7 @@ import fridgy.logic.commands.recipe.CookRecipeCommand;
 import fridgy.logic.commands.recipe.DeleteRecipeCommand;
 import fridgy.logic.commands.recipe.FindRecipeCommand;
 import fridgy.logic.commands.recipe.ListRecipeCommand;
+import fridgy.logic.commands.recipe.MultiDeleteRecipeCommand;
 import fridgy.logic.commands.recipe.RecipeCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 
@@ -52,6 +53,18 @@ public class RecipeCommandParserTestUtil {
             AddRecipeCommand.MESSAGE_USAGE);
     public static final String INVALID_DEL_COMMAND_MESSAGE = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             DeleteRecipeCommand.MESSAGE_USAGE);
+
+    //--------------------------------INVALID MULTIDELETE RECIPE COMMANDS---------------------------------------------
+    public static final String INVALID_MDEL_COMMAND_WRONG_KEYWORD = "multidelete kekw 2";
+    public static final String INVALID_MDEL_COMMAND_INVALID_INDEX = "multidelete recipe -3";
+    public static final String INVALID_MDEL_COMMAND_WRONG_FORMAT = "recipe multidelete 0";
+    public static final String INVALID_MDEL_COMMAND_NO_KEYWORD = "multidelete 0";
+
+    //---------------------------------VALID MULTIDELETE RECIPE COMMANDS----------------------------------------------
+    public static final String VALID_MDEL_COMMAND = "multidelete recipe 1 2 3";
+
+    public static final String INVALID_MDEL_COMMAND_MESSAGE = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            MultiDeleteRecipeCommand.MESSAGE_USAGE);
 
     //------------------------------------VALID VIEW RECIPE COMMANDS-------------------------------------------------
     public static final String VALID_VIEW_COMMAND = "view recipe 1";
