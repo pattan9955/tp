@@ -48,6 +48,33 @@ This User Guide covers:
 3. Copy the file to the folder you want to use as the home folder for Fridgy.
 4. Double-click the file to start the app. The GUI should appear in a few seconds. We've populated it with some sample data for you to experiment with.
 
+<a name="startup"></a>
+<div style="text-align: center; padding-bottom: 2em">
+<img width=60% id="logo" src="images/startup-ss.png"/>
+<br>
+<i>The initial state of Fridgy, populated with sample data</i>
+</div>
+
+## 2.1 Tutorial
+
+Now that Fridgy is installed, you can test out the commands — add ingredients, recipes, and more! 
+
+Adding our first ingredient:
+
+`add ingredient -n Grapes -q 100g -e 25-10-2021 -d Seedless grapes`
+
+Then, let us add a recipe that uses that ingredient:
+
+`add recipe -n Grape juice -i Grapes 50g -s Mash grapes -s Strain juice`
+
+Finally, execute the recipe:
+
+`cook recipe 1`
+
+The quantity of grapes would have been deducted accordingly.
+
+To exit Fridgy, simply close the application window.
+
 --------------------------------------------------------------------------------------------------------------------
 
 # 3. UI
