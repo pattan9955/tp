@@ -4,6 +4,7 @@ import static fridgy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import fridgy.logic.commands.recipe.AddRecipeCommand;
+import fridgy.logic.commands.recipe.CookRecipeCommand;
 import fridgy.logic.commands.recipe.DeleteRecipeCommand;
 import fridgy.logic.commands.recipe.FindRecipeCommand;
 import fridgy.logic.commands.recipe.ListRecipeCommand;
@@ -76,6 +77,36 @@ public class RecipeCommandParserTestUtil {
     public static final String INVALID_LIST_COMMAND = "list";
     public static final String INVALID_LIST_TYPE_COMMAND = "list ingredient";
 
+
+    //---------------------------------VALID COOK RECIPE COMMANDS-----------------------------------------------------
+    public static final String VALID_COOK_COMMAND = "cook recipe 1";
+    //---------------------------------INVALID COOK RECIPE COMMANDS---------------------------------------------------
+    public static final String INVALID_COOK_COMMAND = "cook recipe";
+    public static final String INVALID_COOK_COMMAND_WRONG_KEYWORD = "cook kekw 2";
+    public static final String INVALID_COOK_COMMAND_INVALID_INDEX = "cook recipe -3";
+    public static final String INVALID_COOK_COMMAND_WRONG_FORMAT = "recipe cook 0";
+    public static final String INVALID_COOK_COMMAND_NO_KEYWORD = "cook 0";
+
+
+    public static final String INVALID_COOK_COMMAND_MESSAGE = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            CookRecipeCommand.MESSAGE_USAGE);
+    //---------------------------------INVALID EDIT RECIPE COMMANDS---------------------------------------------------
+    public static final String INVALID_EDIT_COMMAND = "edit";
+    public static final String INVALID_BLANK_FIELDS_EDIT_COMMAND = "edit recipe 1";
+    public static final String INVALID_EDIT_TYPE_COMMAND = "edit kekw -i ingr1";
+    public static final String INVALID_INDEX_EDIT_COMMAND = "edit recipe -1 -i ingr1 -n test name";
+
+    //-----------------------------------VALID EDIT RECIPE COMMAND----------------------------------------------------
+    public static final String VALID_EDIT_COMMAND_ALL_FIELDS_PRESENT = "edit recipe 1 -n new Test -i new ingr1 100mg "
+            + "-i new ingr2 200mg -s new step 1 -s new step 2 -d new optional description";
+    public static final String VALID_EDIT_COMMAND_NAME_PRESENT = "edit recipe 1 -n new Test";
+    public static final String VALID_EDIT_COMMAND_INGR_PRESENT = "edit recipe 1 -i new ingr1 100mg -i new ingr2 200mg";
+    public static final String VALID_EDIT_COMMAND_DESC_PRESENT = "edit recipe 1 -d new optional description";
+    public static final String VALID_EDIT_COMMAND_STEPS_PRESENT = "edit recipe 1 -s new step 1 -s new step 2";
+    public static final String VALID_EDIT_COMMAND_DESC_STEPS_PRESENT = "edit recipe 1 -d new optional description "
+            + "-s new step 1 -s new step 2";
+    public static final String VALID_EDIT_COMMAND_INGR_NAME_PRESENT = "edit recipe 1 -n new Test -i new ingr1 100mg"
+            + " -i new ingr2 200mg";
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created
      * equals to {@code expectedCommand}.

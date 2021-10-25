@@ -2,9 +2,11 @@ package fridgy.model;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import javafx.collections.ObservableList;
@@ -67,12 +69,16 @@ public interface RecipeModel {
     /** Returns an unmodifiable view of the filtered ingredient list */
     ObservableList<Ingredient> getFilteredIngredientList();
 
-    ObservableList<Recipe> getActiveRecipe();
-    void setActiveRecipe(Recipe target);
+    /** Sets a new recipe as active under an {@code Observable}.
+     * @param activeRecipe to be placed under an Observable
+     */
+    void setActiveRecipe(Recipe activeRecipe);
 
     /**
      * Updates the filter of the filtered recipe list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredRecipeList(Predicate<Recipe> predicate);
+
+    boolean deductIngredients(Set<BaseIngredient> ingrToDeduct);
 }
