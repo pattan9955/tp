@@ -61,9 +61,9 @@ Now that Fridgy is installed, you can test out the commands — add ingredients,
 
 Adding our first ingredient:
 
-`add ingredient -n Grapes -q 100g -e 25-10-2021 -d Seedless grapes`
+`add ingredient -n Grapes -q 100g -e 25-10-2022 -d Seedless grapes`
 
-Then, let us add a recipe that uses that ingredient:
+Then, add a recipe that uses that ingredient:
 
 `add recipe -n Grape juice -i Grapes 50g -s Mash grapes -s Strain juice`
 
@@ -71,7 +71,7 @@ Finally, execute the recipe:
 
 `cook recipe 1`
 
-The quantity of grapes would have been deducted accordingly.
+The quantity of grapes would be deducted accordingly.
 
 To exit Fridgy, simply close the application window.
 
