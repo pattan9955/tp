@@ -18,6 +18,7 @@ import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.ExpiryStatusUpdater;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.ingredient.IngredientDefaultComparator;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
 import fridgy.model.tag.Tag;
@@ -80,6 +81,7 @@ public class EditCommand extends Command {
 
         model.set(ingredientToEdit, editedIngredient);
         model.updateFilteredIngredientList(IngredientModel.PREDICATE_SHOW_ALL_INGREDIENTS);
+        model.sortIngredient(new IngredientDefaultComparator());
         return new CommandResult(String.format(MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient));
     }
 
