@@ -13,6 +13,7 @@ import fridgy.logic.parser.FridgyParser;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.Model;
 import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import fridgy.storage.Storage;
@@ -89,5 +90,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public Boolean isEnough(BaseIngredient ingredient) {
+        return model.isEnough(ingredient);
     }
 }

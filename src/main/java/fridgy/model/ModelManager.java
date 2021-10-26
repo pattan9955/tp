@@ -126,6 +126,9 @@ public class ModelManager implements Model {
     @Override
     public void delete(Ingredient target) {
         inventory.remove(target);
+
+        // ingredient changes need to inform recipeBook to update for tagging purposes.
+        refresh(this.filteredRecipes);
     }
 
     @Override
@@ -137,6 +140,9 @@ public class ModelManager implements Model {
     public void add(Ingredient ingredient) {
         inventory.add(ingredient);
         updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
+
+        // ingredient changes need to inform recipeBook to update for tagging purposes.
+        refresh(this.filteredRecipes);
     }
 
     @Override
@@ -148,14 +154,15 @@ public class ModelManager implements Model {
     @Override
     public void set(Ingredient target, Ingredient editedIngredient) {
         requireAllNonNull(target, editedIngredient);
-
         inventory.set(target, editedIngredient);
+
+        // ingredient changes need to inform recipeBook to update for tagging purposes.
+        refresh(this.filteredRecipes);
     }
 
     @Override
     public void set(Recipe target, Recipe editedRecipe) {
         requireAllNonNull(target, editedRecipe);
-
         recipeBook.set(target, editedRecipe);
     }
 
@@ -204,6 +211,11 @@ public class ModelManager implements Model {
     @Override
     public boolean deductIngredients(Set<BaseIngredient> ingredients) {
         return inventory.deductIngredients(ingredients);
+    }
+
+    @Override
+    public Boolean isEnough(BaseIngredient ingredient) {
+        return inventory.isDeductible(ingredient);
     }
 
     //=========== Filtered Ingredient List Accessors =============================================================
@@ -274,10 +286,15 @@ public class ModelManager implements Model {
     }
 
     //=========== Observable =============================================================
-
     @Override
     public Observable getActiveObservable() {
         return activeObservable;
     }
 
+    //========== Private Method ============================================================
+    private <T> void refresh(FilteredList<T> list) {
+        Predicate<? super T> currentPredicate = list.getPredicate();
+        list.setPredicate(unused -> false);
+        list.setPredicate(currentPredicate);
+    }
 }

@@ -1,7 +1,9 @@
 package fridgy.ui;
 
 import java.util.Comparator;
+import java.util.function.Function;
 
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.recipe.Recipe;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -47,7 +49,8 @@ public class RecipeCard extends UiPart<Region> {
     /**
      * Creates a {@code RecipeCode} with the given {@code Recipe} and index to display.
      */
-    public RecipeCard(Recipe recipe, int displayedIndex, boolean isStepsVisible) {
+    public RecipeCard(Recipe recipe, int displayedIndex, boolean isStepsVisible,
+                      Function<BaseIngredient, Boolean> isEnough) {
         super(FXML);
         this.recipe = recipe;
 
@@ -61,16 +64,23 @@ public class RecipeCard extends UiPart<Region> {
         // sort and iterate through the ingredients in recipe and add it to ingredients FlowPane as tags.
         recipe.getIngredients().stream()
                 .sorted(Comparator.comparing(ingredient -> ingredient.getName().toString()))
-                .forEach(ingredient -> ingredients.getChildren().add(
-                        new Label(UiUtil.truncateText(
-                            ingredient.getName().toString()
+                .forEach(ingredient -> {
+                    Label ingredientLabel = new Label(UiUtil.truncateText(
+                        ingredient.getName().toString()
                             + " "
                             + ingredient.getQuantity().toString(),
-                            INGREDIENT_CHAR_LIMIT)
-                        )));
+                        INGREDIENT_CHAR_LIMIT)
+                    );
+                    if (!isEnough.apply(ingredient)) {
+                        ingredientLabel.setStyle("-fx-background-color: #CF1259;");
+                    }
+                    ingredients.getChildren().add(ingredientLabel);
+                });
+
         description.setText(!recipeDescription.equals("")
                 ? "Description: " + recipeDescription
                 : recipeDescription);
+
         // This will automatically show / hide steps label
         steps.setText("Steps:\n" + UiUtil.numberedList(recipe.getSteps()));
         steps.setVisible(isStepsVisible);
