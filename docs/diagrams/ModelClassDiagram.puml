@@ -18,12 +18,14 @@ Class ReadOnlyUserPrefs
 
 
 Package Ingredient <<Rectangle>> #F4F6F6 {
-Class UniqueIngredientList
+Class "Database <<Ingredient>>" as IngredientDatabase
+Class "UniqueDataList <<Ingredient>> " as UniqueIngredientList
 Class Ingredient
 }
 
 Package Recipe <<Rectangle>> #F4F6F6 {
-Class UniqueRecipeList
+Class "Database <<Recipe>>" as RecipeDatabase
+Class "UniqueDataList <<Recipe>> " as UniqueRecipeList
 Class Recipe
 }
 
@@ -42,11 +44,13 @@ ModelManager -right-> "1" RecipeBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-Inventory *--> "1" UniqueIngredientList
+Inventory --|> IngredientDatabase
+IngredientDatabase *--> "1" UniqueIngredientList
 UniqueIngredientList --> "~* all" Ingredient
 
 
-RecipeBook *--> "1" UniqueRecipeList
+RecipeBook --|> RecipeDatabase
+RecipeDatabase *--> "1" UniqueRecipeList
 UniqueRecipeList --> "~* all" Recipe
 
 

@@ -133,13 +133,10 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
-<img src="images/IngredientClassDiagram.png" width="450" />
-<img src="images/RecipeClassDiagram.png" width="450" />
-
 
 The `Model` component,
 
-* stores the Fridgy data i.e., all `Ingredient` and `Recipe` objects (which are contained in a `Database<Ingredient>` / `Database<Recipe` object).
+* stores the Fridgy data i.e., all `Ingredient` and `Recipe` objects (which are contained in a `Database<Ingredient>` / `Database<Recipe>` object).
 * stores the currently 'selected' `Ingredient` and `Recipe` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Ingredient>` and `Recipe` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores the 'active' `Ingredient` or `Recipe` object that is displayed in detail in the UI component
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
@@ -148,6 +145,12 @@ The `Model` component,
 The container for `Ingredient` is called `Inventory` and container for `Recipe` is called `RecipeBook`
 
 The CRUD behavior of `Ingredient` and `Recipe` are similar as they are implemented using a generic base model `Database<T>` internally.
+
+The base model objects are constructed as shown in the following class diagrams.
+
+<img src="images/IngredientClassDiagram.png" width="450" />
+<img src="images/RecipeClassDiagram.png" width="450" />
+
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Inventory`, which `Ingredient` references. This allows `Inventory` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -180,12 +183,23 @@ This section describes some noteworthy details on how certain features are imple
 
 At the fundamental level, both `Recipe` and `Ingredient` are using the same CRUD operations. To reduce code duplication, a generic class of `Database<T extends Eq>` is implemented.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** `Eq` is an interface that ensures all objects entered into the Database has a weaker notion of equality defined by the developer. <br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** `Eq` is an interface that ensures all objects entered into the Database has a weaker notion of equality defined by the developer. This is done as all our models do not allow duplicates defined by our weaker notion of equality. <br>
 </div>
 
-This implementation allow more flexibility in extending the application in the future. One can easily duplicate a database model by extending from the Database generic.
+This implementation allow more flexibility in extending the application in the future. One can easily duplicate a database model by extending from the Database generic. For example, if I want to implement another model to keep track of student contacts, I can simply implement it with
 
-However, do note that this implementation is purely contained within Model component. The `ModelManager` is still a monolithic class that handles all operations from other components. That means all CRUD operations to new types of objects will need to be implemented and exposed through `ModelManager`.
+```java
+public class ContactBook extends Database<Person> {
+    public ContactBook() {
+        super(new UniqueDataList<>());
+    }
+    public ContactBook(ReadOnlyDatabase<Person> roBook) {
+        super(roBook);
+    }
+}
+```
+
+However, do note that this implementation is purely contained within Model component. The `ModelManager` is still a facade that handles all operations from other components. That means all CRUD operations to new types of objects will need to be implemented and exposed through `ModelManager`.
 
 
 ### 3.2 Automatic Quantity Conversion
@@ -571,6 +585,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 |**GUI**               | A graphical user interface, i.e. the visual display of Fridgy |
 |**Mainstream OS**     | Windows, Linux, Unix, OS-X. |
 |**SI prefix**         | SI prefixes are a standard defined by the International System of Units such as kilo-, milli-, centi- and so on. |
+|**CRUD** | Stands for Create, Read, Update, and Delete which are the 4 functions necessary to implement persistent storage. |
+|**Higher order function** | A higher order function is a function that can be passed as parameter or return values. | 
 
 
 --------------------------------------------------------------------------------------------------------------------
