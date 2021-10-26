@@ -122,14 +122,16 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
+        ActiveItemPanel activeItemPanel = new ActiveItemPanel(logic.getActiveObservable());
+        viewDisplayPlaceholder.vvalueProperty().bind(displayContainer.heightProperty());
+        viewDisplayPlaceholder.hvalueProperty().bind(displayContainer.widthProperty());
+        displayContainer.getChildren().add(activeItemPanel.getRoot());
+
+        ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList(), activeItemPanel);
         ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
 
-        recipeListPanel = new RecipeListPanel(logic.getFilteredRecipeList(), false);
+        recipeListPanel = new RecipeListPanel(logic.getFilteredRecipeList(), activeItemPanel);
         recipeListPanelPlaceholder.getChildren().add(recipeListPanel.getRoot());
-
-        ActiveItemPanel activeItemPanel = new ActiveItemPanel(logic.getActiveObservable());
-        displayContainer.getChildren().add(activeItemPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

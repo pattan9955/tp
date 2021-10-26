@@ -34,14 +34,14 @@ public class ActiveItemPanel extends UiPart<Region> implements Observer {
     @Override
     public void update(Ingredient newItem) {
         activeBox.getChildren().clear();
-        IngredientCard ingredientCard = new IngredientCard(newItem, 1);
-        activeBox.getChildren().add(ingredientCard.getRoot());
+        IngredientDisplay ingredientDisplay = new IngredientDisplay(newItem, 1);
+        activeBox.getChildren().add(ingredientDisplay.getRoot());
     }
 
     @Override
     public void update(Recipe newItem) {
         activeBox.getChildren().clear();
-        RecipeCard recipeCard = new RecipeCard(newItem, 1, true, isEnough);
-        activeBox.getChildren().add(recipeCard.getRoot());
+        RecipeDisplay recipeDisplay = new RecipeDisplay(newItem, isEnough);
+        activeBox.getChildren().add(recipeDisplay.getRoot());
     }
 }

@@ -42,8 +42,6 @@ public class RecipeCard extends UiPart<Region> {
     @FXML
     private FlowPane ingredients;
     @FXML
-    private Label steps;
-    @FXML
     private Label description;
 
     /**
@@ -80,11 +78,10 @@ public class RecipeCard extends UiPart<Region> {
         description.setText(!recipeDescription.equals("")
                 ? "Description: " + recipeDescription
                 : recipeDescription);
-
         // This will automatically show / hide steps label
-        steps.setText("Steps:\n" + UiUtil.numberedList(recipe.getSteps()));
-        steps.setVisible(isStepsVisible);
-        steps.managedProperty().bind(steps.visibleProperty());
+//        steps.setText("Steps:\n" + UiUtil.numberedList(recipe.getSteps()));
+//        steps.setVisible(isStepsVisible);
+//        steps.managedProperty().bind(steps.visibleProperty());
     }
 
     @Override

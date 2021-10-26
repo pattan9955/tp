@@ -14,7 +14,7 @@ import javafx.scene.layout.Region;
  */
 public class IngredientDisplay extends UiPart<Region> {
 
-    private static final String FXML = "IngredientListCard.fxml";
+    private static final String FXML = "IngredientDisplay.fxml";
 
     private static final int TAG_CHAR_LIMIT = 70;
 
@@ -33,8 +33,6 @@ public class IngredientDisplay extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
-    @FXML
     private Label quantity;
     @FXML
     private Label description;
@@ -50,7 +48,6 @@ public class IngredientDisplay extends UiPart<Region> {
         super(FXML);
         this.ingredient = ingredient;
 
-        id.setText(displayedIndex + ". ");
         name.setText(ingredient.getName().fullName);
         quantity.setText(ingredient.getQuantity().value);
         description.setText(ingredient.getDescription().value.orElse(""));
@@ -82,7 +79,7 @@ public class IngredientDisplay extends UiPart<Region> {
 
         // state check
         IngredientDisplay card = (IngredientDisplay) other;
-        return id.getText().equals(card.id.getText())
+        return name.getText().equals(card.name.getText())
                 && ingredient.equals(card.ingredient);
     }
 }

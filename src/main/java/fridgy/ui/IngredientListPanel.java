@@ -27,19 +27,15 @@ public class IngredientListPanel extends UiPart<Region> {
     /**
      * Creates a {@code IngredientListPanel} with the given {@code ObservableList}.
      */
-    public IngredientListPanel(ObservableList<Ingredient> ingredientList, ScrollPane viewDisplay, VBox displayContainer) {
+    public IngredientListPanel(ObservableList<Ingredient> ingredientList, ActiveItemPanel activeItemPanel) {
         super(FXML);
         ingredientListView.setItems(ingredientList);
         ingredientListView.setCellFactory(listView -> new IngredientListViewCell());
-        viewDisplay.vvalueProperty().bind(displayContainer.heightProperty());
-        viewDisplay.hvalueProperty().bind(displayContainer.widthProperty());
         ingredientListView.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Ingredient>() {
                     public void changed(ObservableValue<? extends Ingredient> ov,
                                         Ingredient old_val, Ingredient new_val) {
-                        displayContainer.getChildren().clear();
-                        displayContainer.getChildren().add(new IngredientDisplay(new_val,
-                                ingredientList.indexOf(new_val) + 1).getRoot());
+                        activeItemPanel.update(new_val);
                     }
                 });
     }

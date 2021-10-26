@@ -28,19 +28,15 @@ public class RecipeListPanel extends UiPart<Region> {
      * Creates a {@code RecipeListPanel} with the given {@code ObservableList}.
      * isDetailed flag determines if the recipe card will show the steps. This is added to allow component reuse.
      */
-    public RecipeListPanel(ObservableList<Recipe> recipeList, ScrollPane viewDisplay, VBox displayContainer) {
+    public RecipeListPanel(ObservableList<Recipe> recipeList, ActiveItemPanel activeItemPanel) {
         super(FXML);
         recipeListView.setItems(recipeList);
         recipeListView.setCellFactory(listView -> new RecipeListViewCell());
-        viewDisplay.vvalueProperty().bind(displayContainer.heightProperty());
-        viewDisplay.hvalueProperty().bind(displayContainer.widthProperty());
         recipeListView.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Recipe>() {
                     public void changed(ObservableValue<? extends Recipe> ov,
                                         Recipe old_val, Recipe new_val) {
-                        displayContainer.getChildren().clear();
-                        displayContainer.getChildren().add(new RecipeDisplay(new_val,
-                                recipeList.indexOf(new_val) + 1).getRoot());
+                        activeItemPanel.update(new_val);
                     }
                 });
     }

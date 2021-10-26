@@ -35,8 +35,6 @@ public class RecipeDisplay extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
-    @FXML
     private FlowPane ingredients;
     @FXML
     private Label description;
@@ -50,12 +48,11 @@ public class RecipeDisplay extends UiPart<Region> {
         super(FXML);
         this.recipe = recipe;
 
-        id.setText(displayedIndex + ". ");
         name.setText(recipe.getName().fullName);
         recipe.getIngredients().stream()
-                .sorted(Comparator.comparing(ingredient -> ingredient.getName()))
+                .sorted(Comparator.comparing(ingredient -> ingredient.getName().toString()))
                 .forEach(ingredient -> ingredients.getChildren().add(
-                        new Label(UiUtil.truncateText(ingredient.getName(), INGREDIENT_CHAR_LIMIT)
+                        new Label(UiUtil.truncateText(ingredient.getName().toString(), INGREDIENT_CHAR_LIMIT)
                         )));
         description.setText(recipe.getDescription().orElse(""));
         // steps.getChildren().add(new Label("Hello"));
@@ -75,7 +72,7 @@ public class RecipeDisplay extends UiPart<Region> {
 
         // state check
         RecipeDisplay card = (RecipeDisplay) other;
-        return id.getText().equals(card.id.getText())
+        return name.getText().equals(card.name.getText())
                 && recipe.equals(card.recipe);
     }
 }
