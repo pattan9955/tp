@@ -74,8 +74,8 @@
                                 </padding>
                                 <children>
                                     <ScrollPane fx:id="viewDisplayPlaceholder" prefHeight="1000" hbarPolicy="NEVER"
-                                                styleClass="view-display" hvalue="1.0" vvalue="1.0" fitToWidth="true">
-                                        <content>
+                                                styleClass="view-display" vvalue="0.0" fitToWidth="true">
+                                        <content >
                                             <VBox fx:id="displayContainer" prefWidth="1300" />
                                         </content>
                                     </ScrollPane>
