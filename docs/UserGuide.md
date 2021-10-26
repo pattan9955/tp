@@ -223,8 +223,9 @@ Format: `find ingredient <keyword>...`
 - Requirements for a keyword:
     1. Keyword is case-insensitive.<br />
        e.g. Finding with keyword: "corn" will match with "COrN"
-    2. Any keyword must match a full word in the name of the recipe.<br />
-       e.g. Finding with keyword: "corn" will match with "CoRN flour", "coRn FlakeS", etc. but not "popcorn" <br />
+       
+    2. Any keyword must be contained in the name of the recipe.<br />
+       e.g. Finding with keyword: "corn" will match with "CoRN flour", "coRn FlakeS", "popcorn" but not "`" <br />
        e.g. Finding with keywords: "corn Chicken beef" will match "beef Chicken", "beef corn", etc. but not "beefcorn"
 
 Example(s):
@@ -300,10 +301,21 @@ Example(s):
    <br />Expected Output:<br />
    ![deleteRecipe2.png](images/recipeCommands/deleteRecipe2.png)
 
-### 4.3.3 Edit Recipes
+### 4.3.3 Clear Recipes
+`clear recipe`
+
+Clears all recipes from the Recipe Book.
+
+Format: `clear recipe`
+
+Example(s):
+1. `clear recipe`
+    <br />Expected Output: <br />
+
+### 4.3.4 Edit Recipes
 `edit recipe`
 
-Edit a recipe from the Inventory.
+Edit a recipe from the Recipe Book.
 
 Format: `edit recipe <index> <field flag><new data>...`
 
@@ -322,7 +334,7 @@ Example(s):
 ![editRecipe1.png](images/recipeCommands/editRecipe1.png)
 
 
-### 4.3.4 Find Recipes
+### 4.3.5 Find Recipes
 `find recipe`
 
 - Search for a recipe from the RecipeBook based on a user-inputted keyword(s) that match the name of a recipe(s).
@@ -343,7 +355,7 @@ Example(s):
 <br />Expected Output:<br />
 ![findRecipe1.png](images/recipeCommands/findRecipe1.png)
 
-### 4.3.5 List Recipes
+### 4.3.6 List Recipes
 `list recipe`
 
 Lists out all the recipes again after `find recipe` operation. 
@@ -355,7 +367,7 @@ Example(s):
 <br /> Expected Output:<br />
 ![listRecipe1.png](images/recipeCommands/listRecipe1.png)
 
-### 4.3.6 View Recipes
+### 4.3.7 View Recipes
 `view recipe`
 
 Expand the recipe and view the detailed steps in a bigger window.
@@ -369,7 +381,7 @@ Example(s):
 <br />Expected Output:<br />
 ![viewRecipe1.png](images/recipeCommands/viewRecipe1.png)
 
-### 4.3.7 Cook Recipe
+### 4.3.8 Cook Recipe
 `cook recipe`
 
 Cooks a recipe and deducts the ingredients required by the chosen recipe from the Inventory.
