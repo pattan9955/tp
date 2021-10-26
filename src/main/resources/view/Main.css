@@ -56,7 +56,6 @@
 
 /*Text area (result display)*/
 .text-area {
-    /*-fx-background-color: #EBECF0;*/
     -fx-background-color: #f9f9f9;
     -fx-background-radius: 15;
     -fx-border-radius: 15;
@@ -164,7 +163,6 @@
 
 .text-field:focused {
     -fx-background-color: transparent, transparent, transparent;
-    /*-fx-border-color: transparent transparent #1C5D99 transparent;*/
     -fx-border-color: transparent transparent #0046fe transparent;
     -fx-prompt-text-fill: #C5C5C5;
 }
@@ -187,26 +185,21 @@
 }
 
 .list-cell:filled:odd {
-    /*-fx-background-color: #EBF2FA;*/
     -fx-background-color: #f9f9f9;
 }
 
 .list-cell:filled:hover {
     -fx-background-color: #EBF2FA;
     -fx-cursor: hand;
-    /*-fx-border-color: transparent transparent #f9f9f9 transparent;*/
-    /*-fx-border-width: 0 0 2 0;*/
 }
 
 .list-cell:filled:odd:selected {
-    /*-fx-background-color: derive(#1C5D99, 100%);*/
     -fx-background-color: #f9f9f9;
     -fx-border-color: transparent transparent transparent #0046fe;
     -fx-border-width: 0 0 0 3;
 }
 
 .list-cell:filled:even:selected {
-    /*-fx-background-color: derive(#1C5D99, 100%);*/
     -fx-background-color: transparent;
     -fx-border-color: transparent transparent transparent #0046fe;
     -fx-border-width: 0 0 0 3;

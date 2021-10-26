@@ -42,9 +42,9 @@ public class IngredientDisplay extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code IngredientCode} with the given {@code Ingredient} and index to display.
+     * Creates a {@code IngredientCode} with the given {@code Ingredient}.
      */
-    public IngredientDisplay(Ingredient ingredient, int displayedIndex) {
+    public IngredientDisplay(Ingredient ingredient) {
         super(FXML);
         this.ingredient = ingredient;
 

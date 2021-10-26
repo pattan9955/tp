@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
  */
 public class RecipeDisplay extends UiPart<Region> {
 
-    private static final String FXML = "RecipeListCard.fxml";
+    private static final String FXML = "RecipeDisplay.fxml";
 
     // Char limits
     private static final int INGREDIENT_CHAR_LIMIT = 55;
@@ -39,12 +39,12 @@ public class RecipeDisplay extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
-    private VBox steps;
+    private Label steps;
 
     /**
-     * Creates a {@code RecipeCode} with the given {@code Recipe} and index to display.
+     * Creates a {@code RecipeCode} with the given {@code Recipe}.
      */
-    public RecipeDisplay(Recipe recipe, int displayedIndex) {
+    public RecipeDisplay(Recipe recipe) {
         super(FXML);
         this.recipe = recipe;
 
@@ -55,7 +55,7 @@ public class RecipeDisplay extends UiPart<Region> {
                         new Label(UiUtil.truncateText(ingredient.getName().toString(), INGREDIENT_CHAR_LIMIT)
                         )));
         description.setText(recipe.getDescription().orElse(""));
-        // steps.getChildren().add(new Label("Hello"));
+        steps.setText("Steps:\n" + UiUtil.numberedList(recipe.getSteps()));
     }
 
     @Override

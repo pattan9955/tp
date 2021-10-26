@@ -34,7 +34,7 @@ public class ActiveItemPanel extends UiPart<Region> implements Observer {
     @Override
     public void update(Ingredient newItem) {
         activeBox.getChildren().clear();
-        IngredientDisplay ingredientDisplay = new IngredientDisplay(newItem, 1);
+        IngredientDisplay ingredientDisplay = new IngredientDisplay(newItem);
         activeBox.getChildren().add(ingredientDisplay.getRoot());
     }
 
