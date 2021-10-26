@@ -38,10 +38,8 @@ public class MultiDeleteCommand extends Command {
      * @param targetIndex   index of the minimal ingredient to be deleted
      * @param targetIndices indices of any number of additional ingredients to be deleted
      */
-    public MultiDeleteCommand(Index targetIndex, Index... targetIndices) {
-        requireNonNull(targetIndex);
+    public MultiDeleteCommand(Index... targetIndices) {
         requireNonNull(targetIndices);
-        this.targetIndices.add(targetIndex);
         this.targetIndices.addAll(Arrays.asList(targetIndices));
     }
 

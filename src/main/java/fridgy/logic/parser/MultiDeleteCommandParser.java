@@ -46,8 +46,6 @@ public class MultiDeleteCommandParser implements Parser<MultiDeleteCommand> {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MultiDeleteCommand.MESSAGE_USAGE), pe);
         }
-
-        Index first = indicesList.remove(0);
-        return new MultiDeleteCommand(first, indicesList.toArray(Index[]::new));
+        return new MultiDeleteCommand(indicesList.toArray(Index[]::new));
     }
 }

@@ -47,8 +47,6 @@ public class MultiDeleteRecipeCommandParser implements RecipeCommandParser<Multi
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MultiDeleteRecipeCommand.MESSAGE_USAGE), pe);
         }
-
-        Index first = indicesList.remove(0);
-        return new MultiDeleteRecipeCommand(first, indicesList.toArray(Index[]::new));
+        return new MultiDeleteRecipeCommand(indicesList.toArray(Index[]::new));
     }
 }

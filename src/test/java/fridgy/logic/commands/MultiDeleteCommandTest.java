@@ -95,6 +95,18 @@ public class MultiDeleteCommandTest {
     }
 
     @Test
+    public void execute_noArgs_deleteNothing() {
+        /* Trivial test case where nothing is deleted if there are no arguments passed to varargs. Parser should have
+          filtered this out. */
+        MultiDeleteCommand multiDeleteCommand = new MultiDeleteCommand();
+        String expectedMessage = String.format(MultiDeleteCommand.MESSAGE_MULTIDELETE_INGREDIENT_SUCCESS, 0);
+
+        ModelManager expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
+
+        CommandTestUtil.assertCommandSuccess(multiDeleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void equals() {
         MultiDeleteCommand multiDeleteFirstCommand = new MultiDeleteCommand(INDEX_FIRST_INGREDIENT,
                 INDEX_SECOND_INGREDIENT);

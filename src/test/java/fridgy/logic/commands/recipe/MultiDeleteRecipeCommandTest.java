@@ -96,6 +96,19 @@ public class MultiDeleteRecipeCommandTest {
     }
 
     @Test
+    public void execute_noArgs_deleteNothing() {
+        /* Trivial test case where nothing is deleted if there are no arguments passed to varargs. Parser should have
+          filtered this out. */
+        MultiDeleteRecipeCommand multiDeleteRecipeCommand = new MultiDeleteRecipeCommand();
+        String expectedMessage = String.format(MultiDeleteRecipeCommand.MESSAGE_MULTIDELETE_RECIPE_SUCCESS, 0);
+
+        ModelManager expectedModel = new ModelManager(new Inventory(), model.getRecipeBook(), new UserPrefs());
+
+        RecipeCommandTestUtil.assertRecipeCommandSuccess(multiDeleteRecipeCommand, model,
+                expectedMessage, expectedModel);
+    }
+
+    @Test
     public void equals() {
         MultiDeleteRecipeCommand multiDeleteFirstCommand = new MultiDeleteRecipeCommand(INDEX_FIRST_RECIPE,
                 INDEX_SECOND_RECIPE);

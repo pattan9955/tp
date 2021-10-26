@@ -39,10 +39,8 @@ public class MultiDeleteRecipeCommand extends RecipeCommand {
      * @param targetIndex   index of the minimal recipe to be deleted
      * @param targetIndices indices of any number of additional recipes to be deleted
      */
-    public MultiDeleteRecipeCommand(Index targetIndex, Index... targetIndices) {
-        requireNonNull(targetIndex);
+    public MultiDeleteRecipeCommand(Index... targetIndices) {
         requireNonNull(targetIndices);
-        this.targetIndices.add(targetIndex);
         this.targetIndices.addAll(Arrays.asList(targetIndices));
     }
 
