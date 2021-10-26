@@ -96,7 +96,7 @@ public class FridgyParserTest {
     @Test
     public void parseCommand_validDoubleTokenCommand_returnsCorrectCommandResult() {
         Model testModel = new ModelManager();
-        CommandResult expected = new ClearCommand().execute(testModel);
+        CommandResult expected = new ClearCommand(false).execute(testModel);
         try {
             CommandResult result = testParser.parseCommand(VALID_DOUBLE_WORD_CLEAR_COMMAND).apply(testModel);
             assertEquals(expected, result);
