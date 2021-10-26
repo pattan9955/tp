@@ -61,8 +61,12 @@ public class InventoryParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        ClearCommand clearExpiredCommand = (ClearCommand) parser.parseCommand(ClearCommand.COMMAND_WORD + " "
+                + ClearCommand.INGREDIENT_KEYWORD + " " + ClearCommand.EXPIRED_KEYWORD);
+        ClearCommand clearCommand = (ClearCommand) parser.parseCommand(ClearCommand.COMMAND_WORD + " "
+                + ClearCommand.INGREDIENT_KEYWORD);
+        assertEquals(new ClearCommand(true), clearExpiredCommand);
+        assertEquals(new ClearCommand(false), clearCommand);
     }
 
     @Test
