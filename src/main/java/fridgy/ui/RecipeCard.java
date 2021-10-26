@@ -76,7 +76,11 @@ public class RecipeCard extends UiPart<Region> {
                     }
                     ingredients.getChildren().add(ingredientLabel);
                 });
-        description.setText("Description: " + recipeDescription);
+
+        description.setText(!recipeDescription.equals("")
+                ? "Description: " + recipeDescription
+                : recipeDescription);
+
         // This will automatically show / hide steps label
         steps.setText("Steps:\n" + UiUtil.numberedList(recipe.getSteps()));
         steps.setVisible(isStepsVisible);

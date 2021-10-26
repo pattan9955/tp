@@ -20,9 +20,9 @@ import fridgy.model.util.SampleDataUtil;
  */
 public class IngredientBuilder {
 
-    public static final String DEFAULT_NAME = "Almond Bee";
-    public static final String DEFAULT_QUANTITY = "85355255";
-    public static final String DEFAULT_DESCRIPTION = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_NAME = "Almond";
+    public static final String DEFAULT_QUANTITY = "50g";
+    public static final String DEFAULT_DESCRIPTION = "Nut";
     public static final String DEFAULT_EXPIRY_DATE = "20-08-2010";
     public static final Set<Tag> DEFAULT_TAGS = Set.of(Tag.EXPIRED);
 

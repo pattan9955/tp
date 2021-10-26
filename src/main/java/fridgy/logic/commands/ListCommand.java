@@ -16,9 +16,9 @@ public class ListCommand extends Command {
     public static final String INGREDIENT_KEYWORD = "ingredient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " "
-            + INGREDIENT_KEYWORD + ": Lists all ingredients.\n";
+            + INGREDIENT_KEYWORD + ": Lists and sorts all ingredients.\n";
 
-    public static final String MESSAGE_SUCCESS = "Listed all ingredients";
+    public static final String MESSAGE_SUCCESS = "Listed and sorted all ingredients";
 
 
     @Override

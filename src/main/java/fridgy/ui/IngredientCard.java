@@ -63,15 +63,21 @@ public class IngredientCard extends UiPart<Region> {
         name.setText(ingredientName);
         quantity.setText(ingredientQuantity);
         description.setText(ingredientDescription);
-        expiryDate.setText("Expiring on: " + ingredient.getExpiryDate().toString());
+        expiryDate.setText("Expiry Date: " + ingredient.getExpiryDate().toString());
         ingredient.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .sorted(Comparator.comparing(tag ->
+                        tag.tagName.equals("expired") || tag.tagName.equals("expiring")
+                                ? "" // comes first in ordering
+                                : tag.tagName)
+                )
                 .forEach(tag -> {
                     String name = tag.tagName;
                     Label tagLabel = new Label(UiUtil.truncateText(name, TAG_CHAR_LIMIT));
                     tagLabel.setWrapText(true);
                     if (name == "expired") {
                         tagLabel.setStyle("-fx-background-color: #CF1259;");
+                    } else if (name == "expiring") {
+                        tagLabel.setStyle("-fx-background-color: #767676;");
                     }
                     tags.getChildren().add(tagLabel);
                 });

@@ -11,7 +11,9 @@ import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.ExpiryDate;
+import fridgy.model.ingredient.ExpiryStatusUpdater;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.ingredient.IngredientDefaultComparator;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
 import fridgy.model.recipe.Recipe;
@@ -76,8 +78,10 @@ public class SampleDataUtil {
     public static ReadOnlyDatabase<Ingredient> getSampleInventory() {
         Inventory sampleAb = new Inventory();
         for (Ingredient sampleIngredient : getSampleIngredients()) {
+            sampleIngredient = ExpiryStatusUpdater.updateExpiryTags(sampleIngredient);
             sampleAb.add(sampleIngredient);
         }
+        sampleAb.sort(new IngredientDefaultComparator());
         return sampleAb;
     }
 
