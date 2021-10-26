@@ -8,6 +8,7 @@ import fridgy.model.ModelManager;
 import fridgy.model.RecipeBook;
 import fridgy.model.UserPrefs;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.ingredient.IngredientDefaultComparator;
 import fridgy.testutil.IngredientBuilder;
 import fridgy.testutil.TypicalIngredients;
 
@@ -29,6 +30,7 @@ public class AddCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
         expectedModel.add(validIngredient);
+        expectedModel.sortIngredient(new IngredientDefaultComparator());
 
         CommandTestUtil.assertCommandSuccess(new AddCommand(validIngredient), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, validIngredient), expectedModel);
@@ -36,6 +38,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateIngredient_throwsCommandException() {
+        model.sortIngredient(new IngredientDefaultComparator());
         Ingredient ingredientInList = model.getInventory().getList().get(0);
         CommandTestUtil.assertCommandFailure(new AddCommand(ingredientInList), model,
                 AddCommand.MESSAGE_DUPLICATE_INGREDIENT);

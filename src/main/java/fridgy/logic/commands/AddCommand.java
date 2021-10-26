@@ -11,6 +11,7 @@ import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.IngredientModel;
 import fridgy.model.ingredient.ExpiryStatusUpdater;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.ingredient.IngredientDefaultComparator;
 
 
 /**
@@ -61,6 +62,7 @@ public class AddCommand extends Command {
         }
 
         model.add(toAdd);
+        model.sortIngredient(new IngredientDefaultComparator());
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

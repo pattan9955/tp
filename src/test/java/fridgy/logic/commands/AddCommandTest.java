@@ -36,7 +36,6 @@ public class AddCommandTest {
     public void execute_ingredientAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingIngredientAdded modelStub = new ModelStubAcceptingIngredientAdded();
         Ingredient validIngredient = new IngredientBuilder().build();
-
         CommandResult commandResult = new AddCommand(validIngredient).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validIngredient), commandResult.getFeedbackToUser());
@@ -118,9 +117,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortIngredient(Comparator<Ingredient> comparator) {
-            throw new AssertionError("This method should not be called.");
-        }
+        public void sortIngredient(Comparator<Ingredient> comparator) {}
 
         @Override
         public void setInventory(ReadOnlyDatabase<Ingredient> newData) {

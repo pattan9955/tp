@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import fridgy.commons.core.Messages;
 import fridgy.model.IngredientModel;
+import fridgy.model.ingredient.IngredientDefaultComparator;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 
 /**
@@ -31,6 +32,7 @@ public class FindCommand extends Command {
     public CommandResult execute(IngredientModel model) {
         requireNonNull(model);
         model.updateFilteredIngredientList(predicate);
+        model.sortIngredient(new IngredientDefaultComparator());
 
         int size = model.getFilteredIngredientList().size();
         String plural = size == 0 || size == 1 ? "" : "s";

@@ -76,8 +76,6 @@ public class TypicalIngredients {
             .withDescription(VALID_DESCRIPTION_FISH)
             .withExpiryDate(VALID_EXPIRY_DATE).build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
-
     private TypicalIngredients() {} // prevents instantiation
 
     /**
