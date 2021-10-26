@@ -120,6 +120,15 @@ public class RecipeCommandParserTestUtil {
             + "-s new step 1 -s new step 2";
     public static final String VALID_EDIT_COMMAND_INGR_NAME_PRESENT = "edit recipe 1 -n new Test -i new ingr1 100mg"
             + " -i new ingr2 200mg";
+
+    //-------------------------------------INVALID CLEAR RECIPE COMMANDS----------------------------------------------
+    public static final String INVALID_CLEAR_COMMAND = "clear";
+    public static final String INVALID_CLEAR_COMMAND_WRONG_TYPE = "clear ingredient";
+    public static final String INVALID_CLEAR_COMMAND_ARGS_PROVIDED = "clear recipe kekw";
+
+    //---------------------------------------VALID CLEAR RECIPE COMMANDS-----------------------------------------------
+    public static final String VALID_CLEAR_RECIPE_COMMAND = "clear recipe";
+
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created
      * equals to {@code expectedCommand}.
