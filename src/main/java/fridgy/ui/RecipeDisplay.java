@@ -21,7 +21,8 @@ public class RecipeDisplay extends UiPart<Region> {
     private static final String FXML = "RecipeDisplay.fxml";
 
     // Char limits
-    private static final int INGREDIENT_CHAR_LIMIT = 55;
+    private static final int INGREDIENT_CHAR_LIMIT = 45;
+    private static final int QUANTITY_CHAR_LIMIT = 25;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -73,12 +74,14 @@ public class RecipeDisplay extends UiPart<Region> {
         recipe.getIngredients().stream()
                 .sorted(Comparator.comparing(ingredient -> ingredient.getName().toString()))
                 .forEach(ingredient -> {
-                    Label ingredientLabel = new Label(ingredient.getQuantity().toString()
+                    Label ingredientLabel = new Label(UiUtil.truncateText(ingredient.getQuantity().toString(),
+                            QUANTITY_CHAR_LIMIT)
                                     + " "
                                     + UiUtil.truncateText(
                             ingredient.getName().toString(),
                             INGREDIENT_CHAR_LIMIT)
                     );
+                    ingredientLabel.setWrapText(true);
                     if (!isEnough.apply(ingredient)) {
                         missingIngredientsPlaceholder.getChildren().add(ingredientLabel);
                     } else {
