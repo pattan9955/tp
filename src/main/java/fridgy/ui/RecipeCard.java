@@ -47,7 +47,7 @@ public class RecipeCard extends UiPart<Region> {
     /**
      * Creates a {@code RecipeCode} with the given {@code Recipe} and index to display.
      */
-    public RecipeCard(Recipe recipe, int displayedIndex, boolean isStepsVisible,
+    public RecipeCard(Recipe recipe, int displayedIndex,
                       Function<BaseIngredient, Boolean> isEnough) {
         super(FXML);
         this.recipe = recipe;
@@ -78,10 +78,6 @@ public class RecipeCard extends UiPart<Region> {
         description.setText(!recipeDescription.equals("")
                 ? "Description: " + recipeDescription
                 : recipeDescription);
-        // This will automatically show / hide steps label
-//        steps.setText("Steps:\n" + UiUtil.numberedList(recipe.getSteps()));
-//        steps.setVisible(isStepsVisible);
-//        steps.managedProperty().bind(steps.visibleProperty());
     }
 
     @Override

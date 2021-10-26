@@ -1,7 +1,9 @@
 package fridgy.ui;
 
 import java.util.Comparator;
+import java.util.function.Function;
 
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.recipe.Recipe;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -44,16 +46,25 @@ public class RecipeDisplay extends UiPart<Region> {
     /**
      * Creates a {@code RecipeCode} with the given {@code Recipe}.
      */
-    public RecipeDisplay(Recipe recipe) {
+    public RecipeDisplay(Recipe recipe, Function<BaseIngredient, Boolean> isEnough) {
         super(FXML);
         this.recipe = recipe;
 
         name.setText(recipe.getName().fullName);
         recipe.getIngredients().stream()
                 .sorted(Comparator.comparing(ingredient -> ingredient.getName().toString()))
-                .forEach(ingredient -> ingredients.getChildren().add(
-                        new Label(UiUtil.truncateText(ingredient.getName().toString(), INGREDIENT_CHAR_LIMIT)
-                        )));
+                .forEach(ingredient -> {
+                    Label ingredientLabel = new Label(UiUtil.truncateText(
+                            ingredient.getName().toString()
+                                    + " "
+                                    + ingredient.getQuantity().toString(),
+                            INGREDIENT_CHAR_LIMIT)
+                    );
+                    if (!isEnough.apply(ingredient)) {
+                        ingredientLabel.setStyle("-fx-background-color: #CF1259;");
+                    }
+                    ingredients.getChildren().add(ingredientLabel);
+                });
         description.setText(recipe.getDescription().orElse(""));
         steps.setText("Steps:\n" + UiUtil.numberedList(recipe.getSteps()));
     }

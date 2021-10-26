@@ -1,8 +1,10 @@
 package fridgy.ui;
 
+import java.util.function.Function;
 import java.util.logging.Logger;
 
 import fridgy.commons.core.LogsCenter;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.recipe.Recipe;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -19,6 +21,8 @@ public class RecipeListPanel extends UiPart<Region> {
     private static final String FXML = "RecipeListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(RecipeListPanel.class);
 
+    private final Function<BaseIngredient, Boolean> isEnough;
+
     @FXML
     private ListView<Recipe> recipeListView;
 
@@ -26,8 +30,10 @@ public class RecipeListPanel extends UiPart<Region> {
      * Creates a {@code RecipeListPanel} with the given {@code ObservableList}.
      * isDetailed flag determines if the recipe card will show the steps. This is added to allow component reuse.
      */
-    public RecipeListPanel(ObservableList<Recipe> recipeList, ActiveItemPanel activeItemPanel) {
+    public RecipeListPanel(ObservableList<Recipe> recipeList, ActiveItemPanel activeItemPanel,
+                           Function<BaseIngredient, Boolean> isEnough) {
         super(FXML);
+        this.isEnough = isEnough;
         recipeListView.setItems(recipeList);
         recipeListView.setCellFactory(listView -> new RecipeListViewCell());
         recipeListView.getSelectionModel().selectedItemProperty().addListener(
@@ -51,7 +57,7 @@ public class RecipeListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new RecipeCard(recipe, getIndex() + 1).getRoot());
+                setGraphic(new RecipeCard(recipe, getIndex() + 1, isEnough).getRoot());
             }
         }
     }
