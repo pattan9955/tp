@@ -1,12 +1,9 @@
 ---
 layout: page
-title: Developer Guide
+title: Fridgy – Developer Guide
 ---
 
-# Fridgy – Developer Guide
-
 By: `Team Fridgy`
-
 
 * Table of Contents
 {:toc}
