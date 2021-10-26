@@ -3,11 +3,9 @@ layout: page
 title: Fridgy – User Guide
 ---
 
-By: `Team Fridgy`
+<img src="images/fridge.png" width="50" id="logo" />
+By: `Team Fridgy` 
 
-<div id="cover-image">
-  <img width=30% id="logo" src="images/fridge.png"/>
-</div>
 
 * Table of Contents
 {:toc}
@@ -46,18 +44,18 @@ This User Guide covers:
 1. Ensure you have Java 11 or above installed in your Computer.
 2. Download the latest `fridgy.jar` [here](https://github.com/AY2122S1-CS2103T-W11-1/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for Fridgy.
-4. Double-click the file to start the app. The GUI should appear in a few seconds. We've populated it with some sample data for you to experiment with.
+4. Double-click the file to start the app. The GUI should appear in a few seconds. We've populated it with some sample ingredients and recipes for you to experiment with.
 
 <a name="startup"></a>
 <div style="text-align: center; padding-bottom: 2em">
-<img width=60% id="logo" src="images/startup-ss.png"/>
+<img src="images/startup-ss.png" width="80%" id="logo" />
 <br>
-<i>The initial state of Fridgy, populated with sample data</i>
+<i>When you first open Fridgy, it is filled with sample ingredients and recipes</i>
 </div>
 
 ## 2.1 Tutorial
 
-Now that Fridgy is installed, you can test out the commands — add ingredients, recipes, and more! 
+Now that Fridgy is installed, you can test out the commands — add ingredients, recipes, and more!
 
 Adding our first ingredient:
 
@@ -72,6 +70,11 @@ Finally, execute the recipe:
 `cook recipe 1`
 
 The quantity of grapes would be deducted accordingly.
+
+Now that you are ready to use fridgy, you may use clear commands to clear out the sample entries:
+
+`clear ingredient`
+`clear recipe`
 
 To exit Fridgy, simply close the application window.
 
