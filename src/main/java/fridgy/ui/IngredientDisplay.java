@@ -16,7 +16,7 @@ public class IngredientDisplay extends UiPart<Region> {
 
     private static final String FXML = "IngredientDisplay.fxml";
 
-    private static final int TAG_CHAR_LIMIT = 70;
+    private static final int TAG_CHAR_LIMIT = 55;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -49,9 +49,9 @@ public class IngredientDisplay extends UiPart<Region> {
         this.ingredient = ingredient;
 
         name.setText(ingredient.getName().fullName);
-        quantity.setText(ingredient.getQuantity().value);
-        description.setText(ingredient.getDescription().value.orElse(""));
+        quantity.setText("Quantity: " + ingredient.getQuantity().value);
         expiryDate.setText("Expiring on: " + ingredient.getExpiryDate().toString());
+        description.setText(ingredient.getDescription().value.orElse(""));
         ingredient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
@@ -60,6 +60,8 @@ public class IngredientDisplay extends UiPart<Region> {
                     tagLabel.setWrapText(true);
                     if (name == "expired") {
                         tagLabel.setStyle("-fx-background-color: #CF1259;");
+                    } else if (name == "expiring") {
+                        tagLabel.setStyle("-fx-background-color: #F77F00;");
                     }
                     tags.getChildren().add(tagLabel);
                 });

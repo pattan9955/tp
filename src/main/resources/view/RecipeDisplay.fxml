@@ -17,11 +17,24 @@
             <padding>
                 <Insets bottom="5" left="15" right="5" top="5" />
             </padding>
-            <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true" />
+            <Label fx:id="name" styleClass="name_display" text="\$first" wrapText="true" />
+            <Label fx:id="description" styleClass="recipe_description_display" text="\$description" wrapText="true"
+                   prefWidth="Infinity"/>
+            <HBox styleClass="ingredientsPane" spacing="20">
+                <children>
+                    <VBox fx:id="availableIngredientsPlaceholder" styleClass="available_ingredients_placeholder"
+                          minWidth="400">
+                    </VBox>
+                    <VBox fx:id="missingIngredientsPlaceholder" styleClass="missing_ingredients_placeholder"
+                          minWidth="400">
+
+                    </VBox>
+                </children>
+            </HBox>
             <FlowPane fx:id="ingredients" />
-            <Label fx:id="description" styleClass="cell_small_label" text="\$description" wrapText="true" />
 <!--         <VBox id="steps" prefHeight="55.0" prefWidth="130.0" />-->
-            <Label fx:id="steps" wrapText="true" styleClass="cell_small_label" text="\$steps" />
+            <Label fx:id="stepsTitle" styleClass="steps_title"/>
+            <Label fx:id="steps" wrapText="true" styleClass="steps_description" text="\$steps" />
         </VBox>
     </GridPane>
 </HBox>

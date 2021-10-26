@@ -28,6 +28,7 @@
 
 .menu-bar .label {
     -fx-font-family: "Montserrat SemiBold";
+    -fx-font-size: 16;
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -35,6 +36,7 @@
 .menu-item .label {
     -fx-font-family: "Montserrat";
     -fx-text-fill: black;
+    -fx-font-size: 16;
     -fx-opacity: 0.9;
 }
 
@@ -56,6 +58,7 @@
 
 /*Text area (result display)*/
 .text-area {
+    -fx-font-size: 16;
     -fx-background-color: #f9f9f9;
     -fx-background-radius: 15;
     -fx-border-radius: 15;
@@ -116,6 +119,7 @@
 .tab-pane .tab
 {
     -fx-font-family: "Montserrat SemiBold";
+    -fx-font-size: 16;
     -fx-background-color: white;
     -fx-border-color: transparent transparent transparent transparent;
 }
@@ -143,6 +147,7 @@
 
 /*Text field*/
 .text-field {
+    -fx-font-size: 16;
     -fx-focus-color: #4059A9;
     -fx-padding: 0.333333em 0 0.333333em 0;
     -fx-background-color: transparent, transparent, transparent;
@@ -210,33 +215,42 @@
 }
 
 .cell_big_label {
+    -fx-padding: 0 0 10 0;
     -fx-font-family: "Montserrat Semibold";
-    -fx-font-size: 16px;
+    -fx-font-size: 20px;
 }
 
 .cell_small_label {
     -fx-font-family: "Montserrat Regular";
-    -fx-font-size: 13px;
+    -fx-font-size: 16px;
+}
+
+.description_label {
+    -fx-font-family: "Montserrat Regular";
+    -fx-padding: 10 0 0 0;
+    -fx-font-size: 16px;
 }
 
 #tags {
     -fx-hgap: 9;
     -fx-vgap: 4;
+    -fx-padding: 0 0 10 0;
 }
 
 #tags .label {
     -fx-text-fill: white;
     -fx-font-family: "Montserrat SemiBold";
     -fx-background-color:  #0046fe;
-    -fx-padding: 2 4 2 4;
-    -fx-border-radius: 5;
-    -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-padding: 3 10 3 10;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-font-size: 13;
 }
 
 #ingredients {
     -fx-hgap: 9;
     -fx-vgap: 4;
+    -fx-padding: 0 0 10 0;
 }
 
 #ingredients .label {
@@ -279,5 +293,76 @@
 .view-display {
     -fx-background-color: white;
     -fx-background: white;
+}
+
+.name_display {
+    -fx-padding: 20 0 20 0;
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-font-size: 48px;
+}
+
+/*Ingredient Display*/
+.ingredient_description_display {
+    -fx-padding: 30 0 30 0;
+    -fx-font-size: 20;
+    -fx-border-color: #EBF2FA transparent transparent transparent;
+}
+
+.expiry_display {
+    -fx-padding: 0 0 30 0;
+    -fx-font-family: "Montserrat Regular";
+    -fx-font-size: 16px;
+}
+
+/*Recipe Display*/
+.recipe_description_display {
+    -fx-padding: 0 0 30 0;
+    -fx-end-margin: 10;
+    -fx-border-color: transparent transparent #EBF2FA transparent;
+}
+
+.steps_title {
+    -fx-padding: 0 0 20 0;
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-font-size: 32px;
+}
+
+.steps_description {
+    -fx-font-family: "Montserrat Regular";
+    -fx-font-size: 22px;
+}
+
+.ingredientsPane {
+    -fx-padding: 30 0 10 0;
+}
+
+.available_ingredients_placeholder {
+    -fx-padding: 30 0 10 0;
+    -fx-background-color: #EBF2FA;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}
+
+.missing_ingredients_placeholder {
+    -fx-padding: 30 0 10 0;
+    -fx-background-color: #FAC7DB;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}
+
+.available_ingredients_placeholder .label {
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-padding: 0 20 20 20;
+    -fx-border-radius: 5;
+    -fx-background-radius: 2;
+    -fx-font-size: 25;
+}
+
+.missing_ingredients_placeholder .label {
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-padding: 0 20 20 20;
+    -fx-border-radius: 5;
+    -fx-background-radius: 2;
+    -fx-font-size: 25;
 }
 

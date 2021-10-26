@@ -20,7 +20,7 @@ public class RecipeCard extends UiPart<Region> {
 
     // Char limits
     private static final int DESCRIPTION_CHAR_LIMIT = 155;
-    private static final int INGREDIENT_CHAR_LIMIT = 55;
+    private static final int INGREDIENT_CHAR_LIMIT = 35;
     private static final int NAME_CHAR_LIMIT = 25;
 
     /**
@@ -76,7 +76,7 @@ public class RecipeCard extends UiPart<Region> {
                 });
 
         description.setText(!recipeDescription.equals("")
-                ? "Description: " + recipeDescription
+                ? recipeDescription
                 : recipeDescription);
     }
 

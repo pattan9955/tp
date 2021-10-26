@@ -11,6 +11,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 /**
  * An UI component that displays information of a {@code Recipe}.
@@ -39,7 +40,13 @@ public class RecipeDisplay extends UiPart<Region> {
     @FXML
     private FlowPane ingredients;
     @FXML
+    private VBox availableIngredientsPlaceholder;
+    @FXML
+    private VBox missingIngredientsPlaceholder;
+    @FXML
     private Label description;
+    @FXML
+    private Label stepsTitle;
     @FXML
     private Label steps;
 
@@ -50,23 +57,45 @@ public class RecipeDisplay extends UiPart<Region> {
         super(FXML);
         this.recipe = recipe;
 
+
         name.setText(recipe.getName().fullName);
+        long missingIngredientsCount = recipe.getIngredients().stream()
+                .filter(ingredient -> !isEnough.apply(ingredient)).count();
+        long availableIngredientsCount = recipe.getIngredients().size() - missingIngredientsCount;
+        if (missingIngredientsCount == 0) {
+            missingIngredientsPlaceholder.setVisible(false);
+            missingIngredientsPlaceholder.managedProperty().bind(missingIngredientsPlaceholder.visibleProperty());
+        }
+        if (availableIngredientsCount == 0) {
+            availableIngredientsPlaceholder.setVisible(false);
+            availableIngredientsPlaceholder.managedProperty().bind(availableIngredientsPlaceholder.visibleProperty());
+        }
         recipe.getIngredients().stream()
                 .sorted(Comparator.comparing(ingredient -> ingredient.getName().toString()))
                 .forEach(ingredient -> {
-                    Label ingredientLabel = new Label(UiUtil.truncateText(
-                            ingredient.getName().toString()
+                    Label ingredientLabel = new Label(ingredient.getQuantity().toString()
                                     + " "
-                                    + ingredient.getQuantity().toString(),
+                                    + UiUtil.truncateText(
+                            ingredient.getName().toString(),
                             INGREDIENT_CHAR_LIMIT)
                     );
                     if (!isEnough.apply(ingredient)) {
-                        ingredientLabel.setStyle("-fx-background-color: #CF1259;");
+                        missingIngredientsPlaceholder.getChildren().add(ingredientLabel);
+                    } else {
+                        availableIngredientsPlaceholder.getChildren().add(ingredientLabel);
                     }
-                    ingredients.getChildren().add(ingredientLabel);
                 });
+        String recipeDescription = recipe.getDescription().orElse("");
         description.setText(recipe.getDescription().orElse(""));
-        steps.setText("Steps:\n" + UiUtil.numberedList(recipe.getSteps()));
+        if (recipeDescription.length() < 20) {
+            description.setFont(Font.font("Montserrat Regular", 32));
+        } else if (recipeDescription.length() < 30) {
+            description.setFont(Font.font("Montserrat Regular", 25));
+        } else {
+            description.setFont(Font.font("Montserrat Regular", 20));
+        }
+        stepsTitle.setText("Steps:");
+        steps.setText(UiUtil.numberedList(recipe.getSteps()));
     }
 
     @Override

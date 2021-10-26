@@ -20,7 +20,7 @@ public class IngredientCard extends UiPart<Region> {
     private static final int DESCRIPTION_CHAR_LIMIT = 90;
     private static final int NAME_CHAR_LIMIT = 25;
     private static final int QUANTITY_CHAR_LIMIT = 50;
-    private static final int TAG_CHAR_LIMIT = 55;
+    private static final int TAG_CHAR_LIMIT = 35;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -61,7 +61,7 @@ public class IngredientCard extends UiPart<Region> {
 
         id.setText(displayedIndex + ". ");
         name.setText(ingredientName);
-        quantity.setText(ingredientQuantity);
+        quantity.setText("Quantity: " + ingredientQuantity);
         description.setText(ingredientDescription);
         expiryDate.setText("Expiry Date: " + ingredient.getExpiryDate().toString());
         ingredient.getTags().stream()
@@ -77,7 +77,7 @@ public class IngredientCard extends UiPart<Region> {
                     if (name == "expired") {
                         tagLabel.setStyle("-fx-background-color: #CF1259;");
                     } else if (name == "expiring") {
-                        tagLabel.setStyle("-fx-background-color: #767676;");
+                        tagLabel.setStyle("-fx-background-color: #F77F00;");
                     }
                     tags.getChildren().add(tagLabel);
                 });
