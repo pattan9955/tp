@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+            <padding>
+                <Insets bottom="5" left="15" right="5" top="5" />
+            </padding>
+            <Label fx:id="name" styleClass="name_display" text="\$first" wrapText="true" />
+            <Label fx:id="description" styleClass="recipe_description_display" text="\$description" wrapText="true"
+                   prefWidth="Infinity"/>
+            <HBox styleClass="ingredientsPane" spacing="20">
+                <children>
+                    <VBox fx:id="availableIngredientsPlaceholder" styleClass="available_ingredients_placeholder"
+                          minWidth="400">
+                    </VBox>
+                    <VBox fx:id="missingIngredientsPlaceholder" styleClass="missing_ingredients_placeholder"
+                          minWidth="400">
+
+                    </VBox>
+                </children>
+            </HBox>
+            <FlowPane fx:id="ingredients" />
+<!--         <VBox id="steps" prefHeight="55.0" prefWidth="130.0" />-->
+            <Label fx:id="stepsTitle" styleClass="steps_title"/>
+            <Label fx:id="steps" wrapText="true" styleClass="steps_description" text="\$steps" />
+        </VBox>
+    </GridPane>
+</HBox>

@@ -22,8 +22,13 @@
     -fx-background-color: #0046fe;
 }
 
+.menu:hover {
+    -fx-cursor: hand;
+}
+
 .menu-bar .label {
     -fx-font-family: "Montserrat SemiBold";
+    -fx-font-size: 16;
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -31,7 +36,12 @@
 .menu-item .label {
     -fx-font-family: "Montserrat";
     -fx-text-fill: black;
+    -fx-font-size: 16;
     -fx-opacity: 0.9;
+}
+
+.menu-item:hover {
+    -fx-cursor: hand;
 }
 
 /*Status bar*/
@@ -48,7 +58,8 @@
 
 /*Text area (result display)*/
 .text-area {
-    -fx-background-color: #EBECF0;
+    -fx-font-size: 16;
+    -fx-background-color: #f9f9f9;
     -fx-background-radius: 15;
     -fx-border-radius: 15;
     -fx-border-color: transparent;
@@ -107,6 +118,8 @@
 
 .tab-pane .tab
 {
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-font-size: 16;
     -fx-background-color: white;
     -fx-border-color: transparent transparent transparent transparent;
 }
@@ -115,6 +128,7 @@
 .tab-pane .tab:hover
 {
     -fx-background-color: #EBF2FA;
+    -fx-cursor: hand;
 }
 
 /*Underline and bold tab header when selected*/
@@ -123,7 +137,7 @@
     -fx-background-color: white;
     -fx-border-color: transparent transparent #0046fe transparent;
     -fx-font-family: "Montserrat SemiBold";
-    -fx-border-width: 0 0 2 0;
+    -fx-border-width: 0 0 3 0;
 }
 
 /*Color tab header label when selected*/
@@ -133,6 +147,7 @@
 
 /*Text field*/
 .text-field {
+    -fx-font-size: 16;
     -fx-focus-color: #4059A9;
     -fx-padding: 0.333333em 0 0.333333em 0;
     -fx-background-color: transparent, transparent, transparent;
@@ -153,7 +168,7 @@
 
 .text-field:focused {
     -fx-background-color: transparent, transparent, transparent;
-    -fx-border-color: transparent transparent #1C5D99 transparent;
+    -fx-border-color: transparent transparent #0046fe transparent;
     -fx-prompt-text-fill: #C5C5C5;
 }
 
@@ -175,11 +190,24 @@
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #EBF2FA;
+    -fx-background-color: #f9f9f9;
 }
 
-.list-cell:filled:selected {
-    -fx-background-color: derive(#1C5D99, 100%);
+.list-cell:filled:hover {
+    -fx-background-color: #EBF2FA;
+    -fx-cursor: hand;
+}
+
+.list-cell:filled:odd:selected {
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: transparent transparent transparent #0046fe;
+    -fx-border-width: 0 0 0 3;
+}
+
+.list-cell:filled:even:selected {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent transparent #0046fe;
+    -fx-border-width: 0 0 0 3;
 }
 
 .list-cell .label {
@@ -187,43 +215,52 @@
 }
 
 .cell_big_label {
+    -fx-padding: 0 0 10 0;
     -fx-font-family: "Montserrat Semibold";
-    -fx-font-size: 16px;
+    -fx-font-size: 20px;
 }
 
 .cell_small_label {
     -fx-font-family: "Montserrat Regular";
-    -fx-font-size: 13px;
+    -fx-font-size: 16px;
+}
+
+.description_label {
+    -fx-font-family: "Montserrat Regular";
+    -fx-padding: 10 0 0 0;
+    -fx-font-size: 16px;
 }
 
 #tags {
     -fx-hgap: 9;
     -fx-vgap: 4;
+    -fx-padding: 0 0 10 0;
 }
 
 #tags .label {
     -fx-text-fill: white;
     -fx-font-family: "Montserrat SemiBold";
     -fx-background-color:  #0046fe;
-    -fx-padding: 2 4 2 4;
-    -fx-border-radius: 5;
-    -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-padding: 3 10 3 10;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-font-size: 13;
 }
 
 #ingredients {
     -fx-hgap: 9;
     -fx-vgap: 4;
+    -fx-padding: 0 0 10 0;
 }
 
 #ingredients .label {
     -fx-text-fill: white;
     -fx-font-family: "Montserrat SemiBold";
     -fx-background-color:  #0046fe;
-    -fx-padding: 2 4 2 4;
-    -fx-border-radius: 5;
-    -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-padding: 3 10 3 10;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-font-size: 13;
 }
 
 /*Scroll Bar*/
@@ -232,7 +269,7 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#d8d8d8, 0%);
+    -fx-background-color: derive(#d8d8d8, 50%);
     -fx-background-insets: 3;
 }
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
@@ -250,5 +287,82 @@
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
     -fx-padding: 8 1 8 1;
+}
+
+/*View Display*/
+.view-display {
+    -fx-background-color: white;
+    -fx-background: white;
+}
+
+.name_display {
+    -fx-padding: 20 0 20 0;
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-font-size: 42px;
+}
+
+/*Ingredient Display*/
+.ingredient_description_display {
+    -fx-padding: 30 0 30 0;
+    -fx-font-size: 20;
+    -fx-border-color: #EBF2FA transparent transparent transparent;
+}
+
+.expiry_display {
+    -fx-padding: 0 0 30 0;
+    -fx-font-family: "Montserrat Regular";
+    -fx-font-size: 16px;
+}
+
+/*Recipe Display*/
+.recipe_description_display {
+    -fx-padding: 0 0 30 0;
+    -fx-end-margin: 10;
+    -fx-border-color: transparent transparent #EBF2FA transparent;
+}
+
+.steps_title {
+    -fx-padding: 0 0 20 0;
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-font-size: 32px;
+}
+
+.steps_description {
+    -fx-font-family: "Montserrat Regular";
+    -fx-font-size: 22px;
+}
+
+.ingredientsPane {
+    -fx-padding: 30 0 10 0;
+}
+
+.available_ingredients_placeholder {
+    -fx-padding: 30 0 10 0;
+    -fx-background-color: #EBF2FA;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}
+
+.missing_ingredients_placeholder {
+    -fx-padding: 30 0 10 0;
+    -fx-background-color: #FAC7DB;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}
+
+.available_ingredients_placeholder .label {
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-padding: 0 20 20 20;
+    -fx-border-radius: 5;
+    -fx-background-radius: 2;
+    -fx-font-size: 25;
+}
+
+.missing_ingredients_placeholder .label {
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-padding: 0 20 20 20;
+    -fx-border-radius: 5;
+    -fx-background-radius: 2;
+    -fx-font-size: 25;
 }
 

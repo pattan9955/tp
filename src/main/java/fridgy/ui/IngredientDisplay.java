@@ -12,15 +12,11 @@ import javafx.scene.layout.Region;
 /**
  * An UI component that displays information of a {@code Ingredient}.
  */
-public class IngredientCard extends UiPart<Region> {
+public class IngredientDisplay extends UiPart<Region> {
 
-    private static final String FXML = "IngredientListCard.fxml";
+    private static final String FXML = "IngredientDisplay.fxml";
 
-    // Char limits
-    private static final int DESCRIPTION_CHAR_LIMIT = 90;
-    private static final int NAME_CHAR_LIMIT = 25;
-    private static final int QUANTITY_CHAR_LIMIT = 50;
-    private static final int TAG_CHAR_LIMIT = 35;
+    private static final int TAG_CHAR_LIMIT = 55;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -37,8 +33,6 @@ public class IngredientCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
-    @FXML
     private Label quantity;
     @FXML
     private Label description;
@@ -48,22 +42,16 @@ public class IngredientCard extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code IngredientCode} with the given {@code Ingredient} and index to display.
+     * Creates a {@code IngredientCode} with the given {@code Ingredient}.
      */
-    public IngredientCard(Ingredient ingredient, int displayedIndex) {
+    public IngredientDisplay(Ingredient ingredient) {
         super(FXML);
         this.ingredient = ingredient;
 
-        String ingredientName = UiUtil.truncateText(ingredient.getName().fullName, NAME_CHAR_LIMIT);
-        String ingredientDescription = UiUtil.truncateText(ingredient.getDescription().value.orElse(""),
-                DESCRIPTION_CHAR_LIMIT);
-        String ingredientQuantity = UiUtil.truncateText(ingredient.getQuantity().value, QUANTITY_CHAR_LIMIT);
-
-        id.setText(displayedIndex + ". ");
-        name.setText(ingredientName);
-        quantity.setText("Quantity: " + ingredientQuantity);
-        description.setText(ingredientDescription);
-        expiryDate.setText("Expiry Date: " + ingredient.getExpiryDate().toString());
+        name.setText(ingredient.getName().fullName);
+        quantity.setText("Quantity: " + ingredient.getQuantity().value);
+        expiryDate.setText("Expiring on: " + ingredient.getExpiryDate().toString());
+        description.setText(ingredient.getDescription().value.orElse(""));
         ingredient.getTags().stream()
                 .sorted(Comparator.comparing(tag ->
                         tag.tagName.equals("expired") || tag.tagName.equals("expiring")
@@ -91,13 +79,13 @@ public class IngredientCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof IngredientCard)) {
+        if (!(other instanceof IngredientDisplay)) {
             return false;
         }
 
         // state check
-        IngredientCard card = (IngredientCard) other;
-        return id.getText().equals(card.id.getText())
+        IngredientDisplay card = (IngredientDisplay) other;
+        return name.getText().equals(card.name.getText())
                 && ingredient.equals(card.ingredient);
     }
 }

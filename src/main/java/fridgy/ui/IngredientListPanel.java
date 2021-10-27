@@ -4,6 +4,8 @@ import java.util.logging.Logger;
 
 import fridgy.commons.core.LogsCenter;
 import fridgy.model.ingredient.Ingredient;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -23,10 +25,17 @@ public class IngredientListPanel extends UiPart<Region> {
     /**
      * Creates a {@code IngredientListPanel} with the given {@code ObservableList}.
      */
-    public IngredientListPanel(ObservableList<Ingredient> ingredientList) {
+    public IngredientListPanel(ObservableList<Ingredient> ingredientList, ActiveItemPanel activeItemPanel) {
         super(FXML);
         ingredientListView.setItems(ingredientList);
         ingredientListView.setCellFactory(listView -> new IngredientListViewCell());
+        ingredientListView.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<Ingredient>() {
+                    public void changed(ObservableValue<? extends Ingredient> ov,
+                                        Ingredient old_val, Ingredient new_val) {
+                        activeItemPanel.update(new_val);
+                    }
+                });
     }
 
     /**

@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 import fridgy.commons.core.LogsCenter;
 import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.recipe.Recipe;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -19,7 +21,6 @@ public class RecipeListPanel extends UiPart<Region> {
     private static final String FXML = "RecipeListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(RecipeListPanel.class);
 
-    private final boolean isDetailed;
     private final Function<BaseIngredient, Boolean> isEnough;
 
     @FXML
@@ -29,17 +30,23 @@ public class RecipeListPanel extends UiPart<Region> {
      * Creates a {@code RecipeListPanel} with the given {@code ObservableList}.
      * isDetailed flag determines if the recipe card will show the steps. This is added to allow component reuse.
      */
-    public RecipeListPanel(ObservableList<Recipe> recipeList, boolean isDetailed,
+    public RecipeListPanel(ObservableList<Recipe> recipeList, ActiveItemPanel activeItemPanel,
                            Function<BaseIngredient, Boolean> isEnough) {
         super(FXML);
-        this.isDetailed = isDetailed;
+        this.isEnough = isEnough;
         recipeListView.setItems(recipeList);
         recipeListView.setCellFactory(listView -> new RecipeListViewCell());
-        this.isEnough = isEnough;
+        recipeListView.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<Recipe>() {
+                    public void changed(ObservableValue<? extends Recipe> ov,
+                                        Recipe old_val, Recipe new_val) {
+                        activeItemPanel.update(new_val);
+                    }
+                });
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code BaseIngredient} using a {@code RecipeCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code RecipeIngredient} using a {@code RecipeCard}.
      */
     class RecipeListViewCell extends ListCell<Recipe> {
         @Override
@@ -50,7 +57,7 @@ public class RecipeListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new RecipeCard(recipe, getIndex() + 1, isDetailed, isEnough).getRoot());
+                setGraphic(new RecipeCard(recipe, getIndex() + 1, isEnough).getRoot());
             }
         }
     }

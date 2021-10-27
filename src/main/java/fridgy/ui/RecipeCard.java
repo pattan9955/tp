@@ -20,7 +20,7 @@ public class RecipeCard extends UiPart<Region> {
 
     // Char limits
     private static final int DESCRIPTION_CHAR_LIMIT = 155;
-    private static final int INGREDIENT_CHAR_LIMIT = 55;
+    private static final int INGREDIENT_CHAR_LIMIT = 35;
     private static final int NAME_CHAR_LIMIT = 25;
 
     /**
@@ -42,14 +42,12 @@ public class RecipeCard extends UiPart<Region> {
     @FXML
     private FlowPane ingredients;
     @FXML
-    private Label steps;
-    @FXML
     private Label description;
 
     /**
      * Creates a {@code RecipeCode} with the given {@code Recipe} and index to display.
      */
-    public RecipeCard(Recipe recipe, int displayedIndex, boolean isStepsVisible,
+    public RecipeCard(Recipe recipe, int displayedIndex,
                       Function<BaseIngredient, Boolean> isEnough) {
         super(FXML);
         this.recipe = recipe;
@@ -78,13 +76,8 @@ public class RecipeCard extends UiPart<Region> {
                 });
 
         description.setText(!recipeDescription.equals("")
-                ? "Description: " + recipeDescription
+                ? recipeDescription
                 : recipeDescription);
-
-        // This will automatically show / hide steps label
-        steps.setText("Steps:\n" + UiUtil.numberedList(recipe.getSteps()));
-        steps.setVisible(isStepsVisible);
-        steps.managedProperty().bind(steps.visibleProperty());
     }
 
     @Override

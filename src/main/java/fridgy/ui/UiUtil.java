@@ -27,7 +27,7 @@ public class UiUtil {
         for (int i = 1; i < list.size() + 1; i++) {
             sb.append(i + ". ")
                 .append(list.get(i - 1).toString())
-                .append("\n");
+                .append("\n\n");
         }
         return sb.toString();
     }

@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
@@ -18,17 +17,13 @@
             <padding>
                 <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
-            <HBox spacing="5" alignment="CENTER_LEFT">
-                <Label fx:id="id" styleClass="cell_big_label">
-                    <minWidth>
-                        <!-- Ensures that the label text is never truncated -->
-                        <Region fx:constant="USE_PREF_SIZE" />
-                    </minWidth>
-                </Label>
-                <Label fx:id="name" wrapText="true" text="\$first" styleClass="cell_big_label" />
-            </HBox>
-            <FlowPane fx:id="ingredients" />
-            <Label fx:id="description" wrapText="true" styleClass="cell_small_label" text="\$description" />
+            <Label fx:id="name" styleClass="name_display" wrapText="true" text="\$first" />
+            <FlowPane fx:id="tags" />
+            <Label fx:id="quantity" wrapText="true" styleClass="cell_small_label" text="\$quantity" />
+            <Label fx:id="expiryDate" wrapText="true" styleClass="expiry_display" text="\$expiryDate" />
+            <Label fx:id="description" wrapText="true" styleClass="ingredient_description_display" text="\$description"
+                   prefWidth="Infinity" />
         </VBox>
     </GridPane>
 </HBox>
+
