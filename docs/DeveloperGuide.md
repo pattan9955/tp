@@ -21,7 +21,7 @@ For more information on the Fridgy application, refer to the [_User Guide_](User
 
 Fridgy is a **desktop app for managing an Inventory of food as well as a list of recipes, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Fridgy can get your fridge Inventory and recipe sorted out faster than traditional GUI apps.
 
-Fridgy helps to manage and track your ingredients in the fridge. It can warn you about expiring ingredients and track your recipes in the Recipe Book. There will be more functionalities in the future, such as automatic deduction of ingredients after executing a recipe. 
+Fridgy helps to manage and track your ingredients in the fridge. It can warn you about expiring ingredients and track your recipes in the Recipe Book. There will be more functionalities in the future, such as automatic deduction of ingredients after executing a recipe.
 
 ## 1.2 **Setting up, Getting started**
 
