@@ -21,7 +21,7 @@ For more information on the Fridgy application, refer to the [_User Guide_](User
 
 Fridgy is a **desktop app for managing an Inventory of food as well as a list of recipes, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Fridgy can get your fridge Inventory and recipe sorted out faster than traditional GUI apps.
 
-Fridgy helps to manage and track your ingredients in the fridge. It can warn you about expiring ingredients and track your recipes in the Recipe Book. There will be more functionalities in the future, such as automatic deduction of ingredients after executing a recipe.  
+Fridgy helps to manage and track your ingredients in the fridge. It can warn you about expiring ingredients and track your recipes in the Recipe Book. There will be more functionalities in the future, such as automatic deduction of ingredients after executing a recipe. 
 
 ## 1.2 **Setting up, Getting started**
 
@@ -82,7 +82,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of:
-1. `UIManager` which implements the `UI` interface, and hence is responsible for handling the initial setup when Fridgy is started e.g. initializing `MainWindow` and its parts. 
+1. `UIManager` which implements the `UI` interface, and hence is responsible for handling the initial setup when Fridgy is started e.g. initializing `MainWindow` and its parts.
 2. `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ActiveDisplay`, `ingredientListPanel`, `recipeListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI such as the handling of the interaction between these classes and their corresponding FXML files.
 
 The `UI` component uses the JavaFx UI framework. As such, it follows closely to the typical JavaFX application structure. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
@@ -204,7 +204,7 @@ However, do note that this implementation is purely contained within Model compo
 
 ### 3.2 Automatic Quantity Conversion
 
-Currently, 
+Currently,
 1. Accepted SI prefixes are:
    - `k`: for kilo-
    - `m`: for milli-
@@ -212,9 +212,9 @@ Currently,
    - `g`: for grams
    - `l`: for litres
 
-Do note that the user can choose not to include any units. It will be processed as a unit-less quantity.  
+Do note that the user can choose not to include any units. It will be processed as a unit-less quantity.
 
-The initial step is to use Regex to split the quantity into a `Double`, the SI prefix, and the base unit. The computation is done based on the prefix detected, and a relevant multiplier is used to convert the quantity into the base unit. 
+The initial step is to use Regex to split the quantity into a `Double`, the SI prefix, and the base unit. The computation is done based on the prefix detected, and a relevant multiplier is used to convert the quantity into the base unit.
 
 This is done for any incoming ingredient before the quantity is stored, and there are future plans to utilise this for other computations, such as deducting a quantity of ingredients in the inventory when a recipe is executed.
 This also requires consistency in units for each ingredient.
@@ -314,7 +314,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 **Extensions**
 
 * 1a. The user enters an invalid input format.
-    * 1a1. Fridgy displays an error message.     
+    * 1a1. Fridgy displays an error message.
 
         Use case ends.
 * 2a. The user enters an invalid parameter.
@@ -586,7 +586,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 |**Mainstream OS**     | Windows, Linux, Unix, OS-X. |
 |**SI prefix**         | SI prefixes are a standard defined by the International System of Units such as kilo-, milli-, centi- and so on. |
 |**CRUD** | Stands for Create, Read, Update, and Delete which are the 4 functions necessary to implement persistent storage. |
-|**Higher order function** | A higher order function is a function that can be passed as parameter or return values. | 
+|**Higher order function** | A higher order function is a function that can be passed as parameter or return values. |
 
 
 --------------------------------------------------------------------------------------------------------------------
