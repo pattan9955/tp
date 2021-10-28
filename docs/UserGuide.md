@@ -15,7 +15,7 @@ By: `Team Fridgy`
 
 Fridgy is a **food and recipe management system**, for users to manage their ingredients and recipes easily.
 
-Fridgy helps you track your ingredients and recipes. It also warns you about expiring and expired ingredients, and automatically deducts your ingredients when you execute recipes.
+Fridgy helps you track your ingredients and recipes. It also warns you about expiring and expired ingredients, and automatically deducts your ingredients when you cook recipes.
 
 Fridgy is made for people living in shared spaces, since fridges can get *very messy* and difficult to keep track of!
 
@@ -25,7 +25,7 @@ Want to know more? Jump to [Section 2, Quick Start](#QuickStart) to get started.
 
 ## 1.1 Navigating the User Guide
 
-This user guide provides a comprehensive guide on how to use Fridgy. 
+This user guide aims to provide a comprehensive guide on how to use Fridgy. 
 In addition, the quick start guide provides an end-to-end process to help you get started with installing Fridgy.
 
 This User Guide covers:
@@ -71,7 +71,7 @@ Finally, execute the recipe:
 
 The quantity of grapes would be deducted accordingly.
 
-Now that you are ready to use fridgy, you may use clear commands to clear out the sample entries:
+Now that you are ready to use Fridgy, you may use clear commands to clear out the sample entries:
 
 `clear ingredient`
 `clear recipe`
@@ -108,15 +108,17 @@ Displays the output of `View` command, which expands each ingredient or recipe c
 
 - Items in square brackets are optional.
 
-  e.g. `add ingredient -n <name> [-d <description>]` can be used as
+  e.g. `add ingredient -n <name> [-d <description>]` can be used as:
      1. `add ingredient -n tomato -d from Africa` or as
      2. `add ingredient -n tomato`
   
-  e.g. `add ingredient -n <name> -q <quantity>[<units>]` can be used as 
+  e.g. `add ingredient -n <name> -q <quantity>[<units>]` can be used as: 
      1. `add ingredient -n chicken -q 2` or as
      2. `add ingredient -n chicken -q 2kg`
 
 - Items with `…` after them can be used multiple times.
+
+  e.g. `find ingredient <keyword>...`, can be used as:<br />`find ingredient Strawberry Milk Cheese Tomato`
 
 ## 4.1 General Commands
 
