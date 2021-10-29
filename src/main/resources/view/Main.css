@@ -328,7 +328,7 @@
 
 .steps_description {
     -fx-font-family: "Montserrat Regular";
-    -fx-padding: 30 20 20 20;
+    -fx-padding: 30 20 30 20;
     -fx-font-size: 16px;
     -fx-background-color: #EBF2FA;
     -fx-background-radius: 15;
