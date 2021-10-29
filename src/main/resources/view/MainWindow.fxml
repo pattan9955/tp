@@ -16,7 +16,7 @@
 <?import javafx.stage.Stage?>
 <?import javafx.scene.control.ScrollPane?>
 
-<fx:root minHeight="900" minWidth="1300" onCloseRequest="#handleExit" title="Fridgy" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="900" minWidth="985" onCloseRequest="#handleExit" title="Fridgy" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/cute_fridge.png" />
     </icons>
@@ -70,24 +70,27 @@
                             </TabPane>
                             <VBox>
                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
                                 </padding>
                                 <children>
                                     <ScrollPane fx:id="viewDisplayPlaceholder" prefHeight="1000" hbarPolicy="NEVER"
                                                 styleClass="view-display" vvalue="0.0" fitToWidth="true">
+                                        <padding>
+                                            <Insets bottom="0" left="0" right="20.0" top="0" />
+                                        </padding>
                                         <content >
                                             <VBox fx:id="displayContainer" prefWidth="1300" />
                                         </content>
                                     </ScrollPane>
                                     <StackPane fx:id="commandBoxPlaceholder" prefWidth="1500"  prefHeight="48.0">
                                         <padding>
-                                            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                            <Insets bottom="5.0" left="10.0" right="25.0" top="5.0" />
                                         </padding>
                                     </StackPane>
                                     <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100"
                                                minHeight="150" prefWidth="1500" prefHeight="150" VBox.vgrow="NEVER">
                                         <padding>
-                                            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                            <Insets bottom="5.0" left="10.0" right="25.0" top="5.0" />
                                         </padding>
                                     </StackPane>
                                 </children>
