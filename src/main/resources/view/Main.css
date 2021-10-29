@@ -323,7 +323,7 @@
 .steps_title {
     -fx-padding: 0 0 20 0;
     -fx-font-family: "Montserrat SemiBold";
-    -fx-font-size: 25px;
+    -fx-font-size: 20px;
 }
 
 .steps_description {
@@ -343,7 +343,7 @@
 .ingredient_title {
     -fx-padding: 20 0 20 0;
     -fx-font-family: "Montserrat SemiBold";
-    -fx-font-size: 25px;
+    -fx-font-size: 20px;
 }
 
 .available_ingredients_placeholder {
