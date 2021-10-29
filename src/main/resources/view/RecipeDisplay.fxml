@@ -15,26 +15,32 @@
         </columnConstraints>
         <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
             <padding>
-                <Insets bottom="5" left="15" right="5" top="5" />
+                <Insets bottom="5" left="10" right="5" top="5" />
             </padding>
             <Label fx:id="name" styleClass="name_display" text="\$first" wrapText="true" />
             <Label fx:id="description" styleClass="recipe_description_display" text="\$description" wrapText="true"
                    prefWidth="Infinity"/>
             <HBox styleClass="ingredientsPane" spacing="20">
                 <children>
-                    <VBox fx:id="availableIngredientsPlaceholder" styleClass="available_ingredients_placeholder"
-                          minWidth="400">
+                    <VBox fx:id = "availableIngredientsSection" styleClass="ingredient_section">
+                        <Label fx:id="availableIngredientTitle" styleClass="ingredient_title" />
+                        <VBox fx:id="availableIngredientsPlaceholder" styleClass="available_ingredients_placeholder"
+                              minWidth="250">
+                        </VBox>
                     </VBox>
-                    <VBox fx:id="missingIngredientsPlaceholder" styleClass="missing_ingredients_placeholder"
-                          minWidth="400">
+                    <VBox fx:id = "missingIngredientsSection" styleClass="ingredient_section">
+                        <Label fx:id="missingIngredientTitle" styleClass="ingredient_title" />
+                        <VBox fx:id="missingIngredientsPlaceholder" styleClass="missing_ingredients_placeholder"
+                              minWidth="250">
 
+                        </VBox>
                     </VBox>
                 </children>
             </HBox>
             <FlowPane fx:id="ingredients" />
 <!--         <VBox id="steps" prefHeight="55.0" prefWidth="130.0" />-->
             <Label fx:id="stepsTitle" styleClass="steps_title"/>
-            <Label fx:id="steps" wrapText="true" styleClass="steps_description" text="\$steps" />
+            <Label fx:id="steps" wrapText="true" styleClass="steps_description" text="\$steps" prefWidth="1920.0"/>
         </VBox>
     </GridPane>
 </HBox>

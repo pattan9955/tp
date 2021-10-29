@@ -19,9 +19,9 @@ public class RecipeCard extends UiPart<Region> {
     private static final String FXML = "RecipeListCard.fxml";
 
     // Char limits
-    private static final int DESCRIPTION_CHAR_LIMIT = 155;
-    private static final int INGREDIENT_CHAR_LIMIT = 35;
-    private static final int NAME_CHAR_LIMIT = 25;
+    private static final int DESCRIPTION_CHAR_LIMIT = 100;
+    private static final int INGREDIENT_CHAR_LIMIT = 30;
+    private static final int NAME_CHAR_LIMIT = 20;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -75,9 +75,11 @@ public class RecipeCard extends UiPart<Region> {
                     ingredients.getChildren().add(ingredientLabel);
                 });
 
-        description.setText(!recipeDescription.equals("")
-                ? recipeDescription
-                : recipeDescription);
+        description.setText(recipeDescription);
+        if (recipeDescription.equals("")) {
+            description.setVisible(false);
+            description.managedProperty().bind(description.visibleProperty());
+        }
     }
 
     @Override

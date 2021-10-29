@@ -48,10 +48,15 @@ public class IngredientDisplay extends UiPart<Region> {
         super(FXML);
         this.ingredient = ingredient;
 
+        String ingredientDescription = ingredient.getDescription().value.orElse("");
         name.setText(ingredient.getName().fullName);
         quantity.setText("Quantity: " + ingredient.getQuantity().value);
         expiryDate.setText("Expiring on: " + ingredient.getExpiryDate().toString());
-        description.setText(ingredient.getDescription().value.orElse(""));
+        description.setText(ingredientDescription);
+        if (ingredientDescription.equals("")) {
+            description.setVisible(false);
+            description.managedProperty().bind(description.visibleProperty());
+        }
         ingredient.getTags().stream()
                 .sorted(Comparator.comparing(tag ->
                         tag.tagName.equals("expired") || tag.tagName.equals("expiring")
@@ -69,6 +74,10 @@ public class IngredientDisplay extends UiPart<Region> {
                     }
                     tags.getChildren().add(tagLabel);
                 });
+        if (ingredient.getTags().size() == 0) {
+            tags.setVisible(false);
+            tags.managedProperty().bind(tags.visibleProperty());
+        }
     }
 
     @Override

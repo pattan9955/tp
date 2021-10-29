@@ -45,6 +45,14 @@ public class RecipeDisplay extends UiPart<Region> {
     @FXML
     private VBox missingIngredientsPlaceholder;
     @FXML
+    private VBox availableIngredientsSection;
+    @FXML
+    private VBox missingIngredientsSection;
+    @FXML
+    private Label availableIngredientTitle;
+    @FXML
+    private Label missingIngredientTitle;
+    @FXML
     private Label description;
     @FXML
     private Label stepsTitle;
@@ -58,19 +66,25 @@ public class RecipeDisplay extends UiPart<Region> {
         super(FXML);
         this.recipe = recipe;
 
+        String recipeDescription = recipe.getDescription().orElse("");
 
         name.setText(recipe.getName().fullName);
         long missingIngredientsCount = recipe.getIngredients().stream()
                 .filter(ingredient -> !isEnough.apply(ingredient)).count();
         long availableIngredientsCount = recipe.getIngredients().size() - missingIngredientsCount;
         if (missingIngredientsCount == 0) {
-            missingIngredientsPlaceholder.setVisible(false);
-            missingIngredientsPlaceholder.managedProperty().bind(missingIngredientsPlaceholder.visibleProperty());
+            missingIngredientsSection.setVisible(false);
+            missingIngredientsSection.managedProperty().bind(missingIngredientsSection.visibleProperty());
         }
         if (availableIngredientsCount == 0) {
-            availableIngredientsPlaceholder.setVisible(false);
-            availableIngredientsPlaceholder.managedProperty().bind(availableIngredientsPlaceholder.visibleProperty());
+            availableIngredientsSection.setVisible(false);
+            availableIngredientsSection.managedProperty().bind(availableIngredientsSection.visibleProperty());
         }
+
+        availableIngredientTitle.setText("Available :");
+
+        missingIngredientTitle.setText("Missing :");
+
         recipe.getIngredients().stream()
                 .sorted(Comparator.comparing(ingredient -> ingredient.getName().toString()))
                 .forEach(ingredient -> {
@@ -88,14 +102,17 @@ public class RecipeDisplay extends UiPart<Region> {
                         availableIngredientsPlaceholder.getChildren().add(ingredientLabel);
                     }
                 });
-        String recipeDescription = recipe.getDescription().orElse("");
-        description.setText(recipe.getDescription().orElse(""));
+        description.setText(recipeDescription);
+        if (recipeDescription.equals("")) {
+            description.setVisible(false);
+            description.managedProperty().bind(description.visibleProperty());
+        }
         if (recipeDescription.length() < 20) {
-            description.setFont(Font.font("Montserrat Regular", 32));
-        } else if (recipeDescription.length() < 30) {
             description.setFont(Font.font("Montserrat Regular", 25));
-        } else {
+        } else if (recipeDescription.length() < 30) {
             description.setFont(Font.font("Montserrat Regular", 20));
+        } else {
+            description.setFont(Font.font("Montserrat Regular", 16));
         }
         stepsTitle.setText("Steps:");
         steps.setText(UiUtil.numberedList(recipe.getSteps()));
