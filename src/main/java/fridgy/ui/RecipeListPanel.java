@@ -39,8 +39,8 @@ public class RecipeListPanel extends UiPart<Region> {
         recipeListView.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Recipe>() {
                     public void changed(ObservableValue<? extends Recipe> ov,
-                                        Recipe old_val, Recipe new_val) {
-                        activeItemPanel.update(new_val);
+                                        Recipe oldVal, Recipe newVal) {
+                        activeItemPanel.update(newVal);
                     }
                 });
     }
