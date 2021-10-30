@@ -16,7 +16,7 @@ import fridgy.model.ingredient.Ingredient;
 /**
  * An Immutable Inventory that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "inventory")
 class JsonSerializableInventory {
 
     public static final String MESSAGE_DUPLICATE_INGREDIENT = "Ingredients list contains duplicate ingredient(s).";
@@ -47,15 +47,15 @@ class JsonSerializableInventory {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public Inventory toModelType() throws IllegalValueException {
-        Inventory addressBook = new Inventory();
+        Inventory inventory = new Inventory();
         for (JsonAdaptedIngredient jsonAdaptedIngredient : ingredients) {
             Ingredient ingredient = jsonAdaptedIngredient.toModelType();
-            if (addressBook.has(ingredient)) {
+            if (inventory.has(ingredient)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_INGREDIENT);
             }
-            addressBook.add(ingredient);
+            inventory.add(ingredient);
         }
-        return addressBook;
+        return inventory;
     }
 
 }

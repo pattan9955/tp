@@ -94,12 +94,12 @@ public class JsonRecipeBookStorageTest {
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code recipeBook} at the specified {@code filePath}.
      */
-    private void saveRecipeBook(ReadOnlyDatabase<Recipe> addressBook, String filePath) {
+    private void saveRecipeBook(ReadOnlyDatabase<Recipe> recipeBook, String filePath) {
         try {
             new JsonRecipeBookStorage(Paths.get(filePath))
-                    .saveRecipeBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveRecipeBook(recipeBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

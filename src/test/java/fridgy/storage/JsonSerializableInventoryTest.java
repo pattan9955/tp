@@ -24,9 +24,9 @@ public class JsonSerializableInventoryTest {
     public void toModelType_typicalIngredientsFile_success() throws Exception {
         JsonSerializableInventory dataFromFile = JsonUtil.readJsonFile(TYPICAL_INGREDIENTS_FILE,
                 JsonSerializableInventory.class).get();
-        Inventory addressBookFromFile = dataFromFile.toModelType();
+        Inventory inventoryFromFile = dataFromFile.toModelType();
         Inventory typicalIngredientsInventory = TypicalIngredients.getTypicalInventory();
-        assertEquals(addressBookFromFile, typicalIngredientsInventory);
+        assertEquals(inventoryFromFile, typicalIngredientsInventory);
     }
 
     @Test
