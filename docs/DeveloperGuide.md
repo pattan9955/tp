@@ -576,7 +576,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 **MSS**
 
-1. User requests to execute a recipe by specifying its name.
+1. User requests to execute a recipe by specifying its index.
 2. Fridgy executes the recipe and deducts the respective quantities of ingredients.
 3. Fridgy displays a confirmation message.
 
@@ -584,7 +584,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 **Extensions**
 
-* 1a. The user enters an invalid input format or name.
+* 1a. The user enters an invalid input format or index.
     * 1a1. Fridgy displays an error message.
 
       Use case ends.
