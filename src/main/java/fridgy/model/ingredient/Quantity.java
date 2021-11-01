@@ -11,9 +11,8 @@ import fridgy.model.util.QuantityCalc;
  */
 public class Quantity {
 
-
     public static final String MESSAGE_CONSTRAINTS =
-            "Quantity should not be empty. \n"
+            "Quantity is invalid. (Quantity must be a valid number greater than 0) \n"
                     + "Include units in grams (g) or litres (l) when applicable. \n"
                     + "Do not input units for discrete ingredients (i.e. bottle, pieces, etc.) \n"
                     + "SI prefixes for units: milli (m) and kilo (k) are accepted. \n";
