@@ -29,8 +29,8 @@ public class AddRecipeCommand extends RecipeCommand {
             + "[" + PREFIX_DESCRIPTION + " DESCRIPTION]\n"
             + "Example: " + COMMAND_WORD + " " + RECIPE_KEYWORD + " "
             + PREFIX_NAME + " Burger "
-            + PREFIX_INGREDIENT + " Buns "
-            + PREFIX_INGREDIENT + " Patty "
+            + PREFIX_INGREDIENT + " Buns 2"
+            + PREFIX_INGREDIENT + " Patty 1"
             + PREFIX_STEP + " Toast the buns. "
             + PREFIX_STEP + " Put the patty between the buns. "
             + PREFIX_DESCRIPTION + " Great burger! ";
