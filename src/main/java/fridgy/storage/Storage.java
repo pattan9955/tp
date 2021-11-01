@@ -28,6 +28,6 @@ public interface Storage extends InventoryStorage, RecipeBookStorage, UserPrefsS
     Optional<ReadOnlyDatabase<Ingredient>> readInventory() throws DataConversionException, IOException;
 
     @Override
-    void saveInventory(ReadOnlyDatabase<Ingredient> addressBook) throws IOException;
+    void saveInventory(ReadOnlyDatabase<Ingredient> inventory) throws IOException;
 
 }

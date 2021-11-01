@@ -35,14 +35,14 @@ public interface InventoryStorage {
 
     /**
      * Saves the given {@link ReadOnlyDatabase} to the storage.
-     * @param addressBook cannot be null.
+     * @param inventory cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveInventory(ReadOnlyDatabase<Ingredient> addressBook) throws IOException;
+    void saveInventory(ReadOnlyDatabase<Ingredient> inventory) throws IOException;
 
     /**
      * @see #saveInventory(ReadOnlyDatabase)
      */
-    void saveInventory(ReadOnlyDatabase<Ingredient> addressBook, Path filePath) throws IOException;
+    void saveInventory(ReadOnlyDatabase<Ingredient> inventory, Path filePath) throws IOException;
 
 }

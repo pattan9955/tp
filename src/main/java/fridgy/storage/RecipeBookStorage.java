@@ -34,14 +34,14 @@ public interface RecipeBookStorage {
 
     /**
      * Saves the given {@link ReadOnlyDatabase} to the storage.
-     * @param addressBook cannot be null.
+     * @param recipeBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveRecipeBook(ReadOnlyDatabase<Recipe> addressBook) throws IOException;
+    void saveRecipeBook(ReadOnlyDatabase<Recipe> recipeBook) throws IOException;
 
     /**
      * @see #saveRecipeBook(ReadOnlyDatabase)
      */
-    void saveRecipeBook(ReadOnlyDatabase<Recipe> addressBook, Path filePath) throws IOException;
+    void saveRecipeBook(ReadOnlyDatabase<Recipe> recipeBook, Path filePath) throws IOException;
 
 }

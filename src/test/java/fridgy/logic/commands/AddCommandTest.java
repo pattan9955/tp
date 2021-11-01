@@ -107,7 +107,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setInventoryFilePath(Path addressBookFilePath) {
+        public void setInventoryFilePath(Path inventoryFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -120,7 +120,7 @@ public class AddCommandTest {
         public void sortIngredient(Comparator<Ingredient> comparator) {}
 
         @Override
-        public void setInventory(ReadOnlyDatabase<Ingredient> newData) {
+        public void setInventory(ReadOnlyDatabase<Ingredient> inventory) {
             throw new AssertionError("This method should not be called.");
         }
 

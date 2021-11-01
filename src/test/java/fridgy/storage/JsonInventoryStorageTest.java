@@ -96,12 +96,12 @@ public class JsonInventoryStorageTest {
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code inventory} at the specified {@code filePath}.
      */
-    private void saveInventory(ReadOnlyDatabase<Ingredient> addressBook, String filePath) {
+    private void saveInventory(ReadOnlyDatabase<Ingredient> inventory, String filePath) {
         try {
             new JsonInventoryStorage(Paths.get(filePath))
-                    .saveInventory(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveInventory(inventory, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

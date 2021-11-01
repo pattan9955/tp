@@ -10,25 +10,25 @@ import fridgy.model.ingredient.Ingredient;
  */
 public class InventoryBuilder {
 
-    private Inventory addressBook;
+    private Inventory inventory;
 
     public InventoryBuilder() {
-        addressBook = new Inventory();
+        inventory = new Inventory();
     }
 
-    public InventoryBuilder(Inventory addressBook) {
-        this.addressBook = addressBook;
+    public InventoryBuilder(Inventory inventory) {
+        this.inventory = inventory;
     }
 
     /**
      * Adds a new {@code Ingredient} to the {@code Inventory} that we are building.
      */
     public InventoryBuilder withIngredient(Ingredient ingredient) {
-        addressBook.add(ingredient);
+        inventory.add(ingredient);
         return this;
     }
 
     public Inventory build() {
-        return addressBook;
+        return inventory;
     }
 }

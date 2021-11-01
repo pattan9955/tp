@@ -76,7 +76,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'fridgy.jar'
 }
 
 defaultTasks 'clean', 'test'
