@@ -32,8 +32,8 @@ public class IngredientListPanel extends UiPart<Region> {
         ingredientListView.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Ingredient>() {
                     public void changed(ObservableValue<? extends Ingredient> ov,
-                                        Ingredient old_val, Ingredient new_val) {
-                        activeItemPanel.update(new_val);
+                                        Ingredient oldVal, Ingredient newVal) {
+                        activeItemPanel.update(newVal);
                     }
                 });
     }

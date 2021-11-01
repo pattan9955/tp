@@ -1,18 +1,33 @@
 package fridgy.logic.parser;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fridgy.commons.core.Messages;
+import fridgy.logic.commands.AddCommand;
 import fridgy.logic.commands.Command;
+import fridgy.logic.commands.DeleteCommand;
+import fridgy.logic.commands.EditCommand;
 import fridgy.logic.commands.ExitCommand;
+import fridgy.logic.commands.FindCommand;
 import fridgy.logic.commands.HelpCommand;
+import fridgy.logic.commands.ListCommand;
 import fridgy.logic.commands.recipe.RecipeCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.logic.parser.recipe.RecipeParser;
 
+/**
+ * Parses user input.
+ */
 public class FridgyParser {
 
+    public static final List<String> COMMAND_NAMES = List.of(AddCommand.COMMAND_WORD,
+            DeleteCommand.COMMAND_WORD,
+            EditCommand.COMMAND_WORD,
+            FindCommand.COMMAND_WORD,
+            ListCommand.COMMAND_WORD
+    );
     private static final String RECIPE_TYPE = "recipe";
     private static final String INGREDIENT_TYPE = "ingredient";
     private static final Pattern TYPED_COMMAND_FORMAT = Pattern
@@ -44,6 +59,32 @@ public class FridgyParser {
         if (!taskMatcher.matches()) {
             return parseGeneralCommand(userInput);
         }
+        final String commandWord = taskMatcher.group("commandWord");
+        switch(commandWord) {
+
+        case ExitCommand.COMMAND_WORD:
+        case HelpCommand.COMMAND_WORD: {
+            return parseGeneralCommand(userInput);
+        }
+        default:
+            return parseCommandWithType(userInput);
+        }
+    }
+
+    /**
+     * Parses user input with type into a CommandExecutor executable that can be run to
+     * produce a CommandResult.
+     *
+     * @param userInput The user input to be parsed.
+     * @return A CommandExecutor that executes the command when provided a model.
+     * @throws ParseException If user provides invalid input.
+     */
+    private CommandExecutor parseCommandWithType(String userInput) throws ParseException {
+        final Matcher taskMatcher = TYPED_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!taskMatcher.matches()) {
+            return parseGeneralCommand(userInput);
+        }
+        final String commandWord = taskMatcher.group("commandWord");
         final String taskType = taskMatcher.group("taskType");
         switch(taskType) {
 
@@ -53,10 +94,20 @@ public class FridgyParser {
         case INGREDIENT_TYPE:
             Command ingredientCommand = inventoryParser.parseCommand(userInput.trim());
             return ingredientCommand::execute;
-        default:
+        case "": // no type
             return parseGeneralCommand(userInput);
+        default: // invalid type
+            if (COMMAND_NAMES.contains(commandWord)) {
+                throw new ParseException(Messages.TYPE_INVALID_COMMAND_FORMAT + " "
+                        + formatString(taskType)
+                        + " " + Messages.TYPE_EXPECTED);
+            }
+            // invalid command
+            throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND + " "
+                    + formatString(commandWord));
         }
     }
+
 
     private CommandExecutor parseGeneralCommand(String userInput) throws ParseException {
         final Matcher matcher = GENERAL_COMMAND_FORMAT.matcher(userInput.trim());
@@ -75,7 +126,15 @@ public class FridgyParser {
             return new HelpCommand()::execute;
 
         default:
-            throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND + " "
+                    + formatString(commandWord));
         }
+    }
+
+    /**
+     * Appends apostrophes to a string for error messages.
+     */
+    public String formatString(String input) {
+        return "'" + input + "'";
     }
 }

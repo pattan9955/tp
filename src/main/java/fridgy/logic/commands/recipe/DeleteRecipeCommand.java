@@ -21,7 +21,7 @@ public class DeleteRecipeCommand extends RecipeCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + RECIPE_KEYWORD
             + ": Deletes the recipe by index.\n"
-            + "Parameters: INDEX\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
             + RECIPE_KEYWORD
             + " 1";

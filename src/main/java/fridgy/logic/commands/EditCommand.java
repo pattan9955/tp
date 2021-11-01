@@ -34,7 +34,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " "
             + INGREDIENT_KEYWORD + ": Edits details of the ingredient. "
             + "Existing values are replaced with input values.\n"
-            + "Parameters: INDEX "
+            + "Parameters: INDEX (must be a positive integer) "
             + "[" + CliSyntax.PREFIX_NAME + " NAME] "
             + "[" + CliSyntax.PREFIX_QUANTITY + " QUANTITY] "
             + "[" + CliSyntax.PREFIX_EXPIRY + " EXPIRY DATE] "
