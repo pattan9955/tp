@@ -283,6 +283,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setUiState(UiState uiState) {
+        requireNonNull(uiState);
         this.uiState = uiState;
     }
 
