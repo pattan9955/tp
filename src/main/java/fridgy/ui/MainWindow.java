@@ -196,8 +196,10 @@ public class MainWindow extends UiPart<Stage> implements Observer {
 
     /**
      * Fires an {@code ActiveItemChangeEvent} to update active recipe.
+     * and a {@code TabSwitchEvent} to switch to the correct tab.
      * @param recipe the recipe to be displayed.
      */
+    @Override
     public void update(Recipe recipe) {
         this.getRoot().fireEvent(new ActiveItemChangeEvent<Recipe>(ActiveItemChangeEvent.RECIPE, recipe));
         this.getRoot().fireEvent(new TabSwitchEvent<>(TabSwitchEvent.RECIPE, recipe));
@@ -205,11 +207,31 @@ public class MainWindow extends UiPart<Stage> implements Observer {
 
     /**
      * Fires an {@code ActiveItemChangeEvent} to update active ingredient.
+     * and a {@code TabSwitchEvent} to switch to the correct tab.
      * @param ingredient the ingredient to be displayed.
      */
+    @Override
     public void update(Ingredient ingredient) {
         this.getRoot().fireEvent(new ActiveItemChangeEvent<Ingredient>(ActiveItemChangeEvent.INGREDIENT, ingredient));
         this.getRoot().fireEvent(new TabSwitchEvent<>(TabSwitchEvent.INGREDIENT, ingredient));
+    }
+
+    /**
+     * Fires a {@code TabSwitchEvent} to switch to the correct tab.
+     * Null is used here since we do not want to update selected card.
+     * @param tab the tab to switch to
+     */
+    @Override
+    public void update(TabEnum tab) {
+        switch (tab) {
+        case RECIPE:
+            this.getRoot().fireEvent(new TabSwitchEvent<>(TabSwitchEvent.RECIPE, null));
+            break;
+        case INGREDIENT:
+            this.getRoot().fireEvent(new TabSwitchEvent<>(TabSwitchEvent.INGREDIENT, null));
+            break;
+        default:
+        }
     }
 
     /**

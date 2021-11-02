@@ -11,10 +11,6 @@ import javafx.scene.layout.StackPane;
 public class TabListPanel extends UiPart<Region> {
     private static final String FXML = "TabListPanel.fxml";
 
-    public enum TabEnum {
-        INGREDIENT,
-        RECIPE
-    }
 
     @FXML
     private StackPane ingredientListPanelPlaceholder;
@@ -42,11 +38,15 @@ public class TabListPanel extends UiPart<Region> {
 
     public void handleIngredientTabSwitchEvent(TabSwitchEvent<Ingredient> event) {
         tabPane.getSelectionModel().select(TabEnum.INGREDIENT.ordinal());
-        ingredientListPanel.changeSelected(event.getItem());
+        if (event.getItem() != null) {
+            ingredientListPanel.changeSelected(event.getItem());
+        }
     }
 
     public void handleRecipeTabSwitchEvent(TabSwitchEvent<Recipe> event) {
         tabPane.getSelectionModel().select(TabEnum.RECIPE.ordinal());
-        recipeListPanel.changeSelected(event.getItem());
+        if (event.getItem() != null) {
+            recipeListPanel.changeSelected(event.getItem());
+        }
     }
 }

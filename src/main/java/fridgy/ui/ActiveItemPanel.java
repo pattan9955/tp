@@ -30,17 +30,21 @@ public class ActiveItemPanel extends UiPart<Region> {
     }
 
     public void handleIngredientEvent(ActiveItemChangeEvent<Ingredient> event) {
-        activeBox.getChildren().clear();
         Ingredient newItem = event.getItem();
-        IngredientDisplay ingredientDisplay = new IngredientDisplay(newItem);
-        activeBox.getChildren().add(ingredientDisplay.getRoot());
+        if (newItem != null) {
+            activeBox.getChildren().clear();
+            IngredientDisplay ingredientDisplay = new IngredientDisplay(newItem);
+            activeBox.getChildren().add(ingredientDisplay.getRoot());
+        }
     }
 
     public void handleRecipeEvent(ActiveItemChangeEvent<Recipe> event) {
-        activeBox.getChildren().clear();
         Recipe newItem = event.getItem();
-        RecipeDisplay recipeDisplay = new RecipeDisplay(newItem, isEnough);
-        activeBox.getChildren().add(recipeDisplay.getRoot());
+        if (newItem != null) {
+            activeBox.getChildren().clear();
+            RecipeDisplay recipeDisplay = new RecipeDisplay(newItem, isEnough);
+            activeBox.getChildren().add(recipeDisplay.getRoot());
+        }
     }
 
     public void handleClearEvent(ActiveItemChangeEvent<?> unused) {

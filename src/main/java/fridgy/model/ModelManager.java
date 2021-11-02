@@ -15,6 +15,7 @@ import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
+import fridgy.ui.TabEnum;
 import fridgy.ui.UiState;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -211,6 +212,7 @@ public class ModelManager implements Model {
     public void updateFilteredIngredientList(Predicate<Ingredient> predicate) {
         requireNonNull(predicate);
         filteredIngredients.setPredicate(predicate);
+        uiState.switchTab(TabEnum.INGREDIENT);
     }
 
     //=========== Filtered Recipe List Accessors =============================================================
@@ -228,6 +230,7 @@ public class ModelManager implements Model {
     public void updateFilteredRecipeList(Predicate<Recipe> predicate) {
         requireNonNull(predicate);
         filteredRecipes.setPredicate(predicate);
+        uiState.switchTab(TabEnum.RECIPE);
     }
 
     //=========== Sorting =============================================================

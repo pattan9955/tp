@@ -38,6 +38,11 @@ public class UiState {
         mainWindow.update(active);
     }
 
+    public void switchTab(TabEnum tab) {
+        requireNonNull(tab);
+        mainWindow.update(tab);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
