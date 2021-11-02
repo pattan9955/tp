@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 import fridgy.commons.util.AppUtil;
 
@@ -14,9 +16,10 @@ import fridgy.commons.util.AppUtil;
 public class ExpiryDate implements Comparable<ExpiryDate> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Expiry Date should be in the format DD-MM-YYYY";
+            "Expiry Date should be a valid date in the format DD-MM-YYYY";
     public static final String VALIDATION_REGEX = "^([0-2]\\d|3[01])-([0]\\d|1[0-2])-\\d{4}$";
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
     public final LocalDate expiryDate;
 
     /**
@@ -24,7 +27,7 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
      *
      * @param date A valid date.
      */
-    public ExpiryDate(String date) {
+    public ExpiryDate(String date) throws DateTimeParseException {
         requireNonNull(date);
         AppUtil.checkArgument(isValidExpiry(date), MESSAGE_CONSTRAINTS);
         expiryDate = LocalDate.parse(date, DATE_FORMATTER);
@@ -38,7 +41,7 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidExpiry(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return isValidDate(test) && test.matches(VALIDATION_REGEX);
     }
 
     @Override
@@ -51,6 +54,15 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
         return other == this // short circuit if same object
                 || (other instanceof ExpiryDate // instanceof handles nulls
                 && expiryDate.equals(((ExpiryDate) other).expiryDate)); // state check
+    }
+
+    private static boolean isValidDate(String test) {
+        try {
+            LocalDate.parse(test, DATE_FORMATTER);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
 
     @Override

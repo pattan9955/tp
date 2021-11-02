@@ -17,7 +17,7 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + INGREDIENT_KEYWORD
             + ": view the ingredient identified by the index number used in the displayed ingredient list.\n"
-            + "Parameters: INDEX\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " " + INGREDIENT_KEYWORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Viewing ingredient:\n%1$s";
