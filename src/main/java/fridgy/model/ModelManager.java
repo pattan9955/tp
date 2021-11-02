@@ -153,11 +153,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedIngredient);
         inventory.set(target, editedIngredient);
 
-        // update current active recipe as well if it is the same as target
-        if (uiState.getActiveIngredient() == target) {
-            uiState.setActive(editedIngredient);
-        }
-
         // ingredient changes need to inform recipeBook to update for tagging purposes.
         refresh(this.filteredRecipes);
     }
@@ -166,11 +161,6 @@ public class ModelManager implements Model {
     public void set(Recipe target, Recipe editedRecipe) {
         requireAllNonNull(target, editedRecipe);
         recipeBook.set(target, editedRecipe);
-
-        // update current active recipe as well if it is the same as target
-        if (uiState.getActiveRecipe() == target) {
-            uiState.setActive(editedRecipe);
-        }
     }
 
     //=========== Inventory ================================================================================

@@ -91,8 +91,8 @@ public interface IngredientModel {
     void updateFilteredIngredientList(Predicate<Ingredient> predicate);
 
     /**
-     * Puts a new Ingredient under an {@code Observable}.
-     * @param activeIngredient to be placed under an Observable
+     * Puts a new Ingredient under an {@code UiState}.
+     * @param activeIngredient to be placed under an Observable UiState
      */
     void setActiveIngredient(Ingredient activeIngredient);
 }

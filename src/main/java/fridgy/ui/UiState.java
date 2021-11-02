@@ -11,15 +11,6 @@ public class UiState {
     private Ingredient activeIngredient;
     private final Observer mainWindow;
 
-    public Recipe getActiveRecipe() {
-        return activeRecipe;
-    }
-
-    public Ingredient getActiveIngredient() {
-        return activeIngredient;
-    }
-
-
     /**
      * Constructs a UI state object that is observable by an Observer.
      * @param mainWindow the Observer
@@ -29,15 +20,26 @@ public class UiState {
         this.mainWindow = mainWindow;
     }
 
+    private void set(Recipe active) {
+        if (activeRecipe == null || !activeRecipe.equals(active)) {
+            this.activeRecipe = active;
+            this.activeIngredient = null;
+        }
+    }
+
+    private void set(Ingredient active) {
+        if (activeIngredient == null || !activeIngredient.equals(active)) {
+            this.activeIngredient = active;
+            this.activeRecipe = null;
+        }
+    }
+
     /**
      * Set a recipe as active, erase current activeIngredient
      */
     public void setActive(Recipe active) {
         requireNonNull(active);
-        if (activeRecipe == null || !activeRecipe.equals(active)) {
-            this.activeRecipe = active;
-            this.activeIngredient = null;
-        }
+        set(active);
         mainWindow.update(active);
     }
 
@@ -46,10 +48,7 @@ public class UiState {
      */
     public void setActive(Ingredient active) {
         requireNonNull(active);
-        if (activeIngredient == null || !activeIngredient.equals(active)) {
-            this.activeIngredient = active;
-            this.activeRecipe = null;
-        }
+        set(active);
         mainWindow.update(active);
     }
 
