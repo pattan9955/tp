@@ -25,8 +25,8 @@ public class UiState {
         if (activeRecipe == null || !activeRecipe.equals(active)) {
             this.activeRecipe = active;
             this.activeIngredient = null;
-            mainWindow.update(active);
         }
+        mainWindow.update(active);
     }
 
     public void setActive(Ingredient active) {
@@ -34,8 +34,8 @@ public class UiState {
         if (activeIngredient == null || !activeIngredient.equals(active)) {
             this.activeIngredient = active;
             this.activeRecipe = null;
-            mainWindow.update(active);
         }
+        mainWindow.update(active);
     }
 
     @Override

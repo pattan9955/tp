@@ -47,6 +47,12 @@ public class RecipeListPanel extends UiPart<Region> {
                 });
     }
 
+    public void changeSelected(Recipe to) {
+        if (to != null) {
+            recipeListView.getSelectionModel().select(to);
+        }
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code RecipeIngredient} using a {@code RecipeCard}.
      */

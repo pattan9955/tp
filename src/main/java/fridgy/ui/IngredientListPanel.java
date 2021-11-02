@@ -40,6 +40,12 @@ public class IngredientListPanel extends UiPart<Region> {
                 });
     }
 
+    public void changeSelected(Ingredient to) {
+        if (to != null) {
+            ingredientListView.getSelectionModel().select(to);
+        }
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code BaseIngredient} using a {@code IngredientCard}.
      */
@@ -56,5 +62,6 @@ public class IngredientListPanel extends UiPart<Region> {
             }
         }
     }
+
 
 }

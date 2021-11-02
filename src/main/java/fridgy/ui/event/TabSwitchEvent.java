@@ -7,15 +7,15 @@ import javafx.event.EventType;
 
 public class TabSwitchEvent<T> extends Event {
 
-    public static final EventType<TabSwitchEvent<?>> ANY = new EventType<>(Event.ANY, "ANY");
+    public static final EventType<TabSwitchEvent<?>> ANY = new EventType<>(Event.ANY, "ANY_TAB_SWITCH");
 
     // switch to recipe tab AND select the right recipe
     public static final EventType<TabSwitchEvent<Recipe>> RECIPE =
-        new EventType<>(TabSwitchEvent.ANY, "CHANGE_RECIPE");
+        new EventType<>(TabSwitchEvent.ANY, "TAB_CHANGE_RECIPE");
 
     // switch to ingredient tab AND select the right ingredient
     public static final EventType<TabSwitchEvent<Ingredient>> INGREDIENT =
-        new EventType<>(TabSwitchEvent.ANY, "CHANGE_INGREDIENT");
+        new EventType<>(TabSwitchEvent.ANY, "TAB_CHANGE_INGREDIENT");
 
     private final T item;
 

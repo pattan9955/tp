@@ -149,6 +149,9 @@ public class MainWindow extends UiPart<Stage> implements Observer {
         this.getRoot().addEventFilter(ActiveItemChangeEvent.RECIPE, activeItemPanel::handleRecipeEvent);
         this.getRoot().addEventFilter(ActiveItemChangeEvent.INGREDIENT, activeItemPanel::handleIngredientEvent);
         this.getRoot().addEventFilter(ActiveItemChangeEvent.CLEAR, activeItemPanel::handleClearEvent);
+
+        this.getRoot().addEventFilter(TabSwitchEvent.INGREDIENT, tabListPanel::handleIngredientTabSwitchEvent);
+        this.getRoot().addEventFilter(TabSwitchEvent.RECIPE, tabListPanel::handleRecipeTabSwitchEvent);
     }
 
     /**
