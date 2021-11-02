@@ -29,6 +29,9 @@ public class ActiveItemPanel extends UiPart<Region> {
         this.isEnough = isEnough;
     }
 
+    /**
+     * Update current active item displayed to an Ingredient.
+     */
     public void handleIngredientEvent(ActiveItemChangeEvent<Ingredient> event) {
         Ingredient newItem = event.getItem();
         if (newItem != null) {
@@ -38,6 +41,9 @@ public class ActiveItemPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Update current active item displayed to a Recipe.
+     */
     public void handleRecipeEvent(ActiveItemChangeEvent<Recipe> event) {
         Recipe newItem = event.getItem();
         if (newItem != null) {
@@ -47,6 +53,9 @@ public class ActiveItemPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Clear the active window.
+     */
     public void handleClearEvent(ActiveItemChangeEvent<?> unused) {
         activeBox.getChildren().clear();
     }

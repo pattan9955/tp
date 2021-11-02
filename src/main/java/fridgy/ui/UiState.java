@@ -9,7 +9,7 @@ public class UiState {
 
     private Recipe activeRecipe;
     private Ingredient activeIngredient;
-    private Observer mainWindow;
+    private final Observer mainWindow;
 
     /**
      * Constructs a UI state object that is observable by an Observer.
@@ -20,6 +20,9 @@ public class UiState {
         this.mainWindow = mainWindow;
     }
 
+    /**
+     * Set a recipe as active, erase current activeIngredient
+     */
     public void setActive(Recipe active) {
         requireNonNull(active);
         if (activeRecipe == null || !activeRecipe.equals(active)) {
@@ -29,6 +32,9 @@ public class UiState {
         mainWindow.update(active);
     }
 
+    /**
+     * Set an ingredient as active, erase current activeRecipe
+     */
     public void setActive(Ingredient active) {
         requireNonNull(active);
         if (activeIngredient == null || !activeIngredient.equals(active)) {
@@ -50,6 +56,10 @@ public class UiState {
         }
     }
 
+    /**
+     * Switch to a target tab programmatically.
+     * @param tab the tab to switch to.
+     */
     public void switchTab(TabEnum tab) {
         requireNonNull(tab);
         mainWindow.update(tab);

@@ -4,10 +4,7 @@ import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import fridgy.ui.event.ActiveItemChangeEvent;
 import fridgy.ui.event.TabSwitchEvent;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -24,8 +21,8 @@ public class TabListPanel extends UiPart<Region> {
     @FXML
     private TabPane tabPane;
 
-    private RecipeListPanel recipeListPanel;
-    private IngredientListPanel ingredientListPanel;
+    private final RecipeListPanel recipeListPanel;
+    private final IngredientListPanel ingredientListPanel;
 
     private Recipe activeRecipe;
     private Ingredient activeIngredient;
@@ -50,16 +47,25 @@ public class TabListPanel extends UiPart<Region> {
         );
     }
 
+    /**
+     * Handles a {@code TabSwitchEvent}, switch the tab to the target tab.
+     */
     public void handleTabChange(TabSwitchEvent event) {
         tabPane.getSelectionModel().select(event.getItem().ordinal());
     }
 
+    /**
+     * Handles a {@code ActiveItemChangeEvent} for recipe, set the current active Item as selected
+     */
     public void handleActiveRecipe(ActiveItemChangeEvent<Recipe> event) {
         this.activeRecipe = event.getItem();
         this.activeIngredient = null;
         recipeListPanel.changeSelected(activeRecipe);
     }
 
+    /**
+     * Handles a {@code ActiveItemChangeEvent} for ingredient, set the current active Item as selected
+     */
     public void handleActiveIngredient(ActiveItemChangeEvent<Ingredient> event) {
         this.activeIngredient = event.getItem();
         this.activeRecipe = null;
