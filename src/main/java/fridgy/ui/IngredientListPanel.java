@@ -8,9 +8,11 @@ import fridgy.ui.event.ActiveItemChangeEvent;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 
 /**
@@ -30,20 +32,24 @@ public class IngredientListPanel extends UiPart<Region> {
         super(FXML);
         ingredientListView.setItems(ingredientList);
         ingredientListView.setCellFactory(listView -> new IngredientListViewCell());
-        ingredientListView.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<Ingredient>() {
-                    public void changed(ObservableValue<? extends Ingredient> ov,
-                                        Ingredient old_val, Ingredient new_val) {
-                        ingredientListView.fireEvent(
-                                new ActiveItemChangeEvent<Ingredient>(ActiveItemChangeEvent.INGREDIENT, new_val));
-                    }
-                });
+        ingredientListView.setOnMouseClicked(
+            event -> {
+                ingredientListView.fireEvent(
+                    new ActiveItemChangeEvent<>(ActiveItemChangeEvent.INGREDIENT,
+                        ingredientListView.getSelectionModel().getSelectedItem())
+                );
+            }
+        );
     }
 
     public void changeSelected(Ingredient to) {
         if (to != null) {
             ingredientListView.getSelectionModel().select(to);
         }
+    }
+
+    public void clearSelection() {
+        ingredientListView.getSelectionModel().clearSelection();
     }
 
     /**

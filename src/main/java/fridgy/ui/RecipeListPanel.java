@@ -37,20 +37,24 @@ public class RecipeListPanel extends UiPart<Region> {
         this.isEnough = isEnough;
         recipeListView.setItems(recipeList);
         recipeListView.setCellFactory(listView -> new RecipeListViewCell());
-        recipeListView.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<Recipe>() {
-                    public void changed(ObservableValue<? extends Recipe> ov,
-                                        Recipe old_val, Recipe new_val) {
-                        recipeListView.fireEvent(
-                            new ActiveItemChangeEvent<Recipe>(ActiveItemChangeEvent.RECIPE, new_val));
-                    }
-                });
+        recipeListView.setOnMouseClicked(
+            event -> {
+                recipeListView.fireEvent(
+                    new ActiveItemChangeEvent<>(ActiveItemChangeEvent.RECIPE,
+                        recipeListView.getSelectionModel().getSelectedItem())
+                );
+            }
+        );
     }
 
     public void changeSelected(Recipe to) {
         if (to != null) {
             recipeListView.getSelectionModel().select(to);
         }
+    }
+
+    public void clearSelection() {
+        recipeListView.getSelectionModel().clearSelection();
     }
 
     /**
