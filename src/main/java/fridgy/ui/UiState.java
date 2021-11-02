@@ -38,6 +38,18 @@ public class UiState {
         mainWindow.update(active);
     }
 
+    /**
+     * Resend {@code ActiveItemChangeEvent}. To be used after a filtered list change as
+     * old selected objects are destroyed, this will reselect them.
+     */
+    public void refreshActive() {
+        if (activeIngredient != null) {
+            mainWindow.update(activeIngredient);
+        } else if (activeRecipe != null) {
+            mainWindow.update(activeRecipe);
+        }
+    }
+
     public void switchTab(TabEnum tab) {
         requireNonNull(tab);
         mainWindow.update(tab);

@@ -202,7 +202,6 @@ public class MainWindow extends UiPart<Stage> implements Observer {
     @Override
     public void update(Recipe recipe) {
         this.getRoot().fireEvent(new ActiveItemChangeEvent<Recipe>(ActiveItemChangeEvent.RECIPE, recipe));
-        update(TabEnum.RECIPE);
     }
 
     /**
@@ -213,7 +212,6 @@ public class MainWindow extends UiPart<Stage> implements Observer {
     @Override
     public void update(Ingredient ingredient) {
         this.getRoot().fireEvent(new ActiveItemChangeEvent<Ingredient>(ActiveItemChangeEvent.INGREDIENT, ingredient));
-        update(TabEnum.INGREDIENT);
     }
 
     /**

@@ -19,6 +19,7 @@ import fridgy.ui.TabEnum;
 import fridgy.ui.UiState;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.scene.control.Tab;
 
 
 /**
@@ -213,6 +214,7 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredIngredients.setPredicate(predicate);
         uiState.switchTab(TabEnum.INGREDIENT);
+        uiState.refreshActive();
     }
 
     //=========== Filtered Recipe List Accessors =============================================================
@@ -231,6 +233,7 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredRecipes.setPredicate(predicate);
         uiState.switchTab(TabEnum.RECIPE);
+        uiState.refreshActive();
     }
 
     //=========== Sorting =============================================================
@@ -273,6 +276,7 @@ public class ModelManager implements Model {
         requireNonNull(activeRecipe);
         if (recipeBook.has(activeRecipe)) {
             uiState.setActive(activeRecipe);
+            uiState.switchTab(TabEnum.RECIPE);
         }
     }
 
@@ -281,6 +285,7 @@ public class ModelManager implements Model {
         requireNonNull(activeIngredient);
         if (inventory.has(activeIngredient)) {
             uiState.setActive(activeIngredient);
+            uiState.switchTab(TabEnum.INGREDIENT);
         }
     }
 
