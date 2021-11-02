@@ -152,7 +152,7 @@ public class ModelManager implements Model {
     public void set(Ingredient target, Ingredient editedIngredient) {
         requireAllNonNull(target, editedIngredient);
         inventory.set(target, editedIngredient);
-
+        uiState.modify(target, editedIngredient);
         // ingredient changes need to inform recipeBook to update for tagging purposes.
         refresh(this.filteredRecipes);
     }
@@ -160,6 +160,7 @@ public class ModelManager implements Model {
     @Override
     public void set(Recipe target, Recipe editedRecipe) {
         requireAllNonNull(target, editedRecipe);
+        uiState.modify(target, editedRecipe);
         recipeBook.set(target, editedRecipe);
     }
 

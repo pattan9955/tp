@@ -1,10 +1,12 @@
 package fridgy.ui;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
 import fridgy.commons.core.LogsCenter;
 import fridgy.model.ingredient.BaseIngredient;
+import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import fridgy.ui.event.ActiveItemChangeEvent;
 import javafx.collections.ObservableList;
@@ -30,18 +32,14 @@ public class RecipeListPanel extends UiPart<Region> {
      * isDetailed flag determines if the recipe card will show the steps. This is added to allow component reuse.
      */
     public RecipeListPanel(ObservableList<Recipe> recipeList,
+                           Consumer<Recipe> changeActive,
                            Function<BaseIngredient, Boolean> isEnough) {
         super(FXML);
         this.isEnough = isEnough;
         recipeListView.setItems(recipeList);
         recipeListView.setCellFactory(listView -> new RecipeListViewCell());
         recipeListView.setOnMouseClicked(
-            event -> {
-                recipeListView.fireEvent(
-                    new ActiveItemChangeEvent<>(ActiveItemChangeEvent.RECIPE,
-                        recipeListView.getSelectionModel().getSelectedItem())
-                );
-            }
+            event -> changeActive.accept(recipeListView.getSelectionModel().getSelectedItem())
         );
     }
 

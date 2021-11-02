@@ -1,5 +1,7 @@
 package fridgy.ui;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.logging.Logger;
 
 import fridgy.commons.core.LogsCenter;
@@ -24,17 +26,12 @@ public class IngredientListPanel extends UiPart<Region> {
     /**
      * Creates a {@code IngredientListPanel} with the given {@code ObservableList}.
      */
-    public IngredientListPanel(ObservableList<Ingredient> ingredientList) {
+    public IngredientListPanel(ObservableList<Ingredient> ingredientList, Consumer<Ingredient> changeActive) {
         super(FXML);
         ingredientListView.setItems(ingredientList);
         ingredientListView.setCellFactory(listView -> new IngredientListViewCell());
         ingredientListView.setOnMouseClicked(
-            event -> {
-                ingredientListView.fireEvent(
-                    new ActiveItemChangeEvent<>(ActiveItemChangeEvent.INGREDIENT,
-                        ingredientListView.getSelectionModel().getSelectedItem())
-                );
-            }
+            event -> changeActive.accept(ingredientListView.getSelectionModel().getSelectedItem())
         );
     }
 

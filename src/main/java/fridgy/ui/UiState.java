@@ -20,6 +20,28 @@ public class UiState {
         this.mainWindow = mainWindow;
     }
 
+    /**
+     * Modify active recipe to editedRecipe if target {@code Recipe} is the same as the current activeRecipe.
+     */
+    public void modify(Recipe target, Recipe editedRecipe) {
+        if (activeRecipe == target) {
+            set(editedRecipe);
+        }
+    }
+
+    /**
+     * Modify active ingredient to editedIngredient if target {@code Ingredient}
+     * is the same as the current activeIngredient.
+     */
+    public void modify(Ingredient target, Ingredient editedIngredient) {
+        if (activeIngredient == target) {
+            set(editedIngredient);
+        }
+    }
+
+    /**
+     * Set a recipe as active, erase current activeRecipe.
+     */
     private void set(Recipe active) {
         if (activeRecipe == null || !activeRecipe.equals(active)) {
             this.activeRecipe = active;
@@ -27,6 +49,9 @@ public class UiState {
         }
     }
 
+    /**
+     * Set a recipe as active, erase current activeIngredient.
+     */
     private void set(Ingredient active) {
         if (activeIngredient == null || !activeIngredient.equals(active)) {
             this.activeIngredient = active;
@@ -35,7 +60,7 @@ public class UiState {
     }
 
     /**
-     * Set a recipe as active, erase current activeIngredient
+     * Set a recipe as active, erase current activeRecipe. Inform MainWindow of change.
      */
     public void setActive(Recipe active) {
         requireNonNull(active);
@@ -44,7 +69,7 @@ public class UiState {
     }
 
     /**
-     * Set an ingredient as active, erase current activeRecipe
+     * Set a recipe as active, erase current activeIngredient. Inform MainWindow of change.
      */
     public void setActive(Ingredient active) {
         requireNonNull(active);

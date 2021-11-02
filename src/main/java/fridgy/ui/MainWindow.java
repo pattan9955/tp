@@ -127,8 +127,8 @@ public class MainWindow extends UiPart<Stage> implements Observer {
 
         activeItemPanel = new ActiveItemPanel(logic::isEnough);
         tabListPanel = new TabListPanel(
-            new IngredientListPanel(logic.getFilteredIngredientList()),
-            new RecipeListPanel(logic.getFilteredRecipeList(), logic::isEnough)
+            new IngredientListPanel(logic.getFilteredIngredientList(), uiState::setActive),
+            new RecipeListPanel(logic.getFilteredRecipeList(), uiState::setActive, logic::isEnough)
         );
 
 
