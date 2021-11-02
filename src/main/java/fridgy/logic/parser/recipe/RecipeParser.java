@@ -5,8 +5,15 @@ import java.util.regex.Pattern;
 
 import fridgy.commons.core.Messages;
 import fridgy.logic.commands.HelpCommand;
-import fridgy.logic.commands.recipe.*;
+import fridgy.logic.commands.recipe.AddRecipeCommand;
+import fridgy.logic.commands.recipe.ClearRecipeCommand;
+import fridgy.logic.commands.recipe.CookRecipeCommand;
 import fridgy.logic.commands.recipe.DeleteRecipeCommand;
+import fridgy.logic.commands.recipe.EditRecipeCommand;
+import fridgy.logic.commands.recipe.FindRecipeCommand;
+import fridgy.logic.commands.recipe.ListRecipeCommand;
+import fridgy.logic.commands.recipe.RecipeCommand;
+import fridgy.logic.commands.recipe.ViewRecipeCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 
 /**

@@ -1,10 +1,10 @@
 package fridgy.logic.parser;
 
-import fridgy.logic.commands.DeleteCommand;
 import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.Messages;
 import fridgy.logic.commands.CommandTestUtil;
+import fridgy.logic.commands.DeleteCommand;
 import fridgy.testutil.TypicalIndexes;
 
 public class DeleteCommandParserTest {
