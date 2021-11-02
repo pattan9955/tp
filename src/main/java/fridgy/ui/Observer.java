@@ -10,4 +10,6 @@ public interface Observer {
     void update(Ingredient newItem);
     void update(Recipe newItem);
     void update(TabEnum tab);
+
+    void clearWindow();
 }

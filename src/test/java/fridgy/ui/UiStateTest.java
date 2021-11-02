@@ -26,14 +26,14 @@ class UiStateTest {
     }
 
     @Test
-    public void setActive_validIngredient_successs() {
+    public void setActive_validIngredient_success() {
         assertDoesNotThrow(() -> new UiState(new ObserverStub()).setActive(
             TypicalIngredients.ALMOND
         ));
     }
 
     @Test
-    public void setActive_validRecipe_successs() {
+    public void setActive_validRecipe_success() {
         assertDoesNotThrow(() -> new UiState(new ObserverStub()).setActive(
             TypicalRecipes.BURGER
         ));
@@ -65,6 +65,68 @@ class UiStateTest {
         assertNotEquals(state1, state2);
     }
 
+    @Test
+    public void modify_sameActive_success() {
+        UiState state1 = new UiState(new ObserverStub());
+        UiState state2 = new UiState(new ObserverStub());
+        state1.setActive(TypicalIngredients.ALMOND);
+        state2.setActive(TypicalIngredients.APPLE);
+
+        state1.modify(TypicalIngredients.ALMOND, TypicalIngredients.APPLE);
+        assertEquals(state1, state2);
+
+
+        state1.setActive(TypicalRecipes.RICE);
+        state2.setActive(TypicalRecipes.BURGER);
+
+        state1.modify(TypicalRecipes.RICE, TypicalRecipes.BURGER);
+        assertEquals(state1, state2);
+    }
+
+    @Test
+    public void modify_differentActive_doNothing() {
+        UiState state1 = new UiState(new ObserverStub());
+        UiState state2 = new UiState(new ObserverStub());
+        state1.setActive(TypicalIngredients.ALMOND);
+        state2.setActive(TypicalIngredients.APPLE);
+
+        state1.modify(TypicalIngredients.BANANA, TypicalIngredients.APPLE);
+        assertNotEquals(state1, state2);
+
+        state1.setActive(TypicalRecipes.RICE);
+        state2.setActive(TypicalRecipes.BURGER);
+
+        state1.modify(TypicalRecipes.MAGGIE, TypicalRecipes.BURGER);
+        assertNotEquals(state1, state2);
+    }
+
+    @Test
+    public void delete_sameActive_success() {
+        UiState state1 = new UiState(new ObserverStub());
+        UiState state2 = new UiState(new ObserverStub());
+
+        state1.setActive(TypicalIngredients.ALMOND);
+        state1.delete(TypicalIngredients.ALMOND);
+        assertEquals(state1, state2);
+
+        state1.setActive(TypicalRecipes.RICE);
+        state1.delete(TypicalRecipes.RICE);
+        assertEquals(state1, state2);
+    }
+
+    @Test
+    public void delete_differentActive_doNothing() {
+        UiState state1 = new UiState(new ObserverStub());
+        UiState state2 = new UiState(new ObserverStub());
+
+        state1.setActive(TypicalIngredients.ALMOND);
+        state1.delete(TypicalIngredients.BANANA);
+        assertNotEquals(state1, state2);
+
+        state1.setActive(TypicalRecipes.RICE);
+        state1.delete(TypicalRecipes.MAGGIE);
+        assertNotEquals(state1, state2);
+    }
 
     class ObserverStub implements Observer {
 
@@ -82,6 +144,9 @@ class UiStateTest {
         public void update(TabEnum tab) {
 
         }
+
+        @Override
+        public void clearWindow() {}
 
         @Override
         public boolean equals(Object other) {

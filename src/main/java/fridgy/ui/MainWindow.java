@@ -233,6 +233,14 @@ public class MainWindow extends UiPart<Stage> implements Observer {
     }
 
     /**
+     * Fires a {@code ActiveItemChangeEvent} to clear active Window.
+     */
+    @Override
+    public void clearWindow() {
+        this.getRoot().fireEvent(new ActiveItemChangeEvent<>(ActiveItemChangeEvent.CLEAR, null));
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see Logic#execute(String)

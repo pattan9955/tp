@@ -45,6 +45,26 @@ public class UiState {
     }
 
     /**
+     * Delete active ingredient if it is the same as the target.
+     */
+    public void delete(Ingredient target) {
+        if (target.equals(activeIngredient)) {
+            activeIngredient = null;
+            mainWindow.clearWindow();
+        }
+    }
+
+    /**
+     * Delete active recipe if it is the same as the target.
+     */
+    public void delete(Recipe target) {
+        if (target.equals(activeRecipe)) {
+            activeRecipe = null;
+            mainWindow.clearWindow();
+        }
+    }
+
+    /**
      * Set a recipe as active, erase current activeRecipe.
      */
     private void set(Recipe active) {

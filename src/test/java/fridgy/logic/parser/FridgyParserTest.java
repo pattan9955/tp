@@ -190,5 +190,8 @@ public class FridgyParserTest {
         public void update(TabEnum tab) {
 
         }
+
+        @Override
+        public void clearWindow() {}
     }
 }

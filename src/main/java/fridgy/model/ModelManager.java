@@ -123,7 +123,8 @@ public class ModelManager implements Model {
     @Override
     public void delete(Ingredient target) {
         inventory.remove(target);
-
+        uiState.delete(target);
+        uiState.switchTab(TabEnum.INGREDIENT);
         // ingredient changes need to inform recipeBook to update for tagging purposes.
         refresh(this.filteredRecipes);
     }
@@ -131,6 +132,8 @@ public class ModelManager implements Model {
     @Override
     public void delete(Recipe target) {
         recipeBook.remove(target);
+        uiState.delete(target);
+        uiState.switchTab(TabEnum.RECIPE);
     }
 
     @Override
