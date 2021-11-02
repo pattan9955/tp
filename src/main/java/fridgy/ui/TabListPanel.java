@@ -2,6 +2,7 @@ package fridgy.ui;
 
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
+import fridgy.ui.event.ActiveItemChangeEvent;
 import fridgy.ui.event.TabSwitchEvent;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -14,7 +15,6 @@ import javafx.scene.layout.StackPane;
 public class TabListPanel extends UiPart<Region> {
     private static final String FXML = "TabListPanel.fxml";
 
-
     @FXML
     private StackPane ingredientListPanelPlaceholder;
 
@@ -26,6 +26,9 @@ public class TabListPanel extends UiPart<Region> {
 
     private RecipeListPanel recipeListPanel;
     private IngredientListPanel ingredientListPanel;
+
+    private Recipe activeRecipe;
+    private Ingredient activeIngredient;
 
     /**
      * Creates a {@code TabListPanel} with the given {@code IngredientListPanel} and {@code RecipeListPanel}.
@@ -41,17 +44,27 @@ public class TabListPanel extends UiPart<Region> {
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                 ingredientListPanel.clearSelection();
                 recipeListPanel.clearSelection();
+                ingredientListPanel.changeSelected(activeIngredient);
+                recipeListPanel.changeSelected(activeRecipe);
             }
         );
     }
 
-    public void handleIngredientTabSwitchEvent(TabSwitchEvent<Ingredient> event) {
-        tabPane.getSelectionModel().select(TabEnum.INGREDIENT.ordinal());
-        ingredientListPanel.changeSelected(event.getItem());
+    public void handleTabChange(TabSwitchEvent event) {
+        tabPane.getSelectionModel().select(event.getItem().ordinal());
     }
 
-    public void handleRecipeTabSwitchEvent(TabSwitchEvent<Recipe> event) {
-        tabPane.getSelectionModel().select(TabEnum.RECIPE.ordinal());
-        recipeListPanel.changeSelected(event.getItem());
+    public void handleActiveRecipe(ActiveItemChangeEvent<Recipe> event) {
+        this.activeRecipe = event.getItem();
+        this.activeIngredient = null;
+        recipeListPanel.changeSelected(activeRecipe);
     }
+
+    public void handleActiveIngredient(ActiveItemChangeEvent<Ingredient> event) {
+        this.activeIngredient = event.getItem();
+        this.activeRecipe = null;
+        ingredientListPanel.changeSelected(activeIngredient);
+    }
+
+
 }

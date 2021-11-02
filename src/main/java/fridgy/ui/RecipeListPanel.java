@@ -7,8 +7,6 @@ import fridgy.commons.core.LogsCenter;
 import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.recipe.Recipe;
 import fridgy.ui.event.ActiveItemChangeEvent;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;

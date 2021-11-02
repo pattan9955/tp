@@ -16,7 +16,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -150,8 +149,9 @@ public class MainWindow extends UiPart<Stage> implements Observer {
         this.getRoot().addEventFilter(ActiveItemChangeEvent.INGREDIENT, activeItemPanel::handleIngredientEvent);
         this.getRoot().addEventFilter(ActiveItemChangeEvent.CLEAR, activeItemPanel::handleClearEvent);
 
-        this.getRoot().addEventFilter(TabSwitchEvent.INGREDIENT, tabListPanel::handleIngredientTabSwitchEvent);
-        this.getRoot().addEventFilter(TabSwitchEvent.RECIPE, tabListPanel::handleRecipeTabSwitchEvent);
+        this.getRoot().addEventFilter(TabSwitchEvent.CHANGE, tabListPanel::handleTabChange);
+        this.getRoot().addEventFilter(ActiveItemChangeEvent.RECIPE, tabListPanel::handleActiveRecipe);
+        this.getRoot().addEventFilter(ActiveItemChangeEvent.INGREDIENT, tabListPanel::handleActiveIngredient);
     }
 
     /**
@@ -202,7 +202,7 @@ public class MainWindow extends UiPart<Stage> implements Observer {
     @Override
     public void update(Recipe recipe) {
         this.getRoot().fireEvent(new ActiveItemChangeEvent<Recipe>(ActiveItemChangeEvent.RECIPE, recipe));
-        this.getRoot().fireEvent(new TabSwitchEvent<>(TabSwitchEvent.RECIPE, recipe));
+        update(TabEnum.RECIPE);
     }
 
     /**
@@ -213,25 +213,16 @@ public class MainWindow extends UiPart<Stage> implements Observer {
     @Override
     public void update(Ingredient ingredient) {
         this.getRoot().fireEvent(new ActiveItemChangeEvent<Ingredient>(ActiveItemChangeEvent.INGREDIENT, ingredient));
-        this.getRoot().fireEvent(new TabSwitchEvent<>(TabSwitchEvent.INGREDIENT, ingredient));
+        update(TabEnum.INGREDIENT);
     }
 
     /**
      * Fires a {@code TabSwitchEvent} to switch to the correct tab.
-     * Null is used here since we do not want to update selected card.
      * @param tab the tab to switch to
      */
     @Override
     public void update(TabEnum tab) {
-        switch (tab) {
-        case RECIPE:
-            this.getRoot().fireEvent(new TabSwitchEvent<>(TabSwitchEvent.RECIPE, null));
-            break;
-        case INGREDIENT:
-            this.getRoot().fireEvent(new TabSwitchEvent<>(TabSwitchEvent.INGREDIENT, null));
-            break;
-        default:
-        }
+        this.getRoot().fireEvent(new TabSwitchEvent(TabSwitchEvent.CHANGE, tab));
     }
 
     /**
