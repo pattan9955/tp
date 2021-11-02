@@ -19,18 +19,18 @@ import fridgy.model.recipe.Recipe;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private InventoryStorage addressBookStorage;
+    private InventoryStorage inventoryStorage;
     private RecipeBookStorage recipeBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code InventoryStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(InventoryStorage addressBookStorage,
+    public StorageManager(InventoryStorage inventoryStorage,
                           RecipeBookStorage recipeBookStorage,
                           UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.inventoryStorage = inventoryStorage;
         this.recipeBookStorage = recipeBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
@@ -57,30 +57,30 @@ public class StorageManager implements Storage {
 
     @Override
     public Path getInventoryFilePath() {
-        return addressBookStorage.getInventoryFilePath();
+        return inventoryStorage.getInventoryFilePath();
     }
 
     @Override
     public Optional<ReadOnlyDatabase<Ingredient>> readInventory() throws DataConversionException, IOException {
-        return readInventory(addressBookStorage.getInventoryFilePath());
+        return readInventory(inventoryStorage.getInventoryFilePath());
     }
 
     @Override
     public Optional<ReadOnlyDatabase<Ingredient>> readInventory(Path filePath)
             throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readInventory(filePath);
+        return inventoryStorage.readInventory(filePath);
     }
 
     @Override
-    public void saveInventory(ReadOnlyDatabase<Ingredient> addressBook) throws IOException {
-        saveInventory(addressBook, addressBookStorage.getInventoryFilePath());
+    public void saveInventory(ReadOnlyDatabase<Ingredient> inventory) throws IOException {
+        saveInventory(inventory, inventoryStorage.getInventoryFilePath());
     }
 
     @Override
-    public void saveInventory(ReadOnlyDatabase<Ingredient> addressBook, Path filePath) throws IOException {
+    public void saveInventory(ReadOnlyDatabase<Ingredient> inventory, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveInventory(addressBook, filePath);
+        inventoryStorage.saveInventory(inventory, filePath);
     }
 
     // ================ RecipeBook methods ==============================

@@ -62,9 +62,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        InventoryStorage addressBookStorage = new JsonInventoryStorage(userPrefs.getInventoryFilePath());
+        InventoryStorage inventoryStorage = new JsonInventoryStorage(userPrefs.getInventoryFilePath());
         RecipeBookStorage recipeBookStorage = new JsonRecipeBookStorage(userPrefs.getRecipeBookFilePath());
-        storage = new StorageManager(addressBookStorage, recipeBookStorage, userPrefsStorage);
+        storage = new StorageManager(inventoryStorage, recipeBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -85,15 +85,15 @@ public class MainApp extends Application {
      * or an empty recipe book will be used instead if errors occur when reading {@code storage}'s recipe book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyDatabase<Ingredient>> addressBookOptional;
+        Optional<ReadOnlyDatabase<Ingredient>> inventoryOptional;
         ReadOnlyDatabase<Ingredient> initialInventory;
         try {
-            addressBookOptional = storage.readInventory();
-            if (!addressBookOptional.isPresent()) {
+            inventoryOptional = storage.readInventory();
+            if (!inventoryOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample Inventory");
             }
 
-            initialInventory = addressBookOptional.orElseGet(SampleDataUtil::getSampleInventory);
+            initialInventory = inventoryOptional.orElseGet(SampleDataUtil::getSampleInventory);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty Inventory");
             initialInventory = new Inventory();
