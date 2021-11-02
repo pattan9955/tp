@@ -5,16 +5,8 @@ import java.util.regex.Pattern;
 
 import fridgy.commons.core.Messages;
 import fridgy.logic.commands.HelpCommand;
-import fridgy.logic.commands.recipe.AddRecipeCommand;
-import fridgy.logic.commands.recipe.ClearRecipeCommand;
-import fridgy.logic.commands.recipe.CookRecipeCommand;
+import fridgy.logic.commands.recipe.*;
 import fridgy.logic.commands.recipe.DeleteRecipeCommand;
-import fridgy.logic.commands.recipe.EditRecipeCommand;
-import fridgy.logic.commands.recipe.FindRecipeCommand;
-import fridgy.logic.commands.recipe.ListRecipeCommand;
-import fridgy.logic.commands.recipe.MultiDeleteRecipeCommand;
-import fridgy.logic.commands.recipe.RecipeCommand;
-import fridgy.logic.commands.recipe.ViewRecipeCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 
 /**
@@ -46,8 +38,6 @@ public class RecipeParser {
         switch (commandWord) {
         case AddRecipeCommand.COMMAND_WORD:
             return new AddRecipeCommandParser().parse(arguments);
-        case DeleteRecipeCommand.COMMAND_WORD:
-            return new DeleteRecipeCommandParser().parse(arguments);
         case FindRecipeCommand.COMMAND_WORD:
             return new FindRecipeCommandParser().parse(arguments);
         case ListRecipeCommand.COMMAND_WORD:
@@ -58,8 +48,8 @@ public class RecipeParser {
             return new CookRecipeCommandParser().parse(arguments);
         case EditRecipeCommand.COMMAND_WORD:
             return new EditRecipeCommandParser().parse(arguments);
-        case MultiDeleteRecipeCommand.COMMAND_WORD:
-            return new MultiDeleteRecipeCommandParser().parse(arguments);
+        case DeleteRecipeCommand.COMMAND_WORD:
+            return new DeleteRecipeCommandParser().parse(arguments);
         case ClearRecipeCommand.COMMAND_WORD:
             return new ClearRecipeCommandParser().parse(arguments);
         default:

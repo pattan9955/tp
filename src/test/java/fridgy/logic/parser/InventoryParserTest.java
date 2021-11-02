@@ -8,18 +8,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import fridgy.logic.commands.*;
 import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.Messages;
-import fridgy.logic.commands.AddCommand;
-import fridgy.logic.commands.ClearCommand;
-import fridgy.logic.commands.CommandTestUtil;
-import fridgy.logic.commands.DeleteCommand;
-import fridgy.logic.commands.EditCommand;
 import fridgy.logic.commands.EditCommand.EditIngredientDescriptor;
-import fridgy.logic.commands.FindCommand;
-import fridgy.logic.commands.HelpCommand;
-import fridgy.logic.commands.ListCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
