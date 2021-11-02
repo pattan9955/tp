@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<TabPane fx:id="tabPane" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  tabClosingPolicy="UNAVAILABLE">
+    <tabs>
+        <Tab text="Ingredient">
+            <content>
+                <VBox fx:id="ingredientList" minWidth="400" prefWidth="400" VBox.vgrow="ALWAYS"
+                      styleClass="main-window">
+                    <padding>
+                        <Insets bottom="10" left="10" right="10" top="10" />
+                    </padding>
+                    <StackPane  styleClass="main-window" fx:id="ingredientListPanelPlaceholder"
+                                VBox.vgrow="ALWAYS" />
+                </VBox>
+            </content>
+        </Tab>
+        <Tab text="Recipe">
+            <content>
+                <VBox fx:id="recipeList" minWidth="400" prefWidth="400" VBox.vgrow="ALWAYS">
+                    <padding>
+                        <Insets bottom="10" left="10" right="10" top="10" />
+                    </padding>
+                    <StackPane fx:id="recipeListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                </VBox>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>

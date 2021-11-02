@@ -1,11 +1,10 @@
 package fridgy.ui;
 
+import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 import fridgy.commons.core.LogsCenter;
 import fridgy.model.ingredient.Ingredient;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -25,17 +24,26 @@ public class IngredientListPanel extends UiPart<Region> {
     /**
      * Creates a {@code IngredientListPanel} with the given {@code ObservableList}.
      */
-    public IngredientListPanel(ObservableList<Ingredient> ingredientList, ActiveItemPanel activeItemPanel) {
+    public IngredientListPanel(ObservableList<Ingredient> ingredientList, Consumer<Ingredient> changeActive) {
         super(FXML);
         ingredientListView.setItems(ingredientList);
         ingredientListView.setCellFactory(listView -> new IngredientListViewCell());
-        ingredientListView.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<Ingredient>() {
-                    public void changed(ObservableValue<? extends Ingredient> ov,
-                                        Ingredient oldVal, Ingredient newVal) {
-                        activeItemPanel.update(newVal);
-                    }
-                });
+        ingredientListView.setOnMouseClicked(
+            event -> changeActive.accept(ingredientListView.getSelectionModel().getSelectedItem())
+        );
+    }
+
+    /**
+     * Change the selected item to a target {@code Ingredient}.
+     */
+    public void changeSelected(Ingredient to) {
+        if (to != null) {
+            ingredientListView.getSelectionModel().select(to);
+        }
+    }
+
+    public void clearSelection() {
+        ingredientListView.getSelectionModel().clearSelection();
     }
 
     /**
@@ -54,5 +62,6 @@ public class IngredientListPanel extends UiPart<Region> {
             }
         }
     }
+
 
 }
