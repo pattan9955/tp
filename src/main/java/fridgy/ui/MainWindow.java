@@ -11,10 +11,12 @@ import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import fridgy.ui.event.ActiveItemChangeEvent;
+import fridgy.ui.event.TabSwitchEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -36,8 +38,7 @@ public class MainWindow extends UiPart<Stage> implements Observer {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private IngredientListPanel ingredientListPanel;
-    private RecipeListPanel recipeListPanel;
+    private TabListPanel tabListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -48,10 +49,7 @@ public class MainWindow extends UiPart<Stage> implements Observer {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane ingredientListPanelPlaceholder;
-
-    @FXML
-    private StackPane recipeListPanelPlaceholder;
+    private VBox tabListPanelPlaceholder;
 
     @FXML
     private ScrollPane viewDisplayPlaceholder;
@@ -131,11 +129,11 @@ public class MainWindow extends UiPart<Stage> implements Observer {
         viewDisplayPlaceholder.hvalueProperty().bind(displayContainer.widthProperty());
         displayContainer.getChildren().add(activeItemPanel.getRoot());
 
-        ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList(), activeItemPanel);
-        ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
-
-        recipeListPanel = new RecipeListPanel(logic.getFilteredRecipeList(), activeItemPanel, logic::isEnough);
-        recipeListPanelPlaceholder.getChildren().add(recipeListPanel.getRoot());
+        tabListPanel = new TabListPanel(
+            new IngredientListPanel(logic.getFilteredIngredientList(), activeItemPanel),
+            new RecipeListPanel(logic.getFilteredRecipeList(), activeItemPanel, logic::isEnough)
+        );
+        tabListPanelPlaceholder.getChildren().add(tabListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -199,6 +197,7 @@ public class MainWindow extends UiPart<Stage> implements Observer {
      */
     public void update(Recipe recipe) {
         this.getRoot().fireEvent(new ActiveItemChangeEvent<Recipe>(ActiveItemChangeEvent.RECIPE, recipe));
+        this.getRoot().fireEvent(new TabSwitchEvent<>(TabSwitchEvent.RECIPE, recipe));
     }
 
     /**
@@ -207,15 +206,7 @@ public class MainWindow extends UiPart<Stage> implements Observer {
      */
     public void update(Ingredient ingredient) {
         this.getRoot().fireEvent(new ActiveItemChangeEvent<Ingredient>(ActiveItemChangeEvent.INGREDIENT, ingredient));
-    }
-
-    /**
-     * Fires an {@code ActiveItemChangeEvent} to update active tab.
-     * @param tab the tab to be displayed.
-     */
-    public void update(TabEnum tab) {
-        // do nothing for now
-        return;
+        this.getRoot().fireEvent(new TabSwitchEvent<>(TabSwitchEvent.INGREDIENT, ingredient));
     }
 
     /**

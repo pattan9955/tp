@@ -39,7 +39,6 @@ import fridgy.model.tag.Tag;
 import fridgy.testutil.RecipeBuilder;
 import fridgy.testutil.TypicalBaseIngredients;
 import fridgy.ui.Observer;
-import fridgy.ui.TabEnum;
 import fridgy.ui.UiState;
 
 
@@ -184,11 +183,6 @@ public class FridgyParserTest {
 
         @Override
         public void update(Recipe newItem) {
-
-        }
-
-        @Override
-        public void update(TabEnum tab) {
 
         }
     }

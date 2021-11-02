@@ -79,11 +79,6 @@ class UiStateTest {
         }
 
         @Override
-        public void update(TabEnum tab) {
-
-        }
-
-        @Override
         public boolean equals(Object other) {
             return other instanceof ObserverStub;
         }

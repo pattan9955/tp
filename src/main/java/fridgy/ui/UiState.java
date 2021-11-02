@@ -9,7 +9,6 @@ public class UiState {
 
     private Recipe activeRecipe;
     private Ingredient activeIngredient;
-    private TabEnum activeTab;
     private Observer mainWindow;
 
     /**
@@ -49,7 +48,6 @@ public class UiState {
             UiState o = (UiState) other;
             return o.activeIngredient == this.activeIngredient
                 && o.activeRecipe == this.activeRecipe
-                && o.activeTab == this.activeTab
                 && o.mainWindow.equals(this.mainWindow);
         }
         return false;
