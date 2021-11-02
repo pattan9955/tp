@@ -19,7 +19,6 @@ import fridgy.ui.TabEnum;
 import fridgy.ui.UiState;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.scene.control.Tab;
 
 
 /**
@@ -190,7 +189,9 @@ public class ModelManager implements Model {
 
     @Override
     public boolean deductIngredients(Set<BaseIngredient> ingredients) {
-        return inventory.deductIngredients(ingredients);
+        boolean isSuccess = inventory.deductIngredients(ingredients);
+        refresh(this.filteredRecipes);
+        return isSuccess;
     }
 
     @Override
@@ -300,5 +301,6 @@ public class ModelManager implements Model {
         Predicate<? super T> currentPredicate = list.getPredicate();
         list.setPredicate(unused -> false);
         list.setPredicate(currentPredicate);
+        uiState.refreshActive();
     }
 }
