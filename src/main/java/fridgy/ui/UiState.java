@@ -11,6 +11,15 @@ public class UiState {
     private Ingredient activeIngredient;
     private final Observer mainWindow;
 
+    public Recipe getActiveRecipe() {
+        return activeRecipe;
+    }
+
+    public Ingredient getActiveIngredient() {
+        return activeIngredient;
+    }
+
+
     /**
      * Constructs a UI state object that is observable by an Observer.
      * @param mainWindow the Observer
