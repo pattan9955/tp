@@ -5,14 +5,10 @@ import java.util.logging.Logger;
 import fridgy.commons.core.LogsCenter;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.ui.event.ActiveItemChangeEvent;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 
 /**
@@ -28,7 +24,7 @@ public class IngredientListPanel extends UiPart<Region> {
     /**
      * Creates a {@code IngredientListPanel} with the given {@code ObservableList}.
      */
-    public IngredientListPanel(ObservableList<Ingredient> ingredientList, ActiveItemPanel activeItemPanel) {
+    public IngredientListPanel(ObservableList<Ingredient> ingredientList) {
         super(FXML);
         ingredientListView.setItems(ingredientList);
         ingredientListView.setCellFactory(listView -> new IngredientListViewCell());
@@ -42,6 +38,9 @@ public class IngredientListPanel extends UiPart<Region> {
         );
     }
 
+    /**
+     * Change the selected item to a target {@code Ingredient}.
+     */
     public void changeSelected(Ingredient to) {
         if (to != null) {
             ingredientListView.getSelectionModel().select(to);

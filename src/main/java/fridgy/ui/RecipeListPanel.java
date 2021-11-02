@@ -29,7 +29,7 @@ public class RecipeListPanel extends UiPart<Region> {
      * Creates a {@code RecipeListPanel} with the given {@code ObservableList}.
      * isDetailed flag determines if the recipe card will show the steps. This is added to allow component reuse.
      */
-    public RecipeListPanel(ObservableList<Recipe> recipeList, ActiveItemPanel activeItemPanel,
+    public RecipeListPanel(ObservableList<Recipe> recipeList,
                            Function<BaseIngredient, Boolean> isEnough) {
         super(FXML);
         this.isEnough = isEnough;
@@ -45,6 +45,9 @@ public class RecipeListPanel extends UiPart<Region> {
         );
     }
 
+    /**
+     * Change the selected item to a target {@code Recipe}.
+     */
     public void changeSelected(Recipe to) {
         if (to != null) {
             recipeListView.getSelectionModel().select(to);

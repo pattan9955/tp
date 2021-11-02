@@ -38,6 +38,7 @@ public class MainWindow extends UiPart<Stage> implements Observer {
 
     // Independent Ui parts residing in this Ui container
     private TabListPanel tabListPanel;
+    private ActiveItemPanel activeItemPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -71,8 +72,6 @@ public class MainWindow extends UiPart<Stage> implements Observer {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
-        this.logic.setUiState(new UiState(this));
-
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
@@ -120,28 +119,17 @@ public class MainWindow extends UiPart<Stage> implements Observer {
     }
 
     /**
-     * Fills up all the placeholders of this window.
+     * Initialize all the stateful components
      */
-    void fillInnerParts() {
-        ActiveItemPanel activeItemPanel = new ActiveItemPanel(logic::isEnough);
-        viewDisplayPlaceholder.vvalueProperty().bind(displayContainer.heightProperty());
-        viewDisplayPlaceholder.hvalueProperty().bind(displayContainer.widthProperty());
-        displayContainer.getChildren().add(activeItemPanel.getRoot());
+    private void initialize() {
+        UiState uiState = new UiState(this);
+        logic.setUiState(uiState);
 
+        activeItemPanel = new ActiveItemPanel(logic::isEnough);
         tabListPanel = new TabListPanel(
-            new IngredientListPanel(logic.getFilteredIngredientList(), activeItemPanel),
-            new RecipeListPanel(logic.getFilteredRecipeList(), activeItemPanel, logic::isEnough)
+            new IngredientListPanel(logic.getFilteredIngredientList()),
+            new RecipeListPanel(logic.getFilteredRecipeList(), logic::isEnough)
         );
-        tabListPanelPlaceholder.getChildren().add(tabListPanel.getRoot());
-
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getInventoryFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        CommandBox commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
 
         // Initialise event listeners.
@@ -152,6 +140,27 @@ public class MainWindow extends UiPart<Stage> implements Observer {
         this.getRoot().addEventFilter(TabSwitchEvent.CHANGE, tabListPanel::handleTabChange);
         this.getRoot().addEventFilter(ActiveItemChangeEvent.RECIPE, tabListPanel::handleActiveRecipe);
         this.getRoot().addEventFilter(ActiveItemChangeEvent.INGREDIENT, tabListPanel::handleActiveIngredient);
+    }
+
+    /**
+     * Fills up all the placeholders of this window.
+     */
+    void fillInnerParts() {
+        initialize();
+        viewDisplayPlaceholder.vvalueProperty().bind(displayContainer.heightProperty());
+        viewDisplayPlaceholder.hvalueProperty().bind(displayContainer.widthProperty());
+        displayContainer.getChildren().add(activeItemPanel.getRoot());
+
+        tabListPanelPlaceholder.getChildren().add(tabListPanel.getRoot());
+
+        resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getInventoryFilePath());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
+        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
     /**
