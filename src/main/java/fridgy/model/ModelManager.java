@@ -33,7 +33,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Ingredient> filteredIngredients;
     private final FilteredList<Recipe> filteredRecipes;
-    private UiState uiState;
+    private UiState uiState = new UiState();
 
     /**
      * Initializes a ModelManager with the given inventory and userPrefs.

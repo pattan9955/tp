@@ -1,15 +1,15 @@
 package fridgy.ui;
 
-import static org.junit.jupiter.api.Assertions.*;
-import java.util.HashSet;
+
+import static fridgy.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 import org.junit.jupiter.api.Test;
-import fridgy.model.ingredient.ExpiryDate;
+
 import fridgy.model.ingredient.Ingredient;
-import fridgy.model.ingredient.Name;
-import fridgy.model.ingredient.Quantity;
 import fridgy.model.recipe.Recipe;
-import fridgy.testutil.IngredientUtil;
-import fridgy.testutil.TypicalIndexes;
 import fridgy.testutil.TypicalIngredients;
 import fridgy.testutil.TypicalRecipes;
 
@@ -41,7 +41,7 @@ class UiStateTest {
 
     @Test
     public void setActive_nullRecipe_throwsException() {
-        assertThrows(NullPointerException.class, () -> new UiState(new ObserverStub()).setActive((Recipe)null));
+        assertThrows(NullPointerException.class, () -> new UiState(new ObserverStub()).setActive((Recipe) null));
     }
 
     @Test
@@ -75,6 +75,11 @@ class UiStateTest {
 
         @Override
         public void update(Recipe newItem) {
+
+        }
+
+        @Override
+        public void update(TabEnum tab) {
 
         }
 

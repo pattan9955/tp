@@ -1,12 +1,10 @@
 package fridgy.ui;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.logging.Logger;
 
 import fridgy.commons.core.LogsCenter;
 import fridgy.model.ingredient.Ingredient;
-import fridgy.ui.event.ActiveItemChangeEvent;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;

@@ -9,7 +9,7 @@ public class UiState {
 
     private Recipe activeRecipe;
     private Ingredient activeIngredient;
-    private final Observer mainWindow;
+    private Observer mainWindow;
 
     /**
      * Constructs a UI state object that is observable by an Observer.
@@ -19,6 +19,11 @@ public class UiState {
         requireNonNull(mainWindow);
         this.mainWindow = mainWindow;
     }
+
+    /**
+     * Constructs a default UI state object.
+     */
+    public UiState() {}
 
     /**
      * Modify active recipe to editedRecipe if target {@code Recipe} is the same as the current activeRecipe.
@@ -65,7 +70,9 @@ public class UiState {
     public void setActive(Recipe active) {
         requireNonNull(active);
         set(active);
-        mainWindow.update(active);
+        if (mainWindow != null) {
+            mainWindow.update(active);
+        }
     }
 
     /**
@@ -74,7 +81,9 @@ public class UiState {
     public void setActive(Ingredient active) {
         requireNonNull(active);
         set(active);
-        mainWindow.update(active);
+        if (mainWindow != null) {
+            mainWindow.update(active);
+        }
     }
 
     /**
@@ -82,10 +91,12 @@ public class UiState {
      * old selected objects are destroyed, this will reselect them.
      */
     public void refreshActive() {
-        if (activeIngredient != null) {
-            mainWindow.update(activeIngredient);
-        } else if (activeRecipe != null) {
-            mainWindow.update(activeRecipe);
+        if (mainWindow != null) {
+            if (activeIngredient != null) {
+                mainWindow.update(activeIngredient);
+            } else if (activeRecipe != null) {
+                mainWindow.update(activeRecipe);
+            }
         }
     }
 
@@ -95,7 +106,13 @@ public class UiState {
      */
     public void switchTab(TabEnum tab) {
         requireNonNull(tab);
-        mainWindow.update(tab);
+        if (mainWindow != null) {
+            mainWindow.update(tab);
+        }
+    }
+
+    public void setMainWindow(Observer mainWindow) {
+        this.mainWindow = mainWindow;
     }
 
     @Override

@@ -3,7 +3,6 @@ package fridgy.logic.parser;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_ALL_PREFIX_PRESENT;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_DEL_COMMAND;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_VIEW_COMMAND;
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -39,6 +38,7 @@ import fridgy.model.tag.Tag;
 import fridgy.testutil.RecipeBuilder;
 import fridgy.testutil.TypicalBaseIngredients;
 import fridgy.ui.Observer;
+import fridgy.ui.TabEnum;
 import fridgy.ui.UiState;
 
 
@@ -183,6 +183,11 @@ public class FridgyParserTest {
 
         @Override
         public void update(Recipe newItem) {
+
+        }
+
+        @Override
+        public void update(TabEnum tab) {
 
         }
     }
