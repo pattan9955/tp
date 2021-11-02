@@ -15,7 +15,7 @@ import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
-import fridgy.ui.Observable;
+import fridgy.ui.UiState;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
@@ -32,7 +32,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Ingredient> filteredIngredients;
     private final FilteredList<Recipe> filteredRecipes;
-    private final Observable activeObservable;
+    private UiState uiState;
 
     /**
      * Initializes a ModelManager with the given inventory and userPrefs.
@@ -54,9 +54,6 @@ public class ModelManager implements Model {
 
         filteredIngredients = new FilteredList<>(this.inventory.getList());
         filteredRecipes = new FilteredList<>(this.recipeBook.getList());
-
-        // observable that can change to make UI auto update
-        activeObservable = new Observable();
     }
 
     public ModelManager() {
@@ -108,7 +105,6 @@ public class ModelManager implements Model {
         requireNonNull(recipeBookFilePath);
         userPrefs.setRecipeBookFilePath(recipeBookFilePath);
     }
-
     //=========== Common CRUD ==============================================================================
 
     @Override
@@ -178,15 +174,6 @@ public class ModelManager implements Model {
         return inventory;
     }
 
-    /** Changes the active {@code Ingredient} under the {@code Observable}. */
-    @Override
-    public void setActiveIngredient(Ingredient ingredient) {
-        requireNonNull(ingredient);
-        if (inventory.has(ingredient)) {
-            activeObservable.change(ingredient);
-        }
-    }
-
     //=========== RecipeBook ================================================================================
 
     @Override
@@ -197,15 +184,6 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyDatabase<Recipe> getRecipeBook() {
         return recipeBook;
-    }
-
-    /** Changes the active {@code Recipe} under the {@code Observable}. */
-    @Override
-    public void setActiveRecipe(Recipe recipe) {
-        requireNonNull(recipe);
-        if (recipeBook.has(recipe)) {
-            activeObservable.change(recipe);
-        }
     }
 
     @Override
@@ -285,10 +263,27 @@ public class ModelManager implements Model {
                 && filteredRecipes.equals(other.filteredRecipes);
     }
 
-    //=========== Observable =============================================================
+    // ========= UI State changes ==========================================================
+
     @Override
-    public Observable getActiveObservable() {
-        return activeObservable;
+    public void setActiveRecipe(Recipe activeRecipe) {
+        requireNonNull(activeRecipe);
+        if (recipeBook.has(activeRecipe)) {
+            uiState.setActive(activeRecipe);
+        }
+    }
+
+    @Override
+    public void setActiveIngredient(Ingredient activeIngredient) {
+        requireNonNull(activeIngredient);
+        if (inventory.has(activeIngredient)) {
+            uiState.setActive(activeIngredient);
+        }
+    }
+
+    @Override
+    public void setUiState(UiState uiState) {
+        this.uiState = uiState;
     }
 
     //========== Private Method ============================================================

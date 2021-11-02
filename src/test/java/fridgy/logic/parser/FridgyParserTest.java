@@ -39,6 +39,8 @@ import fridgy.model.tag.Tag;
 import fridgy.testutil.RecipeBuilder;
 import fridgy.testutil.TypicalBaseIngredients;
 import fridgy.ui.Observer;
+import fridgy.ui.TabEnum;
+import fridgy.ui.UiState;
 
 
 public class FridgyParserTest {
@@ -123,9 +125,8 @@ public class FridgyParserTest {
                 .withSteps(Arrays.asList("why tho"))
                 .withDescription("optional")
                 .build();
-        ObserverStub observerStub = new ObserverStub();
-        testModel.getActiveObservable().setObserver(observerStub);
         testModel.setActiveRecipe(testRecipe);
+        testModel.setUiState(new UiState(new ObserverStub()));
         try {
             CommandResult expectedAdd = new AddRecipeCommand(testRecipe).execute(testModel);
             CommandResult expectedView = new ViewRecipeCommand(Index.fromZeroBased(0)).execute(testModel);
@@ -174,16 +175,21 @@ public class FridgyParserTest {
         }
     }
 
-    private class ObserverStub implements Observer {
+    class ObserverStub implements Observer {
 
         @Override
         public void update(Ingredient newItem) {
-            requireNonNull(newItem);
+
         }
 
         @Override
         public void update(Recipe newItem) {
-            requireNonNull(newItem);
+
+        }
+
+        @Override
+        public void update(TabEnum tab) {
+
         }
     }
 }

@@ -9,4 +9,5 @@ import fridgy.model.recipe.Recipe;
 public interface Observer {
     void update(Ingredient newItem);
     void update(Recipe newItem);
+    void update(TabEnum tab);
 }

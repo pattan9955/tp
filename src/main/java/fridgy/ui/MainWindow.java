@@ -8,6 +8,9 @@ import fridgy.logic.Logic;
 import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.exceptions.ParseException;
+import fridgy.model.ingredient.Ingredient;
+import fridgy.model.recipe.Recipe;
+import fridgy.ui.event.ActiveItemChangeEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -23,7 +26,7 @@ import javafx.stage.Stage;
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Stage> {
+public class MainWindow extends UiPart<Stage> implements Observer {
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -71,6 +74,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.logic.setUiState(new UiState(this));
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -122,7 +126,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        ActiveItemPanel activeItemPanel = new ActiveItemPanel(logic.getActiveObservable(), logic::isEnough);
+        ActiveItemPanel activeItemPanel = new ActiveItemPanel(logic::isEnough);
         viewDisplayPlaceholder.vvalueProperty().bind(displayContainer.heightProperty());
         viewDisplayPlaceholder.hvalueProperty().bind(displayContainer.widthProperty());
         displayContainer.getChildren().add(activeItemPanel.getRoot());
@@ -141,6 +145,12 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+
+        // Initialise event listeners.
+        this.getRoot().addEventFilter(ActiveItemChangeEvent.RECIPE, activeItemPanel::handleRecipeEvent);
+        this.getRoot().addEventFilter(ActiveItemChangeEvent.INGREDIENT, activeItemPanel::handleIngredientEvent);
+        this.getRoot().addEventFilter(ActiveItemChangeEvent.CLEAR, activeItemPanel::handleClearEvent);
     }
 
     /**
@@ -181,6 +191,31 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Fires an {@code ActiveItemChangeEvent} to update active recipe.
+     * @param recipe the recipe to be displayed.
+     */
+    public void update(Recipe recipe) {
+        this.getRoot().fireEvent(new ActiveItemChangeEvent<Recipe>(ActiveItemChangeEvent.RECIPE, recipe));
+    }
+
+    /**
+     * Fires an {@code ActiveItemChangeEvent} to update active ingredient.
+     * @param ingredient the ingredient to be displayed.
+     */
+    public void update(Ingredient ingredient) {
+        this.getRoot().fireEvent(new ActiveItemChangeEvent<Ingredient>(ActiveItemChangeEvent.INGREDIENT, ingredient));
+    }
+
+    /**
+     * Fires an {@code ActiveItemChangeEvent} to update active tab.
+     * @param tab the tab to be displayed.
+     */
+    public void update(TabEnum tab) {
+        // do nothing for now
+        return;
     }
 
     /**

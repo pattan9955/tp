@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import fridgy.commons.core.LogsCenter;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.ui.event.ActiveItemChangeEvent;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -33,7 +34,8 @@ public class IngredientListPanel extends UiPart<Region> {
                 new ChangeListener<Ingredient>() {
                     public void changed(ObservableValue<? extends Ingredient> ov,
                                         Ingredient old_val, Ingredient new_val) {
-                        activeItemPanel.update(new_val);
+                        ingredientListView.fireEvent(
+                                new ActiveItemChangeEvent<Ingredient>(ActiveItemChangeEvent.INGREDIENT, new_val));
                     }
                 });
     }

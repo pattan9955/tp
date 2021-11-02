@@ -5,6 +5,7 @@ import java.util.function.Function;
 import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
+import fridgy.ui.event.ActiveItemChangeEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -12,7 +13,7 @@ import javafx.scene.layout.VBox;
 /**
  * Panel containing an active {@code Ingredient} or {@code Recipe} for display in the main window.
  */
-public class ActiveItemPanel extends UiPart<Region> implements Observer {
+public class ActiveItemPanel extends UiPart<Region> {
 
     private static final String FXML = "ActiveItemPanel.fxml";
     private final Function<BaseIngredient, Boolean> isEnough;
@@ -21,27 +22,28 @@ public class ActiveItemPanel extends UiPart<Region> implements Observer {
     private VBox activeBox;
 
     /**
-     * Instantiates a new Active  Panel.
-     *
-     * @param activeObservable the active observable that notifies the observer of changes
+     * Instantiates a new Active Panel.
      */
-    public ActiveItemPanel(Observable activeObservable, Function<BaseIngredient, Boolean> isEnough) {
+    public ActiveItemPanel(Function<BaseIngredient, Boolean> isEnough) {
         super(FXML);
-        activeObservable.setObserver(this);
         this.isEnough = isEnough;
     }
 
-    @Override
-    public void update(Ingredient newItem) {
+    public void handleIngredientEvent(ActiveItemChangeEvent<Ingredient> event) {
         activeBox.getChildren().clear();
+        Ingredient newItem = event.getItem();
         IngredientDisplay ingredientDisplay = new IngredientDisplay(newItem);
         activeBox.getChildren().add(ingredientDisplay.getRoot());
     }
 
-    @Override
-    public void update(Recipe newItem) {
+    public void handleRecipeEvent(ActiveItemChangeEvent<Recipe> event) {
         activeBox.getChildren().clear();
+        Recipe newItem = event.getItem();
         RecipeDisplay recipeDisplay = new RecipeDisplay(newItem, isEnough);
         activeBox.getChildren().add(recipeDisplay.getRoot());
+    }
+
+    public void handleClearEvent(ActiveItemChangeEvent<?> unused) {
+        activeBox.getChildren().clear();
     }
 }
