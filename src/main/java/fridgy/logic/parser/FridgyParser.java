@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import fridgy.commons.core.Messages;
 import fridgy.logic.commands.AddCommand;
+import fridgy.logic.commands.ClearCommand;
 import fridgy.logic.commands.Command;
 import fridgy.logic.commands.DeleteCommand;
 import fridgy.logic.commands.EditCommand;
@@ -13,6 +14,8 @@ import fridgy.logic.commands.ExitCommand;
 import fridgy.logic.commands.FindCommand;
 import fridgy.logic.commands.HelpCommand;
 import fridgy.logic.commands.ListCommand;
+import fridgy.logic.commands.ViewCommand;
+import fridgy.logic.commands.recipe.CookRecipeCommand;
 import fridgy.logic.commands.recipe.RecipeCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.logic.parser.recipe.RecipeParser;
@@ -23,10 +26,13 @@ import fridgy.logic.parser.recipe.RecipeParser;
 public class FridgyParser {
 
     public static final List<String> COMMAND_NAMES = List.of(AddCommand.COMMAND_WORD,
+            ClearCommand.COMMAND_WORD,
             DeleteCommand.COMMAND_WORD,
             EditCommand.COMMAND_WORD,
             FindCommand.COMMAND_WORD,
-            ListCommand.COMMAND_WORD
+            ListCommand.COMMAND_WORD,
+            ViewCommand.COMMAND_WORD,
+            CookRecipeCommand.COMMAND_WORD
     );
     private static final String RECIPE_TYPE = "recipe";
     private static final String INGREDIENT_TYPE = "ingredient";
@@ -98,13 +104,17 @@ public class FridgyParser {
             return parseGeneralCommand(userInput);
         default: // invalid type
             if (COMMAND_NAMES.contains(commandWord)) {
-                throw new ParseException(Messages.TYPE_INVALID_COMMAND_FORMAT + " "
-                        + formatString(taskType)
-                        + " " + Messages.TYPE_EXPECTED);
+                if (commandWord.equals(CookRecipeCommand.COMMAND_WORD)) {
+                    recipeParser.parseCommand(userInput.trim());
+                } else {
+                    throw new ParseException(Messages.TYPE_INVALID_COMMAND_FORMAT + " "
+                            + formatString(taskType)
+                            + ". " + Messages.TYPE_EXPECTED);
+                }
             }
             // invalid command
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND + " "
-                    + formatString(commandWord));
+                    + formatString(commandWord) + ".");
         }
     }
 
@@ -126,8 +136,16 @@ public class FridgyParser {
             return new HelpCommand()::execute;
 
         default:
+            if (COMMAND_NAMES.contains(commandWord)) {
+                if (commandWord.equals(CookRecipeCommand.COMMAND_WORD)) {
+                    recipeParser.parseCommand(userInput.trim());
+                } else {
+                    throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                            Messages.MISSING_TYPE));
+                }
+            }
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND + " "
-                    + formatString(commandWord));
+                    + formatString(commandWord) + ".");
         }
     }
 

@@ -21,7 +21,7 @@ public class AddRecipeCommand extends RecipeCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " "
             + RECIPE_KEYWORD
-            + ": Adds a recipe to the RecipeBook. "
+            + ": Adds a recipe to the RecipeBook.\n"
             + "Parameters: "
             + PREFIX_NAME + " NAME "
             + PREFIX_INGREDIENT + " INGREDIENTS "
@@ -29,8 +29,8 @@ public class AddRecipeCommand extends RecipeCommand {
             + "[" + PREFIX_DESCRIPTION + " DESCRIPTION]\n"
             + "Example: " + COMMAND_WORD + " " + RECIPE_KEYWORD + " "
             + PREFIX_NAME + " Burger "
-            + PREFIX_INGREDIENT + " Buns 2"
-            + PREFIX_INGREDIENT + " Patty 1"
+            + PREFIX_INGREDIENT + " Buns 2 "
+            + PREFIX_INGREDIENT + " Patty 1 "
             + PREFIX_STEP + " Toast the buns. "
             + PREFIX_STEP + " Put the patty between the buns. "
             + PREFIX_DESCRIPTION + " Great burger! ";

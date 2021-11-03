@@ -17,7 +17,7 @@ public class ListRecipeCommand extends RecipeCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " "
             + RECIPE_KEYWORD + ": Lists all recipes.\n";
 
-    public static final String MESSAGE_SUCCESS = "Listed all recipes";
+    public static final String MESSAGE_SUCCESS = "Listed all recipes!";
 
 
     @Override
