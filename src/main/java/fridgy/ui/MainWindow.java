@@ -148,8 +148,6 @@ public class MainWindow extends UiPart<Stage> implements Observer {
      */
     void fillInnerParts() {
         initialize();
-        viewDisplayPlaceholder.vvalueProperty().bind(displayContainer.heightProperty());
-        viewDisplayPlaceholder.hvalueProperty().bind(displayContainer.widthProperty());
         displayContainer.getChildren().add(activeItemPanel.getRoot());
 
         tabListPanelPlaceholder.getChildren().add(tabListPanel.getRoot());
