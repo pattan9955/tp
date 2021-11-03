@@ -72,5 +72,12 @@ public class TabListPanel extends UiPart<Region> {
         ingredientListPanel.changeSelected(activeIngredient);
     }
 
+    /**
+     * Handles a {@code ActiveItemChangeEvent} to clear selections in ListView.
+     */
+    public void handleClearEvent(ActiveItemChangeEvent<?> event) {
+        ingredientListPanel.clearSelection();
+        recipeListPanel.clearSelection();
+    }
 
 }

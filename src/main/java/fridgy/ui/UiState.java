@@ -50,7 +50,9 @@ public class UiState {
     public void delete(Ingredient target) {
         if (target.equals(activeIngredient)) {
             activeIngredient = null;
-            mainWindow.clearWindow();
+            if (mainWindow != null) {
+                mainWindow.clearWindow();
+            }
         }
     }
 
@@ -60,7 +62,22 @@ public class UiState {
     public void delete(Recipe target) {
         if (target.equals(activeRecipe)) {
             activeRecipe = null;
-            mainWindow.clearWindow();
+            if (mainWindow != null) {
+                mainWindow.clearWindow();
+            }
+        }
+    }
+
+    /**
+     * Clears active window if active item is from the list that was recently cleared.
+     */
+    public void clear(TabEnum tab) {
+        if (mainWindow != null) {
+            if (tab == TabEnum.RECIPE && activeRecipe != null) {
+                mainWindow.clearWindow();
+            } else if (tab == TabEnum.INGREDIENT && activeIngredient != null) {
+                mainWindow.clearWindow();
+            }
         }
     }
 

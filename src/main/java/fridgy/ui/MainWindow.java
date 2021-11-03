@@ -140,6 +140,7 @@ public class MainWindow extends UiPart<Stage> implements Observer {
         this.getRoot().addEventFilter(TabSwitchEvent.CHANGE, tabListPanel::handleTabChange);
         this.getRoot().addEventFilter(ActiveItemChangeEvent.RECIPE, tabListPanel::handleActiveRecipe);
         this.getRoot().addEventFilter(ActiveItemChangeEvent.INGREDIENT, tabListPanel::handleActiveIngredient);
+        this.getRoot().addEventFilter(ActiveItemChangeEvent.CLEAR, tabListPanel::handleClearEvent);
     }
 
     /**
