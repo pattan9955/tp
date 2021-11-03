@@ -176,15 +176,15 @@ Add an ingredient to the Inventory.
 
 ### 4.2.2 Delete Ingredients
 
-Delete an ingredient from the Inventory. If you wish to delete multiple ingredients at once, please use the [MultiDelete Ingredients](#428-multidelete-ingredients) command.
+Delete ingredient(s) from the Inventory.
 
 **Format:**<br />
-`delete ingredient <index>`
+`delete ingredient <index>...`
 
 **Example(s):**<br />
-1. `delete ingredient 1`
+1. `delete ingredient 2 3`
     <br />Expected Output:<br />
-    ![deleteCommand1.png](images/ingredientCommands/deleteCommand1.png)
+    ![deleteCommand.png](images/ingredientCommands/multideleteCommand.png)
 
 **Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
@@ -278,22 +278,6 @@ View an ingredient in the [Main Window](#36-mainwindow).
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
 
-### 4.2.8 MultiDelete Ingredients
-
-Delete multiple ingredients by their indices.
-
-**Format:**<br />
-`multidelete ingredient <index>...`
-
-**Example(s):**<br />
-1. `multidelete ingredient 1 3`
-<br />Expected Output:<br />
-![deleteCommand.png](images/ingredientCommands/multideleteCommand.png)
-
-**Additional Information:**<br />
-- An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
-  [Side Bar](#32-side-bar).
-
 ## 4.3 Recipes
 This sections covers commands related to RecipeBook management. Any command primarily interacting with recipes will 
 be here.
@@ -322,18 +306,15 @@ the lamb chops with salt and pepper. -s Grill the lamb chops over medium high he
 
 ### 4.3.2 Delete Recipes
 
-Delete a recipe from the RecipeBook. If you wish to delete multiple recipes at once, please use the [MultiDelete Recipes](#439-multidelete-recipe) command.
+Delete a recipe from the RecipeBook. 
 
 **Format:**<br />
-`delete recipe <index>`
+`delete recipe <index>...`
 
 **Example(s):**<br />
-1. `delete recipe 1`
+1. `delete recipe 2 3 4`
 <br />Expected Output:<br />
-![deleteRecipe1.png](images/recipeCommands/deleteRecipe1.png)
-2. `delete recipe 2`
-   <br />Expected Output:<br />
-   ![deleteRecipe2.png](images/recipeCommands/deleteRecipe2.png)
+![deleteRecipe.png](images/recipeCommands/multideleteRecipe.png)
 
 **Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
@@ -442,40 +423,22 @@ Cooks a recipe and deducts the ingredients required by the chosen recipe from th
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
 
-### 4.3.9 MultiDelete Recipe
-
-Delete multiple recipes by their indices.
-
-**Format:**<br />
-`multidelete recipe <index>...`
-
-**Example(s):**<br />
-1. `multidelete recipe 3 5 6`
-   <br />Expected Output:<br />
-   ![deleteCommand.png](images/recipeCommands/multideleteRecipe.png)
-
-**Additional Information:**<br />
-- An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
-  [Side Bar](#32-side-bar).
-
 -----
 # 5. Command Summary
 
 Action | Format
 --------|------------------
 **Add Ingredient** | `add ingredient -n <name> -q <quantity>[<units>] [-d <description>] -e <expiry date>`
-**Delete Ingredient** | `delete ingredient <index>`
+**Delete Ingredient** | `delete ingredient <index>...`
 **Edit Ingredient** | `edit ingredient <index> (-<field flag> <new data>)...`
 **Clear Ingredient** | `clear ingredient [expired]`
 **Find Ingredient** | `find ingredient <keyword>...`
 **List Ingredient** | `list ingredient`
 **View Ingredient** | `view ingredient <index>`
-**MultiDelete Ingredient** | `multidelete ingredient <index>...`
 **Add Recipe** | `add recipe -n <name> -i <ingredient> <quantity> [-d <optional description>] -s <steps>...`
-**Delete Recipe** | `delete recipe <index>`
+**Delete Recipe** | `delete recipe <index>...`
 **Edit Recipe** | `edit recipe <index> (-<field flag> <new data>)...`
 **Find Recipe** | `find recipe <keyword>...`
 **List Recipe** | `list recipe`
 **View Recipe** | `view recipe <index>`
 **Cook Recipe** | `cook recipe <index>`
-**MultiDelete Recipe** | `multidelete recipe <index>...`

@@ -1,6 +1,7 @@
 package fridgy.logic.commands.recipe;
 
 import static fridgy.logic.commands.recipe.RecipeCommandTestUtil.assertRecipeCommandSuccess;
+import static fridgy.testutil.Assert.assertThrows;
 import static fridgy.testutil.TypicalIndexes.INDEX_FIRST_RECIPE;
 import static fridgy.testutil.TypicalIndexes.INDEX_SECOND_RECIPE;
 import static fridgy.testutil.TypicalIndexes.INDEX_THIRD_RECIPE;
@@ -30,6 +31,17 @@ public class DeleteRecipeCommandTest {
         model.updateFilteredRecipeList(p -> false);
 
         assertTrue(model.getFilteredRecipeList().isEmpty());
+    }
+
+    @Test
+    public void constructor_nullIndex_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new DeleteRecipeCommand(null));
+    }
+
+    @Test
+    public void execute_nullModel_throwsNullPointerException() {
+        DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(1));
+        assertThrows(NullPointerException.class, () -> testCommand.execute(null));
     }
 
     @Test
