@@ -25,7 +25,7 @@ public class AddRecipeCommand extends RecipeCommand {
             + "Parameters: "
             + PREFIX_NAME + " NAME "
             + PREFIX_INGREDIENT + " INGREDIENTS "
-            + PREFIX_STEP + " STEPS "
+            + "[" + PREFIX_STEP + " STEPS " + "]"
             + "[" + PREFIX_DESCRIPTION + " DESCRIPTION]\n"
             + "Example: " + COMMAND_WORD + " " + RECIPE_KEYWORD + " "
             + PREFIX_NAME + " Burger "

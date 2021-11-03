@@ -9,8 +9,8 @@ import java.util.Objects;
  * Guarantees: immutable;
  */
 public class Step {
-    private final String step;
     public static final String STEP_CONSTRAINTS = "Step field cannot be empty.";
+    private final String step;
 
     /**
      * Constructs a {@code Step}.

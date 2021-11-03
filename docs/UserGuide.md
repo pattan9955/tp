@@ -287,7 +287,7 @@ be here.
 Add a recipe to the RecipeBook.
 
 **Format:**<br />
-`add recipe -n <name> -i <ingredient> <quantity> [-d <optional description>] -s <steps>...`
+`add recipe -n <name> -i <ingredient> <quantity> [-d <optional description>] [-s <steps>]...`
 
 **Example(s):**<br />
 1. `add recipe -n pasta -i tomato 1 -i milk 100ml -i chicken breast 200g -s Chicken thicc -s Thicc chicken`
@@ -435,7 +435,7 @@ Action | Format
 **Find Ingredient** | `find ingredient <keyword>...`
 **List Ingredient** | `list ingredient`
 **View Ingredient** | `view ingredient <index>`
-**Add Recipe** | `add recipe -n <name> -i <ingredient> <quantity> [-d <optional description>] -s <steps>...`
+**Add Recipe** | `add recipe -n <name> -i <ingredient> <quantity> [-d <optional description>] [-s <steps>]...`
 **Delete Recipe** | `delete recipe <index>...`
 **Edit Recipe** | `edit recipe <index> (-<field flag> <new data>)...`
 **Find Recipe** | `find recipe <keyword>...`
