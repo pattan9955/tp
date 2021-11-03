@@ -1,13 +1,12 @@
 package fridgy.ui;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
 import fridgy.commons.core.LogsCenter;
 import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.recipe.Recipe;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -30,19 +29,29 @@ public class RecipeListPanel extends UiPart<Region> {
      * Creates a {@code RecipeListPanel} with the given {@code ObservableList}.
      * isDetailed flag determines if the recipe card will show the steps. This is added to allow component reuse.
      */
-    public RecipeListPanel(ObservableList<Recipe> recipeList, ActiveItemPanel activeItemPanel,
+    public RecipeListPanel(ObservableList<Recipe> recipeList,
+                           Consumer<Recipe> changeActive,
                            Function<BaseIngredient, Boolean> isEnough) {
         super(FXML);
         this.isEnough = isEnough;
         recipeListView.setItems(recipeList);
         recipeListView.setCellFactory(listView -> new RecipeListViewCell());
-        recipeListView.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<Recipe>() {
-                    public void changed(ObservableValue<? extends Recipe> ov,
-                                        Recipe old_val, Recipe new_val) {
-                        activeItemPanel.update(new_val);
-                    }
-                });
+        recipeListView.setOnMouseClicked(
+            event -> changeActive.accept(recipeListView.getSelectionModel().getSelectedItem())
+        );
+    }
+
+    /**
+     * Change the selected item to a target {@code Recipe}.
+     */
+    public void changeSelected(Recipe to) {
+        if (to != null) {
+            recipeListView.getSelectionModel().select(to);
+        }
+    }
+
+    public void clearSelection() {
+        recipeListView.getSelectionModel().clearSelection();
     }
 
     /**

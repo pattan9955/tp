@@ -17,7 +17,7 @@ import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import fridgy.storage.Storage;
-import fridgy.ui.Observable;
+import fridgy.ui.UiState;
 import javafx.collections.ObservableList;
 
 /**
@@ -73,11 +73,6 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Observable getActiveObservable() {
-        return model.getActiveObservable();
-    }
-
-    @Override
     public Path getInventoryFilePath() {
         return model.getInventoryFilePath();
     }
@@ -95,5 +90,10 @@ public class LogicManager implements Logic {
     @Override
     public Boolean isEnough(BaseIngredient ingredient) {
         return model.isEnough(ingredient);
+    }
+
+    @Override
+    public void setUiState(UiState uiState) {
+        this.model.setUiState(uiState);
     }
 }

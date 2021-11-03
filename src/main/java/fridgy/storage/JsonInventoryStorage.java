@@ -61,8 +61,8 @@ public class JsonInventoryStorage implements InventoryStorage {
     }
 
     @Override
-    public void saveInventory(ReadOnlyDatabase<Ingredient> addressBook) throws IOException {
-        saveInventory(addressBook, filePath);
+    public void saveInventory(ReadOnlyDatabase<Ingredient> inventory) throws IOException {
+        saveInventory(inventory, filePath);
     }
 
     /**
@@ -70,12 +70,12 @@ public class JsonInventoryStorage implements InventoryStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveInventory(ReadOnlyDatabase<Ingredient> addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveInventory(ReadOnlyDatabase<Ingredient> inventory, Path filePath) throws IOException {
+        requireNonNull(inventory);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableInventory(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableInventory(inventory), filePath);
     }
 
 }

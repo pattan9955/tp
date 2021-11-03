@@ -14,7 +14,7 @@ import fridgy.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path inventoryFilePath = Paths.get("data" , "inventory.json");
     private Path recipeBookFilePath = Paths.get("data" , "recipebook.json");
 
     /**
@@ -50,15 +50,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     public Path getInventoryFilePath() {
-        return addressBookFilePath;
+        return inventoryFilePath;
     }
     public Path getRecipeBookFilePath() {
         return recipeBookFilePath;
     }
 
-    public void setInventoryFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        this.addressBookFilePath = addressBookFilePath;
+    public void setInventoryFilePath(Path inventoryFilePath) {
+        requireNonNull(inventoryFilePath);
+        this.inventoryFilePath = inventoryFilePath;
     }
 
     public void setRecipeBookFilePath(Path recipeBookFilePath) {
@@ -78,20 +78,20 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && addressBookFilePath.equals(o.addressBookFilePath)
+                && inventoryFilePath.equals(o.inventoryFilePath)
                 && recipeBookFilePath.equals(o.recipeBookFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath, recipeBookFilePath);
+        return Objects.hash(guiSettings, inventoryFilePath, recipeBookFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal address data file location : " + addressBookFilePath);
+        sb.append("\nLocal address data file location : " + inventoryFilePath);
         sb.append("\nLocal recipe data file location : " + recipeBookFilePath);
         return sb.toString();
     }

@@ -34,37 +34,37 @@ public interface IngredientModel {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' inventory file path.
      */
     Path getInventoryFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' inventory file path.
      */
-    void setInventoryFilePath(Path addressBookFilePath);
+    void setInventoryFilePath(Path inventoryFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code inventory}.
      */
-    void setInventory(ReadOnlyDatabase<Ingredient> addressBook);
+    void setInventory(ReadOnlyDatabase<Ingredient> inventory);
 
     /** Returns the Inventory */
     ReadOnlyDatabase<Ingredient> getInventory();
 
     /**
-     * Returns true if n ingredient with the same identity as {@code ingredient} exists in the address book.
+     * Returns true if n ingredient with the same identity as {@code ingredient} exists in the inventory.
      */
     boolean has(Ingredient ingredient);
 
     /**
      * Deletes the given ingredient.
-     * The ingredient must exist in the address book.
+     * The ingredient must exist in the inventory.
      */
     void delete(Ingredient target);
 
     /**
      * Adds the given ingredient.
-     * {@code ingredient} must not already exist in the address book.
+     * {@code ingredient} must not already exist in the inventory.
      */
     void add(Ingredient ingredient);
 
@@ -77,7 +77,7 @@ public interface IngredientModel {
      * Replaces the given ingredient {@code target} with {@code editedIngredient}.
      * {@code target} must exist in the address book.
      * The ingredient identity of {@code editedIngredient} must not be the same as another existing ingredient in the
-     * address book.
+     * inventory.
      */
     void set(Ingredient target, Ingredient editedIngredient);
 
@@ -91,8 +91,8 @@ public interface IngredientModel {
     void updateFilteredIngredientList(Predicate<Ingredient> predicate);
 
     /**
-     * Puts a new Ingredient under an {@code Observable}.
-     * @param activeIngredient to be placed under an Observable
+     * Puts a new Ingredient under an {@code UiState}.
+     * @param activeIngredient to be placed under an Observable UiState
      */
     void setActiveIngredient(Ingredient activeIngredient);
 }

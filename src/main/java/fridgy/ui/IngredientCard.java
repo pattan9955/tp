@@ -17,10 +17,10 @@ public class IngredientCard extends UiPart<Region> {
     private static final String FXML = "IngredientListCard.fxml";
 
     // Char limits
-    private static final int DESCRIPTION_CHAR_LIMIT = 90;
-    private static final int NAME_CHAR_LIMIT = 25;
+    private static final int DESCRIPTION_CHAR_LIMIT = 75;
+    private static final int NAME_CHAR_LIMIT = 20;
     private static final int QUANTITY_CHAR_LIMIT = 50;
-    private static final int TAG_CHAR_LIMIT = 35;
+    private static final int TAG_CHAR_LIMIT = 30;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -63,6 +63,10 @@ public class IngredientCard extends UiPart<Region> {
         name.setText(ingredientName);
         quantity.setText("Quantity: " + ingredientQuantity);
         description.setText(ingredientDescription);
+        if (ingredientDescription.equals("")) {
+            description.setVisible(false);
+            description.managedProperty().bind(description.visibleProperty());
+        }
         expiryDate.setText("Expiry Date: " + ingredient.getExpiryDate().toString());
         ingredient.getTags().stream()
                 .sorted(Comparator.comparing(tag ->
@@ -81,6 +85,10 @@ public class IngredientCard extends UiPart<Region> {
                     }
                     tags.getChildren().add(tagLabel);
                 });
+        if (ingredient.getTags().size() == 0) {
+            tags.setVisible(false);
+            tags.managedProperty().bind(tags.visibleProperty());
+        }
     }
 
     @Override

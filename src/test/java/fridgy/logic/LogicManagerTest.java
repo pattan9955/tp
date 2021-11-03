@@ -42,20 +42,20 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonInventoryStorage addressBookStorage =
-                new JsonInventoryStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonInventoryStorage inventoryStorage =
+                new JsonInventoryStorage(temporaryFolder.resolve("inventory.json"));
         JsonRecipeBookStorage recipeBookStorage =
                 new JsonRecipeBookStorage(temporaryFolder.resolve("recipeBook.json"));
 
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, recipeBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(inventoryStorage, recipeBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, Messages.MESSAGE_UNKNOWN_COMMAND);
+        assertParseException(invalidCommand, Messages.MESSAGE_UNKNOWN_COMMAND + " '" + invalidCommand + "'");
     }
 
     @Test
@@ -73,13 +73,13 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonInventoryIoExceptionThrowingStub
-        JsonInventoryStorage addressBookStorage =
+        JsonInventoryStorage inventoryStorage =
                 new JsonInventoryIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionInventory.json"));
         JsonRecipeBookStorage recipeBookStorage =
                 new JsonRecipeBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionRecipeBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, recipeBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(inventoryStorage, recipeBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -166,7 +166,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveInventory(ReadOnlyDatabase<Ingredient> addressBook, Path filePath) throws IOException {
+        public void saveInventory(ReadOnlyDatabase<Ingredient> inventory, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

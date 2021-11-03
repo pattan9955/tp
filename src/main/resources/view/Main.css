@@ -298,13 +298,13 @@
 .name_display {
     -fx-padding: 20 0 20 0;
     -fx-font-family: "Montserrat SemiBold";
-    -fx-font-size: 42px;
+    -fx-font-size: 35px;
 }
 
 /*Ingredient Display*/
 .ingredient_description_display {
     -fx-padding: 30 0 30 0;
-    -fx-font-size: 20;
+    -fx-font-size: 16;
     -fx-border-color: #EBF2FA transparent transparent transparent;
 }
 
@@ -318,22 +318,32 @@
 .recipe_description_display {
     -fx-padding: 0 0 30 0;
     -fx-end-margin: 10;
-    -fx-border-color: transparent transparent #EBF2FA transparent;
 }
 
 .steps_title {
     -fx-padding: 0 0 20 0;
     -fx-font-family: "Montserrat SemiBold";
-    -fx-font-size: 32px;
+    -fx-font-size: 25px;
 }
 
 .steps_description {
     -fx-font-family: "Montserrat Regular";
-    -fx-font-size: 22px;
+    -fx-padding: 30 20 20 20;
+    -fx-font-size: 16px;
+    -fx-background-color: #EBF2FA;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
 }
 
 .ingredientsPane {
-    -fx-padding: 30 0 10 0;
+    -fx-padding: 0 0 10 0;
+    -fx-border-color: #EBF2FA transparent transparent transparent;
+}
+
+.ingredient_title {
+    -fx-padding: 20 0 20 0;
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-font-size: 25px;
 }
 
 .available_ingredients_placeholder {
@@ -355,7 +365,7 @@
     -fx-padding: 0 20 20 20;
     -fx-border-radius: 5;
     -fx-background-radius: 2;
-    -fx-font-size: 25;
+    -fx-font-size: 16;
 }
 
 .missing_ingredients_placeholder .label {
@@ -363,6 +373,6 @@
     -fx-padding: 0 20 20 20;
     -fx-border-radius: 5;
     -fx-background-radius: 2;
-    -fx-font-size: 25;
+    -fx-font-size: 16;
 }
 

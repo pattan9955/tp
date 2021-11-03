@@ -26,24 +26,24 @@ import fridgy.model.tag.Tag;
 public class SampleDataUtil {
     public static Ingredient[] getSampleIngredients() {
         return new Ingredient[] {
-            new Ingredient(new Name("Almond jelly"), new Quantity("87438807"),
+            new Ingredient(new Name("Almond jelly"), new Quantity("1kg"),
                 new Description(Optional.of("Very nice")),
-                getTagSet("fruit"), new ExpiryDate("20-08-2010")),
-            new Ingredient(new Name("Banana leaf"), new Quantity("99272758"),
+                getTagSet("fruit"), new ExpiryDate("20-08-2021")),
+            new Ingredient(new Name("Banana leaf"), new Quantity("1kg"),
                 new Description(Optional.of("leafy")),
-                getTagSet("colleagues", "fruit"), new ExpiryDate("20-08-2010")),
-            new Ingredient(new Name("Cabbage"), new Quantity("93210283"),
+                getTagSet("vegetable", "fruit"), new ExpiryDate("20-12-2021")),
+            new Ingredient(new Name("Cabbage"), new Quantity("1kg"),
                 new Description(Optional.of("From cold storage")),
-                getTagSet("leafy"), new ExpiryDate("20-08-2010")),
-            new Ingredient(new Name("Dark chocolate"), new Quantity("91031282"),
+                getTagSet("leafy"), new ExpiryDate("20-12-2021")),
+            new Ingredient(new Name("Dark chocolate"), new Quantity("500g"),
                 new Description(Optional.of("Very bitter")),
-                getTagSet("sweet"), new ExpiryDate("20-08-2010")),
-            new Ingredient(new Name("Ice cream"), new Quantity("92492021"),
+                getTagSet("sweet"), new ExpiryDate("20-08-2022")),
+            new Ingredient(new Name("Ice cream"), new Quantity("1kg"),
                 new Description(Optional.of("Very nice")),
-                getTagSet("classmates"), new ExpiryDate("20-08-2010")),
-            new Ingredient(new Name("Red beans"), new Quantity("92624417"),
+                getTagSet("favorite"), new ExpiryDate("20-08-2022")),
+            new Ingredient(new Name("Red beans"), new Quantity("10kg"),
                 new Description(Optional.of("From NTUC")),
-                getTagSet("bean"), new ExpiryDate("20-08-2010"))
+                getTagSet("bean"), new ExpiryDate("20-08-2022"))
         };
     }
 

@@ -19,9 +19,9 @@ Fridgy helps you track your ingredients and recipes. It also warns you about exp
 
 Fridgy is made for people living in shared spaces, since fridges can get *very messy* and difficult to keep track of!
 
-Fridgy is a *_desktop app_*, optimized for use via a Command Line Interface (CLI), while having an interactive Graphical User Interface (GUI) to display ingredients and recipes! If you can type fast, Fridgy can get your fridge Inventory and recipe sorted out faster than traditional GUI apps.
+Fridgy is a *desktop app*, optimized for use via a Command Line Interface (CLI), while having an interactive Graphical User Interface (GUI) to display ingredients and recipes! If you can type fast, Fridgy can get your fridge Inventory and recipe sorted out faster than traditional GUI apps.
 
-Want to know more? Jump to [Section 2, Quick Start](#QuickStart) to get started.
+Want to know more? Jump to [Section 2, Quick Start](#2-quick-start) to get started.
 
 ## 1.1 Navigating the User Guide
 
@@ -31,7 +31,7 @@ In addition, the quick start guide provides an end-to-end process to help you ge
 This User Guide covers:
 
 1. Components of the user interface
-2. Syntax and behaviour of Fridgy's commands
+2. Format and behaviour of Fridgy's commands
 3. Usage examples, with step-by-step instructions
 4. Other features
 
@@ -82,7 +82,7 @@ To exit Fridgy, simply close the application window.
 
 # 3. UI
 
-![Ui](images/Ui.png)
+![Ui](images/Ui layout.png)
 ### 3.1 Tabs
 Click the `Ingredient` or `Recipe` tab each to show the contents of the Inventory or the RecipeBook respectively.
 ### 3.2 Side Bar
@@ -136,40 +136,32 @@ Displays the output of `View` command, which expands each ingredient or recipe c
 ## 4.3 General Commands
 
 ### 4.3.1 Help
+**Format:**<br />
 `help`
 
 Pops out a window that leads the user to [User Guide](https://ay2122s1-cs2103t-w11-1.github.io/tp/UserGuide.html) 
 (You are here).
 
 ### 4.3.2 Exit
+**Format:**<br />
 `exit`
 
-Exits the program.
+Closes the window and exits the program. All your information will be saved. 
 
 ## 4.4 Ingredients
+This section covers commands related to Inventory management. Any command primarily interacting with ingredients will 
+be here.
 - Note that by default, Fridgy will sort all Ingredients by expiry dates in descending order i.e. soonest expiring
-item will be at the top.
+  item will be at the top.
 
 ### 4.4.1 Add Ingredients
-`add ingredient`
 
 Add an ingredient to the Inventory. 
-- Any expired ingredients will be automatically tagged as `expired`.
-- Any expiring (within 7 days from current date) will be automatically tagged as `expiring`.
 
-Format: `add ingredient -n <name> -q <quantity>[<units>] [-d <description>] -e <expiry date> [-t <tags>]`
-- For Quantity, units of measurement are not necessary, but the following are accepted:
-    - Acceptable ingredient units are:
-        1. grams: `g`
-        2. litres: `l`
-    - Acceptable prefixes for units are:
-        1. milli- : `m` (i.e. `ml` for millilitres)
-        2. kilo- : `k` (i.e. `kg` for kilograms)
-    - All units will be converted to grams or litres, to 3 decimal places.
-- Please ensure that the units used for quantity are consistent across the Inventory and the RecipeBook if you wish to
-  use the [Cook Recipe](#cook-recipe) functionality.
+**Format:**<br />
+`add ingredient -n <name> -q <quantity>[<units>] [-d <description>] -e <expiry date> [-t <tags>]`
 
-Example(s):
+**Example(s):**<br />
 1. `add ingredient -n tomato -d from africa -q 500 -e 27-09-2021 -t sweet`
     <br />Expected Output:<br />
     ![addCommand1.png](images/ingredientCommands/addCommand1.png)
@@ -182,30 +174,53 @@ Example(s):
     <br />Expected Output:<br />
     ![addCommand3.png](images/ingredientCommands/addCommand3.png)
 
+**Additional Information:**<br />
+- Any expired ingredients will be automatically tagged as `expired`.
+- Any expiring (within 7 days from current date) will be automatically tagged as `expiring`.
+- For Quantity, units of measurement are not necessary, but the following are accepted:
+    - Acceptable ingredient units are:
+        1. grams: `g`
+        2. litres: `l`
+    - Acceptable prefixes for units are:
+        1. milli- : `m` (i.e. `ml` for millilitres)
+        2. kilo- : `k` (i.e. `kg` for kilograms)
+    - All units will be converted to grams or litres, to 3 decimal places.
+- Please ensure that the units used for quantity are consistent across the Inventory and the RecipeBook if you wish to
+  use the [Cook Recipe](#438-cook-recipe) functionality.
+
 ### 4.4.2 Delete Ingredients
-`delete ingredient`
 
-Delete an ingredient from the Inventory.
+Delete ingredient(s) from the Inventory.
 
-Format: `delete ingredient <index>`
-- An index number is required for the Command. Refer to the indexes displayed for each [Card](#cards) in the
-  [Side Bar](#side-bar).
-  Example(s):
-1. `delete ingredient 1`
+**Format:**<br />
+`delete ingredient <index>...`
+
+**Example(s):**<br />
+1. `delete ingredient 2 3`
     <br />Expected Output:<br />
-    ![deleteCommand1.png](images/ingredientCommands/deleteCommand1.png)
+    ![deleteCommand.png](images/ingredientCommands/multideleteCommand.png)
 
+**Additional Information:**<br />
+- An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
+  [Side Bar](#32-side-bar).
+  
 ### 4.4.3 Edit Ingredients
-`edit ingredient`
 
 Edit an ingredient from the Inventory.
 
-Format: `edit ingredient <index> -<field flag> <new data>...`
+**Format:**<br />
+`edit ingredient <index> -<field flag> <new data>...`
 
-- An index number is required for the Command. Refer to the indexes displayed for each [Card](#cards) in the
-  [Side Bar](#side-bar).
-- A `field flag` is also required for each input field you wish to edit. You can refer to 
-  [Add Command](#add-ingredients) for more examples on usage of each `field flag`. It can be any of the following:
+**Example(s):**<br />
+1. `edit ingredient 1 -d juicy -t fruit`
+   <br />Expected Output:<br />
+   ![editCommand1.png](images/ingredientCommands/editCommand1.png)
+
+**Additional Information:**<br />
+- An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
+  [Side Bar](#32-side-bar).
+A `field flag` is also required for each input field you wish to edit. You can refer to 
+  [Add Command](#421-add-ingredients) for more examples on usage of each `field flag`. It can be any of the following:
     - `-n`: name of the ingredient
     - `-q`: quantity of the ingredient
     - `-d`: description of the ingredient
@@ -219,25 +234,36 @@ Example(s):
 ![editCommand1.png](images/ingredientCommands/editCommand1.png)
 
 ### 4.4.4 Clear Ingredients
-`clear ingredient`
 
-Clear all the ingredients from the Inventory.
+Clear all the ingredients from the Inventory. Add `expired` keyword to only clear expired ingredients. 
 
-Format: `clear ingredient`
+**Format:**<br />
+`clear ingredient [expired]`
 
-Example(s):
+**Example(s):**<br />
 1. `clear ingredient`
 <br />Expected Output:<br />
 ![clearCommand.png](images/ingredientCommands/clearCommand.png)
+2. `clear ingredient expired`
+<br />Expected output:<br />
+![clearCommand2.png](images/ingredientCommands/clearCommand2.png)
+
 
 ### 4.4.5 Find Ingredients
-`find ingredient`
 
 - Search for an ingredient from the Inventory based on a user-inputted keyword(s) that match the name of an ingredient(s).
-- After [Find Ingredient](#find-ingredients) command, to see the full list of ingredients again, please use 
-[List Ingredient](#list-ingredients) command.
+- After [Find Ingredient](#425-find-ingredients) command, to see the full list of ingredients again, please use 
+[List Ingredient](#426-list-ingredients) command.
 
-Format: `find ingredient <keyword>...`
+**Format:**<br />
+`find ingredient <keyword>...`
+
+**Example(s):**<br />
+1. `find ingredient cream`
+   <br />Expected Output:<br />
+   ![findIngredient1.png](images/ingredientCommands/findIngredient1.png)
+
+**Additional Information:**<br />
 - Requirements for a keyword:
     1. Keyword is case-insensitive.<br />
        e.g. Finding with keyword: "corn" will match with "COrN"
@@ -252,42 +278,45 @@ Example(s):
 ![findIngredient1.png](images/ingredientCommands/findIngredient1.png)
 
 ### 4.4.6 List Ingredients
-`list ingredient`
 
 List all the ingredients again after `find ingredient` Operation.
 
-Format: `list ingredient`
+**Format:**<br />
+`list ingredient`
 
-Example(s):
+**Example(s):**<br />
 1. `list ingredient`
 <br />Expected Output:<br />
 ![listIngredient1.png](images/ingredientCommands/listIngredient1.png)
-
+   
 ### 4.4.7 View Ingredients
-`view ingredient`
 
-View an ingredient in the [Main Window](#mainwindow).
+View an ingredient in the [Main Window](#36-mainwindow).
 
-Format: `view ingredient <index>`
-- An index number is required for the Command. Refer to the indexes displayed for each [Card](#cards) in the
-  [Side Bar](#side-bar).
+**Format:**<br />
+`view ingredient <index>`
 
-Example(s):
-1. `view ingredient 10`
-<br />Expected Output:<br />
-![viewCommand1.png](images/ingredientCommands/viewCommand1.png)
+**Example(s):**<br />
+1. `view ingredient 3`
+   <br />Expected Output:<br />
+   ![viewCommand1.png](images/ingredientCommands/viewCommand1.png)
 
+**Additional Information:**<br />
+- An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
+  [Side Bar](#32-side-bar).
 
 ## 4.5 Recipes
+This sections covers commands related to RecipeBook management. Any command primarily interacting with recipes will
+be here.
 
 ### 4.5.1 Add Recipes
-`add recipe`
 
 Add a recipe to the RecipeBook.
 
-Format: `add recipe -n <name> -i <ingredient> <quantity> [-d <optional description>] -s <steps>...`
+**Format:**<br />
+`add recipe -n <name> -i <ingredient> <quantity> [-d <optional description>] [-s <steps>]...`
 
-Example(s):
+**Example(s):**<br />
 1. `add recipe -n pasta -i tomato 1 -i milk 100ml -i chicken breast 200g -s Chicken thicc -s Thicc chicken`
     <br />Expected Output:<br />
     ![addRecipe1.png](images/recipeCommands/addRecipe1.png)
@@ -301,41 +330,41 @@ the lamb chops with salt and pepper. -s Grill the lamb chops over medium high he
 -s Blend the mint with garlic to make a puree. -s Leave the lamb chops to rest for 5min. -s Serve with mint puree. 
 -d Juicy lamb chops served medium rare with a refreshing mint puree.`
 ![addRecipe3.png](images/recipeCommands/addRecipe3.png)
-
+   
 ### 4.5.2 Delete Recipes
-`delete recipe`
 
-Delete a recipe from the RecipeBook.
+Delete a recipe from the RecipeBook. 
 
-Format: `delete recipe <index>`
-- An index number is required for the Command. Refer to the indexes displayed for each [Card](#cards) in the
-  [Side Bar](#side-bar).
+**Format:**<br />
+`delete recipe <index>...`
 
-Example(s):
-1. `delete recipe 1`
+**Example(s):**<br />
+1. `delete recipe 2 3 4`
 <br />Expected Output:<br />
- ![deleteRecipe1.png](images/recipeCommands/deleteRecipe1.png)
-2. `delete recipe 2`
-   <br />Expected Output:<br />
-   ![deleteRecipe2.png](images/recipeCommands/deleteRecipe2.png)
+![deleteRecipe.png](images/recipeCommands/multideleteRecipe.png)
 
+**Additional Information:**<br />
+- An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
+  [Side Bar](#32-side-bar).
+  
 ### 4.5.3 Clear Recipes
-`clear recipe`
 
 Clears all recipes from the Recipe Book.
 
-Format: `clear recipe`
+**Format:**<br />
+`clear recipe`
 
-Example(s):
+**Example(s):**<br />
 1. `clear recipe`
     <br />Expected Output: <br />
-
+![clearRecipe1.png](images/recipeCommands/clearRecipe1.png)
+   
 ### 4.5.4 Edit Recipes
-`edit recipe`
 
 Edit a recipe from the Recipe Book.
 
-Format: `edit recipe <index> <field flag><new data>...`
+**Format**:<br /> 
+`edit recipe <index> <field flag><new data>...`
 
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#cards) in the
   [Side Bar](#side-bar).
@@ -348,20 +377,36 @@ Format: `edit recipe <index> <field flag><new data>...`
 - Note that when editing ingredients or steps, all existing ingredients or steps will be overwritten with the new
 ingredients or steps specified.
 
-Example(s):
+**Example(s):**<br />
 1. `edit recipe 2 -i chicken 5kg -i mushroom sauce 1l`
-<br />Expected Output:<br />
-![editRecipe1.png](images/recipeCommands/editRecipe1.png)
+   <br />Expected Output:<br />
+   ![editRecipe1.png](images/recipeCommands/editRecipe1.png)
 
+**Additional Information:**<br />
+- An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
+  [Side Bar](#32-side-bar).
+A `field flag` is also required for each input field you wish to edit. You can refer to
+  [Add Command](#431-add-recipes) for more examples on usage of each `field flag`. It can be any of the following:
+- `-n`: name of the recipe
+- `-i`: ingredients use in the recipe
+- `-s`: steps of the recipe
+- `-d`: description of the recipe
 
 ### 4.5.5 Find Recipes
-`find recipe`
 
 - Search for a recipe from the RecipeBook based on a user-inputted keyword(s) that match the name of a recipe(s).
-- After [Find Recipes](#find-recipes) command, to see the full list of recipes again, 
-please use [List Recipes](#list-recipes) command.
+- After [Find Recipes](#435-find-recipes) command, to see the full list of recipes again, 
+please use [List Recipes](#436-list-recipes) command.
 
-Format: `find recipe <keyword>...`
+**Format:**<br />:
+`find recipe <keyword>...`
+
+**Example(s):**<br />
+1. `find recipe chop`
+   <br />Expected Output:<br />
+   ![findRecipe1.png](images/recipeCommands/findRecipe1.png)
+
+**Additional Information:**<br />
 - Current requirements for a keyword:
     1. Keyword is case-insensitive. 
         1. e.g. Finding with keyword: "mee" will match with "Maggie Mee"
@@ -369,69 +414,72 @@ Format: `find recipe <keyword>...`
         1. e.g. Finding with keyword: "mee" will match with "Maggie Mee" but not "Me"
         2. e.g. Finding with keywords: "salad Chicken burger" will match "Fried Chicken", "Burger Chicken", "Salad",
        "Chicken Salad" and "chickenburger"
-
+           
 Example(s): 
 1. `find recipe chop`
 <br />Expected Output:<br />
 ![findRecipe1.png](images/recipeCommands/findRecipe1.png)
 
 ### 4.5.6 List Recipes
-`list recipe`
 
 Lists out all the recipes again after `find recipe` operation. 
 
-Format: `list recipe`
+**Format:**<br />
+`list recipe`
 
-Example(s):
+**Example(s):**<br />
 1. `list recipe`
 <br /> Expected Output:<br />
 ![listRecipe1.png](images/recipeCommands/listRecipe1.png)
-
+   
 ### 4.5.7 View Recipes
-`view recipe`
 
 Expand the recipe and view the detailed steps in a bigger window.
 
-Format: `view recipe <index>`
-- An index number is required for the Command. Refer to the indexes displayed for each [Card](#cards) in the
-  [Side Bar](#side-bar).
+**Format:**<br />
+`view recipe <index>`
 
-Example(s):
+**Example(s):**<br />
 1. `view recipe 4`
-<br />Expected Output:<br />
-![viewRecipe1.png](images/recipeCommands/viewRecipe1.png)
+   <br />Expected Output:<br />
+   ![viewRecipe1.png](images/recipeCommands/viewRecipe1.png)
+
+**Additional Information:**<br />
+- An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
+  [Side Bar](#32-side-bar).
 
 ### 4.5.8 Cook Recipe
-`cook recipe`
 
 Cooks a recipe and deducts the ingredients required by the chosen recipe from the Inventory.
 
-Format: `cook recipe <index>`
-- An index number is required for the Command. Refer to the indexes displayed for each [Card](#cards) in the
-  [Side Bar](#side-bar).
+**Format:**<br />
+`cook recipe <index>`
 
-Example(s):
+**Example(s):**<br />
 1. `cook recipe 2`
-<br />Ingredients Before Cooking:<br />
-![cookRecipe1.png](images/recipeCommands/cookRecipe1.png)
-<br />Expected Output:<br />
-![cookRecipe2.png](images/recipeCommands/cookRecipe2.png)
-<br />Ingredients After Cooking:<br />
-![cookRecipe3.png](images/recipeCommands/cookRecipe3.png)
+   <br />Ingredients Before Cooking:<br />
+   ![cookRecipe1.png](images/recipeCommands/cookRecipe1.png)
+   <br />Ingredients After Cooking:<br />
+   ![cookRecipe3.png](images/recipeCommands/cookRecipe2.png)
+
+**Additional Information:**<br />
+- An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
+  [Side Bar](#32-side-bar).
+
 -----
 # 5. Command Summary
 
 Action | Format
 --------|------------------
 **Add Ingredient** | `add ingredient -n <name> -q <quantity>[<units>] [-d <description>] -e <expiry date>`
-**Delete Ingredient** | `delete ingredient <index>`
+**Delete Ingredient** | `delete ingredient <index>...`
 **Edit Ingredient** | `edit ingredient <index> (-<field flag> <new data>)...`
-**Clear Ingredient** | `clear ingredient`
+**Clear Ingredient** | `clear ingredient [expired]`
 **Find Ingredient** | `find ingredient <keyword>...`
 **List Ingredient** | `list ingredient`
 **View Ingredient** | `view ingredient <index>`
-**Add Recipe** | `add recipe -n <name> -i <ingredient> <quantity> [-d <optional description>] -s <steps>...`
-**Delete Recipe** | `delete recipe <index>`
+**Add Recipe** | `add recipe -n <name> -i <ingredient> <quantity> [-d <optional description>] [-s <steps>]...`
+**Delete Recipe** | `delete recipe <index>...`
 **Edit Recipe** | `edit recipe <index> (-<field flag> <new data>)...`
 **Find Recipe** | `find recipe <keyword>...`
 **List Recipe** | `list recipe`

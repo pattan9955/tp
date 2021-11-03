@@ -143,7 +143,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        Inventory addressBook = new InventoryBuilder().withIngredient(TypicalIngredients.APPLE)
+        Inventory inventory = new InventoryBuilder().withIngredient(TypicalIngredients.APPLE)
                 .withIngredient(TypicalIngredients.BANANA).build();
         Inventory differentInventory = new Inventory();
 
@@ -153,8 +153,8 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, recipeBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, recipeBook, userPrefs);
+        modelManager = new ModelManager(inventory, recipeBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(inventory, recipeBook, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -170,23 +170,23 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
+        // different inventory -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentInventory, recipeBook, userPrefs)));
 
         // different recipeBook -> return false
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentRecipeBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(inventory, differentRecipeBook, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = TypicalIngredients.APPLE.getName().fullName.split("\\s+");
         modelManager.updateFilteredIngredientList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, recipeBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(inventory, recipeBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredIngredientList(Model.PREDICATE_SHOW_ALL_INGREDIENTS);
 
         // different filteredList -> returns false
         modelManager.updateFilteredRecipeList(x -> x.getName().equals(BURGER.getName()));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, recipeBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(inventory, recipeBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredRecipeList(PREDICATE_SHOW_ALL_RECIPES);
@@ -194,7 +194,7 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setInventoryFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, recipeBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(inventory, recipeBook, differentUserPrefs)));
 
     }
 }
