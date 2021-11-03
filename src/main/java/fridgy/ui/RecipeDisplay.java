@@ -26,7 +26,7 @@ public class RecipeDisplay extends UiPart<Region> {
 
     // Default Empty Step Message
     private static final String EMPTY_STEP_MESSAGE = "This recipe has no step.";
-    
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
