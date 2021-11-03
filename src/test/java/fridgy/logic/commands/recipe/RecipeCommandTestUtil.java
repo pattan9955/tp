@@ -61,7 +61,7 @@ public class RecipeCommandTestUtil {
      * Executes the given {@code recipeCommand}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered ingredient list and selected ingredient in {@code actualModel} remain unchanged
+     * - the recipe book, filtered recipe list and selected recipe in {@code actualModel} remain unchanged
      */
     public static void assertRecipeCommandFailure(RecipeCommand recipeCommand, Model actualModel,
                                                   String expectedMessage) {

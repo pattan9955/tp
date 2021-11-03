@@ -8,7 +8,7 @@ import fridgy.model.ingredient.IngredientDefaultComparator;
 
 
 /**
- * Lists all ingredients in the address book to the user.
+ * Lists all ingredients in the inventory to the user.
  */
 public class ListCommand extends Command {
 
