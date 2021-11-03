@@ -288,7 +288,7 @@ Delete multiple ingredients by their indices.
 **Example(s):**<br />
 1. `multidelete ingredient 1 3`
 <br />Expected Output:<br />
-![multiDeleteCommand.png](images/ingredientCommands/multideleteCommand.png)
+![deleteCommand.png](images/ingredientCommands/multideleteCommand.png)
 
 **Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
@@ -452,7 +452,7 @@ Delete multiple recipes by their indices.
 **Example(s):**<br />
 1. `multidelete recipe 3 5 6`
    <br />Expected Output:<br />
-   ![multiDeleteCommand.png](images/recipeCommands/multideleteRecipe.png)
+   ![deleteCommand.png](images/recipeCommands/multideleteRecipe.png)
 
 **Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the

@@ -1,200 +1,136 @@
 package fridgy.logic.commands.recipe;
 
-import static fridgy.testutil.TypicalRecipes.BURGER;
-import static fridgy.testutil.TypicalRecipes.MAGGIE;
+import static fridgy.logic.commands.recipe.RecipeCommandTestUtil.assertRecipeCommandSuccess;
+import static fridgy.testutil.TypicalIndexes.INDEX_FIRST_RECIPE;
+import static fridgy.testutil.TypicalIndexes.INDEX_SECOND_RECIPE;
+import static fridgy.testutil.TypicalIndexes.INDEX_THIRD_RECIPE;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.nio.file.Path;
-import java.util.Comparator;
-import java.util.Set;
-import java.util.function.Predicate;
-
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
-import fridgy.logic.commands.CommandResult;
-import fridgy.logic.commands.exceptions.CommandException;
-import fridgy.model.RecipeBook;
-import fridgy.model.RecipeModel;
-import fridgy.model.base.ReadOnlyDatabase;
-import fridgy.model.ingredient.BaseIngredient;
-import fridgy.model.ingredient.Ingredient;
+import fridgy.model.Inventory;
+import fridgy.model.Model;
+import fridgy.model.ModelManager;
+import fridgy.model.UserPrefs;
 import fridgy.model.recipe.Recipe;
-import javafx.collections.ObservableList;
+import fridgy.testutil.TypicalRecipes;
 
 public class DeleteRecipeCommandTest {
-    @Test
-    public void constructor_nullIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeleteRecipeCommand(null));
+
+    private Model model = new ModelManager(new Inventory(), TypicalRecipes.getTypicalRecipeBook(), new UserPrefs());
+    // RecipeBook with BURGER, MAGGIE, FRIES
+
+    /**
+     * Updates {@code model}'s filtered list to show no one.
+     */
+    private void showNoRecipe(Model model) {
+        model.updateFilteredRecipeList(p -> false);
+
+        assertTrue(model.getFilteredRecipeList().isEmpty());
     }
 
     @Test
-    public void equals_sameObject_returnsTrue() {
-        DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(4));
-        assertTrue(testCommand.equals(testCommand));
+    public void execute_validIndexUnfilteredList_success() {
+        Recipe recipeToDelete1 = model.getFilteredRecipeList()
+                .get(INDEX_FIRST_RECIPE.getZeroBased());
+        Recipe recipeToDelete2 = model.getFilteredRecipeList()
+                .get(INDEX_SECOND_RECIPE.getZeroBased());
+        Recipe recipeToDelete3 = model.getFilteredRecipeList()
+                .get(INDEX_THIRD_RECIPE.getZeroBased());
+        DeleteRecipeCommand deleteRecipeCommand = new DeleteRecipeCommand(INDEX_FIRST_RECIPE,
+                INDEX_SECOND_RECIPE, INDEX_THIRD_RECIPE);
+
+        String expectedMessage = String.format(DeleteRecipeCommand.MESSAGE_DELETE_RECIPE_SUCCESS, 3);
+
+        ModelManager expectedModel = new ModelManager(new Inventory(), model.getRecipeBook(), new UserPrefs());
+        expectedModel.delete(recipeToDelete1);
+        expectedModel.delete(recipeToDelete2);
+        expectedModel.delete(recipeToDelete3);
+
+        assertRecipeCommandSuccess(deleteRecipeCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void equals_differentCommand_returnsFalse() {
-        DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(3));
-        DeleteRecipeCommand targetCommand = new DeleteRecipeCommand(Index.fromZeroBased(4));
-        assertFalse(testCommand.equals(targetCommand));
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredRecipeList().size() + 1);
+        DeleteRecipeCommand deleteRecipeCommand = new DeleteRecipeCommand(outOfBoundIndex,
+                INDEX_FIRST_RECIPE, INDEX_SECOND_RECIPE, INDEX_THIRD_RECIPE);
+
+        RecipeCommandTestUtil.assertRecipeCommandFailure(deleteRecipeCommand, model,
+                Messages.MESSAGE_INVALID_RECIPE_DISPLAYED_INDEX);
     }
 
     @Test
-    public void equals_equalCommand_returnsTrue() {
-        DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(3));
-        DeleteRecipeCommand targetCommand = new DeleteRecipeCommand(Index.fromZeroBased(3));
-        DeleteRecipeCommand targetCommand2 = new DeleteRecipeCommand(Index.fromOneBased(4));
-        assertTrue(testCommand.equals(targetCommand));
-        assertTrue(testCommand.equals(targetCommand2));
+    public void execute_validIndexFilteredList_success() {
+        RecipeCommandTestUtil.showRecipeAtIndex(model, INDEX_FIRST_RECIPE);
+
+        Recipe recipeToDelete = model.getFilteredRecipeList()
+                .get(INDEX_FIRST_RECIPE.getZeroBased());
+        DeleteRecipeCommand deleteCommand = new DeleteRecipeCommand(INDEX_FIRST_RECIPE);
+
+        String expectedMessage = String.format(DeleteRecipeCommand.MESSAGE_DELETE_RECIPE_SUCCESS,
+                1);
+
+        Model expectedModel = new ModelManager(new Inventory(), model.getRecipeBook(), new UserPrefs());
+        expectedModel.delete(recipeToDelete);
+        showNoRecipe(expectedModel);
+
+        assertRecipeCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void equals_differentObject_returnsFalse() {
-        DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(2));
-        Object targetObj = new String("2");
-        assertFalse(testCommand.equals(targetObj));
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
+        RecipeCommandTestUtil.showRecipeAtIndex(model, INDEX_FIRST_RECIPE);
+
+        Index outOfBoundIndex = INDEX_SECOND_RECIPE;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRecipeBook().getList().size());
+
+        DeleteRecipeCommand deleteCommand = new DeleteRecipeCommand(outOfBoundIndex);
+
+        RecipeCommandTestUtil.assertRecipeCommandFailure(deleteCommand, model,
+                Messages.MESSAGE_INVALID_RECIPE_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_nullModel_throwsNullPointerException() {
-        DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(1));
-        assertThrows(NullPointerException.class, () -> testCommand.execute(null));
+    public void execute_noArgs_deleteNothing() {
+        /* Trivial test case where nothing is deleted if there are no arguments passed to varargs. Parser should have
+          filtered this out. */
+        DeleteRecipeCommand deleteRecipeCommand = new DeleteRecipeCommand();
+        String expectedMessage = String.format(DeleteRecipeCommand.MESSAGE_DELETE_RECIPE_SUCCESS, 0);
+
+        ModelManager expectedModel = new ModelManager(new Inventory(), model.getRecipeBook(), new UserPrefs());
+
+        RecipeCommandTestUtil.assertRecipeCommandSuccess(deleteRecipeCommand, model,
+                expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_targetIndexLargerThanList_throwsCommandException() {
-        DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(3));
-        RecipeModelStubWithRecipe testModel = new RecipeModelStubWithRecipe();
-        assertThrows(CommandException.class, () -> testCommand.execute(testModel));
+    public void equals() {
+        DeleteRecipeCommand deleteRecipeFirstCommand = new DeleteRecipeCommand(INDEX_FIRST_RECIPE,
+                INDEX_SECOND_RECIPE);
+        DeleteRecipeCommand deleteRecipeSecondCommand = new DeleteRecipeCommand(INDEX_SECOND_RECIPE,
+                INDEX_THIRD_RECIPE);
+
+        // same object -> returns true
+        assertTrue(deleteRecipeFirstCommand.equals(deleteRecipeFirstCommand));
+
+        // same values -> returns true
+        DeleteRecipeCommand deleteFirstCommandCopy = new DeleteRecipeCommand(INDEX_FIRST_RECIPE,
+                INDEX_SECOND_RECIPE);
+        assertTrue(deleteRecipeFirstCommand.equals(deleteFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(deleteRecipeFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(deleteRecipeFirstCommand.equals(null));
+
+        // different Ingredient -> returns false
+        assertFalse(deleteRecipeFirstCommand.equals(deleteRecipeSecondCommand));
     }
 
-    @Test
-    public void execute_validTargetIndex_deletesSpecifiedRecipe() {
-        DeleteRecipeCommand testCommand = new DeleteRecipeCommand(Index.fromZeroBased(0));
-        RecipeModelStubWithRecipe testModel = new RecipeModelStubWithRecipe();
-        testModel.add(MAGGIE);
-        CommandResult expected = new CommandResult(
-                String.format(DeleteRecipeCommand.MESSAGE_SUCCESS, BURGER));
-        try {
-            CommandResult result = testCommand.execute(testModel);
-            assertTrue(result.equals(expected));
-            assertFalse(testModel.has(BURGER));
-            assertTrue(testModel.has(MAGGIE));
-        } catch (CommandException e) {
-            Assertions.fail("CommandException thrown!");
-        }
-    }
-
-    private class RecipeModelStub implements RecipeModel {
-
-        @Override
-        public Path getRecipeBookFilePath() {
-            throw new AssertionError("Should not be used!");
-        }
-
-        @Override
-        public void setRecipeBookFilePath(Path recipeBookFilePath) {
-            throw new AssertionError("Should not be used!");
-        }
-
-        @Override
-        public void setRecipeBook(ReadOnlyDatabase<Recipe> recipeBook) {
-            throw new AssertionError("Should not be used!");
-        }
-
-        @Override
-        public ReadOnlyDatabase<Recipe> getRecipeBook() {
-            throw new AssertionError("Should not be used!");
-        }
-
-        @Override
-        public boolean has(Recipe recipe) {
-            throw new AssertionError("Should not be used!");
-        }
-
-        @Override
-        public void delete(Recipe target) {
-            throw new AssertionError("Should not be used!");
-        }
-
-        @Override
-        public void add(Recipe recipe) {
-            throw new AssertionError("Should not be used!");
-        }
-
-        @Override
-        public void sortRecipe(Comparator<Recipe> comparator) {
-            throw new AssertionError("Should not be used!");
-        }
-
-        @Override
-        public void set(Recipe target, Recipe editedRecipe) {
-            throw new AssertionError("Should not be used!");
-        }
-
-        @Override
-        public ObservableList<Recipe> getFilteredRecipeList() {
-            throw new AssertionError("Should not be used!");
-        }
-
-        @Override
-        public ObservableList<Ingredient> getFilteredIngredientList() {
-            throw new AssertionError("Should not be used!");
-        }
-
-        @Override
-        public void setActiveRecipe(Recipe recipe) {
-            throw new AssertionError("Should not be used!");
-        }
-
-        @Override
-        public void updateFilteredRecipeList(Predicate<Recipe> predicate) {
-            throw new AssertionError("Should not be used!");
-        }
-
-        @Override
-        public boolean deductIngredients(Set<BaseIngredient> ingrToDeduct) {
-            throw new AssertionError("Should not be used!");
-        }
-    }
-
-    private class RecipeModelStubNoRecipe extends RecipeModelStub {
-        private RecipeBook recipeBook = new RecipeBook();
-
-        @Override
-        public ObservableList<Recipe> getFilteredRecipeList() {
-            return recipeBook.getList();
-        }
-
-        @Override
-        public boolean has(Recipe recipe) {
-            return recipeBook.has(recipe);
-        }
-
-        @Override
-        public void delete(Recipe target) {
-            this.recipeBook.remove(target);
-        }
-
-        @Override
-        public void add(Recipe recipe) {
-            this.recipeBook.add(recipe);
-        }
-
-        @Override
-        public void set(Recipe target, Recipe editedRecipe) {
-            this.recipeBook.set(target, editedRecipe);
-        }
-    }
-
-    private class RecipeModelStubWithRecipe extends RecipeModelStubNoRecipe {
-        public RecipeModelStubWithRecipe() {
-            super.recipeBook.add(BURGER);
-        }
-    }
 }
