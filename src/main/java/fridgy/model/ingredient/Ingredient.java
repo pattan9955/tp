@@ -73,7 +73,8 @@ public class Ingredient extends BaseIngredient {
         }
 
         return otherIngredient != null
-                && otherIngredient.getName().equals(getName());
+                && otherIngredient.getName().equals(getName())
+                && otherIngredient.getExpiryDate().equals(getExpiryDate());
     }
 
     @Override

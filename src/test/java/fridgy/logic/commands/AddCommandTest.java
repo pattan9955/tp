@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.GuiSettings;
@@ -22,8 +23,8 @@ import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.testutil.Assert;
 import fridgy.testutil.IngredientBuilder;
+import fridgy.testutil.TypicalIngredients;
 import javafx.collections.ObservableList;
-
 
 public class AddCommandTest {
 
@@ -75,6 +76,26 @@ public class AddCommandTest {
         // different Ingredient -> returns false
         assertFalse(addAlmondCommand.equals(addBasilCommand));
 
+    }
+
+    @Test
+    public void execute_sameIngredientDifferentExpiry_addSuccess() {
+        Ingredient almond1 = new IngredientBuilder(TypicalIngredients.ALMOND).withExpiryDate("11-03-2021").build();
+        Ingredient almond2 = new IngredientBuilder(TypicalIngredients.ALMOND).withExpiryDate("11-04-2021").build();
+        AddCommand addAlmond1Command = new AddCommand(almond1);
+        AddCommand addAlmond2Command = new AddCommand(almond2);
+        ModelStub testModel = new ModelStubAcceptingIngredientAdded();
+
+        CommandResult target1 = new CommandResult(String.format(AddCommand.MESSAGE_SUCCESS, almond1));
+        CommandResult target2 = new CommandResult(String.format(AddCommand.MESSAGE_SUCCESS, almond2));
+
+        try {
+            CommandResult result1 = addAlmond1Command.execute(testModel);
+            CommandResult result2 = addAlmond2Command.execute(testModel);
+            assertTrue(result1.equals(target1) && result2.equals(target2));
+        } catch (CommandException ce) {
+            Assertions.fail("CommandException thrown!");
+        }
     }
 
     /**

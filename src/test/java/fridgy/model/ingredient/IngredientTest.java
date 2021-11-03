@@ -49,6 +49,11 @@ public class IngredientTest {
         String nameWithTrailingSpaces = VALID_NAME_BASIL + " ";
         editedBasil = new IngredientBuilder(TypicalIngredients.BASIL).withName(nameWithTrailingSpaces).build();
         Assertions.assertFalse(TypicalIngredients.BASIL.isSameIngredient(editedBasil));
+
+        // same name, expiry dates different -> returns false
+        Ingredient editedBasil1 = new IngredientBuilder(TypicalIngredients.BASIL).withExpiryDate("11-03-2021").build();
+        Ingredient editedBasil2 = new IngredientBuilder(TypicalIngredients.BASIL).withExpiryDate("11-04-2021").build();
+        Assertions.assertFalse(editedBasil1.isSameIngredient(editedBasil2));
     }
 
     @Test
