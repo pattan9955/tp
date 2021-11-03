@@ -8,9 +8,14 @@ import fridgy.logic.Logic;
 import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.logic.parser.exceptions.ParseException;
+import fridgy.model.ingredient.Ingredient;
+import fridgy.model.recipe.Recipe;
+import fridgy.ui.event.ActiveItemChangeEvent;
+import fridgy.ui.event.TabSwitchEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -22,7 +27,7 @@ import javafx.stage.Stage;
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Stage> {
+public class MainWindow extends UiPart<Stage> implements Observer {
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -32,8 +37,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private IngredientListPanel ingredientListPanel;
-    private RecipeListPanel recipeListPanel;
+    private TabListPanel tabListPanel;
+    private ActiveItemPanel activeItemPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -44,16 +49,16 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane ingredientListPanelPlaceholder;
+    private VBox tabListPanelPlaceholder;
 
     @FXML
-    private StackPane recipeListPanelPlaceholder;
+    private ScrollPane viewDisplayPlaceholder;
+
+    @FXML
+    private VBox displayContainer;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
-
-    @FXML
-    private VBox displayWindowPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -67,7 +72,6 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
-
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
@@ -115,17 +119,39 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Initialize all the stateful components
+     */
+    private void initialize() {
+        UiState uiState = new UiState(this);
+        logic.setUiState(uiState);
+
+        activeItemPanel = new ActiveItemPanel(logic::isEnough);
+        tabListPanel = new TabListPanel(
+            new IngredientListPanel(logic.getFilteredIngredientList(), uiState::setActive),
+            new RecipeListPanel(logic.getFilteredRecipeList(), uiState::setActive, logic::isEnough)
+        );
+
+
+        // Initialise event listeners.
+        this.getRoot().addEventFilter(ActiveItemChangeEvent.RECIPE, activeItemPanel::handleRecipeEvent);
+        this.getRoot().addEventFilter(ActiveItemChangeEvent.INGREDIENT, activeItemPanel::handleIngredientEvent);
+        this.getRoot().addEventFilter(ActiveItemChangeEvent.CLEAR, activeItemPanel::handleClearEvent);
+
+        this.getRoot().addEventFilter(TabSwitchEvent.CHANGE, tabListPanel::handleTabChange);
+        this.getRoot().addEventFilter(ActiveItemChangeEvent.RECIPE, tabListPanel::handleActiveRecipe);
+        this.getRoot().addEventFilter(ActiveItemChangeEvent.INGREDIENT, tabListPanel::handleActiveIngredient);
+    }
+
+    /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
-        ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
+        initialize();
+        viewDisplayPlaceholder.vvalueProperty().bind(displayContainer.heightProperty());
+        viewDisplayPlaceholder.hvalueProperty().bind(displayContainer.widthProperty());
+        displayContainer.getChildren().add(activeItemPanel.getRoot());
 
-        recipeListPanel = new RecipeListPanel(logic.getFilteredRecipeList(), false);
-        recipeListPanelPlaceholder.getChildren().add(recipeListPanel.getRoot());
-
-        ActiveItemPanel activeItemPanel = new ActiveItemPanel(logic.getActiveObservable());
-        displayWindowPlaceholder.getChildren().add(activeItemPanel.getRoot());
+        tabListPanelPlaceholder.getChildren().add(tabListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -177,8 +203,41 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public IngredientListPanel getIngredientListPanel() {
-        return ingredientListPanel;
+    /**
+     * Fires an {@code ActiveItemChangeEvent} to update active recipe.
+     * and a {@code TabSwitchEvent} to switch to the correct tab.
+     * @param recipe the recipe to be displayed.
+     */
+    @Override
+    public void update(Recipe recipe) {
+        this.getRoot().fireEvent(new ActiveItemChangeEvent<Recipe>(ActiveItemChangeEvent.RECIPE, recipe));
+    }
+
+    /**
+     * Fires an {@code ActiveItemChangeEvent} to update active ingredient.
+     * and a {@code TabSwitchEvent} to switch to the correct tab.
+     * @param ingredient the ingredient to be displayed.
+     */
+    @Override
+    public void update(Ingredient ingredient) {
+        this.getRoot().fireEvent(new ActiveItemChangeEvent<Ingredient>(ActiveItemChangeEvent.INGREDIENT, ingredient));
+    }
+
+    /**
+     * Fires a {@code TabSwitchEvent} to switch to the correct tab.
+     * @param tab the tab to switch to
+     */
+    @Override
+    public void update(TabEnum tab) {
+        this.getRoot().fireEvent(new TabSwitchEvent(TabSwitchEvent.CHANGE, tab));
+    }
+
+    /**
+     * Fires a {@code ActiveItemChangeEvent} to clear active Window.
+     */
+    @Override
+    public void clearWindow() {
+        this.getRoot().fireEvent(new ActiveItemChangeEvent<>(ActiveItemChangeEvent.CLEAR, null));
     }
 
     /**

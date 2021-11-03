@@ -13,10 +13,11 @@ import fridgy.logic.parser.FridgyParser;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.Model;
 import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import fridgy.storage.Storage;
-import fridgy.ui.Observable;
+import fridgy.ui.UiState;
 import javafx.collections.ObservableList;
 
 /**
@@ -72,11 +73,6 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Observable getActiveObservable() {
-        return model.getActiveObservable();
-    }
-
-    @Override
     public Path getInventoryFilePath() {
         return model.getInventoryFilePath();
     }
@@ -89,5 +85,15 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public Boolean isEnough(BaseIngredient ingredient) {
+        return model.isEnough(ingredient);
+    }
+
+    @Override
+    public void setUiState(UiState uiState) {
+        this.model.setUiState(uiState);
     }
 }

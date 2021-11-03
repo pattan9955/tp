@@ -61,8 +61,8 @@ public class JsonRecipeBookStorage implements RecipeBookStorage {
     }
 
     @Override
-    public void saveRecipeBook(ReadOnlyDatabase<Recipe> addressBook) throws IOException {
-        saveRecipeBook(addressBook, filePath);
+    public void saveRecipeBook(ReadOnlyDatabase<Recipe> recipeBook) throws IOException {
+        saveRecipeBook(recipeBook, filePath);
     }
 
     /**
@@ -70,12 +70,12 @@ public class JsonRecipeBookStorage implements RecipeBookStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveRecipeBook(ReadOnlyDatabase<Recipe> addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveRecipeBook(ReadOnlyDatabase<Recipe> recipeBook, Path filePath) throws IOException {
+        requireNonNull(recipeBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableRecipeBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableRecipeBook(recipeBook), filePath);
     }
 
 }

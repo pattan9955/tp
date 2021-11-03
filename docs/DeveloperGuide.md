@@ -1,12 +1,9 @@
 ---
 layout: page
-title: Developer Guide
+title: Fridgy – Developer Guide
 ---
 
-# Fridgy – Developer Guide
-
 By: `Team Fridgy`
-
 
 * Table of Contents
 {:toc}
@@ -27,7 +24,6 @@ It warns you about expiring ingredients, and automatically deducts your ingredie
 
 Fridgy is a _desktop app_, optimized for use via a Command Line Interface (CLI), while having an interactive Graphical User Interface (GUI) to display ingredients and recipes. 
 If you can type fast, Fridgy can get your fridge Inventory and recipe sorted out faster than traditional GUI apps.
- 
 
 ## 1.2 **Setting up, Getting started**
 
@@ -88,7 +84,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of:
-1. `UIManager` which implements the `UI` interface, and hence is responsible for handling the initial setup when Fridgy is started e.g. initializing `MainWindow` and its parts. 
+1. `UIManager` which implements the `UI` interface, and hence is responsible for handling the initial setup when Fridgy is started e.g. initializing `MainWindow` and its parts.
 2. `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ActiveDisplay`, `ingredientListPanel`, `recipeListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI such as the handling of the interaction between these classes and their corresponding FXML files.
 
 The `UI` component uses the JavaFx UI framework. As such, it follows closely to the typical JavaFX application structure. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
@@ -139,13 +135,10 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
-<img src="images/IngredientClassDiagram.png" width="450" />
-<img src="images/RecipeClassDiagram.png" width="450" />
-
 
 The `Model` component,
 
-* stores the Fridgy data i.e., all `Ingredient` and `Recipe` objects (which are contained in a `Database<Ingredient>` / `Database<Recipe` object).
+* stores the Fridgy data i.e., all `Ingredient` and `Recipe` objects (which are contained in a `Database<Ingredient>` / `Database<Recipe>` object).
 * stores the currently 'selected' `Ingredient` and `Recipe` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Ingredient>` and `Recipe` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores the 'active' `Ingredient` or `Recipe` object that is displayed in detail in the UI component
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
@@ -155,7 +148,13 @@ The container for `Ingredient` is called `Inventory` and container for `Recipe` 
 
 The CRUD behavior of `Ingredient` and `Recipe` are similar as they are implemented using a generic base model `Database<T>` internally.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Inventory`, which `Ingredient` references. This allows `Inventory` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+The base model objects are constructed as shown in the following class diagrams.
+
+<img src="images/IngredientClassDiagram.png" width="450" />
+<img src="images/RecipeClassDiagram.png" width="450" />
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Inventory`, which `Ingredient` references. This allows `Inventory` to only require one `Tag` object per unique tag, instead of each `Ingredient` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -186,17 +185,28 @@ This section describes some noteworthy details on how certain features are imple
 
 At the fundamental level, both `Recipe` and `Ingredient` are using the same CRUD operations. To reduce code duplication, a generic class of `Database<T extends Eq>` is implemented.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** `Eq` is an interface that ensures all objects entered into the Database has a weaker notion of equality defined by the developer. <br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** `Eq` is an interface that ensures all objects entered into the Database has a weaker notion of equality defined by the developer. This is done as all our models do not allow duplicates defined by our weaker notion of equality. <br>
 </div>
 
-This implementation allow more flexibility in extending the application in the future. One can easily duplicate a database model by extending from the Database generic.
+This implementation allow more flexibility in extending the application in the future. One can easily duplicate a database model by extending from the Database generic. For example, if I want to implement another model to keep track of student contacts, I can simply implement it with
 
-However, do note that this implementation is purely contained within Model component. The `ModelManager` is still a monolithic class that handles all operations from other components. That means all CRUD operations to new types of objects will need to be implemented and exposed through `ModelManager`.
+```java
+public class ContactBook extends Database<Person> {
+    public ContactBook() {
+        super(new UniqueDataList<>());
+    }
+    public ContactBook(ReadOnlyDatabase<Person> roBook) {
+        super(roBook);
+    }
+}
+```
+
+However, do note that this implementation is purely contained within Model component. The `ModelManager` is still a facade that handles all operations from other components. That means all CRUD operations to new types of objects will need to be implemented and exposed through `ModelManager`.
 
 
 ### 3.2 Automatic Quantity Conversion
 
-Currently, 
+Currently,
 1. Accepted SI prefixes are:
    - `k`: for kilo-
    - `m`: for milli-
@@ -204,9 +214,9 @@ Currently,
    - `g`: for grams
    - `l`: for litres
 
-Do note that the user can choose not to include any units. It will be processed as a unit-less quantity.  
+Do note that the user can choose not to include any units. It will be processed as a unit-less quantity.
 
-The initial step is to use Regex to split the quantity into a `Double`, the SI prefix, and the base unit. The computation is done based on the prefix detected, and a relevant multiplier is used to convert the quantity into the base unit. 
+The initial step is to use Regex to split the quantity into a `Double`, the SI prefix, and the base unit. The computation is done based on the prefix detected, and a relevant multiplier is used to convert the quantity into the base unit.
 
 This is done for any incoming ingredient before the quantity is stored, and there are future plans to utilise this for other computations, such as deducting a quantity of ingredients in the inventory when a recipe is executed.
 This also requires consistency in units for each ingredient.
@@ -308,7 +318,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 **Extensions**
 
 * 1a. The user enters an invalid input format.
-    * 1a1. Fridgy displays an error message.     
+    * 1a1. Fridgy displays an error message.
 
         Use case ends.
 * 2a. The user enters an invalid parameter.
@@ -615,6 +625,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 |**GUI**               | A graphical user interface, i.e. the visual display of Fridgy |
 |**Mainstream OS**     | Windows, Linux, Unix, OS-X. |
 |**SI prefix**         | SI prefixes are a standard defined by the International System of Units such as kilo-, milli-, centi- and so on. |
+|**CRUD** | Stands for Create, Read, Update, and Delete which are the 4 functions necessary to implement persistent storage. |
+|**Higher order function** | A higher order function is a function that can be passed as parameter or return values. |
 
 
 --------------------------------------------------------------------------------------------------------------------

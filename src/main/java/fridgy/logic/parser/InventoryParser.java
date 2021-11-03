@@ -12,6 +12,7 @@ import fridgy.logic.commands.EditCommand;
 import fridgy.logic.commands.FindCommand;
 import fridgy.logic.commands.HelpCommand;
 import fridgy.logic.commands.ListCommand;
+import fridgy.logic.commands.MultiDeleteCommand;
 import fridgy.logic.commands.ViewCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 
@@ -52,7 +53,7 @@ public class InventoryParser {
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -62,6 +63,9 @@ public class InventoryParser {
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
+
+        case MultiDeleteCommand.COMMAND_WORD:
+            return new MultiDeleteCommandParser().parse(arguments);
 
         default:
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);

@@ -5,15 +5,18 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.commons.core.LogsCenter;
 import fridgy.model.base.ReadOnlyDatabase;
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
-import fridgy.ui.Observable;
+import fridgy.ui.TabEnum;
+import fridgy.ui.UiState;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
@@ -30,7 +33,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Ingredient> filteredIngredients;
     private final FilteredList<Recipe> filteredRecipes;
-    private final Observable activeObservable;
+    private UiState uiState = new UiState();
 
     /**
      * Initializes a ModelManager with the given inventory and userPrefs.
@@ -52,9 +55,6 @@ public class ModelManager implements Model {
 
         filteredIngredients = new FilteredList<>(this.inventory.getList());
         filteredRecipes = new FilteredList<>(this.recipeBook.getList());
-
-        // observable that can change to make UI auto update
-        activeObservable = new Observable();
     }
 
     public ModelManager() {
@@ -106,7 +106,6 @@ public class ModelManager implements Model {
         requireNonNull(recipeBookFilePath);
         userPrefs.setRecipeBookFilePath(recipeBookFilePath);
     }
-
     //=========== Common CRUD ==============================================================================
 
     @Override
@@ -124,17 +123,26 @@ public class ModelManager implements Model {
     @Override
     public void delete(Ingredient target) {
         inventory.remove(target);
+        uiState.delete(target);
+        uiState.switchTab(TabEnum.INGREDIENT);
+        // ingredient changes need to inform recipeBook to update for tagging purposes.
+        refresh(this.filteredRecipes);
     }
 
     @Override
     public void delete(Recipe target) {
         recipeBook.remove(target);
+        uiState.delete(target);
+        uiState.switchTab(TabEnum.RECIPE);
     }
 
     @Override
     public void add(Ingredient ingredient) {
         inventory.add(ingredient);
         updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
+
+        // ingredient changes need to inform recipeBook to update for tagging purposes.
+        refresh(this.filteredRecipes);
     }
 
     @Override
@@ -146,14 +154,16 @@ public class ModelManager implements Model {
     @Override
     public void set(Ingredient target, Ingredient editedIngredient) {
         requireAllNonNull(target, editedIngredient);
-
         inventory.set(target, editedIngredient);
+        uiState.modify(target, editedIngredient);
+        // ingredient changes need to inform recipeBook to update for tagging purposes.
+        refresh(this.filteredRecipes);
     }
 
     @Override
     public void set(Recipe target, Recipe editedRecipe) {
         requireAllNonNull(target, editedRecipe);
-
+        uiState.modify(target, editedRecipe);
         recipeBook.set(target, editedRecipe);
     }
 
@@ -169,15 +179,6 @@ public class ModelManager implements Model {
         return inventory;
     }
 
-    /** Changes the active {@code Ingredient} under the {@code Observable}. */
-    @Override
-    public void setActiveIngredient(Ingredient ingredient) {
-        requireNonNull(ingredient);
-        if (inventory.has(ingredient)) {
-            activeObservable.change(ingredient);
-        }
-    }
-
     //=========== RecipeBook ================================================================================
 
     @Override
@@ -190,13 +191,16 @@ public class ModelManager implements Model {
         return recipeBook;
     }
 
-    /** Changes the active {@code Recipe} under the {@code Observable}. */
     @Override
-    public void setActiveRecipe(Recipe recipe) {
-        requireNonNull(recipe);
-        if (recipeBook.has(recipe)) {
-            activeObservable.change(recipe);
-        }
+    public boolean deductIngredients(Set<BaseIngredient> ingredients) {
+        boolean isSuccess = inventory.deductIngredients(ingredients);
+        refresh(this.filteredRecipes);
+        return isSuccess;
+    }
+
+    @Override
+    public Boolean isEnough(BaseIngredient ingredient) {
+        return inventory.isDeductible(ingredient);
     }
 
     //=========== Filtered Ingredient List Accessors =============================================================
@@ -214,6 +218,8 @@ public class ModelManager implements Model {
     public void updateFilteredIngredientList(Predicate<Ingredient> predicate) {
         requireNonNull(predicate);
         filteredIngredients.setPredicate(predicate);
+        uiState.switchTab(TabEnum.INGREDIENT);
+        uiState.refreshActive();
     }
 
     //=========== Filtered Recipe List Accessors =============================================================
@@ -231,6 +237,8 @@ public class ModelManager implements Model {
     public void updateFilteredRecipeList(Predicate<Recipe> predicate) {
         requireNonNull(predicate);
         filteredRecipes.setPredicate(predicate);
+        uiState.switchTab(TabEnum.RECIPE);
+        uiState.refreshActive();
     }
 
     //=========== Sorting =============================================================
@@ -266,11 +274,37 @@ public class ModelManager implements Model {
                 && filteredRecipes.equals(other.filteredRecipes);
     }
 
-    //=========== Observable =============================================================
+    // ========= UI State changes ==========================================================
 
     @Override
-    public Observable getActiveObservable() {
-        return activeObservable;
+    public void setActiveRecipe(Recipe activeRecipe) {
+        requireNonNull(activeRecipe);
+        if (recipeBook.has(activeRecipe)) {
+            uiState.setActive(activeRecipe);
+            uiState.switchTab(TabEnum.RECIPE);
+        }
     }
 
+    @Override
+    public void setActiveIngredient(Ingredient activeIngredient) {
+        requireNonNull(activeIngredient);
+        if (inventory.has(activeIngredient)) {
+            uiState.setActive(activeIngredient);
+            uiState.switchTab(TabEnum.INGREDIENT);
+        }
+    }
+
+    @Override
+    public void setUiState(UiState uiState) {
+        requireNonNull(uiState);
+        this.uiState = uiState;
+    }
+
+    //========== Private Method ============================================================
+    private <T> void refresh(FilteredList<T> list) {
+        Predicate<? super T> currentPredicate = list.getPredicate();
+        list.setPredicate(unused -> false);
+        list.setPredicate(currentPredicate);
+        uiState.refreshActive();
+    }
 }

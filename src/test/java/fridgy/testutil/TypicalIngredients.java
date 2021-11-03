@@ -50,6 +50,12 @@ public class TypicalIngredients {
             .withExpiryDate("20-08-2010").build();
 
     // Manually added
+    public static final Ingredient CHICKEN = new IngredientBuilder().withName("chicken").withQuantity("2kg")
+            .withExpiryDate("20-02-2070").build();
+    public static final Ingredient FLOUR = new IngredientBuilder().withName("flour").withQuantity("500g")
+            .withExpiryDate("20-02-2070").build();
+    public static final Ingredient EXPIRED_CHICKEN = new IngredientBuilder().withName("rotting chicken")
+            .withQuantity("2kg").withExpiryDate("20-02-1979").build();
     public static final Ingredient HOON = new IngredientBuilder().withName("Hoon Meier").withQuantity("8482424")
             .withDescription("little india")
             .withExpiryDate("20-08-2010").build();
@@ -69,8 +75,6 @@ public class TypicalIngredients {
             .withQuantity(VALID_QUANTITY_FISH)
             .withDescription(VALID_DESCRIPTION_FISH)
             .withExpiryDate(VALID_EXPIRY_DATE).build();
-
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalIngredients() {} // prevents instantiation
 

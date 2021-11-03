@@ -55,4 +55,68 @@ public class QuantityTest {
         assertEquals(qty.hashCode(), qtySame.hashCode());
         assertNotEquals(qty.hashCode(), qtyDiff.hashCode());
     }
+
+    @Test
+    public void getUnitTest() {
+        Quantity qtyMassUnit1 = new Quantity("90kg");
+        Quantity qtyMassUnit2 = new Quantity("9kg");
+        Quantity qtyLiquidUnit1 = new Quantity("0.2l");
+        Quantity qtyLiquidUnit2 = new Quantity("2ml");
+        Quantity noUnit1 = new Quantity("5");
+        Quantity noUnit2 = new Quantity("10");
+
+
+        // All mass units should be standardised to grams
+        assertEquals(qtyMassUnit1.getUnits(), qtyMassUnit1.getUnits());
+        assertEquals(qtyMassUnit1.getUnits(), qtyMassUnit2.getUnits());
+        assertEquals("g", qtyMassUnit1.getUnits());
+        assertEquals("g", qtyMassUnit2.getUnits());
+        // Mass and liquid units should differ
+        assertNotEquals(qtyMassUnit1.getUnits(), qtyLiquidUnit1.getUnits());
+        assertNotEquals(qtyMassUnit1.getUnits(), qtyLiquidUnit2.getUnits());
+        assertNotEquals(qtyMassUnit2.getUnits(), qtyLiquidUnit2.getUnits());
+        // Mass and no units should differ
+        assertNotEquals(qtyMassUnit1.getUnits(), noUnit1.getUnits());
+        assertNotEquals(qtyMassUnit1.getUnits(), noUnit2.getUnits());
+        assertNotEquals(qtyMassUnit2.getUnits(), noUnit2.getUnits());
+        // All liquid units should be standardised to litres
+        assertEquals(qtyLiquidUnit1.getUnits(), qtyLiquidUnit1.getUnits());
+        assertEquals(qtyLiquidUnit1.getUnits(), qtyLiquidUnit2.getUnits());
+        assertEquals(qtyLiquidUnit2.getUnits(), qtyLiquidUnit2.getUnits());
+        assertEquals("l", qtyLiquidUnit1.getUnits());
+        assertEquals("l", qtyLiquidUnit2.getUnits());
+        // All no units should have empty unit string
+        assertEquals(noUnit1.getUnits(), noUnit1.getUnits());
+        assertEquals(noUnit1.getUnits(), noUnit2.getUnits());
+        assertEquals(noUnit2.getUnits(), noUnit2.getUnits());
+        assertEquals("", noUnit1.getUnits());
+        assertEquals("", noUnit2.getUnits());
+        // Liquid and no units should differ
+        assertNotEquals(qtyLiquidUnit1.getUnits(), noUnit1.getUnits());
+        assertNotEquals(qtyLiquidUnit2.getUnits(), noUnit1.getUnits());
+        assertNotEquals(qtyLiquidUnit1.getUnits(), noUnit2.getUnits());
+        assertNotEquals(qtyLiquidUnit2.getUnits(), noUnit2.getUnits());
+    }
+
+    @Test
+    public void getValueTest() {
+        Quantity qtyMassUnit = new Quantity("9kg"); // 9000g
+        Quantity qtyLiquidUnit = new Quantity("9l"); // 9l
+        Quantity noUnit1 = new Quantity("9"); // 9
+
+        assertEquals(9000, qtyMassUnit.getValue());
+        assertEquals(9, qtyLiquidUnit.getValue());
+        assertEquals(9, noUnit1.getValue());
+    }
+
+    @Test
+    public void compareQtyWithSameUnitsTest() {
+        Quantity qtyMassUnit = new Quantity("0.009kg"); // should be 9g
+        Quantity qtyLiquidUnit = new Quantity("9l"); // 9l
+        Quantity noUnit = new Quantity("9"); // 9
+
+        assertEquals(0, qtyMassUnit.compareQtyWithSameUnits(qtyMassUnit));
+        assertEquals(0, qtyLiquidUnit.compareQtyWithSameUnits(qtyLiquidUnit));
+        assertEquals(0, noUnit.compareQtyWithSameUnits(noUnit));
+    }
 }

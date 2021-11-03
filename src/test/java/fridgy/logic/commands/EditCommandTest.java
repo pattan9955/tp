@@ -13,6 +13,7 @@ import fridgy.model.ModelManager;
 import fridgy.model.RecipeBook;
 import fridgy.model.UserPrefs;
 import fridgy.model.ingredient.Ingredient;
+import fridgy.model.ingredient.IngredientDefaultComparator;
 import fridgy.testutil.EditIngredientDescriptorBuilder;
 import fridgy.testutil.IngredientBuilder;
 import fridgy.testutil.TypicalIndexes;
@@ -60,7 +61,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new RecipeBook(), new UserPrefs());
         expectedModel.set(lastIngredient, editedIngredient);
-
+        expectedModel.sortIngredient(new IngredientDefaultComparator());
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -94,6 +95,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new RecipeBook(), new UserPrefs());
         expectedModel.set(model.getFilteredIngredientList().get(0), editedIngredient);
+        expectedModel.sortIngredient(new IngredientDefaultComparator());
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -167,7 +169,7 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new ClearCommand(false)));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditCommand(TypicalIndexes.INDEX_SECOND_INGREDIENT,

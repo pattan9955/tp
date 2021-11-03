@@ -11,13 +11,16 @@ import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.RecipeModel;
 import fridgy.model.recipe.Recipe;
 
+/**
+ * Deletes a Recipe from the RecipeBook.
+ */
 public class DeleteRecipeCommand extends RecipeCommand {
 
     public static final String COMMAND_WORD = "delete";
     public static final String RECIPE_KEYWORD = "recipe";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + RECIPE_KEYWORD
-            + ": Deletes the recipe identified by the index number used in the displayed recipe list.\n"
+            + ": Deletes the recipe by index.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
             + RECIPE_KEYWORD

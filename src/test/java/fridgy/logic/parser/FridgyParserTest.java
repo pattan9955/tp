@@ -3,7 +3,6 @@ package fridgy.logic.parser;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_ALL_PREFIX_PRESENT;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_DEL_COMMAND;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_VIEW_COMMAND;
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -39,6 +38,8 @@ import fridgy.model.tag.Tag;
 import fridgy.testutil.RecipeBuilder;
 import fridgy.testutil.TypicalBaseIngredients;
 import fridgy.ui.Observer;
+import fridgy.ui.TabEnum;
+import fridgy.ui.UiState;
 
 
 public class FridgyParserTest {
@@ -96,7 +97,7 @@ public class FridgyParserTest {
     @Test
     public void parseCommand_validDoubleTokenCommand_returnsCorrectCommandResult() {
         Model testModel = new ModelManager();
-        CommandResult expected = new ClearCommand().execute(testModel);
+        CommandResult expected = new ClearCommand(false).execute(testModel);
         try {
             CommandResult result = testParser.parseCommand(VALID_DOUBLE_WORD_CLEAR_COMMAND).apply(testModel);
             assertEquals(expected, result);
@@ -123,9 +124,8 @@ public class FridgyParserTest {
                 .withSteps(Arrays.asList("why tho"))
                 .withDescription("optional")
                 .build();
-        ObserverStub observerStub = new ObserverStub();
-        testModel.getActiveObservable().setObserver(observerStub);
         testModel.setActiveRecipe(testRecipe);
+        testModel.setUiState(new UiState(new ObserverStub()));
         try {
             CommandResult expectedAdd = new AddRecipeCommand(testRecipe).execute(testModel);
             CommandResult expectedView = new ViewRecipeCommand(Index.fromZeroBased(0)).execute(testModel);
@@ -174,16 +174,24 @@ public class FridgyParserTest {
         }
     }
 
-    private class ObserverStub implements Observer {
+    class ObserverStub implements Observer {
 
         @Override
         public void update(Ingredient newItem) {
-            requireNonNull(newItem);
+
         }
 
         @Override
         public void update(Recipe newItem) {
-            requireNonNull(newItem);
+
         }
+
+        @Override
+        public void update(TabEnum tab) {
+
+        }
+
+        @Override
+        public void clearWindow() {}
     }
 }

@@ -144,7 +144,12 @@ public class ParserUtil {
         requireNonNull(ingredients);
         final Set<BaseIngredient> ingredientSet = new HashSet<>();
         for (String ingredient : ingredients) {
-            ingredientSet.add(parseBaseIngredient(ingredient));
+            if (!ingredient.equals("")) {
+                ingredientSet.add(parseBaseIngredient(ingredient));
+            }
+        }
+        if (ingredientSet.isEmpty()) {
+            throw new ParseException(BaseIngredient.BASE_INGREDIENT_CONSTRAINTS);
         }
         return ingredientSet;
     }
@@ -159,7 +164,9 @@ public class ParserUtil {
         String validBaseIngredient = "(?<name>\\w.*)\\s(?<quantity>(?=.*[1-9])\\d+(\\.\\d+)?\\h*((m|k)?(g|l)){0,1})";
         Matcher matcher = Pattern.compile(validBaseIngredient).matcher(trimmedIngredient);
 
-        matcher.find(); // sheesh
+        if (!matcher.matches()) {
+            throw new ParseException(BaseIngredient.MESSAGE_CONSTRAINTS);
+        }
         Name name = parseName(matcher.group("name"));
         Quantity quantity = parseQuantity(matcher.group("quantity"));
 

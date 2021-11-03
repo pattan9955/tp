@@ -11,9 +11,8 @@ import fridgy.model.util.QuantityCalc;
  */
 public class Quantity {
 
-
     public static final String MESSAGE_CONSTRAINTS =
-            "Quantity should be greater than zero. \n"
+            "Quantity is invalid. (Quantity must be a valid number greater than 0) \n"
                     + "Include units in grams (g) or litres (l) when applicable. \n"
                     + "Do not input units for discrete ingredients (i.e. bottle, pieces, etc.) \n"
                     + "SI prefixes for units: milli (m) and kilo (k) are accepted. \n";
@@ -58,5 +57,39 @@ public class Quantity {
 
     private String convertToStandardUnit(String quantity) {
         return QuantityCalc.convertToStandardUnits(quantity);
+    }
+
+    /**
+     * Gets units of the {@code Quantity}.
+     * @return String representation of the units
+     */
+    public String getUnits() {
+        String[] valueAndUnit = value.split("\\h");
+        return valueAndUnit.length <= 1 ? "" : valueAndUnit[1];
+    }
+
+    /**
+     * Gets value of the {@code Quantity}.
+     * @return value as a Double
+     */
+    public Double getValue() {
+        String[] valueAndUnit = value.split("\\h");
+        return Double.parseDouble(valueAndUnit[0]);
+    }
+
+    /**
+     * Naively deducts quantity of newQuantity from this quantity, with the assumption both have the same units.
+     * Returns a {@code double}, regardless of units of {@code Quantity}.
+     *
+     * @param newQuantity to be compared to
+     * @return double value of (quantity - newQuantity)
+     */
+    public double compareQtyWithSameUnits(Quantity newQuantity) {
+        requireNonNull(newQuantity);
+        assert getUnits().equals(newQuantity.getUnits());
+
+        Double qty1 = getValue();
+        Double qty2 = newQuantity.getValue();
+        return qty1 - qty2;
     }
 }

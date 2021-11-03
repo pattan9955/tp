@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import fridgy.commons.core.Messages;
 import fridgy.model.IngredientModel;
+import fridgy.model.ingredient.IngredientDefaultComparator;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 
 /**
@@ -17,9 +18,9 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + INGREDIENT_KEYWORD
             + ": Finds all ingredients whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "the specified keywords.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " " + INGREDIENT_KEYWORD + " " + " almond basil chocolate";
+            + "Example: " + COMMAND_WORD + " " + INGREDIENT_KEYWORD + " almond basil chocolate";
 
     private final NameContainsKeywordsPredicate predicate;
 
@@ -31,6 +32,7 @@ public class FindCommand extends Command {
     public CommandResult execute(IngredientModel model) {
         requireNonNull(model);
         model.updateFilteredIngredientList(predicate);
+        model.sortIngredient(new IngredientDefaultComparator());
 
         int size = model.getFilteredIngredientList().size();
         String plural = size == 0 || size == 1 ? "" : "s";

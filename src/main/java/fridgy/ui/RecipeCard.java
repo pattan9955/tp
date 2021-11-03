@@ -1,7 +1,9 @@
 package fridgy.ui;
 
 import java.util.Comparator;
+import java.util.function.Function;
 
+import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.recipe.Recipe;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -17,9 +19,9 @@ public class RecipeCard extends UiPart<Region> {
     private static final String FXML = "RecipeListCard.fxml";
 
     // Char limits
-    private static final int DESCRIPTION_CHAR_LIMIT = 155;
-    private static final int INGREDIENT_CHAR_LIMIT = 55;
-    private static final int NAME_CHAR_LIMIT = 25;
+    private static final int DESCRIPTION_CHAR_LIMIT = 100;
+    private static final int INGREDIENT_CHAR_LIMIT = 30;
+    private static final int NAME_CHAR_LIMIT = 20;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -40,14 +42,13 @@ public class RecipeCard extends UiPart<Region> {
     @FXML
     private FlowPane ingredients;
     @FXML
-    private Label steps;
-    @FXML
     private Label description;
 
     /**
      * Creates a {@code RecipeCode} with the given {@code Recipe} and index to display.
      */
-    public RecipeCard(Recipe recipe, int displayedIndex, boolean isStepsVisible) {
+    public RecipeCard(Recipe recipe, int displayedIndex,
+                      Function<BaseIngredient, Boolean> isEnough) {
         super(FXML);
         this.recipe = recipe;
 
@@ -61,18 +62,24 @@ public class RecipeCard extends UiPart<Region> {
         // sort and iterate through the ingredients in recipe and add it to ingredients FlowPane as tags.
         recipe.getIngredients().stream()
                 .sorted(Comparator.comparing(ingredient -> ingredient.getName().toString()))
-                .forEach(ingredient -> ingredients.getChildren().add(
-                        new Label(UiUtil.truncateText(
-                            ingredient.getName().toString()
+                .forEach(ingredient -> {
+                    Label ingredientLabel = new Label(UiUtil.truncateText(
+                        ingredient.getName().toString()
                             + " "
                             + ingredient.getQuantity().toString(),
-                            INGREDIENT_CHAR_LIMIT)
-                        )));
-        description.setText("Description: " + recipeDescription);
-        // This will automatically show / hide steps label
-        steps.setText("Steps:\n" + UiUtil.numberedList(recipe.getSteps()));
-        steps.setVisible(isStepsVisible);
-        steps.managedProperty().bind(steps.visibleProperty());
+                        INGREDIENT_CHAR_LIMIT)
+                    );
+                    if (!isEnough.apply(ingredient)) {
+                        ingredientLabel.setStyle("-fx-background-color: #CF1259;");
+                    }
+                    ingredients.getChildren().add(ingredientLabel);
+                });
+
+        description.setText(recipeDescription);
+        if (recipeDescription.equals("")) {
+            description.setVisible(false);
+            description.managedProperty().bind(description.visibleProperty());
+        }
     }
 
     @Override
