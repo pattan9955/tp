@@ -98,9 +98,10 @@ Output of the commands keyed in by users are displayed here.
 ### 3.6 MainWindow
 Displays the output of `View` command, which expands each ingredient or recipe card for better visibility. 
 
+---
 # 4. Features
 
-**Notes about the Command Format:**
+## 4.1 Command Notations Used
 
 - Words between `<` and`>` are parameters to be supplied by the user.
 
@@ -120,22 +121,36 @@ Displays the output of `View` command, which expands each ingredient or recipe c
 
   e.g. `find ingredient <keyword>...`, can be used as:<br />`find ingredient Strawberry Milk Cheese Tomato`
 
-## 4.1 General Commands
+## 4.2 Command Flags
 
-### 4.1.1 Help
+ Flag | Usage | Description | Remarks 
+---- | ------- | ----------- | -------
+`-n` | `-n <name>` | Name of the ingredient or recipe | Names can only contain alphanumeric characters or spaces. Compulsory field.
+`-q` | `-q <quantity> [unit]` | Quantity of the ingredient | Must be a number. Can be followed by a unit of measurement (`g`, `kg`, `mg`, `l`, `ml`, `kl`). Compulsory field.
+`-i` | `-i <name> <quantity>...` | Ingredients used in the recipe | Must be a name followed by a space and a quantity. At least one must be specified. 
+`-e` | `-e <expiry date>` | Expiry date of ingredients | Must be in the form DD-MM-YYYY. Compulsory field.
+`-s` | `-s [step]...` | Step used in the recipe | Can contain any characters or spaces. Optional field.
+`-d` | `-d [description]` | Description of the recipe or ingredient | Can contain any characters or spaces. Optional field. 
+`-t` | `-t [tag]...` | Tag for the ingredient | Must be alphanumeric without spaces. Optional field.
+
+## 4.3 General Commands
+
+### 4.3.1 Help
 `help`
 
 Pops out a window that leads the user to [User Guide](https://ay2122s1-cs2103t-w11-1.github.io/tp/UserGuide.html) 
 (You are here).
 
-### 4.1.2 Exit
+### 4.3.2 Exit
 `exit`
 
 Exits the program.
 
-## 4.2 Ingredients
+## 4.4 Ingredients
+- Note that by default, Fridgy will sort all Ingredients by expiry dates in descending order i.e. soonest expiring
+item will be at the top.
 
-### 4.2.1 Add Ingredients
+### 4.4.1 Add Ingredients
 `add ingredient`
 
 Add an ingredient to the Inventory. 
@@ -167,7 +182,7 @@ Example(s):
     <br />Expected Output:<br />
     ![addCommand3.png](images/ingredientCommands/addCommand3.png)
 
-### 4.2.2 Delete Ingredients
+### 4.4.2 Delete Ingredients
 `delete ingredient`
 
 Delete an ingredient from the Inventory.
@@ -180,7 +195,7 @@ Format: `delete ingredient <index>`
     <br />Expected Output:<br />
     ![deleteCommand1.png](images/ingredientCommands/deleteCommand1.png)
 
-### 4.2.3 Edit Ingredients
+### 4.4.3 Edit Ingredients
 `edit ingredient`
 
 Edit an ingredient from the Inventory.
@@ -196,13 +211,14 @@ Format: `edit ingredient <index> -<field flag> <new data>...`
     - `-d`: description of the ingredient
     - `-e`: expiry date of the ingredient
     - `-t`: tags for the ingredient
+- Note that when editing the tags of an ingredient, all existing tags will be replaced with the new tags specified.
 
 Example(s): 
 1. `edit ingredient 1 -d juicy -t fruit`
 <br />Expected Output:<br />
 ![editCommand1.png](images/ingredientCommands/editCommand1.png)
 
-### 4.2.4 Clear Ingredients
+### 4.4.4 Clear Ingredients
 `clear ingredient`
 
 Clear all the ingredients from the Inventory.
@@ -214,7 +230,7 @@ Example(s):
 <br />Expected Output:<br />
 ![clearCommand.png](images/ingredientCommands/clearCommand.png)
 
-### 4.2.5 Find Ingredients
+### 4.4.5 Find Ingredients
 `find ingredient`
 
 - Search for an ingredient from the Inventory based on a user-inputted keyword(s) that match the name of an ingredient(s).
@@ -226,7 +242,7 @@ Format: `find ingredient <keyword>...`
     1. Keyword is case-insensitive.<br />
        e.g. Finding with keyword: "corn" will match with "COrN"
        
-    2. Any keyword must be contained in the name of the recipe.<br />
+    2. Any keyword must be contained in the name of the ingredient.<br />
        e.g. Finding with keyword: "corn" will match with "CoRN flour", "coRn FlakeS", "popcorn" but not "`" <br />
        e.g. Finding with keywords: "corn Chicken beef" will match "beef Chicken", "beef corn", etc. but not "beefcorn"
 
@@ -235,7 +251,7 @@ Example(s):
 <br />Expected Output:<br />
 ![findIngredient1.png](images/ingredientCommands/findIngredient1.png)
 
-### 4.2.6 List Ingredients
+### 4.4.6 List Ingredients
 `list ingredient`
 
 List all the ingredients again after `find ingredient` Operation.
@@ -247,7 +263,7 @@ Example(s):
 <br />Expected Output:<br />
 ![listIngredient1.png](images/ingredientCommands/listIngredient1.png)
 
-### 4.2.7 View Ingredients
+### 4.4.7 View Ingredients
 `view ingredient`
 
 View an ingredient in the [Main Window](#mainwindow).
@@ -262,9 +278,9 @@ Example(s):
 ![viewCommand1.png](images/ingredientCommands/viewCommand1.png)
 
 
-## 4.3 Recipes
+## 4.5 Recipes
 
-### 4.3.1 Add Recipes
+### 4.5.1 Add Recipes
 `add recipe`
 
 Add a recipe to the RecipeBook.
@@ -286,7 +302,7 @@ the lamb chops with salt and pepper. -s Grill the lamb chops over medium high he
 -d Juicy lamb chops served medium rare with a refreshing mint puree.`
 ![addRecipe3.png](images/recipeCommands/addRecipe3.png)
 
-### 4.3.2 Delete Recipes
+### 4.5.2 Delete Recipes
 `delete recipe`
 
 Delete a recipe from the RecipeBook.
@@ -303,7 +319,7 @@ Example(s):
    <br />Expected Output:<br />
    ![deleteRecipe2.png](images/recipeCommands/deleteRecipe2.png)
 
-### 4.3.3 Clear Recipes
+### 4.5.3 Clear Recipes
 `clear recipe`
 
 Clears all recipes from the Recipe Book.
@@ -314,7 +330,7 @@ Example(s):
 1. `clear recipe`
     <br />Expected Output: <br />
 
-### 4.3.4 Edit Recipes
+### 4.5.4 Edit Recipes
 `edit recipe`
 
 Edit a recipe from the Recipe Book.
@@ -329,6 +345,8 @@ Format: `edit recipe <index> <field flag><new data>...`
   - `-i`: ingredients use in the recipe
   - `-s`: steps of the recipe
   - `-d`: description of the recipe
+- Note that when editing ingredients or steps, all existing ingredients or steps will be overwritten with the new
+ingredients or steps specified.
 
 Example(s):
 1. `edit recipe 2 -i chicken 5kg -i mushroom sauce 1l`
@@ -336,7 +354,7 @@ Example(s):
 ![editRecipe1.png](images/recipeCommands/editRecipe1.png)
 
 
-### 4.3.5 Find Recipes
+### 4.5.5 Find Recipes
 `find recipe`
 
 - Search for a recipe from the RecipeBook based on a user-inputted keyword(s) that match the name of a recipe(s).
@@ -345,19 +363,19 @@ please use [List Recipes](#list-recipes) command.
 
 Format: `find recipe <keyword>...`
 - Current requirements for a keyword:
-    1. Keyword is case-insensitive.
-       i. e.g. Finding with keyword: "mee" will match with "Maggie Mee"
-    2. Any keyword must match a full word in the name of the recipe.
-       i. e.g. Finding with keyword: "mee" will match with "Maggie Mee", "mee Goreng", etc. but not "meek"
-       ii. e.g. Finding with keywords: "salad Chicken burger" will match "Fried Chicken", "Burger Chicken", "Salad",
-       "Chicken Salad", etc. but not "chickenburger"
+    1. Keyword is case-insensitive. 
+        1. e.g. Finding with keyword: "mee" will match with "Maggie Mee"
+    2. Any keyword must match the name of the recipe either partially or fully.
+        1. e.g. Finding with keyword: "mee" will match with "Maggie Mee" but not "Me"
+        2. e.g. Finding with keywords: "salad Chicken burger" will match "Fried Chicken", "Burger Chicken", "Salad",
+       "Chicken Salad" and "chickenburger"
 
 Example(s): 
 1. `find recipe chop`
 <br />Expected Output:<br />
 ![findRecipe1.png](images/recipeCommands/findRecipe1.png)
 
-### 4.3.6 List Recipes
+### 4.5.6 List Recipes
 `list recipe`
 
 Lists out all the recipes again after `find recipe` operation. 
@@ -369,7 +387,7 @@ Example(s):
 <br /> Expected Output:<br />
 ![listRecipe1.png](images/recipeCommands/listRecipe1.png)
 
-### 4.3.7 View Recipes
+### 4.5.7 View Recipes
 `view recipe`
 
 Expand the recipe and view the detailed steps in a bigger window.
@@ -383,7 +401,7 @@ Example(s):
 <br />Expected Output:<br />
 ![viewRecipe1.png](images/recipeCommands/viewRecipe1.png)
 
-### 4.3.8 Cook Recipe
+### 4.5.8 Cook Recipe
 `cook recipe`
 
 Cooks a recipe and deducts the ingredients required by the chosen recipe from the Inventory.
