@@ -27,7 +27,7 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
      *
      * @param date A valid date.
      */
-    public ExpiryDate(String date) throws DateTimeParseException {
+    public ExpiryDate(String date) {
         requireNonNull(date);
         AppUtil.checkArgument(isValidExpiry(date), MESSAGE_CONSTRAINTS);
         expiryDate = LocalDate.parse(date, DATE_FORMATTER);

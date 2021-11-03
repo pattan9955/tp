@@ -131,9 +131,12 @@ public class ParserUtil {
     /**
      * Parses {@code String name} into a {@code Name}
      */
-    public static fridgy.model.recipe.Name parseRecipeName(String name) {
+    public static fridgy.model.recipe.Name parseRecipeName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        if (!fridgy.model.recipe.Name.isValidName(trimmedName)) {
+            throw new ParseException(fridgy.model.recipe.Name.MESSAGE_CONSTRAINTS);
+        }
         return new fridgy.model.recipe.Name(trimmedName);
     }
 
