@@ -10,6 +10,7 @@ import java.util.Objects;
  */
 public class Step {
     private final String step;
+    public static final String STEP_CONSTRAINTS = "Step field cannot be empty.";
 
     /**
      * Constructs a {@code Step}.

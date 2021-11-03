@@ -4,7 +4,6 @@ import static fridgy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_ADD_COMMAND_MESSAGE;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_ADD_COMMAND_MISSING_INGREDIENT;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_ADD_COMMAND_MISSING_NAME;
-import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_ADD_COMMAND_MISSING_STEPS;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.INVALID_ADD_COMMAND_WRONG_KEYWORD;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_ALL_PREFIX_PRESENT;
 import static fridgy.logic.parser.recipe.RecipeCommandParserTestUtil.VALID_ADD_COMMAND_MISSING_DESCRIPTION;
@@ -41,9 +40,6 @@ public class AddRecipeCommandParserTest {
 
         RecipeCommandParserTestUtil.assertParseFailure(testParser,
                 INVALID_ADD_COMMAND_MISSING_INGREDIENT.replace("add ", ""), INVALID_ADD_COMMAND_MESSAGE);
-
-        RecipeCommandParserTestUtil.assertParseFailure(testParser,
-                INVALID_ADD_COMMAND_MISSING_STEPS.replace("add ", ""), INVALID_ADD_COMMAND_MESSAGE);
     }
 
     @Test

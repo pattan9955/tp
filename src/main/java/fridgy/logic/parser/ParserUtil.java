@@ -144,9 +144,10 @@ public class ParserUtil {
         requireNonNull(ingredients);
         final Set<BaseIngredient> ingredientSet = new HashSet<>();
         for (String ingredient : ingredients) {
-            if (!ingredient.equals("")) {
-                ingredientSet.add(parseBaseIngredient(ingredient));
+            if (ingredient.isBlank()) {
+                throw new ParseException(BaseIngredient.BASE_INGREDIENT_CONSTRAINTS);
             }
+            ingredientSet.add(parseBaseIngredient(ingredient));
         }
         if (ingredientSet.isEmpty()) {
             throw new ParseException(BaseIngredient.BASE_INGREDIENT_CONSTRAINTS);
@@ -176,10 +177,13 @@ public class ParserUtil {
     /**
      * Parses {@code List<String> steps} into a {@code List<Step>}.
      */
-    public static List<Step> parseSteps(List<String> steps) {
+    public static List<Step> parseSteps(List<String> steps) throws ParseException {
         requireNonNull(steps);
         final ArrayList<Step> stepList = new ArrayList<>();
         for (String step : steps) {
+            if (step.isBlank()) {
+                throw new ParseException(Step.STEP_CONSTRAINTS);
+            }
             stepList.add(parseStep(step));
         }
         return stepList;
