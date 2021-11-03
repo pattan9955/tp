@@ -23,8 +23,8 @@ public class IngredientBuilder {
     public static final String DEFAULT_NAME = "Almond";
     public static final String DEFAULT_QUANTITY = "50g";
     public static final String DEFAULT_DESCRIPTION = "Nut";
-    public static final String DEFAULT_EXPIRY_DATE = "20-08-2010";
-    public static final Set<Tag> DEFAULT_TAGS = Set.of(Tag.EXPIRED);
+    public static final String DEFAULT_EXPIRY_DATE = "20-08-2099";
+    public static final Set<Tag> DEFAULT_TAGS = new HashSet<>();
 
     private Name name;
     private Quantity quantity;

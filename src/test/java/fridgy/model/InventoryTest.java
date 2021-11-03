@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.model.base.Database;
 import fridgy.model.ingredient.BaseIngredient;
+import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
@@ -35,6 +36,7 @@ public class InventoryTest {
 
     private final Inventory ingrInventory = new Inventory();
     private List<Ingredient> inventoryIngrList = Arrays.asList(CHICKEN, FLOUR, APPLE, ALMOND);
+    // this ingredient list will be sorted to: CHICKEN, FLOUR, ALMOND, APPLE
 
     @Test
     public void constructor() {
@@ -132,11 +134,11 @@ public class InventoryTest {
         friedChickenIngr.add(new BaseIngredient(new Name("cHiCKen"), new Quantity("500g")));
         friedChickenIngr.add(new BaseIngredient(new Name("FlOuR"), new Quantity("500g")));
         assertFalse(ingrInventory.deductIngredients(friedChickenIngr));
-        // chicken and flour should be used up and removed, only apple and almond will be left
-        assertEquals(ALMOND.getQuantity(), ingrInventory.getList().get(0).getQuantity());
-        assertEquals(APPLE.getQuantity(), ingrInventory.getList().get(1).getQuantity());
-        assertEquals(CHICKEN.getQuantity(), ingrInventory.getList().get(2).getQuantity());
-        assertEquals(FLOUR.getQuantity(), ingrInventory.getList().get(3).getQuantity());
+        // no matches, everything will be the same
+        assertEquals(CHICKEN.getQuantity(), ingrInventory.getList().get(0).getQuantity());
+        assertEquals(FLOUR.getQuantity(), ingrInventory.getList().get(1).getQuantity());
+        assertEquals(ALMOND.getQuantity(), ingrInventory.getList().get(2).getQuantity());
+        assertEquals(APPLE.getQuantity(), ingrInventory.getList().get(3).getQuantity());
     }
 
     @Test
@@ -147,12 +149,12 @@ public class InventoryTest {
         friedChickenIngr.add(new BaseIngredient(new Name("flour"), new Quantity("20g")));
         assertTrue(ingrInventory.deductIngredients(friedChickenIngr));
         // almond, apple, chicken and flour should be left
-        assertEquals(ALMOND.getQuantity(), ingrInventory.getList().get(0).getQuantity());
-        assertEquals(APPLE.getQuantity(), ingrInventory.getList().get(1).getQuantity());
         // chicken should be left with 2kg - 20g = 1980g
         // flour should be left with 500g - 20g = 480g
-        assertEquals(new Quantity("1980 g"), ingrInventory.getList().get(2).getQuantity());
-        assertEquals(new Quantity("480 g"), ingrInventory.getList().get(3).getQuantity());
+        assertEquals(new Quantity("1980 g"), ingrInventory.getList().get(0).getQuantity());
+        assertEquals(new Quantity("480 g"), ingrInventory.getList().get(1).getQuantity());
+        assertEquals(ALMOND.getQuantity(), ingrInventory.getList().get(2).getQuantity());
+        assertEquals(APPLE.getQuantity(), ingrInventory.getList().get(3).getQuantity());
     }
 
     @Test
@@ -163,23 +165,30 @@ public class InventoryTest {
         friedChickenIngr.add(new BaseIngredient(new Name("flour"), new Quantity("300kg")));
         assertFalse(ingrInventory.deductIngredients(friedChickenIngr));
         // nothing should be deducted, since there is insufficient quantities in inventory
-        assertEquals(ALMOND.getQuantity(), ingrInventory.getList().get(0).getQuantity());
-        assertEquals(APPLE.getQuantity(), ingrInventory.getList().get(1).getQuantity());
-        assertEquals(CHICKEN.getQuantity(), ingrInventory.getList().get(2).getQuantity());
-        assertEquals(FLOUR.getQuantity(), ingrInventory.getList().get(3).getQuantity());
+        assertEquals(CHICKEN.getQuantity(), ingrInventory.getList().get(0).getQuantity());
+        assertEquals(FLOUR.getQuantity(), ingrInventory.getList().get(1).getQuantity());
+        assertEquals(ALMOND.getQuantity(), ingrInventory.getList().get(2).getQuantity());
+        assertEquals(APPLE.getQuantity(), ingrInventory.getList().get(3).getQuantity());
     }
 
     @Test
     public void deductIngredients_expiredIngr_returnsFalse() {
         ingrInventory.setItems(inventoryIngrList);
-        Set<BaseIngredient> fruitAndNutsIngr = new HashSet<>();
-        fruitAndNutsIngr.add(new BaseIngredient(new Name("apple"), new Quantity("1")));
-        fruitAndNutsIngr.add(new BaseIngredient(new Name("almond"), new Quantity("1")));
-        assertFalse(ingrInventory.deductIngredients(fruitAndNutsIngr));
+        // adding expired items
+        ingrInventory.add(new Ingredient(new Name("mango"), new Quantity("5"),
+                new HashSet<>(), new ExpiryDate("20-10-1975")));
+        ingrInventory.add(new Ingredient(new Name("monga"), new Quantity("5"),
+                new HashSet<>(), new ExpiryDate("20-10-1975")));
+        Set<BaseIngredient> fruityIngr = new HashSet<>();
+        fruityIngr.add(new BaseIngredient(new Name("mango"), new Quantity("1")));
+        fruityIngr.add(new BaseIngredient(new Name("monga"), new Quantity("1")));
+        assertFalse(ingrInventory.deductIngredients(fruityIngr));
         // deductIngredients does not allow deduction of expired ingredients, so nothing should be deducted
-        assertEquals(ALMOND.getQuantity(), ingrInventory.getList().get(0).getQuantity());
-        assertEquals(APPLE.getQuantity(), ingrInventory.getList().get(1).getQuantity());
+        assertEquals(new Quantity("5"), ingrInventory.getList().get(0).getQuantity());
+        assertEquals(new Quantity("5"), ingrInventory.getList().get(1).getQuantity());
         assertEquals(CHICKEN.getQuantity(), ingrInventory.getList().get(2).getQuantity());
         assertEquals(FLOUR.getQuantity(), ingrInventory.getList().get(3).getQuantity());
+        assertEquals(ALMOND.getQuantity(), ingrInventory.getList().get(4).getQuantity());
+        assertEquals(APPLE.getQuantity(), ingrInventory.getList().get(5).getQuantity());
     }
 }
