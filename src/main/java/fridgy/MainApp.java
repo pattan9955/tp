@@ -107,14 +107,14 @@ public class MainApp extends Application {
         try {
             recipeBookOptional = storage.readRecipeBook();
             if (!recipeBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample Inventory");
+                logger.info("Data file not found. Will be starting with a sample Recipe Book");
             }
             initialRecipeBook = recipeBookOptional.orElseGet(SampleDataUtil::getSampleRecipeBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty Inventory");
+            logger.warning("Data file not in the correct format. Will be starting with an empty Recipe Book");
             initialRecipeBook = new RecipeBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty Inventory");
+            logger.warning("Problem while reading from the file. Will be starting with an empty Recipe Book");
             initialRecipeBook = new RecipeBook();
         }
 
