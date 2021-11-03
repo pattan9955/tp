@@ -9,6 +9,7 @@ import java.util.Objects;
  * Guarantees: immutable;
  */
 public class Step {
+    public static final String STEP_CONSTRAINTS = "Step field cannot be empty.";
     private final String step;
 
     /**
