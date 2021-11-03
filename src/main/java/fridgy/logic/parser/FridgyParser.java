@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import fridgy.commons.core.Messages;
 import fridgy.logic.commands.AddCommand;
 import fridgy.logic.commands.Command;
+import fridgy.logic.commands.DeleteCommand;
 import fridgy.logic.commands.EditCommand;
 import fridgy.logic.commands.ExitCommand;
 import fridgy.logic.commands.FindCommand;
@@ -22,6 +23,7 @@ import fridgy.logic.parser.recipe.RecipeParser;
 public class FridgyParser {
 
     public static final List<String> COMMAND_NAMES = List.of(AddCommand.COMMAND_WORD,
+            DeleteCommand.COMMAND_WORD,
             EditCommand.COMMAND_WORD,
             FindCommand.COMMAND_WORD,
             ListCommand.COMMAND_WORD
