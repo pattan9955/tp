@@ -23,6 +23,7 @@ Given below are my contributions to the project.
 * **New Feature**: Rework the GUI
     * Justification: This feature improves the product significantly because the application now fits the user requirements and is pleasing to the eye
     * Highlights: UI design. Reworking the GUI also requires a deep understanding of JavaFX and how each component works
+
 * **Minor Enhancements**: More appropriate error messages for some commands in Fridgy
 
 * **Code contributed**: [RepoSense Code Dashboard](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=alissayarmantho)
