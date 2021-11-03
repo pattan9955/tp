@@ -26,8 +26,12 @@ public class UiUtil {
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i < list.size() + 1; i++) {
             sb.append(i + ". ")
-                .append(list.get(i - 1).toString())
-                .append("\n\n");
+                .append(list.get(i - 1).toString());
+            if (!(i == list.size())) {
+                sb.append("\n\n");
+            } else {
+                sb.append("\n");
+            }
         }
         return sb.toString();
     }
