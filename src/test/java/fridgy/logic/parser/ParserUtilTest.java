@@ -2,7 +2,9 @@ package fridgy.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -18,6 +20,7 @@ import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.Name;
 import fridgy.model.ingredient.Quantity;
+import fridgy.model.recipe.Step;
 import fridgy.model.tag.Tag;
 import fridgy.testutil.Assert;
 import fridgy.testutil.TypicalIndexes;
@@ -218,5 +221,57 @@ public class ParserUtilTest {
             ));
 
         assertEquals(expected, ParserUtil.parseIngredients(toParse));
+    }
+
+    @Test
+    public void parseIngredients_emptyIngredients_throwsParseException() {
+        // should reject having no ingredients
+        List<String> nothing = new ArrayList<>();
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIngredients(nothing));
+    }
+
+    @Test
+    public void parseIngredients_blankIngredients_throwsParseException() {
+        // should reject having blank strings as an ingredient
+        List<String> toParse = Arrays.asList(VALID_INGREDIENT, VALID_INGREDIENT_UNIT, "");
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIngredients(toParse));
+
+        List<String> toParse2 = Arrays.asList(VALID_INGREDIENT, VALID_INGREDIENT_UNIT, "       ");
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIngredients(toParse2));
+    }
+
+    @Test
+    public void parseSteps_emptySteps_success() {
+        List<String> nothing = new ArrayList<>();
+        try {
+            assertEquals(new ArrayList<Step>(), ParserUtil.parseSteps(nothing));
+        } catch (ParseException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parseSteps_validSteps_success() {
+        List<String> validSteps = Arrays.asList("A", "B", "C");
+        List<Step> expected = Arrays.asList(new Step("A"), new Step("B"), new Step("C"));
+        try {
+            assertEquals(expected, ParserUtil.parseSteps(validSteps));
+        } catch (ParseException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parseSteps_blankSteps_throwsParseException() {
+        List<String> validSteps = Arrays.asList("A", "", "C");
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseSteps(validSteps));
+    }
+
+    @Test
+    public void parseStep_validStep_success() {
+        assertEquals(new Step(""), ParserUtil.parseStep(""));
+        assertEquals(new Step(""), ParserUtil.parseStep("       "));
+        assertEquals(new Step("123AbCd"), ParserUtil.parseStep("   123AbCd   "));
+        assertEquals(new Step("123AbCd"), ParserUtil.parseStep("123AbCd"));
     }
 }
