@@ -2,7 +2,6 @@ package fridgy.ui;
 
 import static java.util.Objects.requireNonNull;
 
-import javax.management.StandardMBean;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 
