@@ -35,7 +35,7 @@ public class DeleteRecipeCommandTest {
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeleteRecipeCommand(null));
+        assertThrows(NullPointerException.class, () -> new DeleteRecipeCommand((Index[]) null));
     }
 
     @Test

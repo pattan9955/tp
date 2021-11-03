@@ -81,19 +81,17 @@ public class RecipeDisplay extends UiPart<Region> {
             availableIngredientsSection.managedProperty().bind(availableIngredientsSection.visibleProperty());
         }
 
-        availableIngredientTitle.setText("Available :");
+        availableIngredientTitle.setText("Available Ingredients");
 
-        missingIngredientTitle.setText("Missing :");
+        missingIngredientTitle.setText("Missing Ingredients");
 
         recipe.getIngredients().stream()
                 .sorted(Comparator.comparing(ingredient -> ingredient.getName().toString()))
                 .forEach(ingredient -> {
-                    Label ingredientLabel = new Label(UiUtil.truncateText(ingredient.getQuantity().toString(),
-                            QUANTITY_CHAR_LIMIT)
-                                    + " "
-                                    + UiUtil.truncateText(
-                            ingredient.getName().toString(),
-                            INGREDIENT_CHAR_LIMIT)
+                    Label ingredientLabel = new Label(UiUtil.truncateText(
+                            ingredient.getName().toString(), INGREDIENT_CHAR_LIMIT)
+                            + " (" + UiUtil.truncateText(ingredient.getQuantity().toString(),
+                            QUANTITY_CHAR_LIMIT) + ")"
                     );
                     ingredientLabel.setWrapText(true);
                     if (!isEnough.apply(ingredient)) {
