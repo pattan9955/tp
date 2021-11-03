@@ -98,19 +98,23 @@ public class FridgyParser {
             RecipeCommand recipeCommand = recipeParser.parseCommand(userInput.trim());
             return recipeCommand::execute;
         case INGREDIENT_TYPE:
+            if (commandWord.equals(CookRecipeCommand.COMMAND_WORD)) {
+                throw new ParseException(Messages.MESSAGE_WRONG_TYPE + " "
+                        + formatString(taskType)
+                        + ". " + Messages.TYPE_RECIPE_EXPECTED);
+            }
             Command ingredientCommand = inventoryParser.parseCommand(userInput.trim());
             return ingredientCommand::execute;
         case "": // no type
             return parseGeneralCommand(userInput);
         default: // invalid type
             if (COMMAND_NAMES.contains(commandWord)) {
-                if (commandWord.equals(CookRecipeCommand.COMMAND_WORD)) {
-                    recipeParser.parseCommand(userInput.trim());
-                } else {
-                    throw new ParseException(Messages.TYPE_INVALID_COMMAND_FORMAT + " "
-                            + formatString(taskType)
-                            + ". " + Messages.TYPE_EXPECTED);
-                }
+                String expectedType = commandWord.equals(CookRecipeCommand.COMMAND_WORD)
+                        ? Messages.TYPE_RECIPE_EXPECTED
+                        : Messages.TYPE_EXPECTED;
+                throw new ParseException(Messages.TYPE_INVALID_COMMAND_FORMAT + " "
+                        + formatString(taskType)
+                        + ". " + expectedType);
             }
             // invalid command
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND + " "
@@ -137,12 +141,12 @@ public class FridgyParser {
 
         default:
             if (COMMAND_NAMES.contains(commandWord)) {
-                if (commandWord.equals(CookRecipeCommand.COMMAND_WORD)) {
-                    recipeParser.parseCommand(userInput.trim());
-                } else {
-                    throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                            Messages.MISSING_TYPE));
-                }
+                String expectedType = commandWord.equals(CookRecipeCommand.COMMAND_WORD)
+                        ? Messages.TYPE_RECIPE_EXPECTED
+                        : Messages.TYPE_EXPECTED;
+                String missingTypeMessage = String.format(Messages.MESSAGE_MISSING_TYPE, expectedType);
+                throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                            missingTypeMessage));
             }
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND + " "
                     + formatString(commandWord) + ".");
