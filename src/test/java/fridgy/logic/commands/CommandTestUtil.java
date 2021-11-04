@@ -35,7 +35,7 @@ public class CommandTestUtil {
     public static final String VALID_DESCRIPTION_FISH = " ";
     public static final String VALID_TAG_VEGETABLE = "vegetable";
     public static final String VALID_TAG_SNACK = "snack";
-    public static final String VALID_EXPIRY_DATE = "20-08-2010";
+    public static final String VALID_EXPIRY_DATE = "20-08-2099";
 
     public static final String NAME_DESC_ALMOND = " " + CliSyntax.PREFIX_NAME + VALID_NAME_ALMOND;
     public static final String NAME_DESC_BASIL = " " + CliSyntax.PREFIX_NAME + VALID_NAME_BASIL;
