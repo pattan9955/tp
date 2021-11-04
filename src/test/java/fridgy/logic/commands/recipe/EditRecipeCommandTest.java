@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.CommandResult;
+import fridgy.logic.commands.EditCommand;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
@@ -23,6 +24,7 @@ import fridgy.model.recipe.Recipe;
 import fridgy.model.recipe.Step;
 import fridgy.testutil.EditRecipeDescriptorBuilder;
 import fridgy.testutil.RecipeBuilder;
+import fridgy.testutil.TypicalRecipes;
 
 public class EditRecipeCommandTest {
 
@@ -84,6 +86,25 @@ public class EditRecipeCommandTest {
 
         EditRecipeCommand testCommand = new EditRecipeCommand(Index.fromOneBased(1), testDescriptor);
         assertThrows(CommandException.class, () -> testCommand.execute(testModel));
+    }
+
+    @Test
+    public void execute_targetRecipeAlreadyExistsDifferentCase_throwsCommandException() {
+        Model testModel = new ModelManager();
+
+        Recipe testRecipe1 = TypicalRecipes.BURGER;
+        Recipe testRecipe2 = TypicalRecipes.MAGGIE;
+
+        testModel.add(testRecipe1);
+        testModel.add(testRecipe2);
+
+        EditRecipeDescriptor testDescriptor = new EditRecipeDescriptorBuilder(testRecipe1)
+                .withName(testRecipe1.getName().fullName.toLowerCase())
+                .build();
+
+        EditRecipeCommand testCommand = new EditRecipeCommand(Index.fromOneBased(2), testDescriptor);
+        assertThrows(CommandException.class, () -> testCommand.execute(testModel),
+                EditCommand.MESSAGE_DUPLICATE_INGREDIENT);
     }
 
     @Test

@@ -22,6 +22,7 @@ import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.testutil.Assert;
 import fridgy.testutil.IngredientBuilder;
+import fridgy.testutil.TypicalIngredients;
 import javafx.collections.ObservableList;
 
 
@@ -75,6 +76,21 @@ public class AddCommandTest {
         // different Ingredient -> returns false
         assertFalse(addAlmondCommand.equals(addBasilCommand));
 
+    }
+
+    @Test
+    public void execute_sameIngredientDifferentCase_throwsCommandException() {
+        Ingredient almondUpper = new IngredientBuilder(TypicalIngredients.ALMOND).build();
+        Ingredient almondLower = new IngredientBuilder(TypicalIngredients.ALMOND)
+                .withName(TypicalIngredients.ALMOND.getName().fullName.toLowerCase())
+                .build();
+
+        ModelStub testModel = new ModelStubAcceptingIngredientAdded();
+        testModel.add(almondLower);
+        AddCommand testCommand = new AddCommand(almondUpper);
+
+        Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_INGREDIENT, () ->
+                testCommand.execute(testModel));
     }
 
     /**

@@ -72,8 +72,13 @@ public class Ingredient extends BaseIngredient {
             return true;
         }
 
-        return otherIngredient != null
-                && otherIngredient.getName().equals(getName());
+        if (otherIngredient == null) {
+            return false;
+        }
+
+        String currIngredientName = getName().fullName.toLowerCase();
+        String otherIngredientName = otherIngredient.getName().fullName.toLowerCase();
+        return currIngredientName.equals(otherIngredientName);
     }
 
     @Override
