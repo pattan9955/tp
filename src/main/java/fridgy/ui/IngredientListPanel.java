@@ -29,7 +29,12 @@ public class IngredientListPanel extends UiPart<Region> {
         ingredientListView.setItems(ingredientList);
         ingredientListView.setCellFactory(listView -> new IngredientListViewCell());
         ingredientListView.setOnMouseClicked(
-            event -> changeActive.accept(ingredientListView.getSelectionModel().getSelectedItem())
+            event -> {
+                Ingredient clicked = ingredientListView.getSelectionModel().getSelectedItem();
+                if (clicked != null) {
+                    changeActive.accept(clicked);
+                }
+            }
         );
     }
 
