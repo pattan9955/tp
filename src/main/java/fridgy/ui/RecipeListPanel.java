@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 
 import fridgy.commons.core.LogsCenter;
 import fridgy.model.ingredient.BaseIngredient;
-import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
