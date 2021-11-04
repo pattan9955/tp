@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " " + INGREDIENT_KEYWORD + " 1 2 3";
 
-    public static final String MESSAGE_DELETE_INGREDIENT_SUCCESS = "Deleted %1$d ingredients";
+    public static final String MESSAGE_DELETE_INGREDIENT_SUCCESS = "Deleted %1$d ingredient%2$s!";
 
     private final List<Index> targetIndices = new ArrayList<>();
 
@@ -62,7 +62,10 @@ public class DeleteCommand extends Command {
         }
         // delete all chosen ingredients
         toDelete.forEach(model::delete);
-        return new CommandResult(String.format(MESSAGE_DELETE_INGREDIENT_SUCCESS, targetIndices.size()));
+
+        int size = targetIndices.size();
+        String plural = size == 0 || size == 1 ? "" : "s";
+        return new CommandResult(String.format(MESSAGE_DELETE_INGREDIENT_SUCCESS, size, plural));
     }
 
     @Override

@@ -43,7 +43,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_INGREDIENT,
                 INDEX_SECOND_INGREDIENT, INDEX_THIRD_INGREDIENT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, 3);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, 3, "s");
 
         ModelManager expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
         expectedModel.delete(ingredientToDelete1);
@@ -72,7 +72,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_INGREDIENT);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS,
-                1);
+                1, "");
 
         Model expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
         expectedModel.delete(ingredientToDelete);
@@ -99,7 +99,7 @@ public class DeleteCommandTest {
         /* Trivial test case where nothing is deleted if there are no arguments passed to varargs. Parser should have
           filtered this out. */
         DeleteCommand deleteCommand = new DeleteCommand();
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, 0);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, 0, "");
 
         ModelManager expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
 
