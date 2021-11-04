@@ -21,7 +21,7 @@ public class RecipeDisplay extends UiPart<Region> {
     private static final String FXML = "RecipeDisplay.fxml";
 
     // Char limits
-    private static final int INGREDIENT_CHAR_LIMIT = 45;
+    private static final int INGREDIENT_CHAR_LIMIT = 40;
     private static final int QUANTITY_CHAR_LIMIT = 25;
 
     /**
@@ -107,9 +107,7 @@ public class RecipeDisplay extends UiPart<Region> {
             description.setVisible(false);
             description.managedProperty().bind(description.visibleProperty());
         }
-        if (recipeDescription.length() < 20) {
-            description.setFont(Font.font("Montserrat Regular", 25));
-        } else if (recipeDescription.length() < 30) {
+        if (recipeDescription.length() < 30) {
             description.setFont(Font.font("Montserrat Regular", 20));
         } else {
             description.setFont(Font.font("Montserrat Regular", 16));

@@ -28,7 +28,7 @@ public class DeleteRecipeCommand extends RecipeCommand {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " " + RECIPE_KEYWORD + " 1 2 3";
 
-    public static final String MESSAGE_DELETE_RECIPE_SUCCESS = "Deleted %1$d recipes";
+    public static final String MESSAGE_DELETE_RECIPE_SUCCESS = "Deleted %1$d recipe%2$s!";
 
     private final List<Index> targetIndices = new ArrayList<>();
 
@@ -63,7 +63,10 @@ public class DeleteRecipeCommand extends RecipeCommand {
         }
         // delete all chosen recipes
         toDelete.forEach(model::delete);
-        return new CommandResult(String.format(MESSAGE_DELETE_RECIPE_SUCCESS, targetIndices.size()));
+
+        int size = targetIndices.size();
+        String plural = size == 0 || size == 1 ? "" : "s";
+        return new CommandResult(String.format(MESSAGE_DELETE_RECIPE_SUCCESS, size, plural));
     }
 
     @Override

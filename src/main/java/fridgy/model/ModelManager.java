@@ -172,6 +172,7 @@ public class ModelManager implements Model {
     @Override
     public void setInventory(ReadOnlyDatabase<Ingredient> inventory) {
         this.inventory.resetDatabase(inventory);
+        uiState.clear(TabEnum.INGREDIENT);
     }
 
     @Override
@@ -184,6 +185,7 @@ public class ModelManager implements Model {
     @Override
     public void setRecipeBook(ReadOnlyDatabase<Recipe> recipeBook) {
         this.recipeBook.resetDatabase(recipeBook);
+        uiState.clear(TabEnum.RECIPE);
     }
 
     @Override

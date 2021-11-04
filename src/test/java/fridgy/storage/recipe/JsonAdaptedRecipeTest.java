@@ -56,14 +56,7 @@ class JsonAdaptedRecipeTest {
                 BaseIngredient.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, recipe::toModelType);
     }
-    @Test
-    public void toModelType_nullStep_throwsIllegalValueException() {
-        JsonAdaptedRecipe recipe =
-                new JsonAdaptedRecipe(VALID_NAME, VALID_INGREDIENT, null, VALID_DESCRIPTION);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                fridgy.model.recipe.Step.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, recipe::toModelType);
-    }
+
     @Test
     public void toModelType_nullDescription_doesNotThrowException() {
         JsonAdaptedRecipe recipe =

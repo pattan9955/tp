@@ -55,7 +55,7 @@ public class DeleteRecipeCommandTest {
         DeleteRecipeCommand deleteRecipeCommand = new DeleteRecipeCommand(INDEX_FIRST_RECIPE,
                 INDEX_SECOND_RECIPE, INDEX_THIRD_RECIPE);
 
-        String expectedMessage = String.format(DeleteRecipeCommand.MESSAGE_DELETE_RECIPE_SUCCESS, 3);
+        String expectedMessage = String.format(DeleteRecipeCommand.MESSAGE_DELETE_RECIPE_SUCCESS, 3, "s");
 
         ModelManager expectedModel = new ModelManager(new Inventory(), model.getRecipeBook(), new UserPrefs());
         expectedModel.delete(recipeToDelete1);
@@ -84,7 +84,7 @@ public class DeleteRecipeCommandTest {
         DeleteRecipeCommand deleteCommand = new DeleteRecipeCommand(INDEX_FIRST_RECIPE);
 
         String expectedMessage = String.format(DeleteRecipeCommand.MESSAGE_DELETE_RECIPE_SUCCESS,
-                1);
+                1, "");
 
         Model expectedModel = new ModelManager(new Inventory(), model.getRecipeBook(), new UserPrefs());
         expectedModel.delete(recipeToDelete);
@@ -112,7 +112,7 @@ public class DeleteRecipeCommandTest {
         /* Trivial test case where nothing is deleted if there are no arguments passed to varargs. Parser should have
           filtered this out. */
         DeleteRecipeCommand deleteRecipeCommand = new DeleteRecipeCommand();
-        String expectedMessage = String.format(DeleteRecipeCommand.MESSAGE_DELETE_RECIPE_SUCCESS, 0);
+        String expectedMessage = String.format(DeleteRecipeCommand.MESSAGE_DELETE_RECIPE_SUCCESS, 0, "");
 
         ModelManager expectedModel = new ModelManager(new Inventory(), model.getRecipeBook(), new UserPrefs());
 
