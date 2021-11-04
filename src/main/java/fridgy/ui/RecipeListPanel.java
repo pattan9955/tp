@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import fridgy.commons.core.LogsCenter;
 import fridgy.model.ingredient.BaseIngredient;
+import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -37,7 +38,12 @@ public class RecipeListPanel extends UiPart<Region> {
         recipeListView.setItems(recipeList);
         recipeListView.setCellFactory(listView -> new RecipeListViewCell());
         recipeListView.setOnMouseClicked(
-            event -> changeActive.accept(recipeListView.getSelectionModel().getSelectedItem())
+            event -> {
+                Recipe clicked = recipeListView.getSelectionModel().getSelectedItem();
+                if (clicked != null) {
+                    changeActive.accept(clicked);
+                }
+            }
         );
     }
 
