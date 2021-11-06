@@ -13,7 +13,7 @@ Package UI <<Rectangle>> {
 }
 
 MainWindow --|> Observer
-UiState *--> "1" ModelManager
+ModelManager *--> "1" UiState
 UiState *--> "1" Observer
 
 @enduml
