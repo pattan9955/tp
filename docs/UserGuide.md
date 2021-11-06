@@ -4,7 +4,7 @@ title: Fridgy – User Guide
 ---
 
 <img src="images/fridge.png" width="50" id="logo" />
-By: `Team Fridgy` 
+By: `Team Fridgy`
 
 
 * Table of Contents
@@ -25,7 +25,7 @@ Want to know more? Jump to [Section 2, Quick Start](#2-quick-start) to get start
 
 ## 1.1 Navigating the User Guide
 
-This user guide aims to provide a comprehensive guide on how to use Fridgy. 
+This user guide aims to provide a comprehensive guide on how to use Fridgy.
 In addition, the quick start guide provides an end-to-end process to help you get started with installing Fridgy.
 
 This User Guide covers:
@@ -86,17 +86,17 @@ To exit Fridgy, simply close the application window.
 ### 3.1 Tabs
 Click the `Ingredient` or `Recipe` tab each to show the contents of the Inventory or the RecipeBook respectively.
 ### 3.2 Side Bar
-A scrollable window that displays all the contents of the Inventory or the RecipeBook depending on the Tab selected 
+A scrollable window that displays all the contents of the Inventory or the RecipeBook depending on the Tab selected
 by the user.
 ### 3.3 Cards
-A card displays the details of each item inside the Inventory or the RecipeBook depending on the tab selected. Each card 
+A card displays the details of each item inside the Inventory or the RecipeBook depending on the tab selected. Each card
 represents **one** item.
 ### 3.4 CommandLine
 Command Line for users to key their commands into.
 ### 3.5 CommandOutput
 Output of the commands keyed in by users are displayed here.
 ### 3.6 MainWindow
-Displays the output of `View` command, which expands each ingredient or recipe card for better visibility. 
+Displays the output of `View` command, which expands each ingredient or recipe card for better visibility.
 
 # 4. Features
 
@@ -111,8 +111,8 @@ Displays the output of `View` command, which expands each ingredient or recipe c
   e.g. `add ingredient -n <name> [-d <description>]` can be used as:
      1. `add ingredient -n tomato -d from Africa` or as
      2. `add ingredient -n tomato`
-  
-  e.g. `add ingredient -n <name> -q <quantity>[<units>]` can be used as: 
+
+  e.g. `add ingredient -n <name> -q <quantity>[<units>]` can be used as:
      1. `add ingredient -n chicken -q 2` or as
      2. `add ingredient -n chicken -q 2kg`
 
@@ -126,23 +126,23 @@ Displays the output of `View` command, which expands each ingredient or recipe c
 **Format:**<br />
 `help`
 
-Pops out a window that leads the user to [User Guide](https://ay2122s1-cs2103t-w11-1.github.io/tp/UserGuide.html) 
+Pops out a window that leads the user to [User Guide](https://ay2122s1-cs2103t-w11-1.github.io/tp/UserGuide.html)
 (You are here).
 
 ### 4.1.2 Exit
 **Format:**<br />
 `exit`
 
-Closes the window and exits the program. All your information will be saved. 
+Closes the window and exits the program. All your information will be saved.
 
 ## 4.2 Ingredients
 
-This sections covers commands related to Inventory management. Any command primarily interacting with ingredients 
+This sections covers commands related to Inventory management. Any command primarily interacting with ingredients
 will be here.
 
 ### 4.2.1 Add Ingredients
 
-Add an ingredient to the Inventory. 
+Add an ingredient to the Inventory.
 
 **Format:**<br />
 `add ingredient -n <name> -q <quantity>[<units>] [-d <description>] -e <expiry date> [-t <tags>]`
@@ -205,7 +205,7 @@ Edit an ingredient from the Inventory.
 **Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
-A `field flag` is also required for each input field you wish to edit. You can refer to 
+A `field flag` is also required for each input field you wish to edit. You can refer to
   [Add Command](#421-add-ingredients) for more examples on usage of each `field flag`. It can be any of the following:
     - `-n`: name of the ingredient
     - `-q`: quantity of the ingredient
@@ -215,7 +215,7 @@ A `field flag` is also required for each input field you wish to edit. You can r
 
 ### 4.2.4 Clear Ingredients
 
-Clear all the ingredients from the Inventory. Add `expired` keyword to only clear expired ingredients. 
+Clear all the ingredients from the Inventory. Add `expired` keyword to only clear expired ingredients.
 
 **Format:**<br />
 `clear ingredient [expired]`
@@ -231,7 +231,7 @@ Clear all the ingredients from the Inventory. Add `expired` keyword to only clea
 ### 4.2.5 Find Ingredients
 
 - Search for an ingredient from the Inventory based on a user-inputted keyword(s) that match the name of an ingredient(s).
-- After [Find Ingredient](#425-find-ingredients) command, to see the full list of ingredients again, please use 
+- After [Find Ingredient](#425-find-ingredients) command, to see the full list of ingredients again, please use
 [List Ingredient](#426-list-ingredients) command.
 
 **Format:**<br />
@@ -279,7 +279,7 @@ View an ingredient in the [Main Window](#36-mainwindow).
   [Side Bar](#32-side-bar).
 
 ## 4.3 Recipes
-This sections covers commands related to RecipeBook management. Any command primarily interacting with recipes will 
+This sections covers commands related to RecipeBook management. Any command primarily interacting with recipes will
 be here.
 
 ### 4.3.1 Add Recipes
@@ -298,15 +298,15 @@ Add a recipe to the RecipeBook.
     <br />Expected Output:<br />
     ![addRecipe2.png](images/recipeCommands/addRecipe2.png)
 
-3. `add recipe -n Grilled Lamb Chop with Mint Puree -i Mint 5g -i Lamb Chops 1kg -i Butter 20g -i Garlic 20g -s Season 
-the lamb chops with salt and pepper. -s Grill the lamb chops over medium high heat until cooked with butter. 
--s Blend the mint with garlic to make a puree. -s Leave the lamb chops to rest for 5min. -s Serve with mint puree. 
+3. `add recipe -n Grilled Lamb Chop with Mint Puree -i Mint 5g -i Lamb Chops 1kg -i Butter 20g -i Garlic 20g -s Season
+the lamb chops with salt and pepper. -s Grill the lamb chops over medium high heat until cooked with butter.
+-s Blend the mint with garlic to make a puree. -s Leave the lamb chops to rest for 5min. -s Serve with mint puree.
 -d Juicy lamb chops served medium rare with a refreshing mint puree.`
 ![addRecipe3.png](images/recipeCommands/addRecipe3.png)
 
 ### 4.3.2 Delete Recipes
 
-Delete a recipe from the RecipeBook. 
+Delete a recipe from the RecipeBook.
 
 **Format:**<br />
 `delete recipe <index>...`
@@ -357,7 +357,7 @@ A `field flag` is also required for each input field you wish to edit. You can r
 ### 4.3.5 Find Recipes
 
 - Search for a recipe from the RecipeBook based on a user-inputted keyword(s) that match the name of a recipe(s).
-- After [Find Recipes](#435-find-recipes) command, to see the full list of recipes again, 
+- After [Find Recipes](#435-find-recipes) command, to see the full list of recipes again,
 please use [List Recipes](#436-list-recipes) command.
 
 **Format:**<br />:
@@ -379,7 +379,7 @@ please use [List Recipes](#436-list-recipes) command.
 
 ### 4.3.6 List Recipes
 
-Lists out all the recipes again after `find recipe` operation. 
+Lists out all the recipes again after `find recipe` operation.
 
 **Format:**<br />
 `list recipe`
