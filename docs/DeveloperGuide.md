@@ -769,7 +769,7 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
-### 6.6 Viewing ingredients
+### 6.6 Viewing an ingredient
 
 1. Viewing an ingredient from Fridgy's inventory.
 
@@ -786,7 +786,7 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
-### 6.7 Executing recipes
+### 6.7 Executing a recipe
 
 1. Executing a recipe from Fridgy's recipe book and auto-deducting the ingredients used in the recipe.
 
