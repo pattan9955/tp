@@ -116,6 +116,12 @@ Displays the output of `View` command, which expands each ingredient or recipe c
   e.g. `add ingredient -n <name> -q <quantity>[<units>]` can be used as:
      1. `add ingredient -n chicken -q 2` or as
      2. `add ingredient -n chicken -q 2kg`
+    
+- Items in parentheses `()` should come together.
+
+    e.g. `edit ingredient <index> (-<field flag> <new data>)...` can be used as:
+     1. `edit ingredient 3 -q 3` or as 
+     2. `edit ingredient 3 -q 3 -e 11-03-2022`
 
 - Items with `…` after them can be used multiple times.
 
