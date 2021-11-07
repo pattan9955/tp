@@ -24,6 +24,9 @@ public class RecipeDisplay extends UiPart<Region> {
     private static final int INGREDIENT_CHAR_LIMIT = 40;
     private static final int QUANTITY_CHAR_LIMIT = 25;
 
+    // Default Empty Step Message
+    private static final String EMPTY_STEP_MESSAGE = "This recipe has no step.";
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -81,19 +84,17 @@ public class RecipeDisplay extends UiPart<Region> {
             availableIngredientsSection.managedProperty().bind(availableIngredientsSection.visibleProperty());
         }
 
-        availableIngredientTitle.setText("Available :");
+        availableIngredientTitle.setText("Available Ingredients");
 
-        missingIngredientTitle.setText("Missing :");
+        missingIngredientTitle.setText("Missing Ingredients");
 
         recipe.getIngredients().stream()
                 .sorted(Comparator.comparing(ingredient -> ingredient.getName().toString()))
                 .forEach(ingredient -> {
-                    Label ingredientLabel = new Label(UiUtil.truncateText(ingredient.getQuantity().toString(),
-                            QUANTITY_CHAR_LIMIT)
-                                    + " "
-                                    + UiUtil.truncateText(
-                            ingredient.getName().toString(),
-                            INGREDIENT_CHAR_LIMIT)
+                    Label ingredientLabel = new Label(UiUtil.truncateText(
+                            ingredient.getName().toString(), INGREDIENT_CHAR_LIMIT)
+                            + " (" + UiUtil.truncateText(ingredient.getQuantity().toString(),
+                            QUANTITY_CHAR_LIMIT) + ")"
                     );
                     ingredientLabel.setWrapText(true);
                     if (!isEnough.apply(ingredient)) {
@@ -113,7 +114,10 @@ public class RecipeDisplay extends UiPart<Region> {
             description.setFont(Font.font("Montserrat Regular", 16));
         }
         stepsTitle.setText("Steps:");
-        steps.setText(UiUtil.numberedList(recipe.getSteps()));
+
+        String numberedSteps = UiUtil.numberedList(recipe.getSteps());
+        String stepsText = numberedSteps.equals("") ? EMPTY_STEP_MESSAGE : numberedSteps;
+        steps.setText(stepsText);
     }
 
     @Override

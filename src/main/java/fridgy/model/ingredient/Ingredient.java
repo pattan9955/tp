@@ -64,7 +64,8 @@ public class Ingredient extends BaseIngredient {
     }
 
     /**
-     * Returns true if both ingredients have the same name.
+     * Returns true if both ingredients have the same name and expiry date.
+     * Comparison is case-insensitive.
      * This defines a weaker notion of equality between two ingredients.
      */
     public boolean isSameIngredient(Ingredient otherIngredient) {
@@ -78,7 +79,9 @@ public class Ingredient extends BaseIngredient {
 
         String currIngredientName = getName().fullName.toLowerCase();
         String otherIngredientName = otherIngredient.getName().fullName.toLowerCase();
-        return currIngredientName.equals(otherIngredientName);
+        return otherIngredient != null
+                && currIngredientName.equals(otherIngredientName)
+                && otherIngredient.getExpiryDate().equals(getExpiryDate());
     }
 
     @Override
