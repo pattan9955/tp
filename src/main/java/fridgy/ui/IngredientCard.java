@@ -57,7 +57,7 @@ public class IngredientCard extends UiPart<Region> {
         String ingredientName = UiUtil.truncateText(ingredient.getName().fullName, NAME_CHAR_LIMIT);
         String ingredientDescription = UiUtil.truncateText(ingredient.getDescription().value.orElse(""),
                 DESCRIPTION_CHAR_LIMIT);
-        String ingredientQuantity = UiUtil.truncateText(ingredient.getQuantity().value, QUANTITY_CHAR_LIMIT);
+        String ingredientQuantity = UiUtil.truncateText(ingredient.getQuantity().toString(), QUANTITY_CHAR_LIMIT);
 
         id.setText(displayedIndex + ". ");
         name.setText(ingredientName);
