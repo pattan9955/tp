@@ -38,7 +38,7 @@ Fridgy is a desktop app, optimized for use via CLI, with an interactive GUI to d
     * User Guide:
         * Added documentation for introduction and quickstart. [\#119](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/119)
     * Developer Guide:
-        * Added all user stories, use cases, NFRs, glossary, instructions for manual testing and an overview. Ensured consistent formatting and phrasing. [\#13](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/13), [\#80](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/80), [\#112](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/112)
+        * Added all user stories, use cases, NFRs, glossary, instructions for manual testing and overview. Ensured consistent formatting and phrasing. [\#13](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/13), [\#80](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/80), [\#112](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/112), [\#237](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/237)
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#36](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/36), [\#60](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/60), [\#76](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/76), [\#98](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/98), [\#131](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/131), [\#215](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/215)
