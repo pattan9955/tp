@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Fridgy – Developer Guide
+title: Developer Guide
 ---
 
 By: `Team Fridgy`
