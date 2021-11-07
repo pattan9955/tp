@@ -19,7 +19,7 @@ Given below are my contributions to the project.
   * Justification: This feature is necessary for Fridgy users because after executing the `find recipe` command, the recipe list will be filtered accordingly and the user may want to see the full list of recipes back again afterwards
   * Highlights: This feature modifies the existing `list` command syntax to accommodate execution on different models (eg: `Recipe` model or `Ingredient` model) depending on the command syntax used. As this is an extension to the existing `list` command in the codebase, implementing this feature requires great understanding of the original codebase
 
-* **New Feature**: Rework the GUI
+* **Major Enhancements**: Rework the GUI
 * * What it does: Improves the user interface to use a cleaner and minimalistic style
     * Justification: This feature enhances the product aesthetics to become more pleasing to the eye
     * Highlights: UI design. Reworking the GUI also requires a deep understanding of JavaFX and how each component works
