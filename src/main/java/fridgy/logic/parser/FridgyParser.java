@@ -122,7 +122,14 @@ public class FridgyParser {
         }
     }
 
-
+    /**
+     * Parses user input without a type into a CommandExecutor executable that can be run to
+     * produce a CommandResult.
+     *
+     * @param userInput The user input to be parsed.
+     * @return A CommandExecutor that executes the command when provided a model.
+     * @throws ParseException If user provides invalid input.
+     */
     private CommandExecutor parseGeneralCommand(String userInput) throws ParseException {
         final Matcher matcher = GENERAL_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
