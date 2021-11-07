@@ -239,13 +239,13 @@ This also requires consistency in units for each ingredient.
 
 **Target user profile**:
 
-* has a need to manage a significant number of ingredients and recipes
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of ingredients and recipes
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
-**Value proposition**: manage ingredients and recipes faster than a typical mouse/GUI driven app
+**Value proposition**: Manage ingredients and recipes faster than a typical mouse/GUI driven app
 
 <br>
 
@@ -581,6 +581,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
       Use case ends.
 
+<br>
+
 <a name="UC13"></a>
 **Use case: UC13 - Execute Recipe**
 
@@ -640,8 +642,6 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-<br>
-
 ### 6.1 Launch and shutdown
 
 1. Initial launch
@@ -656,8 +656,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+   
 
 <br>
 

@@ -23,7 +23,7 @@ Fridgy is a desktop app, optimized for use via CLI, with an interactive GUI to d
 
 * **Minor Enhancement**: Added automatic sorting of ingredients and their tags
   * What it does: Sorts ingredients by expiry date and name, sorts expiry tags to come before user-inputted tags.
-    * Justification: A major feature of Fridgy is the ability for the user to see what ingredients are expired or expiring first.
+    * Justification: A major feature of Fridgy is the ability for the user to know what ingredients are expired or expiring first. The sort functionality enables them to view ingredients which expire the earliest at the top of the list, indicated by the expired or expiring tag. It is also used in the execution of recipes to choose which ingredients to cook when there are multiple ingredients with the same name, i.e. the earliest expiring ingredient is chosen. 
   * Highlights: This feature was implemented with minimal changes to existing logic and classes.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=rebeccacxy&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=rebeccacxy&tabRepo=AY2122S1-CS2103T-W11-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
@@ -31,17 +31,17 @@ Fridgy is a desktop app, optimized for use via CLI, with an interactive GUI to d
 * **Other code contributions**:
     * Significant modification of Address Book code base for use in Fridgy:
       * Renamed Address Book application to Fridgy. Renamed packages, classes, variable names and javadocs [\#26](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/26)
-    * Introduced a base ingredient to be used by recipe for managing deductions [\#97](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/97)
+    * Introduced a base ingredient to be used by recipe for managing deductions, which ingredient extends from [\#97](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/97)
     * Minor cosmetic tweaks to GUI [\#228](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/228)
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for introduction and quickstart [\#119](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/119)
+        * Added documentation for introduction and quickstart. [\#119](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/119)
     * Developer Guide:
-        * Added all user stories, use cases, NFRs, glossary, instructions for manual testing. Ensured consistent formatting and phrasing [\#13](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/13), [\#112](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/112)
+        * Added all user stories, use cases, NFRs, glossary, instructions for manual testing and an overview. Ensured consistent formatting and phrasing. [\#13](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/13), [\#80](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/80), [\#112](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/112)
 
 * **Community**:
-    * PRs reviewed (non-trivial review comments): [\#36](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/36), [\#60](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/60), [\#76](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/76), [\#98](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/98), [\#131](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/131), [\#215](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/215)
+    * PRs reviewed (with non-trivial review comments): [\#36](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/36), [\#60](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/60), [\#76](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/76), [\#98](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/98), [\#131](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/131), [\#215](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/215)
     * Reported and resolved bugs in Fridgy: [\#63](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues/63), [\#200](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/200), [\#229](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues/229)
     * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/rebeccacxy/ped/issues/2), [2](https://github.com/rebeccacxy/ped/issues/4), [3](https://github.com/rebeccacxy/ped/issues/7))
     
