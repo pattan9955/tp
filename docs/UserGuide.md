@@ -123,15 +123,15 @@ Displays the output of `View` command, which expands each ingredient or recipe c
 
 ## 4.2 Command Flags
 
- Flag | Usage | Description | Remarks 
----- | ------- | ----------- | -------
-`-n` | `-n <name>` | Name of the ingredient or recipe | Names can only contain alphanumeric characters or spaces. Compulsory field.
-`-q` | `-q <quantity> [unit]` | Quantity of the ingredient | Must be a number. Can be followed by a unit of measurement (`g`, `kg`, `mg`, `l`, `ml`, `kl`). Compulsory field.
-`-i` | `-i <name> <quantity>...` | Ingredients used in the recipe | Must be a name followed by a space and a quantity. At least one must be specified. 
-`-e` | `-e <expiry date>` | Expiry date of ingredients | Must be in the form DD-MM-YYYY. Compulsory field.
-`-s` | `-s [step]...` | Step used in the recipe | Can contain any characters or spaces. Optional field.
-`-d` | `-d [description]` | Description of the recipe or ingredient | Can contain any characters or spaces. Optional field. 
-`-t` | `-t [tag]...` | Tag for the ingredient | Must be alphanumeric without spaces. Optional field.
+ Flag | Usage | Description | Compulsory? | Remarks 
+---- | ------- | ----------- | ------- | ----
+`-n` | `-n <name>` | Name of the ingredient or recipe | Yes | Names can only contain alphanumeric characters or spaces.
+`-q` | `-q <quantity> [unit]` | Quantity of the ingredient | Yes | Must be a number. Can be followed by a unit of measurement (`g`, `kg`, `mg`, `l`, `ml`, `kl`). Quantities will be converted to grams or litres, and numbers rounded off to 3 decimal places.
+`-i` | `-i <name> <quantity>...` | Ingredients used in the recipe | At least one specified | Must be a name followed by a space and a quantity.
+`-e` | `-e <expiry date>` | Expiry date of ingredients | Yes | Must be in the form DD-MM-YYYY.
+`-s` | `-s [step]...` | Step used in the recipe | No | Can contain any characters or spaces. 
+`-d` | `-d [description]` | Description of the recipe or ingredient | No | Can contain any characters or spaces.
+`-t` | `-t [tag]...` | Tag for the ingredient | No | Must be alphanumeric without spaces.
 
 ## 4.3 General Commands
 
@@ -175,18 +175,12 @@ Add an ingredient to the Inventory.
     ![addCommand3.png](images/ingredientCommands/addCommand3.png)
 
 **Additional Information:**<br />
+- Refer to the [Command Flags](#42-command-flags) table for information on each `field flag`.
+    - Valid `field flags` are: `-n`, `-q`, `-d`, `-e`, `-t`
 - Any expired ingredients will be automatically tagged as `expired`.
 - Any expiring (within 7 days from current date) will be automatically tagged as `expiring`.
-- For Quantity, units of measurement are not necessary, but the following are accepted:
-    - Acceptable ingredient units are:
-        1. grams: `g`
-        2. litres: `l`
-    - Acceptable prefixes for units are:
-        1. milli- : `m` (i.e. `ml` for millilitres)
-        2. kilo- : `k` (i.e. `kg` for kilograms)
-    - All units will be converted to grams or litres, to 3 decimal places.
 - Please ensure that the units used for quantity are consistent across the Inventory and the RecipeBook if you wish to
-  use the [Cook Recipe](#438-cook-recipe) functionality.
+  use the [Cook Recipe](#458-cook-recipe) functionality.
 
 ### 4.4.2 Delete Ingredients
 
@@ -203,6 +197,7 @@ Delete ingredient(s) from the Inventory.
 **Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
+- If multiple index numbers are specified, Fridgy will delete the ingredients at all specified index numbers.
   
 ### 4.4.3 Edit Ingredients
 
@@ -219,19 +214,10 @@ Edit an ingredient from the Inventory.
 **Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
-A `field flag` is also required for each input field you wish to edit. You can refer to 
-  [Add Command](#421-add-ingredients) for more examples on usage of each `field flag`. It can be any of the following:
-    - `-n`: name of the ingredient
-    - `-q`: quantity of the ingredient
-    - `-d`: description of the ingredient
-    - `-e`: expiry date of the ingredient
-    - `-t`: tags for the ingredient
+- A `field flag` is required for each field you wish to edit. Refer to the [Command Flags](#42-command-flags) table for information on each `field flag`.
+    - Valid `field flags` are `-n`, `-q`, `-e`, `-d`, `-t`.
 - Note that when editing the tags of an ingredient, all existing tags will be replaced with the new tags specified.
-
-Example(s): 
-1. `edit ingredient 1 -d juicy -t fruit`
-<br />Expected Output:<br />
-![editCommand1.png](images/ingredientCommands/editCommand1.png)
+    - `expired` and `expiring` tags which are automatically added by Fridgy will not be affected.
 
 ### 4.4.4 Clear Ingredients
 
@@ -252,8 +238,8 @@ Clear all the ingredients from the Inventory. Add `expired` keyword to only clea
 ### 4.4.5 Find Ingredients
 
 - Search for an ingredient from the Inventory based on a user-inputted keyword(s) that match the name of an ingredient(s).
-- After [Find Ingredient](#425-find-ingredients) command, to see the full list of ingredients again, please use 
-[List Ingredient](#426-list-ingredients) command.
+- After [Find Ingredient](#445-find-ingredients) command, to see the full list of ingredients again, please use 
+[List Ingredient](#446-list-ingredients) command.
 
 **Format:**<br />
 `find ingredient <keyword>...`
@@ -264,22 +250,17 @@ Clear all the ingredients from the Inventory. Add `expired` keyword to only clea
    ![findIngredient1.png](images/ingredientCommands/findIngredient1.png)
 
 **Additional Information:**<br />
-- Requirements for a keyword:
+- Keyword Requirements
     1. Keyword is case-insensitive.<br />
        e.g. Finding with keyword: "corn" will match with "COrN"
        
     2. Any keyword must be contained in the name of the ingredient.<br />
-       e.g. Finding with keyword: "corn" will match with "CoRN flour", "coRn FlakeS", "popcorn" but not "`" <br />
-       e.g. Finding with keywords: "corn Chicken beef" will match "beef Chicken", "beef corn", etc. but not "beefcorn"
-
-Example(s):
-1. `find ingredient cream`
-<br />Expected Output:<br />
-![findIngredient1.png](images/ingredientCommands/findIngredient1.png)
+       e.g. Finding with keyword: "corn" will match with "CoRN flour", "coRn FlakeS", "popcorn" but not "Manacore". <br />
+       e.g. Finding with keywords: "corn Chicken beef" will match "beef Chicken", "beefcorn", etc. but not "Jollibee".
 
 ### 4.4.6 List Ingredients
 
-List all the ingredients again after `find ingredient` Operation.
+List all the ingredients again after a `find ingredient` operation.
 
 **Format:**<br />
 `list ingredient`
@@ -331,6 +312,10 @@ the lamb chops with salt and pepper. -s Grill the lamb chops over medium high he
 -d Juicy lamb chops served medium rare with a refreshing mint puree.`
 ![addRecipe3.png](images/recipeCommands/addRecipe3.png)
    
+**Additional Information:**<br />
+- Refer to the [Command Flags](#42-command-flags) table for information on each `field flag`.
+    - Valid `field flags` are: `-n`, `-i`, `-s`, `-d`
+   
 ### 4.5.2 Delete Recipes
 
 Delete a recipe from the RecipeBook. 
@@ -346,6 +331,7 @@ Delete a recipe from the RecipeBook.
 **Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
+- If multiple index numbers are specified, Fridgy will delete the recipes at all specified index numbers.
   
 ### 4.5.3 Clear Recipes
 
@@ -364,18 +350,7 @@ Clears all recipes from the Recipe Book.
 Edit a recipe from the Recipe Book.
 
 **Format**:<br /> 
-`edit recipe <index> <field flag><new data>...`
-
-- An index number is required for the Command. Refer to the indexes displayed for each [Card](#cards) in the
-  [Side Bar](#side-bar).
-- A `field flag` is also required for each input field you wish to edit. You can refer to
-  [Add Command](#add-recipes) for more examples on usage of each `field flag`. It can be any of the following:
-  - `-n`: name of the recipe
-  - `-i`: ingredients use in the recipe
-  - `-s`: steps of the recipe
-  - `-d`: description of the recipe
-- Note that when editing ingredients or steps, all existing ingredients or steps will be overwritten with the new
-ingredients or steps specified.
+`edit recipe <index> <field flag> <new data>...`
 
 **Example(s):**<br />
 1. `edit recipe 2 -i chicken 5kg -i mushroom sauce 1l`
@@ -385,18 +360,17 @@ ingredients or steps specified.
 **Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
-A `field flag` is also required for each input field you wish to edit. You can refer to
-  [Add Command](#431-add-recipes) for more examples on usage of each `field flag`. It can be any of the following:
-- `-n`: name of the recipe
-- `-i`: ingredients use in the recipe
-- `-s`: steps of the recipe
-- `-d`: description of the recipe
+- A `field flag` is also required for each input field you wish to edit. Refer to the [Command Flags](#42-command-flags)
+  table for information on each `field flag`.
+    - Valid `field flags` are: `-n`, `-i`, `-s`, `-d`
+- Note that when editing ingredients or steps, all existing ingredients or steps will be overwritten with the new
+  ingredients or steps specified.
 
 ### 4.5.5 Find Recipes
 
 - Search for a recipe from the RecipeBook based on a user-inputted keyword(s) that match the name of a recipe(s).
-- After [Find Recipes](#435-find-recipes) command, to see the full list of recipes again, 
-please use [List Recipes](#436-list-recipes) command.
+- After [Find Recipes](#455-find-recipes) command, to see the full list of recipes again, 
+please use [List Recipes](#456-list-recipes) command.
 
 **Format:**<br />:
 `find recipe <keyword>...`
@@ -465,6 +439,7 @@ Cooks a recipe and deducts the ingredients required by the chosen recipe from th
 **Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
+- By default, Fridgy will use ingredients that are closest to expiry first when cooking a recipe.
 
 -----
 # 5. Command Summary
