@@ -72,7 +72,7 @@ public class ModelManagerTest {
         Assertions.assertEquals(guiSettings, modelManager.getGuiSettings());
     }
 
-    //==================Address Book Section======================
+    //==================Inventory Section======================
     @Test
     public void setInventoryFilePath_nullPath_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> modelManager.setInventoryFilePath(null));

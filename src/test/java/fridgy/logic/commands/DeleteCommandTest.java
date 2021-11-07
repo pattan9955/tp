@@ -86,7 +86,7 @@ public class DeleteCommandTest {
         CommandTestUtil.showIngredientAtIndex(model, TypicalIndexes.INDEX_FIRST_INGREDIENT);
 
         Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_INGREDIENT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of inventory list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getInventory().getList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
