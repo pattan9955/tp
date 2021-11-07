@@ -23,7 +23,7 @@ public class CookRecipeCommand extends RecipeCommand {
     public static final String RECIPE_KEYWORD = "recipe";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + RECIPE_KEYWORD
-            + ": Cooks a recipe and deducts the quantity of ingredients from the inventory"
+            + ": Cooks a recipe and deducts the quantity of ingredients from the inventory.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " " + RECIPE_KEYWORD + " 1";
 

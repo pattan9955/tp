@@ -35,19 +35,19 @@ public interface RecipeModel {
 
 
     /**
-     * Returns true if a recipe with the same identity as {@code recipe} exists in the address book.
+     * Returns true if a recipe with the same identity as {@code recipe} exists in the recipe book.
      */
     boolean has(Recipe recipe);
 
     /**
      * Deletes the given recipe.
-     * The recipe must exist in the address book.
+     * The recipe must exist in the recipe book.
      */
     void delete(Recipe target);
 
     /**
      * Adds the given recipe.
-     * {@code recipe} must not already exist in the address book.
+     * {@code recipe} must not already exist in the recipe book.
      */
     void add(Recipe recipe);
 
@@ -58,8 +58,8 @@ public interface RecipeModel {
 
     /**
      * Replaces the given recipe {@code target} with {@code editedRecipe}.
-     * {@code target} must exist in the address book.
-     * The recipe identity of {@code editedRecipe} must not be the same as another existing recipe in the address book.
+     * {@code target} must exist in the recipe book.
+     * The recipe identity of {@code editedRecipe} must not be the same as another existing recipe in the recipe book.
      */
     void set(Recipe target, Recipe editedRecipe);
 

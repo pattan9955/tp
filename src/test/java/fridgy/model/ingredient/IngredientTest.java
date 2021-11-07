@@ -40,15 +40,20 @@ public class IngredientTest {
         editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withName(VALID_NAME_BASIL).build();
         Assertions.assertFalse(TypicalIngredients.APPLE.isSameIngredient(editedAlmond));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Ingredient editedBasil = new IngredientBuilder(TypicalIngredients.BASIL)
                 .withName(VALID_NAME_BASIL.toLowerCase()).build();
-        Assertions.assertFalse(TypicalIngredients.BASIL.isSameIngredient(editedBasil));
+        Assertions.assertTrue(TypicalIngredients.BASIL.isSameIngredient(editedBasil));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BASIL + " ";
         editedBasil = new IngredientBuilder(TypicalIngredients.BASIL).withName(nameWithTrailingSpaces).build();
         Assertions.assertFalse(TypicalIngredients.BASIL.isSameIngredient(editedBasil));
+
+        // same name, expiry dates different -> returns false
+        Ingredient editedBasil1 = new IngredientBuilder(TypicalIngredients.BASIL).withExpiryDate("11-03-2021").build();
+        Ingredient editedBasil2 = new IngredientBuilder(TypicalIngredients.BASIL).withExpiryDate("11-04-2021").build();
+        Assertions.assertFalse(editedBasil1.isSameIngredient(editedBasil2));
     }
 
     @Test

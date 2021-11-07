@@ -91,10 +91,6 @@ public class JsonAdaptedRecipe {
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, BaseIngredient.class.getSimpleName()));
         }
 
-        if (modelSteps.isEmpty()) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Step.class.getSimpleName()));
-        }
         final Optional<String> modelDescription = Optional.ofNullable(description);
         return new Recipe(modelName, modelBaseIngredients, modelSteps, modelDescription);
     }

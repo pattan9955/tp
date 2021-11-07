@@ -34,6 +34,8 @@ public class ExpiryDateTest {
         assertFalse(ExpiryDate.isValidExpiry("24/10/2021")); // Wrong format, using "/" instead of "-"
         assertFalse(ExpiryDate.isValidExpiry("99-05-2021")); // excessive number of days
         assertFalse(ExpiryDate.isValidExpiry("05-99-2021")); // excessive number of months
+        assertFalse(ExpiryDate.isValidExpiry("00-00-0000")); // date does not exist
+        assertFalse(ExpiryDate.isValidExpiry("29-02-2021")); // date does not exist
 
 
         // valid expiry date

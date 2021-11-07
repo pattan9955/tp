@@ -2,6 +2,8 @@ package fridgy.model.tag;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
+
 import fridgy.commons.util.AppUtil;
 
 /**
@@ -9,8 +11,10 @@ import fridgy.commons.util.AppUtil;
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
-
-    public static final String MESSAGE_CONSTRAINTS = "Tag names should be alphanumeric";
+    public static final String[] RESERVED_KEYWORDS = {"expired", "expiring"};
+    public static final String MESSAGE_CONSTRAINTS = "Tags should be alphanumeric, and should not use reserved "
+            + "keywords in any case: " + Arrays.toString(RESERVED_KEYWORDS) + ".\n"
+            + "Tags with multiple words must only be separated by a single space.";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$";
     public static final Tag EXPIRED = new Tag("expired");
     public static final Tag EXPIRING = new Tag("expiring");
@@ -36,6 +40,20 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string matches with any reserved keywords.
+     * @param test string to be checked
+     * @return boolean true if it matches a reserved keyword, false otherwise.
+     */
+    public static boolean isReservedTag(String test) {
+        for (String reserved: RESERVED_KEYWORDS) {
+            if (test.equalsIgnoreCase(reserved)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

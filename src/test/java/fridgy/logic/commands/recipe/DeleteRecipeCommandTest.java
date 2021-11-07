@@ -35,7 +35,7 @@ public class DeleteRecipeCommandTest {
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeleteRecipeCommand(null));
+        assertThrows(NullPointerException.class, () -> new DeleteRecipeCommand((Index[]) null));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class DeleteRecipeCommandTest {
         DeleteRecipeCommand deleteRecipeCommand = new DeleteRecipeCommand(INDEX_FIRST_RECIPE,
                 INDEX_SECOND_RECIPE, INDEX_THIRD_RECIPE);
 
-        String expectedMessage = String.format(DeleteRecipeCommand.MESSAGE_DELETE_RECIPE_SUCCESS, 3);
+        String expectedMessage = String.format(DeleteRecipeCommand.MESSAGE_DELETE_RECIPE_SUCCESS, 3, "s");
 
         ModelManager expectedModel = new ModelManager(new Inventory(), model.getRecipeBook(), new UserPrefs());
         expectedModel.delete(recipeToDelete1);
@@ -84,7 +84,7 @@ public class DeleteRecipeCommandTest {
         DeleteRecipeCommand deleteCommand = new DeleteRecipeCommand(INDEX_FIRST_RECIPE);
 
         String expectedMessage = String.format(DeleteRecipeCommand.MESSAGE_DELETE_RECIPE_SUCCESS,
-                1);
+                1, "");
 
         Model expectedModel = new ModelManager(new Inventory(), model.getRecipeBook(), new UserPrefs());
         expectedModel.delete(recipeToDelete);
@@ -98,7 +98,7 @@ public class DeleteRecipeCommandTest {
         RecipeCommandTestUtil.showRecipeAtIndex(model, INDEX_FIRST_RECIPE);
 
         Index outOfBoundIndex = INDEX_SECOND_RECIPE;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of inventory list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getRecipeBook().getList().size());
 
         DeleteRecipeCommand deleteCommand = new DeleteRecipeCommand(outOfBoundIndex);
@@ -112,7 +112,7 @@ public class DeleteRecipeCommandTest {
         /* Trivial test case where nothing is deleted if there are no arguments passed to varargs. Parser should have
           filtered this out. */
         DeleteRecipeCommand deleteRecipeCommand = new DeleteRecipeCommand();
-        String expectedMessage = String.format(DeleteRecipeCommand.MESSAGE_DELETE_RECIPE_SUCCESS, 0);
+        String expectedMessage = String.format(DeleteRecipeCommand.MESSAGE_DELETE_RECIPE_SUCCESS, 0, "");
 
         ModelManager expectedModel = new ModelManager(new Inventory(), model.getRecipeBook(), new UserPrefs());
 

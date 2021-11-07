@@ -22,7 +22,7 @@ For more information on the Fridgy application, refer to the [_User Guide_](User
 Fridgy is a **food and recipe management system**, which aims to help users manage their ingredients and recipes easily.
 It warns you about expiring ingredients, and automatically deducts your ingredients when you execute recipes.
 
-Fridgy is a _desktop app_, optimized for use via a Command Line Interface (CLI), while having an interactive Graphical User Interface (GUI) to display ingredients and recipes. 
+Fridgy is a _desktop app_, optimized for use via a Command Line Interface (CLI), while having an interactive Graphical User Interface (GUI) to display ingredients and recipes.
 If you can type fast, Fridgy can get your fridge Inventory and recipe sorted out faster than traditional GUI apps.
 
 ## 1.2 **Setting up, Getting started**
@@ -220,6 +220,57 @@ The initial step is to use Regex to split the quantity into a `Double`, the SI p
 
 This is done for any incoming ingredient before the quantity is stored, and there are future plans to utilise this for other computations, such as deducting a quantity of ingredients in the inventory when a recipe is executed.
 This also requires consistency in units for each ingredient.
+
+### 3.3 Stateful UI
+
+To make it easier to understand, we have divided the UI into sections as labeled in diagram below.
+
+![Labelled UI](images/LabelledUi.png)
+
+To give user a great User experience, we decided to make the UI more interactive than simply reflecting changes made in a list of item cards. The UI performs the following:
+
+1. Automatic `tab list` switching on Command.
+2. Highlight card selected by GUI and Command.
+3. Automatic update to `active display windows` and tab list
+
+Because we opted to allow GUI (clicks) and Command to be used together, that means we need to solve 2 problems. Keeping track of UI states and Communication between UI components. 
+
+#### 3.3.1 UI State
+
+There is a need to keep track of the UI State as changes to UI behaviour is dependent on current UI state. For example, when switching tab, we need to highlight the card that is currently displayed on the active display window.
+
+The UI State required are:
+1. Selected ingredient
+2. Selected Recipe
+3. Current Tab
+
+This UI State needs to be available for both the UI Component and Model Component. Therefore, this UI state is stored in the Model Component as an in-memory object since UI is not exposed to Model but Model is exposed to UI.
+
+Whenever a command causes a change in ModelManager, appropriate updates are performed to the UI State object.
+
+To communicate any changes to UI state, we used an **observer pattern** where UI State is Observable and MainWindow is the Observer.
+
+![UiState class diagram](images/UiStateClassDiagram.png)
+
+#### 3.3.2 Communication between UI components
+
+In order to enable GUI operation to switch the item in `active display window`, there are 2 ways to do this. 
+
+The first way is passing a reference of `active display window` root node to `tab list` through constructor. When a card is clicked in `tab list`, it will replace the item in `active display window`.
+
+However, this will mean sibling components will be coupled unnecessarily. 
+
+So, our implementation makes use of JavaFx Events. Updates to Ui State and GUI actions will fire an Event which will then be handled by individual components.
+
+Using events simplifies the implementation of UI behaviour since event emitter does not need to know the expectations of event consumers and vice versa.
+
+The activity will look something like this:
+
+1. User click ingredient card egg
+2. UiState updates active ingredient to egg.
+3. MainWindow observed the change in UiState, fires an event `ActiveItemChangeEvent<Ingredient>` for egg and `TabSwitchEvent` to Ingredient tab.
+4. Active Display Window receives the `ActiveItemChangeEvent<Ingredient>` and update the item displayed.
+5. Tab list receives the `TabSwitchEvent` and `ActiveItemChangeEvent<Ingredient>`, it then highlights the selected item appropriately and switch to Ingredient tab.
 
 --------------------------------------------------------------------------------------------------------------------
 

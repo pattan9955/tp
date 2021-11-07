@@ -75,10 +75,8 @@ public class UiState {
         if (mainWindow != null) {
             if (tab == TabEnum.RECIPE && activeRecipe != null) {
                 mainWindow.clearWindow();
-                activeRecipe = null;
             } else if (tab == TabEnum.INGREDIENT && activeIngredient != null) {
                 mainWindow.clearWindow();
-                activeIngredient = null;
             }
         }
     }
