@@ -9,13 +9,13 @@ Fridgy is a desktop Food Inventory Manager that makes it easy to reduce food was
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability view any ingredient / recipe on the main display window.
+* **New Feature**: The ability view any ingredient / recipe on the main display window.
   * What it does: Allows the user to choose an ingredient / recipe to view them in greater details.
   * Justification: This feature is necessary as original Address Book 3 implementation has limited space to display each information card. For example, it is impossible to display recipe steps in a single information card. It greatly improves the extensibility of the application.
   * Highlights: This enhancement is complex as it requires maintenance of UI state to ensure consistency across different UI components. I made use Observer patterns, functional interfaces and JavaFX events to reduce coupling between existing components while ensuring the behaviour is consistent.
   * Credits: JavaFX events
 
-* **New Feature**: Added automatic highlighting of missing ingredient in recipe display.
+* **New Feature**: Automatic highlighting of missing ingredient in recipe display.
   * What it does: Allows the user to see which ingredient is missing from their recipe easily
   * Justification: This feature is necessary as there could be many ingredients used in a recipe, it is crucial to convey the information of missing ingredient in recipe to users.
 
@@ -54,7 +54,7 @@ Given below are my contributions to the project.
   * Setting up CI and CodeCov for project.
 
 * **Statistics**:
-  * PRs reviewed: [52](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3A%40me)
+  * PRs reviewed: [52](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3A%40rootkie)
   * PRs raised: [20](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Arootkie)
   * Issues commented: [34](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues?q=is%3Aissue+commenter%3Arootkie+is%3Aclosed)
   
