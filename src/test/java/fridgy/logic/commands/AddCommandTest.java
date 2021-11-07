@@ -75,7 +75,6 @@ public class AddCommandTest {
 
         // different Ingredient -> returns false
         assertFalse(addAlmondCommand.equals(addBasilCommand));
-
     }
 
     @Test
@@ -91,7 +90,9 @@ public class AddCommandTest {
 
         Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_INGREDIENT, () ->
                 testCommand.execute(testModel));
+    }
 
+    @Test
     public void execute_sameIngredientDifferentExpiry_addSuccess() {
         Ingredient almond1 = new IngredientBuilder(TypicalIngredients.ALMOND).withExpiryDate("11-03-2021").build();
         Ingredient almond2 = new IngredientBuilder(TypicalIngredients.ALMOND).withExpiryDate("11-04-2021").build();
