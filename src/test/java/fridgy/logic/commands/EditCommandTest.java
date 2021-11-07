@@ -151,6 +151,36 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_ingredientExistsDifferentCaseUnfilteredList_failure() {
+        Ingredient firstIngredient = model.getFilteredIngredientList()
+                .get(TypicalIndexes.INDEX_FIRST_INGREDIENT.getZeroBased());
+
+        EditCommand.EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder(firstIngredient)
+                .withName(firstIngredient.getName().fullName.toLowerCase())
+                .build();
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_SECOND_INGREDIENT, descriptor);
+
+        CommandTestUtil.assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_INGREDIENT);
+    }
+
+    @Test
+    public void execute_ingredientExistsDifferentCaseFilteredList_failure() {
+        CommandTestUtil.showIngredientAtIndex(model, TypicalIndexes.INDEX_FIRST_INGREDIENT);
+
+        // edit Ingredient in filtered list into a duplicate in address book
+        Ingredient ingredientInList = model.getInventory().getList()
+                .get(TypicalIndexes.INDEX_SECOND_INGREDIENT.getZeroBased());
+
+        EditCommand.EditIngredientDescriptor testDescriptor = new EditIngredientDescriptorBuilder(ingredientInList)
+                .withName(ingredientInList.getName().fullName.toLowerCase())
+                .build();
+
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT, testDescriptor);
+
+        CommandTestUtil.assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_INGREDIENT);
+    }
+
+    @Test
     public void equals() {
         final EditCommand standardCommand =
                 new EditCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT, CommandTestUtil.DESC_ALMOND);
