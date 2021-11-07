@@ -137,7 +137,7 @@ Displays the output of `View` command, which expands each ingredient or recipe c
 `-e` | `-e <expiry date>` | Expiry date of ingredients | Yes | Must be in the form DD-MM-YYYY.
 `-s` | `-s [step]...` | Step used in the recipe | No | Can contain any characters or spaces. 
 `-d` | `-d [description]` | Description of the recipe or ingredient | No | Can contain any characters or spaces.
-`-t` | `-t [tag]...` | Tag for the ingredient | No | Must be alphanumeric without spaces.
+`-t` | `-t [tag]...` | Tag for the ingredient | No | Can contain alphanumeric characters or spaces.
 
 ## 4.3 General Commands
 
