@@ -29,13 +29,9 @@ public class Quantity {
     public Quantity(String quantity) {
         requireNonNull(quantity);
         AppUtil.checkArgument(isValidQuantityString(quantity), MESSAGE_CONSTRAINTS);
-        String[] results = QuantityCalc.standardiseQuantity(quantity).split(" ");
-        value = Double.parseDouble(results[0]);
-        if (results.length > 1) {
-            units = results[1];
-        } else {
-            units = "";
-        }
+        String standardQuantity = QuantityCalc.standardiseQuantity(quantity);
+        value = parseValue(standardQuantity);
+        units = parseUnits(standardQuantity);
     }
 
     /**
@@ -64,8 +60,14 @@ public class Quantity {
         return value.hashCode();
     }
 
-    private String convertToStandardUnit(String quantity) {
-        return QuantityCalc.standardiseQuantity(quantity);
+    private Double parseValue(String quantity) {
+        String[] qtySplit = quantity.split(" ");
+        return Double.parseDouble(qtySplit[0]);
+    }
+
+    private String parseUnits(String quantity) {
+        String[] qtySplit = quantity.split(" ");
+        return qtySplit.length > 1 ? qtySplit[1] : "";
     }
 
     /**
