@@ -27,7 +27,7 @@ public class IngredientUtil {
     public static String getIngredientDetails(Ingredient ingredient) {
         StringBuilder sb = new StringBuilder();
         sb.append(CliSyntax.PREFIX_NAME + ingredient.getName().fullName + " ");
-        sb.append(CliSyntax.PREFIX_QUANTITY + ingredient.getQuantity().value + " ");
+        sb.append(CliSyntax.PREFIX_QUANTITY + ingredient.getQuantity().toString() + " ");
         sb.append(CliSyntax.PREFIX_DESCRIPTION + ingredient.getDescription().value.orElse("") + " ");
         sb.append(CliSyntax.PREFIX_EXPIRY + ingredient.getExpiryDate().toString() + " ");
 
@@ -43,7 +43,7 @@ public class IngredientUtil {
     public static String getEditIngredientDescriptorDetails(EditIngredientDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(CliSyntax.PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getQuantity().ifPresent(quantity -> sb.append(CliSyntax.PREFIX_QUANTITY).append(quantity.value)
+        descriptor.getQuantity().ifPresent(quantity -> sb.append(CliSyntax.PREFIX_QUANTITY).append(quantity)
                 .append(" "));
         descriptor.getDescription().ifPresent(description -> sb.append(CliSyntax.PREFIX_DESCRIPTION)
                 .append(description.value.orElse("")).append(" "));

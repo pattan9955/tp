@@ -55,7 +55,7 @@ class JsonAdaptedIngredient {
      */
     public JsonAdaptedIngredient(Ingredient source) {
         name = source.getName().fullName;
-        quantity = source.getQuantity().value;
+        quantity = source.getQuantity().toString();
         expiryDate = source.getExpiryDate().toString();
         description = source.getDescription().value.orElse(null);
         tagged.addAll(source.getTags().stream()
@@ -87,7 +87,7 @@ class JsonAdaptedIngredient {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Quantity.class.getSimpleName()));
         }
-        if (!Quantity.isValidQuantity(quantity)) {
+        if (!Quantity.isValidQuantityString(quantity)) {
             throw new IllegalValueException(Quantity.MESSAGE_CONSTRAINTS);
         }
         final Quantity modelQuantity = new Quantity(quantity);

@@ -25,10 +25,12 @@ public class QuantityCalc {
      * @param quantity the quantity of ingredients with or without units
      * @return the string representation with units converted to standardised units
      */
-    public static String convertToStandardUnits(String quantity) {
+    public static String standardiseQuantity(String quantity) {
         List<String> parsedResults = parseQuantityString(quantity);
         if (parsedResults.size() <= 1) {
-            return quantity;
+            Double amount = Double.parseDouble(parsedResults.get(0));
+            // return in quantity standardised to 3 decimal places
+            return String.format("%.3f", amount);
         }
         Double amount = Double.parseDouble(parsedResults.get(0));
         String units = parsedResults.get(1);

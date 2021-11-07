@@ -7,7 +7,7 @@ import fridgy.model.util.QuantityCalc;
 
 /**
  * Represents an ingredient's quantity number in the Inventory.
- * Guarantees: immutable; is valid as declared in {@link #isValidQuantity(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidQuantityString(String)}
  */
 public class Quantity {
 
@@ -17,7 +17,8 @@ public class Quantity {
                     + "Do not input units for discrete ingredients (i.e. bottle, pieces, etc.) \n"
                     + "SI prefixes for units: milli (m) and kilo (k) are accepted. \n";
     public static final String VALIDATION_REGEX = "^(?=.*[1-9])\\d+(\\.\\d+)?\\h*((m|k)?(g|l)){0,1}$";
-    public final String value;
+    private final Double value;
+    private final String units;
 
     /**
      * Constructs a {@code Quantity}. Standard Units are "kg", "l" or none for discrete.
@@ -27,20 +28,24 @@ public class Quantity {
      */
     public Quantity(String quantity) {
         requireNonNull(quantity);
-        AppUtil.checkArgument(isValidQuantity(quantity), MESSAGE_CONSTRAINTS);
-        value = convertToStandardUnit(quantity);
+        AppUtil.checkArgument(isValidQuantityString(quantity), MESSAGE_CONSTRAINTS);
+        String standardQuantity = QuantityCalc.standardiseQuantity(quantity);
+        value = parseValue(standardQuantity);
+        units = parseUnits(standardQuantity);
     }
 
     /**
      * Returns true if a given string is a valid quantity number.
      */
-    public static boolean isValidQuantity(String test) {
+    public static boolean isValidQuantityString(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
+
     @Override
     public String toString() {
-        return value;
+        // standardised to 3 decimal places
+        return String.format("%.3f %s", value, units);
     }
 
     @Override
@@ -55,8 +60,14 @@ public class Quantity {
         return value.hashCode();
     }
 
-    private String convertToStandardUnit(String quantity) {
-        return QuantityCalc.convertToStandardUnits(quantity);
+    private Double parseValue(String quantity) {
+        String[] qtySplit = quantity.split(" ");
+        return Double.parseDouble(qtySplit[0]);
+    }
+
+    private String parseUnits(String quantity) {
+        String[] qtySplit = quantity.split(" ");
+        return qtySplit.length > 1 ? qtySplit[1] : "";
     }
 
     /**
@@ -64,8 +75,7 @@ public class Quantity {
      * @return String representation of the units
      */
     public String getUnits() {
-        String[] valueAndUnit = value.split("\\h");
-        return valueAndUnit.length <= 1 ? "" : valueAndUnit[1];
+        return units;
     }
 
     /**
@@ -73,8 +83,7 @@ public class Quantity {
      * @return value as a Double
      */
     public Double getValue() {
-        String[] valueAndUnit = value.split("\\h");
-        return Double.parseDouble(valueAndUnit[0]);
+        return value;
     }
 
     /**
