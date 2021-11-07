@@ -1,4 +1,4 @@
-package fridgy.logic.parser;
+package fridgy.logic.parser.ingredient;
 
 import static fridgy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static fridgy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
@@ -17,8 +17,12 @@ import java.util.regex.Pattern;
 
 import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
-import fridgy.logic.commands.EditCommand;
-import fridgy.logic.commands.EditCommand.EditIngredientDescriptor;
+import fridgy.logic.commands.ingredient.EditCommand;
+import fridgy.logic.commands.ingredient.EditCommand.EditIngredientDescriptor;
+import fridgy.logic.parser.ArgumentMultimap;
+import fridgy.logic.parser.ArgumentTokenizer;
+import fridgy.logic.parser.Parser;
+import fridgy.logic.parser.ParserUtil;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.tag.Tag;
 
