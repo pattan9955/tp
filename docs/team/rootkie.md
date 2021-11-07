@@ -5,7 +5,7 @@ title: Bailin's Project Portfolio Page
 
 ### Project: Fridgy
 
-Fridgy is a desktop a Food Inventory Manager that makes it easy to reduce food waste by keeping track of what you have and when it expires. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 14 kLoC.
+Fridgy is a desktop Food Inventory Manager that makes it easy to reduce food waste by keeping track of what you have and when it expires. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 14 kLoC.
 
 Given below are my contributions to the project.
 
