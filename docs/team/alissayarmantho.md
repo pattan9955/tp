@@ -25,7 +25,7 @@ Given below are my contributions to the project.
     * Highlights: UI design. Reworking the GUI also requires a deep understanding of JavaFX and how each component works
 
 * **Minor Enhancements**: More appropriate error messages for commands in Fridgy
-* **Minor Refactoring**: Remove traces of address book from the codebase [\#232](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/232)
+* **Minor Refactoring**: Remove traces of address book from the codebase [\#205](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/205), [\#220](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/220), [\#232](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/232)
 
 * **Code contributed**: [RepoSense Code Dashboard](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=alissayarmantho)
 
