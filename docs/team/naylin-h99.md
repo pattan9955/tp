@@ -3,44 +3,59 @@ layout: page
 title: Nay Lin's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: Fridgy
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Fridgy is a desktop Food Inventory Manager that makes it easy to reduce food waste by keeping track of what you have and when it expires. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 14 kLoC.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added support for `ExpiryDate` of Ingredients.
+  * What it does: Allows the user to keep track of the expiry dates of the ingredients stored in the inventory. 
+  * Justification: This feature is part of the core features for our inventory management which helps to track the expiry status of the ingredients in the Inventory.
+  * Highlights: This addition requires good understanding of the pre-existing `Person` model to be refactored to support `ExpiryDate`, and also allows for additional features related to expiry dates to be added in the future. 
+  * Credits: Java LocalDate
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Added unit support for `Quantity` of Ingredients.
+  * What it does: Allows the user to keep track of quantity with or without units for ingredients stored in the inventory.
+  * Justification: This enhancement allows users better keep track of the quantity of ingredients with units. 
+  * Highlights: This addition requires good understanding of the pre-existing model as well as Java's regex to enforce strict filtering of acceptable units, parsing and converting them to common units for mass and liquids. 
 
-* **Code contributed**: [RepoSense link]()
+* **New Feature**: Added auto-updating of `Tag` for Ingredients based on their expiry date.
+  * What it does: Helps the user keep track of ingredients that are expiring (i.e. within 7 days to expiry date) and expired ingredients.
+  * Justification: This enhancement helps to add convenience to users keeping track of the expiry status of their ingredients in the Inventory.
+  * Highlights: This enhancement requires good understanding of the existing commands so that tags are automatically added after any addition or modifications to any ingredients, as well as good understanding of the Java Period package.  
+  * Credits: Java Period
 
-* **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+* **New Feature**: Added `CookRecipeCommand` for Recipes.
+  * What it does: Helps the user easily deduct ingredients that are used in a recipe when it is cooked.
+  * Justification: This enhancement helps to add convenience to users automatically deduct all the quantity of ingredients used when cooking a recipe.
+  * Highlights: This enhancement requires good understanding of the Inventory and RecipeBook for deductions to be able to happen across the two.
+  
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=NayLin-H99&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByAuthors&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=NayLin-H99&tabRepo=AY2122S1-CS2103T-W11-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+
+* **Other Contributions**: 
+  * Fix CheckStyle for all pre-existing test cases. [\#36](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/36)
+  * Help refactor and remove some unnecessary code from pre-existing Person model. [\#51](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/51), [\#58](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/58)
 
 * **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Enhanced `DeleteCommand` and `DeleteRecipeCommand` to support multiDeletion to allow users to delete multiple ingredients and recipes at once. [\#122](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/122), [\#209](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/209)
+  * Enhanced `ClearCommand` to support deletion of all expired ingredients. [\#129](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/129)
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Updated the entire User Guide for v1.1. [\#28](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/28)
+    * Updated the entire User Guide for v1.2. [\#76](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/76)
+    * Updated most of the User Guide for v1.3. [\#114](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/114), [\#137](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/137)
+    * Updated User Guide for v1.4. [\#213](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/213)
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
+    * Added implementation details of the `Quantity` auto-unit-conversion feature. [\#92](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/92)
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+  * PRs reviewed (with non-trivial review comments): [\#13](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/13), [\116](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/116), [\208](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/208), [\#238](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/238) 
+  * Reported 11 bugs for [PED](https://github.com/NayLin-H99/ped/issues) including non-trivial logic bugs.
 
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+* **Statistics**:
+  * PRs reviewed: [38](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+reviewed-by%3Anaylin-h99)
+  * PRs raised: [24](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Anaylin-h99)
+  * Issues commented: [7](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues?q=is%3Aissue+commenter%3Anaylin-h99+is%3Aclosed)
+  
