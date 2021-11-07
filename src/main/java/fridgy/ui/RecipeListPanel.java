@@ -37,7 +37,12 @@ public class RecipeListPanel extends UiPart<Region> {
         recipeListView.setItems(recipeList);
         recipeListView.setCellFactory(listView -> new RecipeListViewCell());
         recipeListView.setOnMouseClicked(
-            event -> changeActive.accept(recipeListView.getSelectionModel().getSelectedItem())
+            event -> {
+                Recipe clicked = recipeListView.getSelectionModel().getSelectedItem();
+                if (clicked != null) {
+                    changeActive.accept(clicked);
+                }
+            }
         );
     }
 

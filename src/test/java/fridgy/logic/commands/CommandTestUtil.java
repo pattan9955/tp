@@ -35,7 +35,7 @@ public class CommandTestUtil {
     public static final String VALID_DESCRIPTION_FISH = " ";
     public static final String VALID_TAG_VEGETABLE = "vegetable";
     public static final String VALID_TAG_SNACK = "snack";
-    public static final String VALID_EXPIRY_DATE = "20-08-2010";
+    public static final String VALID_EXPIRY_DATE = "20-08-2099";
 
     public static final String NAME_DESC_ALMOND = " " + CliSyntax.PREFIX_NAME + VALID_NAME_ALMOND;
     public static final String NAME_DESC_BASIL = " " + CliSyntax.PREFIX_NAME + VALID_NAME_BASIL;
@@ -113,7 +113,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered ingredient list and selected ingredient in {@code actualModel} remain unchanged
+     * - the inventory, filtered ingredient list and selected ingredient in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can

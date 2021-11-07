@@ -61,8 +61,13 @@ public class Recipe implements Eq {
             return true;
         }
 
-        return otherRecipe != null
-                && otherRecipe.getName().equals(getName());
+        if (otherRecipe == null) {
+            return false;
+        }
+
+        String currRecipeName = getName().fullName.toLowerCase();
+        String otherRecipeName = otherRecipe.getName().fullName.toLowerCase();
+        return currRecipeName.equals(otherRecipeName);
     }
 
     @Override

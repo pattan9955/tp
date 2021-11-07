@@ -110,7 +110,7 @@ public class ParserUtil {
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
+        if (!Tag.isValidTagName(trimmedTag) || Tag.isReservedTag(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
@@ -131,9 +131,12 @@ public class ParserUtil {
     /**
      * Parses {@code String name} into a {@code Name}
      */
-    public static fridgy.model.recipe.Name parseRecipeName(String name) {
+    public static fridgy.model.recipe.Name parseRecipeName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        if (!fridgy.model.recipe.Name.isValidName(trimmedName)) {
+            throw new ParseException(fridgy.model.recipe.Name.MESSAGE_CONSTRAINTS);
+        }
         return new fridgy.model.recipe.Name(trimmedName);
     }
 

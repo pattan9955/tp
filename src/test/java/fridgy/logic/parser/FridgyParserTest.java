@@ -13,6 +13,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.AddCommand;
 import fridgy.logic.commands.ClearCommand;
@@ -57,12 +58,59 @@ public class FridgyParserTest {
     private static final String VALID_TRIPLE_WORD_ADD_INGREDIENT_COMMAND = "add ingredient -n ingr1 -q 20g"
             + " -t tag -e 20-10-2021";
     private static final String VALID_TRIPLE_WORD_DEL_INGREDIENT_COMMAND = "delete ingredient 1";
+    private static final String INVALID_TYPE = "rando";
+    private static final String COOK_COMMAND_WORD_WITH_INGREDIENT_TYPE = "cook ingredient";
+    private static final String COOK_COMMAND_WORD_WITH_INVALID_TYPE = "cook " + INVALID_TYPE;
+    private static final String COOK_COMMAND_WORD_WITH_MISSING_TYPE = "cook";
+    private static final String VALID_COMMAND_WORD_WITH_INVALID_TYPE = "add " + INVALID_TYPE;
+    private static final String VALID_COMMAND_WORD_WITH_MISSING_TYPE = "add";
 
     private static final FridgyParser testParser = new FridgyParser();
 
     @Test
     public void parseCommand_emptyInput_throwsParseException() {
         assertThrows(ParseException.class, () -> testParser.parseCommand(EMPTY_COMMAND));
+    }
+
+    @Test
+    public void parseCommand_cookCommandWordWithIngredientType_throwsParseException() {
+        String expectedMessage = Messages.MESSAGE_WRONG_TYPE + " "
+                + "'ingredient'"
+                + ". " + Messages.TYPE_RECIPE_EXPECTED;
+        System.out.println(expectedMessage);
+        FridgyParserTestUtil.assertParseFailure(testParser, COOK_COMMAND_WORD_WITH_INGREDIENT_TYPE, expectedMessage);
+    }
+
+    @Test
+    public void parseCommand_cookCommandWordWithInvalidType_throwsParseException() {
+        String expectedMessage = Messages.TYPE_INVALID_COMMAND_FORMAT + " "
+                + "'" + INVALID_TYPE + "'"
+                + ". " + Messages.TYPE_RECIPE_EXPECTED;
+        FridgyParserTestUtil.assertParseFailure(testParser, COOK_COMMAND_WORD_WITH_INVALID_TYPE, expectedMessage);
+    }
+
+    @Test
+    public void parseCommand_cookCommandWordWithMissingType_throwsParseException() {
+        String missingTypeMessage = String.format(Messages.MESSAGE_MISSING_TYPE, Messages.TYPE_RECIPE_EXPECTED);
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                missingTypeMessage);
+        FridgyParserTestUtil.assertParseFailure(testParser, COOK_COMMAND_WORD_WITH_MISSING_TYPE, expectedMessage);
+    }
+
+    @Test
+    public void parseCommand_validCommandWordWithMissingType_throwsParseException() {
+        String missingTypeMessage = String.format(Messages.MESSAGE_MISSING_TYPE, Messages.TYPE_EXPECTED);
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                missingTypeMessage);
+        FridgyParserTestUtil.assertParseFailure(testParser, VALID_COMMAND_WORD_WITH_MISSING_TYPE, expectedMessage);
+    }
+
+    @Test
+    public void parseCommand_validCommandWordWithInvalidType_throwsParseException() {
+        String expectedMessage = Messages.TYPE_INVALID_COMMAND_FORMAT + " "
+                + "'" + INVALID_TYPE + "'"
+                + ". " + Messages.TYPE_EXPECTED;
+        FridgyParserTestUtil.assertParseFailure(testParser, VALID_COMMAND_WORD_WITH_INVALID_TYPE, expectedMessage);
     }
 
     @Test

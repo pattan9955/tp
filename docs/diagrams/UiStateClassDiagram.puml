@@ -1,0 +1,19 @@
+@startuml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+!include style.puml
+
+Class ModelManager MODEL_COLOR
+
+Package UI <<Rectangle>> {
+    Class MainWindow UI_COLOR
+    Class Observer<<Interface>> UI_COLOR
+    Class UiState UI_COLOR
+}
+
+MainWindow --|> Observer
+ModelManager *--> "1" UiState
+UiState *--> "1" Observer
+
+@enduml

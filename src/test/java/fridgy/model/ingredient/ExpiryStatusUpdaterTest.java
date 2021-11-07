@@ -15,8 +15,8 @@ import fridgy.testutil.IngredientBuilder;
 public class ExpiryStatusUpdaterTest {
     @Test
     public void updateExpiryTags_updateCorrectly() {
-        // by default, it is expired
-        Ingredient expiredIngredient = new IngredientBuilder().build();
+        // setting as expired
+        Ingredient expiredIngredient = new IngredientBuilder().withExpiryDate("20-10-1979").build();
         Set<Tag> setWithDefaultExpired = Set.of(Tag.EXPIRED);
         assertEquals(setWithDefaultExpired, ExpiryStatusUpdater.updateExpiryTags(expiredIngredient).getTags());
 

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
@@ -23,24 +23,30 @@
             <HBox styleClass="ingredientsPane" spacing="20">
                 <children>
                     <VBox fx:id = "availableIngredientsSection" styleClass="ingredient_section">
-                        <Label fx:id="availableIngredientTitle" styleClass="ingredient_title" />
+                        <padding>
+                            <Insets bottom="0" left="0" right="0" top="20" />
+                        </padding>
                         <VBox fx:id="availableIngredientsPlaceholder" styleClass="available_ingredients_placeholder"
-                              minWidth="250">
+                              minWidth="240">
+                            <Label fx:id="availableIngredientTitle" styleClass="ingredient_title" />
                         </VBox>
                     </VBox>
                     <VBox fx:id = "missingIngredientsSection" styleClass="ingredient_section">
-                        <Label fx:id="missingIngredientTitle" styleClass="ingredient_title" />
+                        <padding>
+                            <Insets bottom="0" left="0" right="0" top="20" />
+                        </padding>
                         <VBox fx:id="missingIngredientsPlaceholder" styleClass="missing_ingredients_placeholder"
-                              minWidth="250">
-
+                              minWidth="240">
+                            <Label fx:id="missingIngredientTitle" styleClass="ingredient_title" />
                         </VBox>
                     </VBox>
                 </children>
             </HBox>
             <FlowPane fx:id="ingredients" />
-<!--         <VBox id="steps" prefHeight="55.0" prefWidth="130.0" />-->
-            <Label fx:id="stepsTitle" styleClass="steps_title"/>
-            <Label fx:id="steps" wrapText="true" styleClass="steps_description" text="\$steps" prefWidth="1920.0"/>
+            <VBox styleClass="steps_description">
+                <Label fx:id="stepsTitle" styleClass="steps_title"/>
+                <Label fx:id="steps" wrapText="true" text="\$steps" prefWidth="1920.0"/>
+            </VBox>
         </VBox>
     </GridPane>
 </HBox>

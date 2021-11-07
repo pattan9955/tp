@@ -140,6 +140,7 @@ public class MainWindow extends UiPart<Stage> implements Observer {
         this.getRoot().addEventFilter(TabSwitchEvent.CHANGE, tabListPanel::handleTabChange);
         this.getRoot().addEventFilter(ActiveItemChangeEvent.RECIPE, tabListPanel::handleActiveRecipe);
         this.getRoot().addEventFilter(ActiveItemChangeEvent.INGREDIENT, tabListPanel::handleActiveIngredient);
+        this.getRoot().addEventFilter(ActiveItemChangeEvent.CLEAR, tabListPanel::handleClearEvent);
     }
 
     /**
@@ -147,8 +148,6 @@ public class MainWindow extends UiPart<Stage> implements Observer {
      */
     void fillInnerParts() {
         initialize();
-        viewDisplayPlaceholder.vvalueProperty().bind(displayContainer.heightProperty());
-        viewDisplayPlaceholder.hvalueProperty().bind(displayContainer.widthProperty());
         displayContainer.getChildren().add(activeItemPanel.getRoot());
 
         tabListPanelPlaceholder.getChildren().add(tabListPanel.getRoot());

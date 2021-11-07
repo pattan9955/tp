@@ -23,6 +23,7 @@ import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.BaseIngredient;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.recipe.Recipe;
+import fridgy.testutil.RecipeBuilder;
 import javafx.collections.ObservableList;
 
 public class AddRecipeCommandTest {
@@ -76,6 +77,15 @@ public class AddRecipeCommandTest {
         AddRecipeCommand testCommand = new AddRecipeCommand(BURGER);
         RecipeModelStubWithRecipe testModel = new RecipeModelStubWithRecipe();
         assertThrows(CommandException.class, () ->
+                testCommand.execute(testModel));
+    }
+
+    @Test
+    public void execute_sameRecipeDifferentCase_throwsCommandException() {
+        Recipe editedBurger = new RecipeBuilder(BURGER).withName("burger").build();
+        AddRecipeCommand testCommand = new AddRecipeCommand(editedBurger);
+        RecipeModelStub testModel = new RecipeModelStubWithRecipe();
+        assertThrows(CommandException.class, AddRecipeCommand.MESSAGE_DUPLICATE_RECIPE, () ->
                 testCommand.execute(testModel));
     }
 

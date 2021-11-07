@@ -75,7 +75,7 @@ public interface IngredientModel {
 
     /**
      * Replaces the given ingredient {@code target} with {@code editedIngredient}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the inventory.
      * The ingredient identity of {@code editedIngredient} must not be the same as another existing ingredient in the
      * inventory.
      */
