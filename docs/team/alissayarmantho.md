@@ -20,9 +20,9 @@ Given below are my contributions to the project.
   * Highlights: This feature modifies the existing `list` command syntax to accommodate execution on different models (eg: `Recipe` model or `Ingredient` model) depending on the command syntax used. As this is an extension to the existing `list` command in the codebase, implementing this feature requires great understanding of the original codebase
 
 * **Major Enhancements**: Rework the GUI
-* * What it does: Improves the user interface to use a cleaner and minimalistic style
-    * Justification: This feature enhances the product aesthetics to become more pleasing to the eye
-    * Highlights: UI design. Reworking the GUI also requires a deep understanding of JavaFX and how each component works
+  * What it does: Improves the user interface to use a cleaner and minimalistic style
+      * Justification: This feature enhances the product aesthetics to become more pleasing to the eye
+      * Highlights: UI design. Reworking the GUI also requires a deep understanding of JavaFX and how each component works
 
 * **Minor Enhancements**: More appropriate error messages for commands in Fridgy
 * **Minor Refactoring**: Remove traces of address book from the codebase [\#205](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/205), [\#220](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/220), [\#232](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/232)
