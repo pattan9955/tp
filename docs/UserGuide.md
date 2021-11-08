@@ -202,15 +202,14 @@ Add an ingredient to the Inventory.
 
 **Example(s):**<br />
 1. Minimal command flags used:<br />
-Command: `add ingredient -n tomato -q 5 -e 20-02-2077`
-<br />Expected Output:<br />
-<img src="images/ingredientCommands/addCommand2.png" style="width:85%">
-![addCommand2.png](images/ingredientCommands/addCommand2.png) <br />
+   Command: `add ingredient -n tomato -q 5 -e 20-02-2077`
+   <br />Expected Output:<br />
+   <img src="images/ingredientCommands/addCommand1.png" style="width:85%"> <br />
    <br />
 2. All command flags used:<br />
    Command: `add ingredient -n flour -d fresh -q 500g -e 27-09-2021`
    <br />Expected Output:<br />
-   ![addCommand1.png](images/ingredientCommands/addCommand1.png)
+   <img src="images/ingredientCommands/addCommand2.png" style="width:85%">
 
 <br />**Additional Information:**<br />
 - Refer to the [Command Flags](#421-command-flags) table for information on each command flag.
@@ -235,10 +234,10 @@ Delete ingredient(s) from the Inventory.
 **Example(s):**<br />
 1. Command: `delete ingredient 2`
 <br />Before:<br />
-![deleteCommand.png](images/ingredientCommands/deleteCommand1.png)
+<img src="images/ingredientCommands/deleteCommand1.png" style="width:85%">
    <br />
 <br />After:<br />
-![deleteCommand2.png](images/ingredientCommands/deleteCommand2.png)
+<img src="images/ingredientCommands/deleteCommand2.png" style="width:85%">
 
 <br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
@@ -257,10 +256,10 @@ Edit an ingredient from the Inventory.
 **Example(s):**<br />
 1. Command: `edit ingredient 1 -d juicy -t jelly`
 <br />Before:<br />
-![editCommand1.png](images/ingredientCommands/editCommand1.png)
+<img src="images/ingredientCommands/editCommand1.png" style="width:85%">
    <br />
 <br />After:<br />
-![editCommand2.png](images/ingredientCommands/editCommand2.png)
+<img src="images/ingredientCommands/editCommand2.png" style="width:85%">
 
 <br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
@@ -287,15 +286,15 @@ Clear all the ingredients from the Inventory. Add `expired` keyword to only clea
 1. Clear all ingredients:<br />
 Command: `clear ingredient`
 <br />Expected Output:<br />
-![clearCommand.png](images/ingredientCommands/clearCommand.png)
+<img src="images/ingredientCommands/clearCommand.png" style="width:85%">
    <br /> <br />
 2. Clear expired ingredients:<br /> 
 Command: `clear ingredient expired`
 <br />Before:<br />
-![clearCommand2.png](images/ingredientCommands/clearExpired1.png)
+<img src="images/ingredientCommands/clearExpired1.png" style="width:85%">
    <br />
 <br />After:<br />
-![clearCommand3.png](images/ingredientCommands/clearExpired2.png)   
+<img src="images/ingredientCommands/clearExpired2.png" style="width:85%">   
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
@@ -311,7 +310,7 @@ Command: `clear ingredient expired`
 **Example(s):**<br />
 1. Command: `find ingredient banana cream`
 <br />Expected Output:<br />
-![findIngredient1.png](images/ingredientCommands/findIngredient.png)
+<img src="images/ingredientCommands/findIngredient.png" style="width:85%">
 
 <br />**Additional Information:**<br />
 - Keyword(s) are separated by spaces.
@@ -336,7 +335,7 @@ Switch to Ingredient [tab](#31-tabs) and list all ingredients.
 **Example(s):**<br />
 1. Command: `list ingredient`
 <br />Expected Output:<br />
-![listIngredient1.png](images/ingredientCommands/listIngredient.png)
+<img src="images/ingredientCommands/listIngredient.png" style="width:85%">
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
@@ -348,9 +347,9 @@ Open an ingredient in the [Main Window](#36-mainwindow).
 `view ingredient <index>`
 
 **Example(s):**<br />
-1. Command: `view ingredient 3`
+1. Command: `view ingredient 2`
 <br />Expected Output:<br />
-![viewCommand1.png](images/ingredientCommands/viewIngredient.png)
+<img src="images/ingredientCommands/viewIngredient.png" style="width:85%">
 
 <br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
@@ -373,7 +372,7 @@ Add a recipe to the Recipe Book.
 1. Minimal command flags used:<br /> 
 Command: `add recipe -n pasta -i tomato 2 -i linguine 50g`
 <br />Expected Output:<br />
-![addRecipe1.png](images/recipeCommands/addRecipe1.png)
+<img src="images/recipeCommands/addRecipe1.png" style="width:85%" class="ug-image">
 <br /> <br />
 2. All command flags used:<br />
 Command:`add recipe -n Grilled Lamb Chop with Mint Puree -i Mint 5g -i Lamb Chops 1kg -i Butter 20g -i Garlic 20g -s Season
@@ -381,7 +380,7 @@ the lamb chops with salt and pepper. -s Grill the lamb chops over medium high he
 -s Blend the mint with garlic to make a puree. -s Leave the lamb chops to rest for 5min. -s Serve with mint puree.
 -d Juicy lamb chops served medium rare with a refreshing mint puree.`
 <br />Expected Output:<br />
-![addRecipe2.png](images/recipeCommands/addRecipe2.png)
+<img src="images/recipeCommands/addRecipe2.png" style="width:85%" class="ug-image">
    
 <br />**Additional Information:**<br />
 - Refer to the [Command Flags](#421-command-flags) table for information on each command flag.
@@ -402,10 +401,10 @@ Delete recipe(s) from the Recipe Book.
 **Example(s):**<br />
 1. Command: `delete recipe 4`
 <br />Before:<br />
-![deleteRecipe1.png](images/recipeCommands/deleteRecipe1.png)
+<img src="images/recipeCommands/deleteRecipe1.png" style="width:85%" class="ug-image">
    <br />
 <br />After:<br />
-![deleteRecipe2.png](images/recipeCommands/deleteRecipe2.png)
+<img src="images/recipeCommands/deleteRecipe2.png" style="width:85%" class="ug-image">
 
 <br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
@@ -422,12 +421,12 @@ Edit a recipe from the Recipe Book.
 `edit recipe <index> [-n <name>] [-i <ingredient>]... [-d <description>] [-s <steps>]...`
 
 **Example(s):**<br />
-1. Command: `edit recipe 2 -i pork knuckle 5kg -i apple juice 1l`
+1. Command: `edit recipe 3 -i pork knuckle 5kg -i apple juice 1l`
 <br />Before:<br />
-![editRecipe1.png](images/recipeCommands/editRecipe1.png)
+<img src="images/recipeCommands/editRecipe1.png" style="width:85%" class="ug-image">
    <br/>
 <br />After:<br />
-![editRecipe2.png](images/recipeCommands/editRecipe2.png)
+<img src="images/recipeCommands/editRecipe2.png" style="width:85%" class="ug-image">
 
 <br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
@@ -452,7 +451,7 @@ Clear all recipes from the Recipe Book.
 **Example(s):**<br />
 1. Command: `clear recipe`
 <br />Expected Output: <br />
-![clearRecipe.png](images/recipeCommands/clearRecipe.png)
+<img src="images/recipeCommands/clearRecipe.png" style="width:85%" class="ug-image">
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
@@ -468,7 +467,7 @@ please use a [List Recipe](#456-list-recipe) command.
 **Example(s):**<br />
 1. Command: `find recipe chop sag`
    <br />Expected Output:<br />
-   ![findRecipe.png](images/recipeCommands/findRecipe.png)
+   <img src="images/recipeCommands/findRecipe.png" style="width:85%" class="ug-image">
 
 <br />**Additional Information:**<br />
 - Keyword(s) are separated by spaces.
@@ -493,7 +492,7 @@ Switch to Recipe [tab](#31-tabs) and list all recipes.
 **Example(s):**<br />
 1. Command: `list recipe`
 <br /> Expected Output:<br />
-![listRecipe.png](images/recipeCommands/listRecipe.png)
+<img src="images/recipeCommands/listRecipe.png" style="width:85%" class="ug-image">
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
@@ -507,7 +506,7 @@ Open a detailed view of a recipe in the [Main Window](#36-mainwindow).
 **Example(s):**<br />
 1. Command: `view recipe 6`
    <br />Expected Output:<br />
-   ![viewRecipe.png](images/recipeCommands/viewRecipe.png)
+   <img src="images/recipeCommands/viewRecipe.png" style="width:85%" class="ug-image">
 
 <br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
@@ -525,13 +524,13 @@ Cook a recipe and deduct the ingredients required by the chosen recipe from the 
 **Example(s):**<br />
 1. `cook recipe 6`
 <br />Before:<br />
-![cookRecipe1.png](images/recipeCommands/cookRecipe1.png)
+<img src="images/recipeCommands/cookRecipe1.png" style="width:85%" class="ug-image">
    <br />
 <br />After:<br />
-![cookRecipe2.png](images/recipeCommands/cookRecipe2.png)
+<img src="images/recipeCommands/cookRecipe2.png" style="width:85%" class="ug-image">
    <br />
 <br />Changes in Ingredients:<br />
-![cookRecipe3.png](images/recipeCommands/cookRecipe3.png)
+<img src="images/recipeCommands/cookRecipe3.png" style="width:85%" class="ug-image">
 
 <br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
