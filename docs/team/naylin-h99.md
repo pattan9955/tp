@@ -39,6 +39,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Enhanced `DeleteCommand` and `DeleteRecipeCommand` to support multiple deletions, allowing users to delete multiple ingredients and recipes at once. [\#122](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/122), [\#209](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/209)
+    * Original `DeleteCommand` and `DeleteRecipeCommand` only supported singular deletes.
   * Enhanced `ClearCommand` to support deletion of all expired ingredients. [\#129](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/129)
 
 * **Documentation**:
@@ -59,4 +60,3 @@ Given below are my contributions to the project.
   * PRs raised: [26](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Anaylin-h99)
   * Issues taken: [25](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues?q=is%3Aissue+assignee%3ANayLin-H99)
   * Issues commented: [9](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues?q=is%3Aissue+commenter%3Anaylin-h99+is%3Aclosed)
-  
