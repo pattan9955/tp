@@ -15,13 +15,13 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
-import fridgy.logic.commands.AddCommand;
 import fridgy.logic.commands.ClearCommand;
 import fridgy.logic.commands.CommandResult;
-import fridgy.logic.commands.DeleteCommand;
 import fridgy.logic.commands.ExitCommand;
 import fridgy.logic.commands.HelpCommand;
 import fridgy.logic.commands.exceptions.CommandException;
+import fridgy.logic.commands.ingredient.AddCommand;
+import fridgy.logic.commands.ingredient.DeleteCommand;
 import fridgy.logic.commands.recipe.AddRecipeCommand;
 import fridgy.logic.commands.recipe.DeleteRecipeCommand;
 import fridgy.logic.commands.recipe.ViewRecipeCommand;

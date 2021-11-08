@@ -1,4 +1,4 @@
-package fridgy.logic.parser;
+package fridgy.logic.parser.ingredient;
 
 import static fridgy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -9,7 +9,9 @@ import java.util.regex.Pattern;
 
 import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
-import fridgy.logic.commands.DeleteCommand;
+import fridgy.logic.commands.ingredient.DeleteCommand;
+import fridgy.logic.parser.Parser;
+import fridgy.logic.parser.ParserUtil;
 import fridgy.logic.parser.exceptions.ParseException;
 
 /**

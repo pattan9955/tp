@@ -1,4 +1,4 @@
-package fridgy.logic.commands;
+package fridgy.logic.commands.ingredient;
 
 import static java.util.Objects.requireNonNull;
 
@@ -10,6 +10,8 @@ import java.util.Set;
 
 import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
+import fridgy.logic.commands.Command;
+import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.IngredientModel;
 import fridgy.model.ingredient.Ingredient;

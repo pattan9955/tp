@@ -1,4 +1,4 @@
-package fridgy.logic.parser;
+package fridgy.logic.parser.ingredient;
 
 import static fridgy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -6,7 +6,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fridgy.commons.core.index.Index;
-import fridgy.logic.commands.ViewCommand;
+import fridgy.logic.commands.ingredient.ViewCommand;
+import fridgy.logic.parser.Parser;
+import fridgy.logic.parser.ParserUtil;
 import fridgy.logic.parser.exceptions.ParseException;
 
 public class ViewCommandParser implements Parser<ViewCommand> {

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Fridgy – Developer Guide
+title: Developer Guide
 ---
 
 By: `Team Fridgy`
@@ -290,13 +290,13 @@ The activity will look something like this:
 
 **Target user profile**:
 
-* has a need to manage a significant number of ingredients and recipes
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of ingredients and recipes
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
-**Value proposition**: manage ingredients and recipes faster than a typical mouse/GUI driven app
+**Value proposition**: Manage ingredients and recipes faster than a typical mouse/GUI driven app
 
 <br>
 
@@ -632,6 +632,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
       Use case ends.
 
+<br>
+
 <a name="UC13"></a>
 **Use case: UC13 - Execute Recipe**
 
@@ -691,8 +693,6 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-<br>
-
 ### 6.1 Launch and shutdown
 
 1. Initial launch
@@ -707,30 +707,103 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
-
+   
 <br>
 
-### 6.2 Deleting an ingredient
+### 6.2 Adding an ingredient
+
+1. Adding a new ingredient
+
+    1. Prerequisites: The ingredient does not already exist in inventory. 
+
+    2. Test case: `add ingredient -n Grapes -q 100g -e 25-10-2022 -d Seedless grapes`<br>
+       Expected: A new ingredient is added to the inventory with name: Grapes, quantity: 100.000g, expiry date: 25-10-2022, description: Seedless grapes. 
+
+<br>    
+
+### 6.3 Deleting an ingredient
 
 1. Deleting an ingredient while all ingredients are being shown
 
    1. Prerequisites: List all ingredients using the `list` command. Multiple ingredients in the list.
 
-   2. Test case: `delete 2`<br>
+   2. Test case: `delete ingredient 2`<br>
       Expected: Second ingredient is deleted from the list. Details of the deleted ingredient shown in the status message.
 
-   3. Test case: `delete 0`<br>
+   3. Test case: `delete ingredient 0`<br>
       Expected: No ingredient is deleted. Error details shown in the status message.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete ingredient`, `delete ingredient x`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
 
 <br>
 
-### 6.3 Saving data
+### 6.4 Finding an ingredient
+
+1. Finding an ingredient while all ingredients are being shown
+
+    1. Prerequisites: Fridgy's inventory is not empty.
+
+    2. Test case: `find ingredient grapes`<br>
+       Expected: All ingredients whose name contains the keyword grapes will be listed.
+
+    3. Test case: `find ingredient`<br>
+       Expected: An error message is shown, as `find ingredient` takes in the name argument. Error details shown in the status message.
+
+<br>
+
+### 6.5 Clearing ingredients
+
+1. Clearing all ingredients from Fridgy's inventory.
+
+    1. Prerequisites: Fridgy's inventory is not empty.
+
+    2. Test case: `clear ingredient`<br>
+       Expected: All ingredients are cleared from the list. A success message is shown.
+
+    3. Test case: `clear ingredient 0`<br>
+       Expected: An error message is shown, as `clear ingredient` has no arguments. Error details shown in the status message.
+
+    4. Other incorrect delete commands to try: `clear`, `clear monke` <br>
+       Expected: Similar to previous.
+
+<br>
+
+### 6.6 Viewing an ingredient
+
+1. Viewing an ingredient from Fridgy's inventory.
+
+    1. Prerequisites: Fridgy's inventory is not empty.
+
+    2. Test case: `view ingredient 1`<br>
+       Expected: Details of the first ingredient in Fridgy's inventory is viewed in the right active window.
+
+    3. Test case: `view ingredient 0`<br>
+       Expected: No ingredient is viewed. Error details shown in the status message.
+
+    4. Other incorrect delete commands to try: `view`, `view ingredient`, `view monke` <br>
+       Expected: Similar to previous.
+
+<br>
+
+### 6.7 Executing a recipe
+
+1. Executing a recipe from Fridgy's recipe book and auto-deducting the ingredients used in the recipe.
+
+    1. Prerequisites: Fridgy's recipe book is not empty, and there are sufficient ingredients required in the recipe in Fridgy's inventory.
+
+    2. Test case: `cook recipe 1`<br>
+       Expected: First recipe in Fridgy's recipe book is executed. A success message is shown, and the respective ingredients are deducted from the inventory of ingredients.
+
+    3. Test case: `cook recipe 0`<br>
+       Expected: No recipe is executed. Error details shown in the status message.
+
+    4. Other incorrect delete commands to try: `cook`, `cook monke`, `cook recipe x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+<br>
+
+### 6.8 Saving data
 
 1. Dealing with missing/corrupted data files
 

@@ -5,19 +5,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fridgy.commons.core.Messages;
-import fridgy.logic.commands.AddCommand;
 import fridgy.logic.commands.ClearCommand;
 import fridgy.logic.commands.Command;
-import fridgy.logic.commands.DeleteCommand;
-import fridgy.logic.commands.EditCommand;
 import fridgy.logic.commands.ExitCommand;
-import fridgy.logic.commands.FindCommand;
 import fridgy.logic.commands.HelpCommand;
-import fridgy.logic.commands.ListCommand;
-import fridgy.logic.commands.ViewCommand;
+import fridgy.logic.commands.ingredient.AddCommand;
+import fridgy.logic.commands.ingredient.DeleteCommand;
+import fridgy.logic.commands.ingredient.EditCommand;
+import fridgy.logic.commands.ingredient.FindCommand;
+import fridgy.logic.commands.ingredient.ListCommand;
+import fridgy.logic.commands.ingredient.ViewCommand;
 import fridgy.logic.commands.recipe.CookRecipeCommand;
 import fridgy.logic.commands.recipe.RecipeCommand;
 import fridgy.logic.parser.exceptions.ParseException;
+import fridgy.logic.parser.ingredient.InventoryParser;
 import fridgy.logic.parser.recipe.RecipeParser;
 
 /**
@@ -122,7 +123,14 @@ public class FridgyParser {
         }
     }
 
-
+    /**
+     * Parses user input without a type into a CommandExecutor executable that can be run to
+     * produce a CommandResult.
+     *
+     * @param userInput The user input to be parsed.
+     * @return A CommandExecutor that executes the command when provided a model.
+     * @throws ParseException If user provides invalid input.
+     */
     private CommandExecutor parseGeneralCommand(String userInput) throws ParseException {
         final Matcher matcher = GENERAL_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
+import fridgy.logic.commands.ingredient.EditCommand;
 import fridgy.model.Inventory;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;

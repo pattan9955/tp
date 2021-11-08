@@ -173,6 +173,7 @@ public class ModelManager implements Model {
     public void setInventory(ReadOnlyDatabase<Ingredient> inventory) {
         this.inventory.resetDatabase(inventory);
         uiState.clear(TabEnum.INGREDIENT);
+        refresh(filteredRecipes);
     }
 
     @Override
