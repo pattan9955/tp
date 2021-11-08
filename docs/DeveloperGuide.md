@@ -19,7 +19,7 @@ It is intended to be read by contributors, users, and future maintainers.
 
 For more information on the Fridgy application, refer to the [_User Guide_](UserGuide.md) instead.
 
-### 1.1 **About Fridgy**
+### 1.1 About Fridgy
 
 Fridgy is a **food and recipe management system**, which aims to help users manage their ingredients and recipes easily.
 It warns you about expiring ingredients, and automatically deducts your ingredients when you execute recipes.
@@ -27,7 +27,7 @@ It warns you about expiring ingredients, and automatically deducts your ingredie
 Fridgy is a _desktop app_, optimized for use via a Command Line Interface (CLI), while having an interactive Graphical User Interface (GUI) to display ingredients and recipes.
 If you can type fast, Fridgy can get your fridge Inventory and recipe sorted out faster than traditional GUI apps.
 
-### 1.2 **Setting up, Getting started**
+### 1.2 Setting up, Getting started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
