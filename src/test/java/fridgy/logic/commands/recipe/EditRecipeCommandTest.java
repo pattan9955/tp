@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.CommandResult;
-import fridgy.logic.commands.EditCommand;
 import fridgy.logic.commands.exceptions.CommandException;
+import fridgy.logic.commands.ingredient.EditCommand;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
 import fridgy.model.ingredient.BaseIngredient;

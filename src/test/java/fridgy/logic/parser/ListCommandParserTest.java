@@ -3,7 +3,8 @@ package fridgy.logic.parser;
 import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.Messages;
-import fridgy.logic.commands.ListCommand;
+import fridgy.logic.commands.ingredient.ListCommand;
+import fridgy.logic.parser.ingredient.ListCommandParser;
 
 public class ListCommandParserTest {
 

@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import fridgy.commons.core.Messages;
-import fridgy.logic.commands.AddCommand;
 import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.CommandTestUtil;
-import fridgy.logic.commands.ListCommand;
 import fridgy.logic.commands.exceptions.CommandException;
+import fridgy.logic.commands.ingredient.AddCommand;
+import fridgy.logic.commands.ingredient.ListCommand;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;

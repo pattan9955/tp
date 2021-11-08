@@ -5,19 +5,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fridgy.commons.core.Messages;
-import fridgy.logic.commands.AddCommand;
 import fridgy.logic.commands.ClearCommand;
 import fridgy.logic.commands.Command;
-import fridgy.logic.commands.DeleteCommand;
-import fridgy.logic.commands.EditCommand;
 import fridgy.logic.commands.ExitCommand;
-import fridgy.logic.commands.FindCommand;
 import fridgy.logic.commands.HelpCommand;
-import fridgy.logic.commands.ListCommand;
-import fridgy.logic.commands.ViewCommand;
+import fridgy.logic.commands.ingredient.AddCommand;
+import fridgy.logic.commands.ingredient.DeleteCommand;
+import fridgy.logic.commands.ingredient.EditCommand;
+import fridgy.logic.commands.ingredient.FindCommand;
+import fridgy.logic.commands.ingredient.ListCommand;
+import fridgy.logic.commands.ingredient.ViewCommand;
 import fridgy.logic.commands.recipe.CookRecipeCommand;
 import fridgy.logic.commands.recipe.RecipeCommand;
 import fridgy.logic.parser.exceptions.ParseException;
+import fridgy.logic.parser.ingredient.InventoryParser;
 import fridgy.logic.parser.recipe.RecipeParser;
 
 /**

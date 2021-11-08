@@ -9,6 +9,7 @@ import java.util.List;
 
 import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.exceptions.CommandException;
+import fridgy.logic.commands.ingredient.EditCommand;
 import fridgy.logic.parser.CliSyntax;
 import fridgy.model.Inventory;
 import fridgy.model.Model;
