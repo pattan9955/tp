@@ -2,6 +2,7 @@ package fridgy.logic.commands.ingredient;
 
 import static java.util.Objects.requireNonNull;
 
+import fridgy.logic.commands.Command;
 import fridgy.logic.commands.CommandResult;
 import fridgy.model.IngredientModel;
 import fridgy.model.Model;

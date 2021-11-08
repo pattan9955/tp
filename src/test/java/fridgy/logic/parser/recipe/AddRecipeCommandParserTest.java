@@ -20,7 +20,7 @@ import fridgy.model.recipe.Recipe;
 import fridgy.testutil.RecipeBuilder;
 import fridgy.testutil.TypicalBaseIngredients;
 
-public class AddRecipeIngredientCommandParserTest {
+public class AddRecipeCommandParserTest {
 
     @Test
     public void parse_invalidKeyword_throwsParseException() {

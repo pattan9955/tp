@@ -1,14 +1,12 @@
 package fridgy.logic.commands;
 
-import fridgy.logic.commands.CommandResult;
-import fridgy.logic.commands.ingredient.IngredientCommand;
 import fridgy.model.IngredientModel;
 
 
 /**
  * Format full help instructions for every command for display.
  */
-public class HelpIngredientCommand extends IngredientCommand {
+public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 

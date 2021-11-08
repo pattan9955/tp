@@ -2,7 +2,7 @@ package fridgy.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import fridgy.logic.commands.ingredient.IngredientCommand;
+import fridgy.logic.commands.Command;
 import fridgy.logic.parser.exceptions.ParseException;
 
 /**
@@ -12,12 +12,12 @@ public class CommandParserTestUtil {
 
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created
-     * equals to {@code expectedIngredientCommand}.
+     * equals to {@code expectedCommand}.
      */
-    public static void assertParseSuccess(Parser parser, String userInput, IngredientCommand expectedIngredientCommand) {
+    public static void assertParseSuccess(Parser parser, String userInput, Command expectedCommand) {
         try {
-            IngredientCommand ingredientCommand = parser.parse(userInput);
-            assertEquals(expectedIngredientCommand, ingredientCommand);
+            Command command = parser.parse(userInput);
+            assertEquals(expectedCommand, command);
         } catch (ParseException pe) {
             throw new IllegalArgumentException("Invalid userInput.", pe);
         }

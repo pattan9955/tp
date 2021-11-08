@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.Messages;
 import fridgy.logic.commands.CommandTestUtil;
-import fridgy.logic.commands.ingredient.AddIngredientCommand;
+import fridgy.logic.commands.ingredient.AddCommand;
 import fridgy.logic.parser.ingredient.AddCommandParser;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.Ingredient;
@@ -14,7 +14,7 @@ import fridgy.model.tag.Tag;
 import fridgy.testutil.IngredientBuilder;
 import fridgy.testutil.TypicalIngredients;
 
-public class AddIngredientCommandParserTest {
+public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
@@ -26,28 +26,28 @@ public class AddIngredientCommandParserTest {
         CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
                 + CommandTestUtil.NAME_DESC_BASIL + CommandTestUtil.QUANTITY_DESC_BASIL
                 + CommandTestUtil.DESCRIPTION_DESC_BASIL + CommandTestUtil.TAG_DESC_SNACK
-                + CommandTestUtil.EXPIRY_DATE_DESC, new AddIngredientCommand(expectedIngredient));
+                + CommandTestUtil.EXPIRY_DATE_DESC, new AddCommand(expectedIngredient));
 
         // multiple names - last name accepted
         CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
                 + CommandTestUtil.NAME_DESC_ALMOND + CommandTestUtil.NAME_DESC_BASIL
                 + CommandTestUtil.QUANTITY_DESC_BASIL
                 + CommandTestUtil.DESCRIPTION_DESC_BASIL + CommandTestUtil.TAG_DESC_SNACK
-                + CommandTestUtil.EXPIRY_DATE_DESC, new AddIngredientCommand(expectedIngredient));
+                + CommandTestUtil.EXPIRY_DATE_DESC, new AddCommand(expectedIngredient));
 
         // multiple quantities - last quantity accepted
         CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
                 + CommandTestUtil.NAME_DESC_BASIL + CommandTestUtil.QUANTITY_DESC_ALMOND
                 + CommandTestUtil.QUANTITY_DESC_BASIL + CommandTestUtil.DESCRIPTION_DESC_BASIL
                 + CommandTestUtil.TAG_DESC_SNACK + CommandTestUtil.EXPIRY_DATE_DESC,
-                new AddIngredientCommand(expectedIngredient));
+                new AddCommand(expectedIngredient));
 
         // multiple descriptions - last description accepted
         CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
                 + CommandTestUtil.NAME_DESC_BASIL + CommandTestUtil.QUANTITY_DESC_BASIL
                 + CommandTestUtil.DESCRIPTION_DESC_ALMOND + CommandTestUtil.DESCRIPTION_DESC_BASIL
                 + CommandTestUtil.TAG_DESC_SNACK + CommandTestUtil.EXPIRY_DATE_DESC,
-                new AddIngredientCommand(expectedIngredient));
+                new AddCommand(expectedIngredient));
 
         // multiple tags - all accepted
         Ingredient expectedIngredientMultipleTags = new IngredientBuilder(TypicalIngredients.BASIL)
@@ -58,7 +58,7 @@ public class AddIngredientCommandParserTest {
                 + CommandTestUtil.NAME_DESC_BASIL + CommandTestUtil.QUANTITY_DESC_BASIL
                 + CommandTestUtil.DESCRIPTION_DESC_BASIL + CommandTestUtil.TAG_DESC_VEGETABLE
                 + CommandTestUtil.TAG_DESC_SNACK + CommandTestUtil.EXPIRY_DATE_DESC,
-                new AddIngredientCommand(expectedIngredientMultipleTags));
+                new AddCommand(expectedIngredientMultipleTags));
     }
 
     @Test
@@ -69,12 +69,12 @@ public class AddIngredientCommandParserTest {
         CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
                 + CommandTestUtil.NAME_DESC_ALMOND + CommandTestUtil.QUANTITY_DESC_ALMOND
                 + CommandTestUtil.DESCRIPTION_DESC_ALMOND + CommandTestUtil.EXPIRY_DATE_DESC,
-                new AddIngredientCommand(expectedIngredient));
+                new AddCommand(expectedIngredient));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, fridgy.logic.commands.ingredient.AddIngredientCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
         CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_INGREDIENT_ARGUMENT_FORMAT
@@ -136,6 +136,6 @@ public class AddIngredientCommandParserTest {
                 + CommandTestUtil.QUANTITY_DESC_BASIL + CommandTestUtil.DESCRIPTION_DESC_BASIL
                 + CommandTestUtil.TAG_DESC_VEGETABLE
                         + CommandTestUtil.TAG_DESC_SNACK + CommandTestUtil.EXPIRY_DATE_DESC,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, fridgy.logic.commands.ingredient.AddIngredientCommand.MESSAGE_USAGE));
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

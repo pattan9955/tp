@@ -3,7 +3,7 @@ package fridgy.logic.commands;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import fridgy.logic.commands.ingredient.ListIngredientCommand;
+import fridgy.logic.commands.ingredient.ListCommand;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
 import fridgy.model.RecipeBook;
@@ -12,9 +12,9 @@ import fridgy.testutil.TypicalIndexes;
 import fridgy.testutil.TypicalIngredients;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListIngredientCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
-public class ListIngredientCommandTest {
+public class ListCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -27,12 +27,12 @@ public class ListIngredientCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        CommandTestUtil.assertCommandSuccess(new ListIngredientCommand(), model, fridgy.logic.commands.ingredient.ListIngredientCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         CommandTestUtil.showIngredientAtIndex(model, TypicalIndexes.INDEX_FIRST_INGREDIENT);
-        CommandTestUtil.assertCommandSuccess(new ListIngredientCommand(), model, fridgy.logic.commands.ingredient.ListIngredientCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

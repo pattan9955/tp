@@ -1,14 +1,12 @@
 package fridgy.logic.commands;
 
-import fridgy.logic.commands.CommandResult;
-import fridgy.logic.commands.ingredient.IngredientCommand;
 import fridgy.model.IngredientModel;
 
 
 /**
  * Terminates the program.
  */
-public class ExitIngredientCommand extends IngredientCommand {
+public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
 

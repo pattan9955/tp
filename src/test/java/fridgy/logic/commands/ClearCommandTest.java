@@ -8,14 +8,13 @@ import static fridgy.testutil.TypicalIngredients.getTypicalInventory;
 
 import org.junit.jupiter.api.Test;
 
-import fridgy.logic.commands.ingredient.ClearIngredientCommand;
 import fridgy.model.Inventory;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
 import fridgy.model.RecipeBook;
 import fridgy.model.UserPrefs;
 
-public class ClearIngredientCommandTest {
+public class ClearCommandTest {
 
     /*================================= testing clearing of all ingredients ==========================================*/
     @Test
@@ -23,7 +22,7 @@ public class ClearIngredientCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        CommandTestUtil.assertCommandSuccess(new ClearIngredientCommand(false), model, fridgy.logic.commands.ingredient.ClearIngredientCommand.MESSAGE_SUCCESS,
+        CommandTestUtil.assertCommandSuccess(new ClearCommand(false), model, ClearCommand.MESSAGE_SUCCESS,
                 expectedModel);
     }
 
@@ -34,7 +33,7 @@ public class ClearIngredientCommandTest {
                 new UserPrefs());
         expectedModel.setInventory(new Inventory());
 
-        CommandTestUtil.assertCommandSuccess(new ClearIngredientCommand(false), model, fridgy.logic.commands.ingredient.ClearIngredientCommand.MESSAGE_SUCCESS,
+        CommandTestUtil.assertCommandSuccess(new ClearCommand(false), model, ClearCommand.MESSAGE_SUCCESS,
                 expectedModel);
     }
 
@@ -45,8 +44,8 @@ public class ClearIngredientCommandTest {
         model.add(EXPIRED_FLOUR);
         model.add(EXPIRED_CHICKEN);
         Model expectedModel = new ModelManager(new Inventory(), new RecipeBook(), new UserPrefs());
-        CommandTestUtil.assertCommandSuccess(new ClearIngredientCommand(true), model,
-                fridgy.logic.commands.ingredient.ClearIngredientCommand.MESSAGE_SUCCESS_EXPIRED, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new ClearCommand(true), model,
+                ClearCommand.MESSAGE_SUCCESS_EXPIRED, expectedModel);
     }
 
     @Test
@@ -55,8 +54,8 @@ public class ClearIngredientCommandTest {
         model.add(EXPIRED_CHICKEN);
         model.add(EXPIRED_FLOUR);
         Model expectedModel = new ModelManager(getTypicalInventory(), new RecipeBook(), new UserPrefs());
-        CommandTestUtil.assertCommandSuccess(new ClearIngredientCommand(true), model,
-                fridgy.logic.commands.ingredient.ClearIngredientCommand.MESSAGE_SUCCESS_EXPIRED, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new ClearCommand(true), model,
+                ClearCommand.MESSAGE_SUCCESS_EXPIRED, expectedModel);
     }
 
     @Test
@@ -67,8 +66,8 @@ public class ClearIngredientCommandTest {
         Model expectedModel = new ModelManager(new Inventory(), new RecipeBook(), new UserPrefs());
         expectedModel.add(CHICKEN);
         expectedModel.add(FLOUR);
-        CommandTestUtil.assertCommandSuccess(new ClearIngredientCommand(true), model,
-                ClearIngredientCommand.MESSAGE_SUCCESS_EXPIRED, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new ClearCommand(true), model,
+                ClearCommand.MESSAGE_SUCCESS_EXPIRED, expectedModel);
     }
 
 

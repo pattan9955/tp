@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.recipe.CookRecipeCommand;
 
-public class CookRecipeIngredientCommandParserTest {
+public class CookRecipeCommandParserTest {
 
     private CookRecipeCommandParser testParser = new CookRecipeCommandParser();
 
