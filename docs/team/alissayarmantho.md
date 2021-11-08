@@ -48,6 +48,6 @@ Given below are my contributions to the project.
     * Integrated Netlify to the team's repository for easy previewing of PRs on documentation changes
 
 * **Statistics**:
-  * PRs reviewed: [19](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Aalissayarmantho)
+  * PRs reviewed: [20](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Aalissayarmantho)
   * PRs raised: [30](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Aalissayarmantho)
   * Issues raised: [18](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues?q=is%3Aissue+author%3Aalissayarmantho+is%3Aclosed)
