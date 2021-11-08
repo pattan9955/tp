@@ -40,7 +40,7 @@ Given below are my contributions to the project.
         * Remove / fix other parts of the documentation referred in the Developer Guide [\#243](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/243)
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#76](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/76), [\#78](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/78), [\#200](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/200)
+    * PRs reviewed (with non-trivial review comments): [\#76](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/76), [\#78](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/78), [\#200](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/200), [\#247](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/247)
     * Contributed to forum discussions [\#172](https://github.com/nus-cs2103-AY2122S1/forum/issues/172)
     * Reported 12 bugs / suggestions during [PED](https://github.com/alissayarmantho/ped/issues)
 
@@ -48,6 +48,6 @@ Given below are my contributions to the project.
     * Integrated Netlify to the team's repository for easy previewing of PRs on documentation changes
 
 * **Statistics**:
-  * PRs reviewed: [16](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Aalissayarmantho)
-  * PRs raised: [28](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Aalissayarmantho)
+  * PRs reviewed: [19](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Aalissayarmantho)
+  * PRs raised: [30](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Aalissayarmantho)
   * Issues raised: [18](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues?q=is%3Aissue+author%3Aalissayarmantho+is%3Aclosed)
