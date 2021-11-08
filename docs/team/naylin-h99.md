@@ -47,12 +47,12 @@ Given below are my contributions to the project.
     * Updated the entire User Guide for v1.1. [\#28](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/28)
     * Updated and improved the entire User Guide for v1.2. [\#76](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/76)
     * Updated and improved most of the User Guide for v1.3. [\#114](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/114), [\#137](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/137)
-    * Updated and improved User Guide for v1.4. [\#213](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/213), [\#245](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/245), [\247](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/247)
+    * Updated and improved User Guide for v1.4. [\#213](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/213), [\#245](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/245), [\#247](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/247)
   * Developer Guide:
     * Added implementation details of the `Quantity` auto-unit-conversion feature. [\#92](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/92)
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#13](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/13), [\116](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/116), [\208](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/208), [\#238](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/238) 
+  * PRs reviewed (with non-trivial review comments): [\#13](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/13), [\#116](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/116), [\#208](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/208), [\#238](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/238) 
   * Reported 11 bugs for [PED](https://github.com/NayLin-H99/ped/issues) including non-trivial logic bugs.
 
 * **Statistics**:
