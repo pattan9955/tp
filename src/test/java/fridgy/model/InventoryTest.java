@@ -134,7 +134,6 @@ public class InventoryTest {
         friedChickenIngr.add(new BaseIngredient(new Name("cHiCKen"), new Quantity("500g")));
         friedChickenIngr.add(new BaseIngredient(new Name("FlOuR"), new Quantity("500g")));
         assertTrue(ingrInventory.deductIngredients(friedChickenIngr));
-        // no matches, everything will be the same
         // chicken should be left with 2kg - 500g = 1500g
         assertEquals(new Quantity("1500 g"), ingrInventory.getList().get(0).getQuantity());
         assertEquals(ALMOND.getQuantity(), ingrInventory.getList().get(1).getQuantity());
