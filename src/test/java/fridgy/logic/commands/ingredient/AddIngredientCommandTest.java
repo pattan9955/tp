@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.logic.commands.exceptions.CommandException;
-import fridgy.logic.commands.ingredient.AddCommand;
+import fridgy.logic.commands.ingredient.AddIngredientCommand;
 import fridgy.model.IngredientModel;
 import fridgy.model.Inventory;
 import fridgy.model.ReadOnlyUserPrefs;
@@ -27,30 +27,30 @@ import fridgy.testutil.IngredientBuilder;
 import fridgy.testutil.TypicalIngredients;
 import javafx.collections.ObservableList;
 
-public class AddCommandTest {
+public class AddIngredientCommandTest {
 
     @Test
     public void constructor_nullIngredient_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        Assert.assertThrows(NullPointerException.class, () -> new AddIngredientCommand(null));
     }
 
     @Test
     public void execute_ingredientAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingIngredientAdded modelStub = new ModelStubAcceptingIngredientAdded();
         Ingredient validIngredient = new IngredientBuilder().build();
-        CommandResult commandResult = new AddCommand(validIngredient).execute(modelStub);
+        CommandResult commandResult = new AddIngredientCommand(validIngredient).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validIngredient), commandResult.getFeedbackToUser());
+        assertEquals(String.format(fridgy.logic.commands.ingredient.AddIngredientCommand.MESSAGE_SUCCESS, validIngredient), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validIngredient), modelStub.ingredientsAdded);
     }
 
     @Test
     public void execute_duplicateIngredient_throwsCommandException() {
         Ingredient validIngredient = new IngredientBuilder().build();
-        AddCommand addCommand = new AddCommand(validIngredient);
+        AddIngredientCommand addCommand = new AddIngredientCommand(validIngredient);
         ModelStub modelStub = new ModelStubWithIngredient(validIngredient);
 
-        Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_INGREDIENT, () ->
+        Assert.assertThrows(CommandException.class, fridgy.logic.commands.ingredient.AddIngredientCommand.MESSAGE_DUPLICATE_INGREDIENT, () ->
                 addCommand.execute(modelStub));
     }
 
@@ -58,14 +58,14 @@ public class AddCommandTest {
     public void equals() {
         Ingredient almond = new IngredientBuilder().withName("Almond").build();
         Ingredient basil = new IngredientBuilder().withName("Basil").build();
-        AddCommand addAlmondCommand = new AddCommand(almond);
-        AddCommand addBasilCommand = new AddCommand(basil);
+        AddIngredientCommand addAlmondCommand = new AddIngredientCommand(almond);
+        AddIngredientCommand addBasilCommand = new AddIngredientCommand(basil);
 
         // same object -> returns true
         assertTrue(addAlmondCommand.equals(addAlmondCommand));
 
         // same values -> returns true
-        AddCommand addAlmondCommandCopy = new AddCommand(almond);
+        AddIngredientCommand addAlmondCommandCopy = new AddIngredientCommand(almond);
         assertTrue(addAlmondCommand.equals(addAlmondCommandCopy));
 
         // different types -> returns false
@@ -87,9 +87,9 @@ public class AddCommandTest {
 
         ModelStub testModel = new ModelStubAcceptingIngredientAdded();
         testModel.add(almondLower);
-        AddCommand testCommand = new AddCommand(almondUpper);
+        AddIngredientCommand testCommand = new AddIngredientCommand(almondUpper);
 
-        Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_INGREDIENT, () ->
+        Assert.assertThrows(CommandException.class, fridgy.logic.commands.ingredient.AddIngredientCommand.MESSAGE_DUPLICATE_INGREDIENT, () ->
                 testCommand.execute(testModel));
     }
 
@@ -97,12 +97,12 @@ public class AddCommandTest {
     public void execute_sameIngredientDifferentExpiry_addSuccess() {
         Ingredient almond1 = new IngredientBuilder(TypicalIngredients.ALMOND).withExpiryDate("11-03-2021").build();
         Ingredient almond2 = new IngredientBuilder(TypicalIngredients.ALMOND).withExpiryDate("11-04-2021").build();
-        AddCommand addAlmond1Command = new AddCommand(almond1);
-        AddCommand addAlmond2Command = new AddCommand(almond2);
+        AddIngredientCommand addAlmond1Command = new AddIngredientCommand(almond1);
+        AddIngredientCommand addAlmond2Command = new AddIngredientCommand(almond2);
         ModelStub testModel = new ModelStubAcceptingIngredientAdded();
 
-        CommandResult target1 = new CommandResult(String.format(AddCommand.MESSAGE_SUCCESS, almond1));
-        CommandResult target2 = new CommandResult(String.format(AddCommand.MESSAGE_SUCCESS, almond2));
+        CommandResult target1 = new CommandResult(String.format(fridgy.logic.commands.ingredient.AddIngredientCommand.MESSAGE_SUCCESS, almond1));
+        CommandResult target2 = new CommandResult(String.format(fridgy.logic.commands.ingredient.AddIngredientCommand.MESSAGE_SUCCESS, almond2));
 
         try {
             CommandResult result1 = addAlmond1Command.execute(testModel);

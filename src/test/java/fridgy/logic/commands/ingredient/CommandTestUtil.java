@@ -9,7 +9,8 @@ import java.util.List;
 
 import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.exceptions.CommandException;
-import fridgy.logic.commands.ingredient.EditCommand;
+import fridgy.logic.commands.ingredient.EditIngredientCommand;
+import fridgy.logic.commands.ingredient.IngredientCommand;
 import fridgy.logic.parser.CliSyntax;
 import fridgy.model.Inventory;
 import fridgy.model.Model;
@@ -64,9 +65,9 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditIngredientDescriptor DESC_ALMOND;
-    public static final EditCommand.EditIngredientDescriptor DESC_BASIL;
-    public static final EditCommand.EditIngredientDescriptor DESC_FISH;
+    public static final EditIngredientCommand.EditIngredientDescriptor DESC_ALMOND;
+    public static final EditIngredientCommand.EditIngredientDescriptor DESC_BASIL;
+    public static final EditIngredientCommand.EditIngredientDescriptor DESC_FISH;
 
     static {
         DESC_ALMOND = new EditIngredientDescriptorBuilder().withName(VALID_NAME_ALMOND)
@@ -85,44 +86,44 @@ public class CommandTestUtil {
     }
 
     /**
-     * Executes the given {@code command}, confirms that <br>
+     * Executes the given {@code ingredientCommand}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
      */
-    public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
+    public static void assertCommandSuccess(IngredientCommand ingredientCommand, Model actualModel, CommandResult expectedCommandResult,
                                             Model expectedModel) {
         try {
-            CommandResult result = command.execute(actualModel);
+            CommandResult result = ingredientCommand.execute(actualModel);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
-            throw new AssertionError("Execution of command should not fail.", ce);
+            throw new AssertionError("Execution of ingredientCommand should not fail.", ce);
         }
     }
 
     /**
-     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
+     * Convenience wrapper to {@link #assertCommandSuccess(IngredientCommand, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
-    public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+    public static void assertCommandSuccess(IngredientCommand ingredientCommand, Model actualModel, String expectedMessage,
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
-        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+        assertCommandSuccess(ingredientCommand, actualModel, expectedCommandResult, expectedModel);
     }
 
     /**
-     * Executes the given {@code command}, confirms that <br>
+     * Executes the given {@code ingredientCommand}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the inventory, filtered ingredient list and selected ingredient in {@code actualModel} remain unchanged
      */
-    public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
+    public static void assertCommandFailure(IngredientCommand ingredientCommand, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         Inventory expectedInventory = new Inventory(actualModel.getInventory());
         List<Ingredient> expectedFilteredList = new ArrayList<>(actualModel.getFilteredIngredientList());
 
-        Assert.assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        Assert.assertThrows(CommandException.class, expectedMessage, () -> ingredientCommand.execute(actualModel));
         assertEquals(expectedInventory, actualModel.getInventory());
         assertEquals(expectedFilteredList, actualModel.getFilteredIngredientList());
     }

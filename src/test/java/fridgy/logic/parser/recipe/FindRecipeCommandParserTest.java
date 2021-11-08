@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import fridgy.logic.commands.recipe.FindRecipeCommand;
 import fridgy.model.recipe.NameContainsKeywordsPredicate;
 
-public class FindRecipeCommandParserTest {
+public class FindRecipeIngredientCommandParserTest {
 
     private FindRecipeCommandParser testParser = new FindRecipeCommandParser();
 

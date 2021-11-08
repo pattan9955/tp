@@ -22,7 +22,7 @@ import fridgy.logic.commands.recipe.EditRecipeCommand;
 import fridgy.logic.commands.recipe.EditRecipeCommand.EditRecipeDescriptor;
 import fridgy.testutil.EditRecipeDescriptorBuilder;
 
-public class EditRecipeCommandParserTest {
+public class EditRecipeIngredientCommandParserTest {
 
     private EditRecipeCommandParser testParser = new EditRecipeCommandParser();
 

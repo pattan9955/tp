@@ -1,10 +1,11 @@
-package fridgy.logic.commands;
+package fridgy.logic.commands.ingredient;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import fridgy.logic.commands.CommandResult;
 import fridgy.model.IngredientModel;
 import fridgy.model.Inventory;
 import fridgy.model.ingredient.Ingredient;

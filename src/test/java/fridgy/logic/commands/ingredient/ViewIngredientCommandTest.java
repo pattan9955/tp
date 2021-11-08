@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import fridgy.commons.core.GuiSettings;
 import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.exceptions.CommandException;
-import fridgy.logic.commands.ingredient.ViewCommand;
+import fridgy.logic.commands.ingredient.ViewIngredientCommand;
 import fridgy.model.IngredientModel;
 import fridgy.model.Inventory;
 import fridgy.model.ReadOnlyUserPrefs;
@@ -24,63 +24,63 @@ import fridgy.model.base.ReadOnlyDatabase;
 import fridgy.model.ingredient.Ingredient;
 import javafx.collections.ObservableList;
 
-public class ViewCommandTest {
+public class ViewIngredientCommandTest {
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new ViewCommand(null));
+        assertThrows(NullPointerException.class, () -> new ViewIngredientCommand(null));
     }
 
     @Test
     public void equals_sameObject_returnsTrue() {
-        ViewCommand testCommand = new ViewCommand(Index.fromZeroBased(4));
+        ViewIngredientCommand testCommand = new ViewIngredientCommand(Index.fromZeroBased(4));
         assertTrue(testCommand.equals(testCommand));
     }
 
     @Test
     public void equals_differentCommand_returnsFalse() {
-        ViewCommand testCommand = new ViewCommand(Index.fromZeroBased(3));
-        ViewCommand targetCommand = new ViewCommand(Index.fromZeroBased(4));
+        ViewIngredientCommand testCommand = new ViewIngredientCommand(Index.fromZeroBased(3));
+        ViewIngredientCommand targetCommand = new ViewIngredientCommand(Index.fromZeroBased(4));
         assertFalse(testCommand.equals(targetCommand));
     }
 
     @Test
     public void equals_equalCommand_returnsTrue() {
-        ViewCommand testCommand = new ViewCommand(Index.fromZeroBased(3));
-        ViewCommand targetCommand = new ViewCommand(Index.fromZeroBased(3));
-        ViewCommand targetCommand2 = new ViewCommand(Index.fromOneBased(4));
+        ViewIngredientCommand testCommand = new ViewIngredientCommand(Index.fromZeroBased(3));
+        ViewIngredientCommand targetCommand = new ViewIngredientCommand(Index.fromZeroBased(3));
+        ViewIngredientCommand targetCommand2 = new ViewIngredientCommand(Index.fromOneBased(4));
         assertTrue(testCommand.equals(targetCommand));
         assertTrue(testCommand.equals(targetCommand2));
     }
 
     @Test
     public void equals_differentObject_returnsFalse() {
-        ViewCommand testCommand = new ViewCommand(Index.fromZeroBased(2));
+        ViewIngredientCommand testCommand = new ViewIngredientCommand(Index.fromZeroBased(2));
         Object targetObj = new String("2");
         assertFalse(testCommand.equals(targetObj));
     }
 
     @Test
     public void execute_nullModel_throwsNullPointerException() {
-        ViewCommand testCommand = new ViewCommand(Index.fromZeroBased(1));
+        ViewIngredientCommand testCommand = new ViewIngredientCommand(Index.fromZeroBased(1));
         assertThrows(NullPointerException.class, () -> testCommand.execute(null));
     }
 
     @Test
     public void execute_targetIndexLargerThanList_throwsCommandException() {
-        ViewCommand testCommand = new ViewCommand(Index.fromZeroBased(3));
-        ViewCommandTest.IngredientModelStubWithIngredient testModel =
-                new ViewCommandTest.IngredientModelStubWithIngredient();
+        ViewIngredientCommand testCommand = new ViewIngredientCommand(Index.fromZeroBased(3));
+        ViewIngredientCommandTest.IngredientModelStubWithIngredient testModel =
+                new ViewIngredientCommandTest.IngredientModelStubWithIngredient();
         assertThrows(CommandException.class, () -> testCommand.execute(testModel));
     }
 
     @Test
     public void execute_validTargetIndex_changesSpecifiedActiveRecipe() {
-        ViewCommand testCommand = new ViewCommand(Index.fromZeroBased(0));
-        ViewCommandTest.IngredientModelStubWithIngredient testModel =
+        ViewIngredientCommand testCommand = new ViewIngredientCommand(Index.fromZeroBased(0));
+        ViewIngredientCommandTest.IngredientModelStubWithIngredient testModel =
                 new IngredientModelStubWithIngredient();
         testModel.add(BANANA);
         CommandResult expected = new CommandResult(
-                String.format(ViewCommand.MESSAGE_SUCCESS, APPLE));
+                String.format(fridgy.logic.commands.ingredient.ViewIngredientCommand.MESSAGE_SUCCESS, APPLE));
         try {
             CommandResult result = testCommand.execute(testModel);
             assertTrue(result.equals(expected));

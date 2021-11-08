@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import fridgy.commons.core.index.Index;
 import fridgy.logic.commands.recipe.DeleteRecipeCommand;
 
-public class DeleteRecipeCommandParserTest {
+public class DeleteRecipeIngredientCommandParserTest {
 
     private DeleteRecipeCommandParser testParser = new DeleteRecipeCommandParser();
 

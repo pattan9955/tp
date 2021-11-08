@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
-import fridgy.logic.commands.ingredient.DeleteCommand;
+import fridgy.logic.commands.ingredient.DeleteIngredientCommand;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
 import fridgy.model.RecipeBook;
@@ -19,7 +19,7 @@ import fridgy.model.ingredient.Ingredient;
 import fridgy.testutil.TypicalIndexes;
 import fridgy.testutil.TypicalIngredients;
 
-public class DeleteCommandTest {
+public class DeleteIngredientCommandTest {
 
     private Model model = new ModelManager(TypicalIngredients.getTypicalInventory(), new RecipeBook(), new UserPrefs());
     // Inventory with APPLE, BANANA, CARROT, DUCK, EGG, FIGS, GRAPES
@@ -41,10 +41,10 @@ public class DeleteCommandTest {
                 .get(INDEX_SECOND_INGREDIENT.getZeroBased());
         Ingredient ingredientToDelete3 = model.getFilteredIngredientList()
                 .get(INDEX_THIRD_INGREDIENT.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_INGREDIENT,
+        DeleteIngredientCommand deleteCommand = new DeleteIngredientCommand(INDEX_FIRST_INGREDIENT,
                 INDEX_SECOND_INGREDIENT, INDEX_THIRD_INGREDIENT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, 3, "s");
+        String expectedMessage = String.format(fridgy.logic.commands.ingredient.DeleteIngredientCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, 3, "s");
 
         ModelManager expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
         expectedModel.delete(ingredientToDelete1);
@@ -57,7 +57,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredIngredientList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, INDEX_FIRST_INGREDIENT,
+        DeleteIngredientCommand deleteCommand = new DeleteIngredientCommand(outOfBoundIndex, INDEX_FIRST_INGREDIENT,
                 INDEX_SECOND_INGREDIENT, INDEX_THIRD_INGREDIENT);
 
         CommandTestUtil.assertCommandFailure(deleteCommand, model,
@@ -70,9 +70,9 @@ public class DeleteCommandTest {
 
         Ingredient ingredientToDelete = model.getFilteredIngredientList()
                 .get(INDEX_FIRST_INGREDIENT.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_INGREDIENT);
+        DeleteIngredientCommand deleteCommand = new DeleteIngredientCommand(INDEX_FIRST_INGREDIENT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS,
+        String expectedMessage = String.format(fridgy.logic.commands.ingredient.DeleteIngredientCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS,
                 1, "");
 
         Model expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
@@ -90,7 +90,7 @@ public class DeleteCommandTest {
         // ensures that outOfBoundIndex is still in bounds of inventory list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getInventory().getList().size());
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeleteIngredientCommand deleteCommand = new DeleteIngredientCommand(outOfBoundIndex);
 
         CommandTestUtil.assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX);
     }
@@ -99,8 +99,8 @@ public class DeleteCommandTest {
     public void execute_noArgs_deleteNothing() {
         /* Trivial test case where nothing is deleted if there are no arguments passed to varargs. Parser should have
           filtered this out. */
-        DeleteCommand deleteCommand = new DeleteCommand();
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, 0, "");
+        DeleteIngredientCommand deleteCommand = new DeleteIngredientCommand();
+        String expectedMessage = String.format(fridgy.logic.commands.ingredient.DeleteIngredientCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS, 0, "");
 
         ModelManager expectedModel = new ModelManager(model.getInventory(), new RecipeBook(), new UserPrefs());
 
@@ -109,16 +109,16 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_INGREDIENT,
+        DeleteIngredientCommand deleteFirstCommand = new DeleteIngredientCommand(INDEX_FIRST_INGREDIENT,
                 INDEX_SECOND_INGREDIENT);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_INGREDIENT,
+        DeleteIngredientCommand deleteSecondCommand = new DeleteIngredientCommand(INDEX_SECOND_INGREDIENT,
                 INDEX_THIRD_INGREDIENT);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_INGREDIENT,
+        DeleteIngredientCommand deleteFirstCommandCopy = new DeleteIngredientCommand(INDEX_FIRST_INGREDIENT,
                 INDEX_SECOND_INGREDIENT);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.logic.commands.recipe.ClearRecipeCommand;
 
-public class ClearRecipeCommandParserTest {
+public class ClearRecipeIngredientCommandParserTest {
     private static final ClearRecipeCommandParser testParser = new ClearRecipeCommandParser();
     private static final String failureMsg = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             ClearRecipeCommand.MESSAGE_USAGE);

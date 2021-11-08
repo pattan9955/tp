@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import fridgy.commons.core.Messages;
 import fridgy.logic.commands.recipe.ViewRecipeCommand;
 
-public class ViewRecipeCommandParserTest {
+public class ViewRecipeIngredientCommandParserTest {
 
     private ViewRecipeCommandParser parser = new ViewRecipeCommandParser();
 

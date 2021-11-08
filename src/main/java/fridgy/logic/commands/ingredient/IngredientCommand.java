@@ -1,5 +1,6 @@
-package fridgy.logic.commands;
+package fridgy.logic.commands.ingredient;
 
+import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.IngredientModel;
 
