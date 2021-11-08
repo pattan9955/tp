@@ -254,12 +254,12 @@ Edit an ingredient from the Inventory.
 `edit ingredient <index> [-n <name>] [-q <quantity> [<units>]] [-e <expiry date>] [-d <description>] [-t <tags>]...`
 
 **Example(s):**<br />
-1. Command: `edit ingredient 1 -d juicy -t jelly`
+1. Command: `edit ingredient 2 -d juicy -t jelly`
 <br />Before:<br />
-<img src="images/ingredientCommands/editCommand1.png" style="width:85%">
+<img src="images/ingredientCommands/editCommand1.png" style="width:85%" class="ug-image">
    <br />
 <br />After:<br />
-<img src="images/ingredientCommands/editCommand2.png" style="width:85%">
+<img src="images/ingredientCommands/editCommand2.png" style="width:85%" class="ug-image">
 
 <br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
@@ -335,7 +335,7 @@ Switch to Ingredient [tab](#31-tabs) and list all ingredients.
 **Example(s):**<br />
 1. Command: `list ingredient`
 <br />Expected Output:<br />
-<img src="images/ingredientCommands/listIngredient.png" style="width:85%">
+<img src="images/ingredientCommands/listIngredient.png" style="width:85%" >
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
