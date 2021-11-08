@@ -803,6 +803,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No ingredient is viewed. Error details shown in the status message.
     
     4. Other incorrect view commands to try: `view`, `view ingredient`, `view monke` <br>
+       Expected: Similar to previous.
 
 <br>
 
