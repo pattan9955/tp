@@ -45,7 +45,7 @@ public class Quantity {
     @Override
     public String toString() {
         // standardised to 3 decimal places
-        return String.format(units == "" ? "%.3f%s" : "%.3f %s", value, units);
+        return String.format("%.3f %s", value, units).trim();
     }
 
     @Override
