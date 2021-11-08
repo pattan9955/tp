@@ -60,7 +60,7 @@ Let us add our first ingredient:
 
 `add ingredient -n Grapes -q 100g -e 25-10-2022 -d Seedless grapes`
 
-This adds an ingredient named Grapes, with a quantity of 100g, expiry date of 25-10-2022, and description of "Seedless grapes".
+This adds an ingredient named "Grapes", with a quantity of 100g, an expiry date of 25-10-2022, and a description of "Seedless grapes".
 
 Then, add a recipe that uses that ingredient:
 
