@@ -73,14 +73,8 @@ public class Ingredient extends BaseIngredient {
             return true;
         }
 
-        if (otherIngredient == null) {
-            return false;
-        }
-
-        String currIngredientName = getName().fullName.toLowerCase();
-        String otherIngredientName = otherIngredient.getName().fullName.toLowerCase();
         return otherIngredient != null
-                && currIngredientName.equals(otherIngredientName)
+                && getName().equals(otherIngredient.getName())
                 && otherIngredient.getExpiryDate().equals(getExpiryDate());
     }
 

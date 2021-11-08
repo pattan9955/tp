@@ -127,18 +127,17 @@ public class InventoryTest {
     }
 
     @Test
-    public void deductIngredients_differentCaseNameofIngr_returnsFalse() {
+    public void deductIngredients_differentCaseNameofIngr_returnsTrue() {
         ingrInventory.setItems(inventoryIngrList);
         Set<BaseIngredient> friedChickenIngr = new HashSet<>();
-        // names are case-sensitive
+        // names are case-insensitive
         friedChickenIngr.add(new BaseIngredient(new Name("cHiCKen"), new Quantity("500g")));
         friedChickenIngr.add(new BaseIngredient(new Name("FlOuR"), new Quantity("500g")));
-        assertFalse(ingrInventory.deductIngredients(friedChickenIngr));
-        // no matches, everything will be the same
-        assertEquals(CHICKEN.getQuantity(), ingrInventory.getList().get(0).getQuantity());
-        assertEquals(FLOUR.getQuantity(), ingrInventory.getList().get(1).getQuantity());
-        assertEquals(ALMOND.getQuantity(), ingrInventory.getList().get(2).getQuantity());
-        assertEquals(APPLE.getQuantity(), ingrInventory.getList().get(3).getQuantity());
+        assertTrue(ingrInventory.deductIngredients(friedChickenIngr));
+        // chicken should be left with 2kg - 500g = 1500g
+        assertEquals(new Quantity("1500 g"), ingrInventory.getList().get(0).getQuantity());
+        assertEquals(ALMOND.getQuantity(), ingrInventory.getList().get(1).getQuantity());
+        assertEquals(APPLE.getQuantity(), ingrInventory.getList().get(2).getQuantity());
     }
 
     @Test
