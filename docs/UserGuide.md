@@ -49,7 +49,7 @@ This User Guide covers:
 
 <a name="startup"></a>
 <div style="text-align: center; padding-bottom: 2em">
-<img src="images/startup-ss.png" width="80%" id="logo" />
+<img src="images/startup-ss.png" width="80%" id="logo" class="ug-image" />
 <br>
 <i>When you first open Fridgy, it is filled with sample ingredients and recipes</i>
 </div>
