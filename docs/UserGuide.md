@@ -57,24 +57,27 @@ This User Guide covers:
 
 Now that Fridgy is installed, you can test out the commands — add ingredients, recipes, and more!
 
-Adding our first ingredient:
+Let us add our first ingredient:
 
 `add ingredient -n Grapes -q 100g -e 25-10-2022 -d Seedless grapes`
+
+This adds an ingredient named Grapes, with a quantity of 100g, expiry date of 25-10-2022, and description of "Seedless grapes".
 
 Then, add a recipe that uses that ingredient:
 
 `add recipe -n Grape juice -i Grapes 50g -s Mash grapes -s Strain juice`
 
+This adds a recipe named Grape juice, which uses 50g of grapes, with two steps of preparation.
+
 Finally, execute the recipe:
 
 `cook recipe 1`
 
-The quantity of grapes would be deducted accordingly.
+You would now have 50g of Grapes left.
 
-Now that you are ready to use Fridgy, you may use clear commands to clear out the sample entries:
+Now that you are ready to use Fridgy, it is time to clear the sample entries and start adding your own:
 
-`clear ingredient`
-`clear recipe`
+`clear ingredient`, `clear recipe`
 
 To exit Fridgy, simply close the application window.
 
