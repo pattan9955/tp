@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Fridgy – User Guide
+title: User Guide
 ---
 
 <img src="images/fridge.png" width="50" id="logo" />

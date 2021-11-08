@@ -2,8 +2,8 @@ package fridgy.testutil;
 
 import java.util.Set;
 
-import fridgy.logic.commands.AddCommand;
-import fridgy.logic.commands.EditCommand.EditIngredientDescriptor;
+import fridgy.logic.commands.ingredient.AddCommand;
+import fridgy.logic.commands.ingredient.EditCommand.EditIngredientDescriptor;
 import fridgy.logic.parser.CliSyntax;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.tag.Tag;

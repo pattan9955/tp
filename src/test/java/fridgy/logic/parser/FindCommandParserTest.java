@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.Messages;
 import fridgy.logic.commands.CommandTestUtil;
-import fridgy.logic.commands.FindCommand;
+import fridgy.logic.commands.ingredient.FindCommand;
+import fridgy.logic.parser.ingredient.FindCommandParser;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {

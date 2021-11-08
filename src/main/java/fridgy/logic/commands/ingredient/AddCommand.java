@@ -1,4 +1,4 @@
-package fridgy.logic.commands;
+package fridgy.logic.commands.ingredient;
 
 import static fridgy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static fridgy.logic.parser.CliSyntax.PREFIX_EXPIRY;
@@ -7,6 +7,8 @@ import static fridgy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static fridgy.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
+import fridgy.logic.commands.Command;
+import fridgy.logic.commands.CommandResult;
 import fridgy.logic.commands.exceptions.CommandException;
 import fridgy.model.IngredientModel;
 import fridgy.model.ingredient.ExpiryStatusUpdater;

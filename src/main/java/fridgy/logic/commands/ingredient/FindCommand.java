@@ -1,8 +1,10 @@
-package fridgy.logic.commands;
+package fridgy.logic.commands.ingredient;
 
 import static java.util.Objects.requireNonNull;
 
 import fridgy.commons.core.Messages;
+import fridgy.logic.commands.Command;
+import fridgy.logic.commands.CommandResult;
 import fridgy.model.IngredientModel;
 import fridgy.model.ingredient.IngredientDefaultComparator;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;
