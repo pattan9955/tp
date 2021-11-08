@@ -5,10 +5,9 @@ title: Rebecca's Project Portfolio Page
 
 ### Project: Fridgy
 
-Fridgy is a Food Inventory Manager that makes it easy to reduce food waste by keeping track of what you have and when it expires.
-It is a desktop app, optimized for use via CLI, with an interactive GUI to display ingredients and recipes. It is written in Java, and has about 14 kLoC.
+Fridgy is a desktop Food Inventory Manager that makes it easy to reduce food waste by keeping track of what you have and when it expires. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 14 kLoC.
 
-### Summary of Contributions
+Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to manage ingredients in Fridgy
   * What it does: It allows the user to add, delete, edit and list ingredients to Fridgy.
