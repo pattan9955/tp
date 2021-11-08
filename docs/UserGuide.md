@@ -204,7 +204,7 @@ Add an ingredient to the Inventory.
 1. Minimal command flags used:<br />
    Command: `add ingredient -n tomato -q 5 -e 20-02-2077`
    <br />Expected Output:<br />
-   <img src="images/ingredientCommands/addCommand1.png" style="width:85%"> <br /
+   <img src="images/ingredientCommands/addCommand1.png" style="width:85%"> <br />
    <br />
 2. All command flags used:<br />
    Command: `add ingredient -n flour -d fresh -q 500g -e 27-09-2021`
