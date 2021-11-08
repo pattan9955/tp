@@ -53,6 +53,6 @@ public class UiUtil {
                 ingredient.getName().toString(), ingredientCharLimit);
         String truncatedIngredientQuantity = truncateText(ingredient.getQuantity().toString(),
                 quantityCharLimit);
-        return truncatedIngredientName + " (" + truncatedIngredientQuantity+ ")";
+        return truncatedIngredientName + " (" + truncatedIngredientQuantity + ")";
     }
 }
