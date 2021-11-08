@@ -782,7 +782,7 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `clear ingredient 0`<br>
        Expected: An error message is shown, as `clear ingredient` has no arguments. Error details shown in the status message.
-    
+
     4. Other incorrect clear commands to try: `clear`, `clear monke` <br>
        Expected: Similar to previous.
 
@@ -801,7 +801,7 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `view ingredient 0`<br>
        Expected: No ingredient is viewed. Error details shown in the status message.
-    
+
     4. Other incorrect view commands to try: `view`, `view ingredient`, `view monke` <br>
        Expected: Similar to previous.
 
@@ -819,7 +819,7 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `cook recipe 0`<br>
        Expected: No recipe is executed. Error details shown in the status message.
-    
+
     4. Other incorrect cook commands to try: `cook`, `cook monke`, `cook recipe x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
