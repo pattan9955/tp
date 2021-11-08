@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.logic.commands.exceptions.CommandException;
+import fridgy.logic.commands.ingredient.AddCommand;
 import fridgy.model.IngredientModel;
 import fridgy.model.Inventory;
 import fridgy.model.ReadOnlyUserPrefs;
@@ -75,7 +76,21 @@ public class AddCommandTest {
 
         // different Ingredient -> returns false
         assertFalse(addAlmondCommand.equals(addBasilCommand));
+    }
 
+    @Test
+    public void execute_sameIngredientDifferentCase_throwsCommandException() {
+        Ingredient almondUpper = new IngredientBuilder(TypicalIngredients.ALMOND).build();
+        Ingredient almondLower = new IngredientBuilder(TypicalIngredients.ALMOND)
+                .withName(TypicalIngredients.ALMOND.getName().fullName.toLowerCase())
+                .build();
+
+        ModelStub testModel = new ModelStubAcceptingIngredientAdded();
+        testModel.add(almondLower);
+        AddCommand testCommand = new AddCommand(almondUpper);
+
+        Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_INGREDIENT, () ->
+                testCommand.execute(testModel));
     }
 
     @Test

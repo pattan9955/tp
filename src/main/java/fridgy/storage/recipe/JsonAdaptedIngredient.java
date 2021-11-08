@@ -32,7 +32,7 @@ public class JsonAdaptedIngredient {
      */
     public JsonAdaptedIngredient(BaseIngredient source) {
         name = source.getName().fullName;
-        quantity = source.getQuantity().value;
+        quantity = source.getQuantity().toString();
     }
 
     /**
@@ -52,7 +52,7 @@ public class JsonAdaptedIngredient {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 Quantity.class.getSimpleName()));
         }
-        if (!Quantity.isValidQuantity(quantity)) {
+        if (!Quantity.isValidQuantityString(quantity)) {
             throw new IllegalValueException(Quantity.MESSAGE_CONSTRAINTS);
         }
         final Quantity modelQuantity = new Quantity(quantity);

@@ -10,6 +10,7 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.Messages;
+import fridgy.logic.commands.ingredient.FindCommand;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
 import fridgy.model.RecipeBook;

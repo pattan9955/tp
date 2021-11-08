@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
+import fridgy.logic.commands.ingredient.EditCommand;
 import fridgy.model.Inventory;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
@@ -114,7 +115,7 @@ public class EditCommandTest {
     public void execute_duplicateIngredientFilteredList_failure() {
         CommandTestUtil.showIngredientAtIndex(model, TypicalIndexes.INDEX_FIRST_INGREDIENT);
 
-        // edit Ingredient in filtered list into a duplicate in address book
+        // edit Ingredient in filtered list into a duplicate in inventory
         Ingredient ingredientInList = model.getInventory().getList()
                 .get(TypicalIndexes.INDEX_SECOND_INGREDIENT.getZeroBased());
         EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT,
@@ -135,19 +136,49 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of inventory
      */
     @Test
     public void execute_invalidIngredientIndexFilteredList_failure() {
         CommandTestUtil.showIngredientAtIndex(model, TypicalIndexes.INDEX_FIRST_INGREDIENT);
         Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_INGREDIENT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of inventory list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getInventory().getList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditIngredientDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BASIL).build());
 
         CommandTestUtil.assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_ingredientExistsDifferentCaseUnfilteredList_failure() {
+        Ingredient firstIngredient = model.getFilteredIngredientList()
+                .get(TypicalIndexes.INDEX_FIRST_INGREDIENT.getZeroBased());
+
+        EditCommand.EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder(firstIngredient)
+                .withName(firstIngredient.getName().fullName.toLowerCase())
+                .build();
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_SECOND_INGREDIENT, descriptor);
+
+        CommandTestUtil.assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_INGREDIENT);
+    }
+
+    @Test
+    public void execute_ingredientExistsDifferentCaseFilteredList_failure() {
+        CommandTestUtil.showIngredientAtIndex(model, TypicalIndexes.INDEX_FIRST_INGREDIENT);
+
+        // edit Ingredient in filtered list into a duplicate in address book
+        Ingredient ingredientInList = model.getInventory().getList()
+                .get(TypicalIndexes.INDEX_SECOND_INGREDIENT.getZeroBased());
+
+        EditCommand.EditIngredientDescriptor testDescriptor = new EditIngredientDescriptorBuilder(ingredientInList)
+                .withName(ingredientInList.getName().fullName.toLowerCase())
+                .build();
+
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_INGREDIENT, testDescriptor);
+
+        CommandTestUtil.assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_INGREDIENT);
     }
 
     @Test

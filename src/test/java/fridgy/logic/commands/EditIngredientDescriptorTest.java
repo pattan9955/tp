@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import fridgy.logic.commands.EditCommand.EditIngredientDescriptor;
+import fridgy.logic.commands.ingredient.EditCommand.EditIngredientDescriptor;
 import fridgy.testutil.EditIngredientDescriptorBuilder;
 
 public class EditIngredientDescriptorTest {

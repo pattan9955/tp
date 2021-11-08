@@ -3,44 +3,51 @@ layout: page
 title: Alissa's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: Fridgy
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Fridgy is a desktop Food Inventory Manager that makes it easy to reduce food waste by keeping track of what you have and when it expires. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 14 kLoC.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-    * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-    * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added the ability to find recipes / ingredients based on their name.
+    * What it does: allows the user to find recipes / ingredients that contain the keywords provided by the user
+    * Justification: This feature improves the product significantly because a user having many recipes / ingredients will definitely need to have a way to search for the right recipe / ingredient fast
+    * Highlights: This feature modifies the existing command syntax to allow them to be executed on either ingredient / recipe depending on the command syntax used by the user. It required an in-depth analysis of design alternatives and deep understanding of the existing codebase
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Added the ability to list recipes
+  * What it does: allows the user to list all recipes in the Recipe Book
+  * Justification: This feature is necessary for Fridgy users because after executing the `find recipe` command, the recipe list will be filtered accordingly and the user may want to see the full list of recipes back again afterwards
+  * Highlights: This feature modifies the existing `list` command syntax to accommodate execution on different models (eg: `Recipe` model or `Ingredient` model) depending on the command syntax used. As this is an extension to the existing `list` command in the codebase, implementing this feature requires great understanding of the original codebase
 
-* **Code contributed**: [RepoSense link]()
+* **Major Enhancements**: Rework the GUI
+  * What it does: Improves the user interface to use a cleaner and minimalistic style
+      * Justification: This feature enhances the product aesthetics to become more pleasing to the eye
+      * Highlights: UI design. Reworking the GUI also requires a deep understanding of JavaFX and how each component works
+
+* **Minor Enhancements**: More appropriate error messages for commands in Fridgy
+* **Minor Refactoring**: Remove traces of address book from the codebase [\#205](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/205), [\#220](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/220), [\#232](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/232)
+
+* **Code contributed**: [RepoSense Code Dashboard](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=alissayarmantho)
 
 * **Project management**:
-    * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-
-* **Enhancements to existing features**:
-    * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-    * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+    * Add deadlines to milestones
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `delete` and `find` [\#72]()
-        * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+        * Did cosmetic tweaks to existing UG [\#135](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/135), [\#226](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/226)
     * Developer Guide:
-        * Added implementation details of the `delete` feature.
+        * Added more details for the documentation on `UI` component [\#89](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/89)
+        * Remove / fix other parts of the documentation referred in the Developer Guide [\#243](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/243)
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-    * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+    * PRs reviewed (with non-trivial review comments): [\#76](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/76), [\#78](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/78), [\#200](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/200)
+    * Contributed to forum discussions [\#172](https://github.com/nus-cs2103-AY2122S1/forum/issues/172)
+    * Reported 12 bugs / suggestions during [PED](https://github.com/alissayarmantho/ped/issues)
 
 * **Tools**:
-    * Integrated a third party library (Natty) to the project ([\#42]())
-    * Integrated a new Github plugin (CircleCI) to the team repo
+    * Integrated Netlify to the team's repository for easy previewing of PRs on documentation changes
 
-* _{you can add/remove categories in the list above}_
+* **Statistics**:
+  * PRs reviewed: [16](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Aalissayarmantho)
+  * PRs raised: [28](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Aalissayarmantho)
+  * Issues raised: [18](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues?q=is%3Aissue+author%3Aalissayarmantho+is%3Aclosed)

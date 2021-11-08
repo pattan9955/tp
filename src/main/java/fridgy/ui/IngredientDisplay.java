@@ -50,7 +50,7 @@ public class IngredientDisplay extends UiPart<Region> {
 
         String ingredientDescription = ingredient.getDescription().value.orElse("");
         name.setText(ingredient.getName().fullName);
-        quantity.setText("Quantity: " + ingredient.getQuantity().value);
+        quantity.setText("Quantity: " + ingredient.getQuantity().toString());
         expiryDate.setText("Expiring on: " + ingredient.getExpiryDate().toString());
         description.setText(ingredientDescription);
         if (ingredientDescription.equals("")) {

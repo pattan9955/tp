@@ -3,8 +3,9 @@ package fridgy.logic.parser;
 import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.Messages;
-import fridgy.logic.commands.AddCommand;
 import fridgy.logic.commands.CommandTestUtil;
+import fridgy.logic.commands.ingredient.AddCommand;
+import fridgy.logic.parser.ingredient.AddCommandParser;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.Ingredient;
 import fridgy.model.ingredient.Name;

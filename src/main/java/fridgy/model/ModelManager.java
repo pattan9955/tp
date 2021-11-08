@@ -22,7 +22,7 @@ import javafx.collections.transformation.FilteredList;
 
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the inventory data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -45,7 +45,7 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(inventory, userPrefs);
 
-        logger.fine("Initializing with address book: " + inventory
+        logger.fine("Initializing with inventory: " + inventory
                 + " Initializing with recipe book: " + inventory
                 + " and user prefs " + userPrefs);
 
@@ -173,6 +173,7 @@ public class ModelManager implements Model {
     public void setInventory(ReadOnlyDatabase<Ingredient> inventory) {
         this.inventory.resetDatabase(inventory);
         uiState.clear(TabEnum.INGREDIENT);
+        refresh(filteredRecipes);
     }
 
     @Override

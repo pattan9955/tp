@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.Messages;
 import fridgy.commons.core.index.Index;
+import fridgy.logic.commands.ingredient.DeleteCommand;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
 import fridgy.model.RecipeBook;
@@ -86,7 +87,7 @@ public class DeleteCommandTest {
         CommandTestUtil.showIngredientAtIndex(model, TypicalIndexes.INDEX_FIRST_INGREDIENT);
 
         Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_INGREDIENT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of inventory list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getInventory().getList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);

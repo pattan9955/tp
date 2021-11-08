@@ -40,10 +40,10 @@ public class IngredientTest {
         editedAlmond = new IngredientBuilder(TypicalIngredients.APPLE).withName(VALID_NAME_BASIL).build();
         Assertions.assertFalse(TypicalIngredients.APPLE.isSameIngredient(editedAlmond));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Ingredient editedBasil = new IngredientBuilder(TypicalIngredients.BASIL)
                 .withName(VALID_NAME_BASIL.toLowerCase()).build();
-        Assertions.assertFalse(TypicalIngredients.BASIL.isSameIngredient(editedBasil));
+        Assertions.assertTrue(TypicalIngredients.BASIL.isSameIngredient(editedBasil));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BASIL + " ";

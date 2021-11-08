@@ -18,26 +18,26 @@ public interface Model<T> {
 
 
     /**
-     * Returns true if a item with the same identity as {@code item} exists in the address book.
+     * Returns true if an item with the same identity as {@code item} exists in the database.
      */
     boolean has(T item);
 
     /**
      * Deletes the given item.
-     * The item must exist in the address book.
+     * The item must exist in the database.
      */
     void delete(T target);
 
     /**
      * Adds the given item.
-     * {@code item} must not already exist in the address book.
+     * {@code item} must not already exist in the database.
      */
     void add(T item);
 
     /**
      * Replaces the given item {@code target} with {@code editedItem}.
-     * {@code target} must exist in the address book.
-     * The item identity of {@code editedItem} must not be the same as another existing item in the address book.
+     * {@code target} must exist in the database.
+     * The item identity of {@code editedItem} must not be the same as another existing item in the database.
      */
     void set(T target, T editedItem);
 

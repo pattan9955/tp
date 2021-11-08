@@ -1,14 +1,16 @@
-package fridgy.logic.commands;
+package fridgy.logic.commands.ingredient;
 
 import static java.util.Objects.requireNonNull;
 
+import fridgy.logic.commands.Command;
+import fridgy.logic.commands.CommandResult;
 import fridgy.model.IngredientModel;
 import fridgy.model.Model;
 import fridgy.model.ingredient.IngredientDefaultComparator;
 
 
 /**
- * Lists all ingredients in the address book to the user.
+ * Lists all ingredients in the inventory to the user.
  */
 public class ListCommand extends Command {
 

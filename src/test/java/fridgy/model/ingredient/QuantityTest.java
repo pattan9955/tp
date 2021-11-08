@@ -25,24 +25,24 @@ public class QuantityTest {
     @Test
     public void isValidQuantity() {
         // null quantity number
-        Assert.assertThrows(NullPointerException.class, () -> Quantity.isValidQuantity(null));
+        Assert.assertThrows(NullPointerException.class, () -> Quantity.isValidQuantityString(null));
 
         // invalid quantity numbers
-        assertFalse(Quantity.isValidQuantity("")); // empty string
-        assertFalse(Quantity.isValidQuantity(" ")); // spaces only
-        assertFalse(Quantity.isValidQuantity("0")); // zero number
-        assertFalse(Quantity.isValidQuantity("-23423")); // negative number
-        assertFalse(Quantity.isValidQuantity("0000000")); // string of zeros
-        assertFalse(Quantity.isValidQuantity("quantity")); // non-numeric
-        assertFalse(Quantity.isValidQuantity("9011p041")); // alphabets within digits
-        assertFalse(Quantity.isValidQuantity("9312 1534")); // spaces within digits
+        assertFalse(Quantity.isValidQuantityString("")); // empty string
+        assertFalse(Quantity.isValidQuantityString(" ")); // spaces only
+        assertFalse(Quantity.isValidQuantityString("0")); // zero number
+        assertFalse(Quantity.isValidQuantityString("-23423")); // negative number
+        assertFalse(Quantity.isValidQuantityString("0000000")); // string of zeros
+        assertFalse(Quantity.isValidQuantityString("quantity")); // non-numeric
+        assertFalse(Quantity.isValidQuantityString("9011p041")); // alphabets within digits
+        assertFalse(Quantity.isValidQuantityString("9312 1534")); // spaces within digits
 
         // valid quantity numbers
-        assertTrue(Quantity.isValidQuantity("9")); // exactly 1 number
-        assertTrue(Quantity.isValidQuantity("9312"));
-        assertTrue(Quantity.isValidQuantity("0009312")); // leading zeros
-        assertTrue(Quantity.isValidQuantity("124293899")); // 9 quantity numbers
-        assertTrue(Quantity.isValidQuantity("1.2979")); // fractions
+        assertTrue(Quantity.isValidQuantityString("9")); // exactly 1 number
+        assertTrue(Quantity.isValidQuantityString("9312"));
+        assertTrue(Quantity.isValidQuantityString("0009312")); // leading zeros
+        assertTrue(Quantity.isValidQuantityString("124293899")); // 9 quantity numbers
+        assertTrue(Quantity.isValidQuantityString("1.2979")); // fractions
     }
 
     @Test

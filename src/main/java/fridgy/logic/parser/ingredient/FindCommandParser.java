@@ -1,11 +1,12 @@
-package fridgy.logic.parser;
+package fridgy.logic.parser.ingredient;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fridgy.commons.core.Messages;
-import fridgy.logic.commands.FindCommand;
+import fridgy.logic.commands.ingredient.FindCommand;
+import fridgy.logic.parser.Parser;
 import fridgy.logic.parser.exceptions.ParseException;
 import fridgy.model.ingredient.NameContainsKeywordsPredicate;
 
