@@ -88,12 +88,12 @@ To exit Fridgy, simply close the application window.
 
 ![Ui](images/Ui layout.png)
 #### 3.1 Tabs
-Click the `Ingredient` or `Recipe` tab each to show the contents of the Inventory or the RecipeBook respectively.
+Click the `Ingredient` or `Recipe` tab each to show the contents of the Inventory or the Recipe Book respectively.
 #### 3.2 Side Bar
-A scrollable window that displays all the contents of the Inventory or the RecipeBook depending on the Tab selected
+A scrollable window that displays all the contents of the Inventory or the Recipe Book depending on the Tab selected
 by the user.
 #### 3.3 Cards
-A card displays the details of each item inside the Inventory or the RecipeBook depending on the tab selected. Each card
+A card displays the details of each item inside the Inventory or the Recipe Book depending on the tab selected. Each card
 represents **one** item.
 #### 3.4 CommandLine
 Command Line for users to key their commands into.
@@ -141,7 +141,7 @@ Displays the output of `View` command, which expands each ingredient or recipe c
 `-e` | `-e <expiry date>` | Expiry date of ingredients | Yes | Must be in the form DD-MM-YYYY.
 `-s` | `-s <step>...` | Step used in the recipe | No | Can contain any characters or spaces. 
 `-d` | `-d <description>` | Description of the recipe or ingredient | No | Can contain any characters or spaces.
-`-t` | `-t <tag>...` | Tag for the ingredient | No | Can contain alphanumeric characters or spaces.
+`-t` | `-t <tag>...` | Tag for the ingredient | No | Can contain alphanumeric characters or spaces. There can be at most 1 space between alphanumeric characters.
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
@@ -149,14 +149,14 @@ Displays the output of `View` command, which expands each ingredient or recipe c
 
 Action | Format
 --------|------------------
-[**Add Ingredient**](#441-add-ingredient) | `add ingredient -n <name> -q <quantity>[<units>] [-d <description>] -e <expiry date>`
+[**Add Ingredient**](#441-add-ingredient) | `add ingredient -n <name> -q <quantity>[<units>] -e <expiry date> [-d <description>]`
 [**Delete Ingredient**](#442-delete-ingredient) | `delete ingredient <index>...`
 [**Edit Ingredient**](#443-edit-ingredient) | `edit ingredient <index> [-n <name>] [-q <quantity> [<units>]] [-e <expiry date>] [-d <description>] [-t <tags>]...`
 [**Clear Ingredient**](#444-clear-ingredient) | `clear ingredient [expired]`
 [**Find Ingredient**](#445-find-ingredient) | `find ingredient <keyword>...`
 [**List Ingredient**](#446-list-ingredient) | `list ingredient`
 [**View Ingredient**](#447-view-ingredient) | `view ingredient <index>`
-[**Add Recipe**](#451-add-recipe) | `add recipe -n <name> -i <ingredient> <quantity> [-d <description>] [-s <steps>]...`
+[**Add Recipe**](#451-add-recipe) | `add recipe -n <name> -i <ingredient>... [-d <description>] [-s <steps>]...`
 [**Delete Recipe**](#452-delete-recipe) | `delete recipe <index>...`
 [**Edit Recipe**](#453-edit-recipe) | `edit recipe <index> [-n <name>] [-i <ingredient>]... [-d <description>] [-s <steps>]...`
 [**Clear Recipe**](#454-clear-recipe) | `clear recipe`
@@ -189,6 +189,7 @@ This section covers commands related to Inventory management. Any command primar
 be here.
 - Note that by default, Fridgy will sort all Ingredients by expiry dates in descending order i.e. soonest expiring
   item will be at the top.
+- If 2 ingredients' expiry dates are the same, they will be sorted in alphabetical order.
 
 #### 4.4.1 Add Ingredient
 
@@ -215,7 +216,7 @@ Command: `add ingredient -n tomato -q 5 -e 20-02-2077`
   - Users are allowed to keep track of ingredients with the same name (ignoring case) but different expiry dates.
 - Any expired ingredients will be automatically tagged as <span style="color:GhostWhite;background-color:Crimson">expired</span>.
 - Any expiring ingredients (within 7 days from current date) will be automatically tagged as <span style="color:GhostWhite;background-color:DarkOrange">expiring</span>.
-- Please ensure that the ingredient names and the units used for quantities are consistent across the Inventory and the RecipeBook if you wish to
+- Please ensure that the ingredient names and the units used for quantities are consistent across the Inventory and the Recipe Book if you wish to
   use the [Cook Recipe](#458-cook-recipe) functionality.
 
 [\[Back to Table of Contents\]](#table-of-contents)
@@ -350,12 +351,12 @@ Open an ingredient in the [Main Window](#36-mainwindow).
 [\[Back to Table of Contents\]](#table-of-contents)
   
 ### 4.5 Recipes
-This sections covers commands related to RecipeBook management. Any command primarily interacting with recipes will
+This sections covers commands related to Recipe Book management. Any command primarily interacting with recipes will
 be here.
 
 #### 4.5.1 Add Recipe
 
-Add a recipe to the RecipeBook.
+Add a recipe to the Recipe Book.
 
 **Format:**<br />
 `add recipe -n <name> -i <ingredient>... [-d <description>] [-s <steps>]...`
@@ -385,7 +386,7 @@ the lamb chops with salt and pepper. -s Grill the lamb chops over medium high he
 
 #### 4.5.2 Delete Recipe
 
-Delete recipe(s) from the RecipeBook.
+Delete recipe(s) from the Recipe Book.
 
 **Format:**<br />
 `delete recipe <index>...`
@@ -447,7 +448,7 @@ Clear all recipes from the Recipe Book.
 
 #### 4.5.5 Find Recipe
 
-- Search for recipe(s) from the RecipeBook based on user-inputted keyword(s) that match the name of recipe(s).
+- Search for recipe(s) from the Recipe Book based on user-inputted keyword(s) that match the name of recipe(s).
 - After a [Find Recipe](#455-find-recipe) command, to see the full list of recipes again, 
 please use a [List Recipe](#456-list-recipe) command.
 
@@ -527,3 +528,15 @@ Cook a recipe and deduct the ingredients required by the chosen recipe from the 
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
+---
+## 5. Glossary
+
+| Term | Definition |
+|-----| -----|
+| Inventory | A list of ingredients stored and tracked by Fridgy. |
+| Recipe Book | A list of recipes stored and tracked by Fridgy. |
+| Command Line Interface | A means for a user to interact with an application through typing text commands. |
+| Command Flag | A way to specify input options for a Command Line Interface-based application. |
+| Graphical User Interface | A means for a user to interact with an application through pictorial icons such as buttons etc. |
+
+[\[Back to Table of Contents\]](#table-of-contents)
