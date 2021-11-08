@@ -334,7 +334,6 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 | `***`  | user who is flexible with my meals          | edit recipes                       | update and personalise recipe details                                      |
 | `***`  | user who has a large collection of recipes  | find a recipe by name              | locate details of recipes without having to go through the entire list     |
 | `***`  | user who wants a complete view of all my recipes | list all recipes              | easily view all recipes                                                    |
-| `***`  | user who is organised                       | tag recipes                        | categorise my recipes easily                                               |
 | `***`  | user who cooks meals                        | execute a recipe                   | update the quantity of ingredients I have used                             |
 | `***`  | user who likes convenience                  | import my saved database           | start using it again quickly                                               |
 
