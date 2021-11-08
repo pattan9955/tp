@@ -39,7 +39,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Review UG and provide feedback to teammates.
+    * Review UG and provide feedback to teammates. [#238](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/238)
   * Developer Guide:
     * Added implementation details of generic model [\#81](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/81)
     * Added implementation details of UI [\#234](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/234)
@@ -54,7 +54,7 @@ Given below are my contributions to the project.
   * Setting up CI and CodeCov for project.
 
 * **Statistics**:
-  * PRs reviewed: [52](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3A%40rootkie)
-  * PRs raised: [20](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Arootkie)
+  * PRs reviewed: [61](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+reviewed-by%3Arootkie)
+  * PRs raised: [26](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Arootkie)
   * Issues commented: [34](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues?q=is%3Aissue+commenter%3Arootkie+is%3Aclosed)
   

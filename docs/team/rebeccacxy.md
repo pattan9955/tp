@@ -5,10 +5,9 @@ title: Rebecca's Project Portfolio Page
 
 ### Project: Fridgy
 
-Fridgy is a Food Inventory Manager that makes it easy to reduce food waste by keeping track of what you have and when it expires.
-It is a desktop app, optimized for use via CLI, with an interactive GUI to display ingredients and recipes. It is written in Java, and has about 14 kLoC.
+Fridgy is a desktop Food Inventory Manager that makes it easy to reduce food waste by keeping track of what you have and when it expires. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 14 kLoC.
 
-### Summary of Contributions
+Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to manage ingredients in Fridgy
   * What it does: It allows the user to add, delete, edit and list ingredients to Fridgy.
@@ -17,7 +16,7 @@ It is a desktop app, optimized for use via CLI, with an interactive GUI to displ
 
 * **New Feature**: Added the quantity and optional description attributes to ingredients.
   * What it does: The quantity attribute is essential to the core functionality of both the ingredient and recipe manager. The description attribute is a nice-to-have additional field for tracking of ingredients.
-  * Highlights: This enhancement integrates into other commands that need to specify a quantity and description. This attribute was also integrated throughout the storage-related code so that the quantity and description can be exported to a file.
+  * Highlights: These attributes integrate into other commands that need to specify a quantity and description. They were also integrated throughout the storage-related code so that the quantity and description can be exported to a file.
 
 * **New Feature**: Added automatic sorting of ingredients and their tags
   * What it does: Sorts ingredients by expiry date and name, sorts expiry tags to precede other tags.
@@ -44,7 +43,7 @@ It is a desktop app, optimized for use via CLI, with an interactive GUI to displ
   * Reported 11 bugs for other teams in the class during [PED](https://github.com/rebeccacxy/ped/issues) and raised detailed suggestions.
 
 * **Statistics**:
-  * PRs reviewed: [39](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Arebeccacxy)
-  * PRs raised: [20](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Arebeccacxy)
+  * PRs reviewed: [40](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Arebeccacxy)
+  * PRs raised: [22](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Arebeccacxy)
   * Issues raised: [25](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues?q=is%3Aissue+author%3Arebeccacxy+is%3Aclosed)
 
