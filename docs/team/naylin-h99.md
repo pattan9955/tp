@@ -38,15 +38,15 @@ Given below are my contributions to the project.
   * Help refactor and remove some unnecessary code from pre-existing Person model. [\#51](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/51), [\#58](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/58)
 
 * **Enhancements to existing features**:
-  * Enhanced `DeleteCommand` and `DeleteRecipeCommand` to support multiDeletion to allow users to delete multiple ingredients and recipes at once. [\#122](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/122), [\#209](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/209)
+  * Enhanced `DeleteCommand` and `DeleteRecipeCommand` to support multiple deletions, allowing users to delete multiple ingredients and recipes at once. [\#122](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/122), [\#209](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/209)
   * Enhanced `ClearCommand` to support deletion of all expired ingredients. [\#129](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/129)
 
 * **Documentation**:
   * User Guide:
     * Updated the entire User Guide for v1.1. [\#28](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/28)
-    * Updated the entire User Guide for v1.2. [\#76](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/76)
-    * Updated most of the User Guide for v1.3. [\#114](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/114), [\#137](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/137)
-    * Updated User Guide for v1.4. [\#213](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/213)
+    * Updated and improved the entire User Guide for v1.2. [\#76](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/76)
+    * Updated and improved most of the User Guide for v1.3. [\#114](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/114), [\#137](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/137)
+    * Updated and improved User Guide for v1.4. [\#213](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/213), [\#245](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/245), [\247](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/247)
   * Developer Guide:
     * Added implementation details of the `Quantity` auto-unit-conversion feature. [\#92](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/92)
 
@@ -56,6 +56,7 @@ Given below are my contributions to the project.
 
 * **Statistics**:
   * PRs reviewed: [38](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+reviewed-by%3Anaylin-h99)
-  * PRs raised: [24](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Anaylin-h99)
-  * Issues commented: [7](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues?q=is%3Aissue+commenter%3Anaylin-h99+is%3Aclosed)
+  * PRs raised: [26](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Anaylin-h99)
+  * Issues taken: [25](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues?q=is%3Aissue+assignee%3ANayLin-H99)
+  * Issues commented: [9](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues?q=is%3Aissue+commenter%3Anaylin-h99+is%3Aclosed)
   
