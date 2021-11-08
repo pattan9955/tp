@@ -66,7 +66,7 @@ Then, add a recipe that uses that ingredient:
 
 `add recipe -n Grape juice -i Grapes 50g -s Mash grapes -s Strain juice`
 
-This adds a recipe named Grape juice, which uses 50g of grapes, with two steps of preparation.
+This adds a recipe named "Grape juice", which uses 50g of grapes, with two steps of preparation.
 
 Finally, execute the recipe:
 
