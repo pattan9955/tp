@@ -1,23 +1,25 @@
 ---
 layout: page
-title: Fridgy – Developer Guide
+title: Developer Guide
 ---
 
+<img src="images/fridge.png" width="50" id="logo" />
 By: `Team Fridgy`
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
-# 1. **Overview**
+## 1. **Overview**
 
 This developer guide contains documentation on design architecture and details software design decisions in the implementation of Fridgy.
 It is intended to be read by contributors, users, and future maintainers.
 
 For more information on the Fridgy application, refer to the [_User Guide_](UserGuide.md) instead.
 
-## 1.1 **About Fridgy**
+### 1.1 About Fridgy
 
 Fridgy is a **food and recipe management system**, which aims to help users manage their ingredients and recipes easily.
 It warns you about expiring ingredients, and automatically deducts your ingredients when you execute recipes.
@@ -25,11 +27,12 @@ It warns you about expiring ingredients, and automatically deducts your ingredie
 Fridgy is a _desktop app_, optimized for use via a Command Line Interface (CLI), while having an interactive Graphical User Interface (GUI) to display ingredients and recipes.
 If you can type fast, Fridgy can get your fridge Inventory and recipe sorted out faster than traditional GUI apps.
 
-## 1.2 **Setting up, Getting started**
+### 1.2 Setting up, Getting started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 2. **Design**
 
@@ -119,6 +122,8 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="800"/>
@@ -160,11 +165,13 @@ The base model objects are constructed as shown in the following class diagrams.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### 2.5 Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+![Storage Class diagram](images/StorageClassDiagram.png)
 
 The `Storage` component,
 * can save `RecipeBook` and `Inventory` data as well as user preference data in json format, and read them back into corresponding objects.
@@ -176,6 +183,8 @@ The `Storage` component,
 Classes used by multiple components are in the `fridgy.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## 3. **Implementation**
 
@@ -274,6 +283,8 @@ The activity will look something like this:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 4. **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -284,19 +295,21 @@ The activity will look something like this:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 5. **Appendix A: Requirements**
 
 ### 5.1 Product scope
 
 **Target user profile**:
 
-* has a need to manage a significant number of ingredients and recipes
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of ingredients and recipes
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
-**Value proposition**: manage ingredients and recipes faster than a typical mouse/GUI driven app
+**Value proposition**: Manage ingredients and recipes faster than a typical mouse/GUI driven app
 
 <br>
 
@@ -321,7 +334,6 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 | `***`  | user who is flexible with my meals          | edit recipes                       | update and personalise recipe details                                      |
 | `***`  | user who has a large collection of recipes  | find a recipe by name              | locate details of recipes without having to go through the entire list     |
 | `***`  | user who wants a complete view of all my recipes | list all recipes              | easily view all recipes                                                    |
-| `***`  | user who is organised                       | tag recipes                        | categorise my recipes easily                                               |
 | `***`  | user who cooks meals                        | execute a recipe                   | update the quantity of ingredients I have used                             |
 | `***`  | user who likes convenience                  | import my saved database           | start using it again quickly                                               |
 
@@ -329,6 +341,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 *{More to be added}*
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### 5.3 Use cases
 
@@ -351,7 +365,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 | [UC13](#UC13)   | Execute recipe                   |
 
 
-### 5.3.1 Ingredient Use Cases
+#### 5.3.1 Ingredient Use Cases
 
 <a name="UC01"></a>
 **Use case: UC01 - Add ingredient**
@@ -495,7 +509,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 <br>
 
-### 5.3.2 Recipe Use Cases
+#### 5.3.2 Recipe Use Cases
 
 <a name="UC07"></a>
 **Use case: UC07 - Add Recipe**
@@ -632,6 +646,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
       Use case ends.
 
+<br>
+
 <a name="UC13"></a>
 **Use case: UC13 - Execute Recipe**
 
@@ -666,6 +682,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### 5.5 Glossary
 
 |   Term   |    Explanation  |
@@ -682,6 +700,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 6. **Appendix B: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -690,8 +710,6 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </div>
-
-<br>
 
 ### 6.1 Launch and shutdown
 
@@ -707,34 +725,110 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
-
+   
 <br>
 
-### 6.2 Deleting an ingredient
+### 6.2 Adding an ingredient
+
+1. Adding a new ingredient
+
+    1. Prerequisites: The ingredient does not already exist in inventory. 
+
+    2. Test case: `add ingredient -n Grapes -q 100g -e 25-10-2022 -d Seedless grapes`<br>
+       Expected: A new ingredient is added to the inventory with name: Grapes, quantity: 100.000g, expiry date: 25-10-2022, description: Seedless grapes. 
+
+<br>    
+
+### 6.3 Deleting an ingredient
 
 1. Deleting an ingredient while all ingredients are being shown
 
    1. Prerequisites: List all ingredients using the `list` command. Multiple ingredients in the list.
 
-   2. Test case: `delete 2`<br>
+   2. Test case: `delete ingredient 2`<br>
       Expected: Second ingredient is deleted from the list. Details of the deleted ingredient shown in the status message.
 
-   3. Test case: `delete 0`<br>
+   3. Test case: `delete ingredient 0`<br>
       Expected: No ingredient is deleted. Error details shown in the status message.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete ingredient`, `delete ingredient x`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
 
 <br>
 
-### 6.3 Saving data
+### 6.4 Finding an ingredient
+
+1. Finding an ingredient while all ingredients are being shown
+
+    1. Prerequisites: Fridgy's inventory is not empty.
+
+    2. Test case: `find ingredient grapes`<br>
+       Expected: All ingredients whose name contains the keyword grapes will be listed.
+
+    3. Test case: `find ingredient`<br>
+       Expected: An error message is shown, as `find ingredient` takes in the name argument. Error details shown in the status message.
+
+<br>
+
+### 6.5 Clearing ingredients
+
+1. Clearing all ingredients from Fridgy's inventory.
+
+    1. Prerequisites: Fridgy's inventory is not empty.
+
+    2. Test case: `clear ingredient`<br>
+       Expected: All ingredients are cleared from the list. A success message is shown.
+
+    3. Test case: `clear ingredient 0`<br>
+       Expected: An error message is shown, as `clear ingredient` has no arguments. Error details shown in the status message.
+
+    4. Other incorrect clear commands to try: `clear`, `clear monke` <br>
+       Expected: Similar to previous.
+
+<br>
+
+<div style="page-break-after: always;"></div>
+
+### 6.6 Viewing an ingredient
+
+1. Viewing an ingredient from Fridgy's inventory.
+
+    1. Prerequisites: Fridgy's inventory is not empty.
+
+    2. Test case: `view ingredient 1`<br>
+       Expected: Details of the first ingredient in Fridgy's inventory is viewed in the right active window.
+
+    3. Test case: `view ingredient 0`<br>
+       Expected: No ingredient is viewed. Error details shown in the status message.
+
+    4. Other incorrect view commands to try: `view`, `view ingredient`, `view monke` <br>
+       Expected: Similar to previous.
+
+<br>
+
+
+### 6.7 Executing a recipe
+
+1. Executing a recipe from Fridgy's recipe book and auto-deducting the ingredients used in the recipe.
+
+    1. Prerequisites: Fridgy's recipe book is not empty, and there are sufficient ingredients required in the recipe in Fridgy's inventory.
+
+    2. Test case: `cook recipe 1`<br>
+       Expected: First recipe in Fridgy's recipe book is executed. A success message is shown, and the respective ingredients are deducted from the inventory of ingredients.
+
+    3. Test case: `cook recipe 0`<br>
+       Expected: No recipe is executed. Error details shown in the status message.
+
+    4. Other incorrect cook commands to try: `cook`, `cook monke`, `cook recipe x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+<br>
+
+### 6.8 Saving data
 
 1. Dealing with missing/corrupted data files
 
    1a. To simulate missing file, create an empty directory and run the program. Program should create a new file in the directory.
 
-   1b. To simulate a corrupted file, replace content in file with wrong or unexpected content. Program should throw an error.
+   1b. To simulate a corrupted file, replace content in file with wrong or unexpected content. Program should throw an error in logs and run with blank data.
 

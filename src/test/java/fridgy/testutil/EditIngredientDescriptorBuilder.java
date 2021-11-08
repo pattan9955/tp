@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import fridgy.logic.commands.EditCommand.EditIngredientDescriptor;
+import fridgy.logic.commands.ingredient.EditCommand.EditIngredientDescriptor;
 import fridgy.model.ingredient.Description;
 import fridgy.model.ingredient.ExpiryDate;
 import fridgy.model.ingredient.Ingredient;

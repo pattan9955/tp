@@ -56,4 +56,6 @@ UniqueRecipeList --> "~* all" Recipe
 
 ModelManager -->"~* filtered" Ingredient
 ModelManager -->"~* filtered" Recipe
+
+Recipe -down[hidden]-> Ingredient
 @enduml

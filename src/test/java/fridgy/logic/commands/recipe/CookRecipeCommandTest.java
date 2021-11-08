@@ -109,7 +109,8 @@ public class CookRecipeCommandTest {
     @Test
     public void execute_expiredRequiredIngredient_commandExceptionThrown() {
         // Adding an expired ingredient with appropriate quantity and name, but expired
-        modelManager.add(new IngredientBuilder().withName("rice").withQuantity("500g").build());
+        modelManager.add(new IngredientBuilder().withName("rice").withQuantity("500g")
+                .withExpiryDate("08-11-1979").build());
         // Others ingredients
         modelManager.add(CHICKEN);
         modelManager.add(FLOUR);
