@@ -681,6 +681,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### 5.5 Glossary
 
 |   Term   |    Explanation  |
@@ -746,6 +748,23 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
+### 6.3 Deleting an ingredient
+
+1. Deleting an ingredient while all ingredients are being shown
+
+    1. Prerequisites: List all ingredients using the `list` command. Multiple ingredients in the list.
+
+    2. Test case: `delete ingredient 2`<br>
+       Expected: Second ingredient is deleted from the list. Details of the deleted ingredient shown in the status message.
+
+    3. Test case: `delete ingredient 0`<br>
+       Expected: No ingredient is deleted. Error details shown in the status message.
+
+    4. Other incorrect delete commands to try: `delete ingredient`, `delete ingredient x`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+<br>
+
 ### 6.4 Finding an ingredient
 
 1. Finding an ingredient while all ingredients are being shown
@@ -777,6 +796,8 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### 6.6 Viewing an ingredient
 
 1. Viewing an ingredient from Fridgy's inventory.
@@ -794,7 +815,6 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
-<div style="page-break-after: always;"></div>
 
 ### 6.7 Executing a recipe
 
