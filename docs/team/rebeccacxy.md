@@ -16,7 +16,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added the quantity and optional description attributes to ingredients.
   * What it does: The quantity attribute is essential to the core functionality of both the ingredient and recipe manager. The description attribute is a nice-to-have additional field for tracking of ingredients.
-  * Highlights: This attribute integrates into other commands that need to specify a quantity and description. It was also integrated throughout the storage-related code so that the quantity and description can be exported to a file.
+  * Highlights: These attributes integrate into other commands that need to specify a quantity and description. They were also integrated throughout the storage-related code so that the quantity and description can be exported to a file.
 
 * **New Feature**: Added automatic sorting of ingredients and their tags
   * What it does: Sorts ingredients by expiry date and name, sorts expiry tags to precede other tags.
