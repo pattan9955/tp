@@ -43,7 +43,7 @@ Given below are my contributions to the project.
   * Reported 11 bugs for other teams in the class during [PED](https://github.com/rebeccacxy/ped/issues) and raised detailed suggestions.
 
 * **Statistics**:
-  * PRs reviewed: [39](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Arebeccacxy)
-  * PRs raised: [20](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Arebeccacxy)
+  * PRs reviewed: [40](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Arebeccacxy)
+  * PRs raised: [22](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Arebeccacxy)
   * Issues raised: [25](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues?q=is%3Aissue+author%3Arebeccacxy+is%3Aclosed)
 
