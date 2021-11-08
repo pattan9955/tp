@@ -2,6 +2,8 @@ package fridgy.ui;
 
 import java.util.List;
 
+import fridgy.model.ingredient.BaseIngredient;
+
 /**
  * A utility class for UI components.
  */
@@ -34,5 +36,23 @@ public class UiUtil {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Formats base ingredient for recipe display
+     *
+     * @param ingredient ingredient to be formatted
+     * @param ingredientCharLimit ingredient char limit for truncation
+     * @param quantityCharLimit quantity char limit for truncation
+     * @return formatted ingredient
+     */
+    public static String formatBaseIngredient(BaseIngredient ingredient,
+                                              int ingredientCharLimit,
+                                              int quantityCharLimit) {
+        String truncatedIngredientName = truncateText(
+                ingredient.getName().toString(), ingredientCharLimit);
+        String truncatedIngredientQuantity = truncateText(ingredient.getQuantity().toString(),
+                quantityCharLimit);
+        return truncatedIngredientName + " (" + truncatedIngredientQuantity+ ")";
     }
 }
