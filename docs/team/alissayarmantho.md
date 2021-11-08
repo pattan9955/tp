@@ -34,7 +34,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Did cosmetic tweaks to existing UG [\#135](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/135), [\#226](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/226)
+        * Did cosmetic tweaks to existing UG [\#135](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/135)
     * Developer Guide:
         * Added more details for the documentation on `UI` component [\#89](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/89)
         * Remove / fix other parts of the documentation referred in the Developer Guide [\#243](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/243)
