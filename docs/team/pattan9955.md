@@ -51,6 +51,7 @@ Given below are my contributions to the project.
     * Updated documentation for the `find ingredient` and `find recipe` features. [\#130](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/130)
     * Help to add screenshots for UG v1.3. [\#137](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/137)
     * Fixed documentation bugs in overall User Guide. [\#238](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/238)
+    * Improved documentation quality for UG v1.4. [\#246](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/246) [\#247](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/247)
   * Developer Guide:
     * Added implementation details pertaining to architecture for the overarching Fridgy, Recipe and Ingredient Parsers. [\#88](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/88)
     * Added implementation details pertaining to the CommandParsers for Recipe and Ingredient commands. [\#88](https://github.com/AY2122S1-CS2103T-W11-1/tp/pull/88)
@@ -61,7 +62,7 @@ Given below are my contributions to the project.
   * Reported 7 bugs for other teams in the class during [PED](https://github.com/pattan9955/ped/issues)
   
 * **Statistics**:
-  * PRs reviewed: [32](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+reviewed-by%3Apattan9955+is%3Aclosed)
-  * PRs raised: [15](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr++is%3Aclosed+author%3Apattan9955+)
+  * PRs reviewed: [33](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+reviewed-by%3Apattan9955+is%3Aclosed)
+  * PRs raised: [16](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr++is%3Aclosed+author%3Apattan9955+)
   * Issues taken: [22](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues?q=is%3Aissue+assignee%3Apattan9955+is%3Aclosed)
     
