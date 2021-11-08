@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.Messages;
 import fridgy.logic.commands.CommandTestUtil;
-import fridgy.logic.commands.DeleteCommand;
+import fridgy.logic.commands.ingredient.DeleteCommand;
+import fridgy.logic.parser.ingredient.DeleteCommandParser;
 import fridgy.testutil.TypicalIndexes;
 
 public class DeleteCommandParserTest {

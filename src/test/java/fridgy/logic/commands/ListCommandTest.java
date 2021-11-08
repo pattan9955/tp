@@ -3,6 +3,7 @@ package fridgy.logic.commands;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fridgy.logic.commands.ingredient.ListCommand;
 import fridgy.model.Model;
 import fridgy.model.ModelManager;
 import fridgy.model.RecipeBook;

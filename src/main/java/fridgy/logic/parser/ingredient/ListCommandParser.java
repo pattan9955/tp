@@ -1,11 +1,12 @@
-package fridgy.logic.parser;
+package fridgy.logic.parser.ingredient;
 
 import static fridgy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import fridgy.logic.commands.ListCommand;
+import fridgy.logic.commands.ingredient.ListCommand;
+import fridgy.logic.parser.Parser;
 import fridgy.logic.parser.exceptions.ParseException;
 
 /**

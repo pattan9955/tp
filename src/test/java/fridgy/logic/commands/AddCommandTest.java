@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import fridgy.commons.core.GuiSettings;
 import fridgy.logic.commands.exceptions.CommandException;
+import fridgy.logic.commands.ingredient.AddCommand;
 import fridgy.model.IngredientModel;
 import fridgy.model.Inventory;
 import fridgy.model.ReadOnlyUserPrefs;
