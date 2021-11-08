@@ -199,16 +199,17 @@ Add an ingredient to the Inventory.
 `add ingredient -n <name> -q <quantity> [<units>] -e <expiry date> [-d <description>] [-t <tags>]...`
 
 **Example(s):**<br />
-1. All command flags used:<br />
-Command: `add ingredient -n flour -d fresh -q 500g -e 27-09-2021`
-<br />Expected Output:<br />
-![addCommand1.png](images/ingredientCommands/addCommand1.png)
-2. Minimal command flags used:<br />
-Command: `add ingredient -n tomato -q 5 -e 20-02-2077`
-<br />Expected Output:<br />
-![addCommand2.png](images/ingredientCommands/addCommand2.png)
+1. Minimal command flags used:<br />
+   Command: `add ingredient -n tomato -q 5 -e 20-02-2077`
+   <br />Expected Output:<br />
+   ![addCommand2.png](images/ingredientCommands/addCommand2.png) <br />
+   <br />
+2. All command flags used:<br />
+   Command: `add ingredient -n flour -d fresh -q 500g -e 27-09-2021`
+   <br />Expected Output:<br />
+   ![addCommand1.png](images/ingredientCommands/addCommand1.png)
 
-**Additional Information:**<br />
+<br />**Additional Information:**<br />
 - Refer to the [Command Flags](#421-command-flags) table for information on each command flag.
     - Valid command flags are: `-n`, `-q`, `-d`, `-e`, `-t`
 - Duplicate ingredients are not allowed. 
@@ -232,10 +233,11 @@ Delete ingredient(s) from the Inventory.
 1. Command: `delete ingredient 2`
 <br />Before:<br />
 ![deleteCommand.png](images/ingredientCommands/deleteCommand1.png)
+   <br />
 <br />After:<br />
 ![deleteCommand2.png](images/ingredientCommands/deleteCommand2.png)
 
-**Additional Information:**<br />
+<br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
 - If multiple index numbers are specified, Fridgy will delete the ingredients at all specified index numbers.
@@ -253,10 +255,11 @@ Edit an ingredient from the Inventory.
 1. Command: `edit ingredient 1 -d juicy -t jelly`
 <br />Before:<br />
 ![editCommand1.png](images/ingredientCommands/editCommand1.png)
+   <br />
 <br />After:<br />
 ![editCommand2.png](images/ingredientCommands/editCommand2.png)
 
-**Additional Information:**<br />
+<br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
 - Refer to the [Command Flags](#421-command-flags) table for information on each command flag.
@@ -282,10 +285,12 @@ Clear all the ingredients from the Inventory. Add `expired` keyword to only clea
 Command: `clear ingredient`
 <br />Expected Output:<br />
 ![clearCommand.png](images/ingredientCommands/clearCommand.png)
+   <br /> <br />
 2. Clear expired ingredients:<br /> 
 Command: `clear ingredient expired`
 <br />Before:<br />
 ![clearCommand2.png](images/ingredientCommands/clearExpired1.png)
+   <br />
 <br />After:<br />
 ![clearCommand3.png](images/ingredientCommands/clearExpired2.png)   
 
@@ -305,7 +310,7 @@ Command: `clear ingredient expired`
 <br />Expected Output:<br />
 ![findIngredient1.png](images/ingredientCommands/findIngredient.png)
 
-**Additional Information:**<br />
+<br />**Additional Information:**<br />
 - Keyword(s) are separated by spaces.
   - e.g. "corn chicken beef" will be regarded as "corn", "chicken" and "beef". 
 Results will show matches for any of the 3 keywords.
@@ -344,7 +349,7 @@ Open an ingredient in the [Main Window](#36-mainwindow).
 <br />Expected Output:<br />
 ![viewCommand1.png](images/ingredientCommands/viewIngredient.png)
 
-**Additional Information:**<br />
+<br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
 
@@ -366,7 +371,7 @@ Add a recipe to the Recipe Book.
 Command: `add recipe -n pasta -i tomato 2 -i linguine 50g`
 <br />Expected Output:<br />
 ![addRecipe1.png](images/recipeCommands/addRecipe1.png)
-
+<br /> <br />
 2. All command flags used:<br />
 Command:`add recipe -n Grilled Lamb Chop with Mint Puree -i Mint 5g -i Lamb Chops 1kg -i Butter 20g -i Garlic 20g -s Season
 the lamb chops with salt and pepper. -s Grill the lamb chops over medium high heat until cooked with butter.
@@ -375,7 +380,7 @@ the lamb chops with salt and pepper. -s Grill the lamb chops over medium high he
 <br />Expected Output:<br />
 ![addRecipe2.png](images/recipeCommands/addRecipe2.png)
    
-**Additional Information:**<br />
+<br />**Additional Information:**<br />
 - Refer to the [Command Flags](#421-command-flags) table for information on each command flag.
     - Valid command flags are: `-n`, `-i`, `-s`, `-d`
 - Duplicate recipes are not allowed.
@@ -395,10 +400,11 @@ Delete recipe(s) from the Recipe Book.
 1. Command: `delete recipe 4`
 <br />Before:<br />
 ![deleteRecipe1.png](images/recipeCommands/deleteRecipe1.png)
+   <br />
 <br />After:<br />
 ![deleteRecipe2.png](images/recipeCommands/deleteRecipe2.png)
 
-**Additional Information:**<br />
+<br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
 - If multiple index numbers are specified, Fridgy will delete the recipes at all specified index numbers.
@@ -416,10 +422,11 @@ Edit a recipe from the Recipe Book.
 1. Command: `edit recipe 2 -i pork knuckle 5kg -i apple juice 1l`
 <br />Before:<br />
 ![editRecipe1.png](images/recipeCommands/editRecipe1.png)
+   <br/>
 <br />After:<br />
 ![editRecipe2.png](images/recipeCommands/editRecipe2.png)
 
-**Additional Information:**<br />
+<br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
 - Refer to the [Command Flags](#421-command-flags) table for information on each command flag.
@@ -460,7 +467,7 @@ please use a [List Recipe](#456-list-recipe) command.
    <br />Expected Output:<br />
    ![findRecipe.png](images/recipeCommands/findRecipe.png)
 
-**Additional Information:**<br />
+<br />**Additional Information:**<br />
 - Keyword(s) are separated by spaces.
     - e.g. "corn chicken beef" will be regarded as "corn", "chicken" and "beef".
       Results will show matches for any of the 3 keywords.
@@ -499,7 +506,7 @@ Open a detailed view of a recipe in the [Main Window](#36-mainwindow).
    <br />Expected Output:<br />
    ![viewRecipe.png](images/recipeCommands/viewRecipe.png)
 
-**Additional Information:**<br />
+<br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
 
@@ -516,12 +523,14 @@ Cook a recipe and deduct the ingredients required by the chosen recipe from the 
 1. `cook recipe 6`
 <br />Before:<br />
 ![cookRecipe1.png](images/recipeCommands/cookRecipe1.png)
+   <br />
 <br />After:<br />
 ![cookRecipe2.png](images/recipeCommands/cookRecipe2.png)
+   <br />
 <br />Changes in Ingredients:<br />
 ![cookRecipe3.png](images/recipeCommands/cookRecipe3.png)
 
-**Additional Information:**<br />
+<br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
 - By default, Fridgy will use ingredients that are closest to expiry first when cooking a recipe.
@@ -533,6 +542,7 @@ Cook a recipe and deduct the ingredients required by the chosen recipe from the 
 
 | Term | Definition |
 |-----| -----|
+| Alphanumeric | Containing alphabets (A to Z) or numbers (0 to 9) only. |
 | Inventory | A list of ingredients stored and tracked by Fridgy. |
 | Recipe Book | A list of recipes stored and tracked by Fridgy. |
 | Command Line Interface | A means for a user to interact with an application through typing text commands. |
