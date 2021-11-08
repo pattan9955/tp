@@ -3,12 +3,14 @@ layout: page
 title: Fridgy – Developer Guide
 ---
 
+<img src="images/fridge.png" width="50" id="logo" />
 By: `Team Fridgy`
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # 1. **Overview**
 
@@ -30,6 +32,7 @@ If you can type fast, Fridgy can get your fridge Inventory and recipe sorted out
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 2. **Design**
 
@@ -119,6 +122,8 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="800"/>
@@ -160,11 +165,13 @@ The base model objects are constructed as shown in the following class diagrams.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### 2.5 Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W11-1/tp/tree/master/src/main/java/fridgy/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+![Storage Class diagram](images/StorageClassDiagram.png)
 
 The `Storage` component,
 * can save `RecipeBook` and `Inventory` data as well as user preference data in json format, and read them back into corresponding objects.
@@ -176,6 +183,8 @@ The `Storage` component,
 Classes used by multiple components are in the `fridgy.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## 3. **Implementation**
 
@@ -274,6 +283,8 @@ The activity will look something like this:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 4. **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -283,6 +294,8 @@ The activity will look something like this:
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## 5. **Appendix A: Requirements**
 
@@ -330,6 +343,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### 5.3 Use cases
 
 (For all use cases below, the **System** is `Fridgy` and the **Actor** is the `user`, unless specified otherwise)
@@ -351,7 +366,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 | [UC13](#UC13)   | Execute recipe                   |
 
 
-### 5.3.1 Ingredient Use Cases
+#### 5.3.1 Ingredient Use Cases
 
 <a name="UC01"></a>
 **Use case: UC01 - Add ingredient**
@@ -495,7 +510,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 <br>
 
-### 5.3.2 Recipe Use Cases
+#### 5.3.2 Recipe Use Cases
 
 <a name="UC07"></a>
 **Use case: UC07 - Add Recipe**
@@ -682,6 +697,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 6. **Appendix B: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -727,6 +744,72 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+<br>
+
+### 6.4 Finding an ingredient
+
+1. Finding an ingredient while all ingredients are being shown
+
+    1. Prerequisites: Fridgy's inventory is not empty.
+
+    2. Test case: `find ingredient grapes`<br>
+       Expected: All ingredients whose name contains the keyword grapes will be listed.
+
+    3. Test case: `find ingredient`<br>
+       Expected: An error message is shown, as `find ingredient` takes in the name argument. Error details shown in the status message.
+
+<br>
+
+### 6.5 Clearing ingredients
+
+1. Clearing all ingredients from Fridgy's inventory.
+
+    1. Prerequisites: Fridgy's inventory is not empty.
+
+    2. Test case: `clear ingredient`<br>
+       Expected: All ingredients are cleared from the list. A success message is shown.
+
+    3. Test case: `clear ingredient 0`<br>
+       Expected: An error message is shown, as `clear ingredient` has no arguments. Error details shown in the status message.
+
+    4. Other incorrect clear commands to try: `clear`, `clear monke` <br>
+       Expected: Similar to previous.
+
+<br>
+
+### 6.6 Viewing an ingredient
+
+1. Viewing an ingredient from Fridgy's inventory.
+
+    1. Prerequisites: Fridgy's inventory is not empty.
+
+    2. Test case: `view ingredient 1`<br>
+       Expected: Details of the first ingredient in Fridgy's inventory is viewed in the right active window.
+
+    3. Test case: `view ingredient 0`<br>
+       Expected: No ingredient is viewed. Error details shown in the status message.
+
+    4. Other incorrect view commands to try: `view`, `view ingredient`, `view monke` <br>
+       Expected: Similar to previous.
+
+<br>
+
+<div style="page-break-after: always;"></div>
+
+### 6.7 Executing a recipe
+
+1. Executing a recipe from Fridgy's recipe book and auto-deducting the ingredients used in the recipe.
+
+    1. Prerequisites: Fridgy's recipe book is not empty, and there are sufficient ingredients required in the recipe in Fridgy's inventory.
+
+    2. Test case: `cook recipe 1`<br>
+       Expected: First recipe in Fridgy's recipe book is executed. A success message is shown, and the respective ingredients are deducted from the inventory of ingredients.
+
+    3. Test case: `cook recipe 0`<br>
+       Expected: No recipe is executed. Error details shown in the status message.
+
+    4. Other incorrect cook commands to try: `cook`, `cook monke`, `cook recipe x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 <br>
 
@@ -736,5 +819,5 @@ testers are expected to do more *exploratory* testing.
 
    1a. To simulate missing file, create an empty directory and run the program. Program should create a new file in the directory.
 
-   1b. To simulate a corrupted file, replace content in file with wrong or unexpected content. Program should throw an error.
+   1b. To simulate a corrupted file, replace content in file with wrong or unexpected content. Program should throw an error in logs and run with blank data.
 
