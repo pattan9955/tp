@@ -79,7 +79,7 @@ Now that you are ready to use Fridgy, it is time to clear the sample entries and
 
 `clear ingredient`, `clear recipe`
 
-To exit Fridgy, simply close the application window.
+To exit Fridgy, type `exit`, or simply close the application window.
 
 --------------------------------------------------------------------------------------------------------------------
 
